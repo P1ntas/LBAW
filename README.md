@@ -4,7 +4,7 @@
 
 ## Project Components
 
-- ER: Requirements Specification
+- [ER: Requirements Specification](/docs/er.md)
 - EBD: Database Specification
 - EAP: Architecture Specification and Prototype
 - PA: Product and Presentation
