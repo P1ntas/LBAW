@@ -1,6 +1,8 @@
-# Product Name
+lbaw2232
 
-> Project vision.
+# Off The Shelf
+
+This is it! The book you need, the experience you want, whenever you like.
 
 ## Project Components
 
@@ -17,10 +19,10 @@
 
 ## Team
 
-- Group member 1 name, email
-- Group member 2 name, email
-- Group member 3 name, email
+- Afonso da Silva Pinto, up202008014@fe.up.pt
+- Afonso José Pinheiro Oliveira Esteves Abreu, up202008552@fe.up.pt
+- Diogo Filipe Ferreira da Silva, up202004288@fe.up.pt
 - Group member 4 name, email
 
 ***
-GROUP21gg, DD/MM/2021
+GROUP2232, DD/MM/2022
