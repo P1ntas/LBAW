@@ -1,14 +1,19 @@
 # ER: Requirements Specification Component
 
-> Project vision.
+This is it! The book you need, the experience you want, whenever you like.
 
-## A1: Project Name
+## A1: Off The Shelf
 
-> Goals, business context and environment.  
-> Motivation.  
-> Main features.  
-> User profiles.
+The Off The Shelf project consists in a web application that serves as an online shop made exclusively for books of all types and categories. 
+This project, developed by our group, will be useful for those who are trying to buy some books online and have them delivered to their homes.
+What motivates this idea are the people who want to find the perfect book to read (amongst so many that are available) and get the physical item for a real experience.  
 
+We pretend to build a system with a practical design and a good product organization in order to help the user quickly find the ideal book with little to no effort.
+The users will be able to create an account for themselves and login/logout as needed. Regarding the website administration, there's some sort of control (access and modification privileges) over user accounts and products.
+This web application will also provide the users with a categorization system for the books as well as some search filters such as search by author, by year, by the publisher, etc.
+The books will be displayed with pictures and their respective information. All of them contain a review section, where buyers can submit a commentary and leave a score. Users will also receive notifications, regarding order status for instance.
+
+The platform will be used by different groups with distinct permissions. The administrators, having complete access, can add books and manage their information and manage all user accounts as well as update the orders' state. However, they cannot buy products. As for the rest of the users, the guests (non-authenticated) can browse books and categories, view reviews and other details, and also add items to a shopping cart. On the other hand, authenticated users, while being able to perform the same tasks as guests, can also view/edit their own profiles, purchase books and submit reviews. In addition to that, they have a wishlist to which they can add some of their desired books.
 
 ---
 
@@ -84,8 +89,9 @@ Changes made to the first submission:
 1. ...
 
 ***
-GROUP21gg, DD/MM/2021
+GROUP2232, DD/MM/2022
 
-* Group member 1 name, email (Editor)
-* Group member 2 name, email
-* ...
+* Afonso da Silva Pinto, up202008014@fe.up.pt
+* Afonso José Pinheiro Oliveira Esteves Abreu, up202008552@fe.up.pt
+* Diogo Filipe Ferreira da Silva, up202004288@fe.up.pt
+* 
