@@ -22,7 +22,7 @@ This is it! The book you need, the experience you want, whenever you like.
 - Afonso da Silva Pinto, up202008014@fe.up.pt
 - Afonso José Pinheiro Oliveira Esteves Abreu, up202008552@fe.up.pt
 - Diogo Filipe Ferreira da Silva, up202004288@fe.up.pt
-- Group member 4 name, email
+- Rúben Lourinha Monteiro, up202006478@fe.up.pt
 
 ***
 GROUP2232, DD/MM/2022
