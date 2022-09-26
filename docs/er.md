@@ -23,16 +23,11 @@ This artifact contains the specification of the actors and their user stories, s
 
 ### 1. Actors
 
-![img]()
+![img](/images/actors.png)
 
 Figure 1: Off The Shelf actors.
 
-| Identifier           | Description                                                                                                                                                                                       |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| User                 | Generic user that has access to public information, such as published titles, and can search products and manage a shopping cart                                                                  |
-| Visitor              | Unauthenticated user that can register themself or sign-in in the system                                                                                                                          |
-| Buyer                | Authenticated user that can consult information, checkout a shopping cart, manage a wishlist, view purchase history and review a product                                                          |
-| Administrator        | Authenticated user that is responsible for the management of normal users, products information, stock and categorization, along with managing orders' status. This user cannot purchase products |
+(table)
 
 Table 1: Off The Shelf actors description.
 
@@ -63,8 +58,30 @@ Table 2: User user stories.
 
 Table 3: Visitor user stories.
 
-#### 2.N. Actor n
+#### 2.3. Authenticated User
 
+(table)
+
+Table 4: Authenticated User user stories.
+
+#### 2.4. Buyer
+
+(table)
+
+Table 5: Buyer user stories.
+
+#### 2.4. Administrator
+
+| Identifier         | Name                                  | Priority | Description                                                                                                                                                   |
+|--------------------|---------------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| US31 (FR.601)      | Add Product                           | high     | As an *Administrator*, I want to be able to add books to the store, so that i can keep it updated with new releases.                                          |
+| US32 (FR.602)      | Manage Products Information           | high     | As an *Administrator*, I want to be able to manage a products information, so that it is updated and users are not mistaken.                                  |
+| US33 (FR.603)      | Manage Products Stock                 | high     | As an *Administrator*, I want to be able to manage a products stock, so that it is updated and users are not mistaken.                                        |
+| US34 (FR.604)      | Manage Products Categories            | high     | As an *Administrator*, I want to be able to manage a products categories, so that it is updated and users are not mistaken.                                   |
+| US35 (FR.605)      | View User's Purchase History          | high     | As an *Administrator*, I want to see a user's purchase history, so that i can see if everything is correct and they are not doing anything nefarious.         |
+| US36 (FR.606)      | Manage Order Status                   | high     | As an *Administrator*, I want to be able to manage order status, so that i can keep it updated to the user.                                                   |  
+
+Table 6: Administrator user stories.
 
 ### 3. Supplementary Requirements
 
@@ -80,15 +97,36 @@ This section contains business rules, technical requirements and other non-funct
 | BR04       | Review Score  | Buyers need to give a score to a book in order to submit a review.                                                                      |
 | BR05       | Book Info     | When looking at a specific book, the user should be able to see its author, publisher, year, price, a picture and a brief description.  |  
 
-Table n: Off The Shelf business rules.
+Table 7: Off The Shelf business rules.
 
 #### 3.2. Technical requirements
 
+| Identifier | Name            | Description                                                                                                                                                                                                                   |
+|------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| TR01       | Availability    | The system must be available 99 percent of the time in each 24-hour period.                                                                                                                                                   |
+| TR02       | Accessibility   | The system must ensure that everyone can access the pages, regardless of whether they have any handicap or not, or the web browser they use.                                                                                  |
+| **TR03**       | **Usability**       | **The system should be simple and easy to use.**                                                                                                                                                                                  |
+| TR04       | Performance     | The system should have response times shorter than 2 s to ensure the user's attention.                                                                                                                                        |
+| **TR05**       | **Web application** | **The system should be implemented as a web application with dynamic pages (HTML, JavaScript, CSS and PHP).**                                                                                                                     |
+| TR06       | Portability     | The server-side system should work across multiple platforms (Linux, Mac OS, etc.).                                                                                                                                           |
+| TR07       | Database        | The PostgreSQL database management system must be used.                                                                                                                                                                       |
+| **TR08**       | **Security**        | **The system shall protect information from unauthorised access through the use of an authentication and verification system.**                                                                                                   |
+| TR09       | Robustness      | The system must be prepared to handle and continue operating when runtime errors occur.                                                                                                                                       |
+| TR10       | Scalability     | The system must be prepared to deal with the growth in the number of users and their actions.                                                                                                                                 |
+| TR11       | Ethics          | The system must respect the ethical principles in software development (for example, personal user details, or usage data, should not be collected nor shared without full acknowledgement and authorization from its owner). |  
+
+Table 8: Off The Shelf technical requirements.
+
 #### 3.3. Restrictions
 
+| Identifier | Name     | Description                                                                         |
+|------------|----------|-------------------------------------------------------------------------------------|
+| C01        | Deadline | The system should be ready to be used mid december.                                 |
+| C02        | Workflow | Some project components must be completed until the respective planned deadlines.   |  
+
+Table 9: Off The Shelf project restrictions.
 
 ---
-
 
 ## A3: Information Architecture
 
