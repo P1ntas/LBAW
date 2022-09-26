@@ -17,36 +17,70 @@ The platform will be used by different groups with distinct permissions. The adm
 
 ---
 
-
 ## A2: Actors and User stories
 
-> Brief presentation of the artefact goals.
-
+This artifact contains the specification of the actors and their user stories, serving as agile documentation of the project’s requirements.
 
 ### 1. Actors
 
-> Diagram identifying actors and their relationships.  
-> Table identifying actors, including a brief description.
+![img]()
 
+Figure 1: Off The Shelf actors.
+
+| Identifier           | Description                                                                                                                                                                                       |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| User                 | Generic user that has access to public information, such as published titles, and can search products and manage a shopping cart                                                                  |
+| Visitor              | Unauthenticated user that can register themself or sign-in in the system                                                                                                                          |
+| Buyer                | Authenticated user that can consult information, checkout a shopping cart, manage a wishlist, view purchase history and review a product                                                          |
+| Administrator        | Authenticated user that is responsible for the management of normal users, products information, stock and categorization, along with managing orders' status. This user cannot purchase products |
+
+Table 1: Off The Shelf actors description.
 
 ### 2. User Stories
 
-> User stories organized by actor.  
-> For each actor, a table containing a line for each user story, and for each user story: an identifier, a name, a priority, and a description (following the recommended pattern).
+For the Off The Shelf system, consider the user stories that are presented in the following sections.
 
-#### 2.1. Actor 1
+#### 2.1. User
 
-#### 2.2. Actor 2
+| Identifier         | Name                                 | Priority | Description                                                                                                                          |
+|--------------------|--------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| US01 (FR.101)      | View Products List                   | high     | As a *User*, I want a products list, so that i can see the books that are available in the store.                                      |
+| US02 (FR.102)      | Browse Product Categories            | high     | As a *User*, I want a filter, so that i can specify the books by category, author, year, publisher, etc.                               |
+| US03 (FR.103)      | View Product Details                 | high     | As a *User*, I want to be able to see the book's details, so that i get to know more about it.                                        |
+| US04 (FR.104)      | View Product Reviews                 | high     | As a *User*, I want to be able to see a book reviews, so that i have a vague idea of its quality.                                      |
+| US05 (FR.105)      | Add Product to Shopping Cart         | high     | As a *User*, I want a shopping cart, so that i can add items that i might want.                                                        |
+| US06 (FR.106)      | Managee Shopping Cart                | high     | As a *User*, I want a shopping cart, so that i can manage the items i wanted and decide if i want to remove any of them.               |
+| US07 (FR.107)      | Search Products                      | high     | As a *User*, I want a search bar, so that i can find the desirable book.                                                               |  
+
+Table 2: User user stories.
+
+#### 2.2. Visitor
+
+| Identifier | Name                       | Priority | Description                                                                                                                                         |
+| ---------- | -------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| US08       | Sign In                    | high     | As a *Visitor*, I want to authenticate into the system, so that i can access a buyers or an administrators privileges.                               |
+| US09       | Register                   | high     | As a *Visitor*, I want to register myself into the system, so that i can authenticate myself into the system.                                        |  
+
+Table 3: Visitor user stories.
 
 #### 2.N. Actor n
 
 
 ### 3. Supplementary Requirements
 
-> Section including business rules, technical requirements, and restrictions.  
-> For each subsection, a table containing identifiers, names, and descriptions for each requirement.
+This section contains business rules, technical requirements and other non-functional requirements on the project.
 
 #### 3.1. Business rules
+
+| Identifier | Name          | Description                                                                                                                             |
+|------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| BR01       | Admin         | Administrator accounts are independent of the user accounts, i.e. they cannot buy products.                                             |
+| BR02       | Username      | There can't be 2 or more users with the same username.                                                                                  |
+| BR03       | Book In Stock | A book can only be bought by a authenticated user if there's at least one available in stock.                                           |
+| BR04       | Review Score  | Buyers need to give a score to a book in order to submit a review.                                                                      |
+| BR05       | Book Info     | When looking at a specific book, the user should be able to see its author, publisher, year, price, a picture and a brief description.  |  
+
+Table n: Off The Shelf business rules.
 
 #### 3.2. Technical requirements
 
