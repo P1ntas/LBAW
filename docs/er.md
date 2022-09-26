@@ -23,7 +23,7 @@ This artifact contains the specification of the actors and their user stories, s
 
 ### 1. Actors
 
-![img](/images/actors.png)
+![img](images/actors.png)
 
 Figure 1: Off The Shelf actors.
 
