@@ -157,29 +157,52 @@ Table 9: Off The Shelf project restrictions.
 
 ## A3: Information Architecture
 
-> Brief presentation of the artefact goals.
+This artifact presents a brief overview of the information architecture of the system to be developed. It has the following goals: 
 
+1. Help to identify and describe the user requirements, and raise new ones; 
+2. Preview and empirically test the user interface of the product to be developed; 
+3. Enable quick and multiple iterations on the design of the user interface. 
+
+This artifact includes two elements: 
+
+1. A sitemap, defining how the information is organized in pages; 
+2. A set of wireframes, defining the functionality and the content for each page. Wireframes are designed for at least two of the most important pages. 
 
 ### 1. Sitemap
 
-> Sitemap presenting the overall structure of the web application.  
-> Each page must be identified in the sitemap.  
-> Multiple instances of the same page (e.g. student profile in SIGARRA) are presented as page stacks.
+A sitemap is a visual representation of the relationship between the different pages of a website that shows how all the information fits together. The sitemap includes all planned pages and provides a high-level view of how the information space is organized. 
 
+From the homepage, you’ll be able to access your user page (as long as you’re logged in), Off The Shelf useful information, and find the book you’re looking for. If you have administrator privileges, it is possible to edit the website and its contents.
+
+![img](images/sitemap.png)  
+
+Figure 1: Off The Shelf sitemap.
 
 ### 2. Wireframes
 
-> Wireframes for, at least, two main pages of the web application.
-> Do not include trivial use cases.
+Wireframes are used to describe layout ideas, content, and the overall page-level design. A page wireframe defines how space is allocated and how content is prioritized, including which features are available.
+The mock-ups presented are the login and profile pages.
 
+#### Login Page
 
-#### UIxx: Page Name
+![img](images/loginpage.png)  
 
-#### UIxx: Page Name
+Figure 2: Login wireframe.  
 
+1. Username/email and password fields
+2. Direct access to the search feature
+
+#### User Profile Page
+
+![img](images/profilepage.png)  
+
+Figure 3: User Profile wireframe.  
+
+1. Profile information (which the user can edit)
+2. User picture (optional)
+3. Direct access to the search feature
 
 ---
-
 
 ## Revision history
 
