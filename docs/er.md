@@ -8,7 +8,7 @@ The Off The Shelf project consists in a web application that serves as an online
 This project, developed by our group, will be useful for those who are trying to buy some books online and have them delivered to their homes.
 What motivates this idea are the people who want to find the perfect book to read (amongst so many that are available) and get the physical item for a real experience.  
 
-We pretend to build a system with a practical design and a good product organization in order to help the user quickly find the ideal book with little to no effort.
+We pretend to build a system with an adaptive and practical design, and a good product organization in order to help the user quickly find the ideal book with little to no effort.
 The users will be able to create an account for themselves and login/logout as needed. Regarding the website administration, there's some sort of control (access and modification privileges) over user accounts and products.
 This web application will also provide the users with a categorization system for the books as well as some search filters such as search by author, by year, by the publisher, etc.
 The books will be displayed with pictures and their respective information. All of them contain a review section, where buyers can submit a commentary and leave a score. Users will also receive notifications, regarding order status for instance.
@@ -23,15 +23,21 @@ This artifact contains the specification of the actors and their user stories, s
 
 ### 1. Actors
 
-![img](images/actors.png)
+![img](images/actors.png)  
 
-Figure 1: Off The Shelf actors.
+Figure 1: Off The Shelf actors.  
 
-(table)
+| Identifier           | Description                                                                                                                                                                                        |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| User                 | Generic user that has access to public information, such as published titles, and can search products and manage a shopping cart.                                                                  |
+| Visitor              | Unauthenticated user that can register themself or sign-in in the system.                                                                                                                          |
+| Authenticated User   | User that can consult information, checkout a shopping cart, manage a wishlist, view purchase history and review a product.                                                                        |
+| Buyer                | Authenticated user that purchased some book(s) and can track/cancel an order as well as review a purchased product.                                                                                |
+| Administrator        | Responsible for the management of normal users, products information, stock and categorization, along with managing orders' status. The administrator cannot purchase products.                    |  
 
 Table 1: Off The Shelf actors description.
 
-### 2. User Stories
+### 2. User Stories  
 
 For the Off The Shelf system, consider the user stories that are presented in the following sections.
 
@@ -39,47 +45,68 @@ For the Off The Shelf system, consider the user stories that are presented in th
 
 | Identifier         | Name                                 | Priority | Description                                                                                                                          |
 |--------------------|--------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| US01 (FR.101)      | View Products List                   | high     | As a *User*, I want a products list, so that i can see the books that are available in the store.                                      |
-| US02 (FR.102)      | Browse Product Categories            | high     | As a *User*, I want a filter, so that i can specify the books by category, author, year, publisher, etc.                               |
-| US03 (FR.103)      | View Product Details                 | high     | As a *User*, I want to be able to see the book's details, so that i get to know more about it.                                        |
-| US04 (FR.104)      | View Product Reviews                 | high     | As a *User*, I want to be able to see a book reviews, so that i have a vague idea of its quality.                                      |
-| US05 (FR.105)      | Add Product to Shopping Cart         | high     | As a *User*, I want a shopping cart, so that i can add items that i might want.                                                        |
-| US06 (FR.106)      | Managee Shopping Cart                | high     | As a *User*, I want a shopping cart, so that i can manage the items i wanted and decide if i want to remove any of them.               |
-| US07 (FR.107)      | Search Products                      | high     | As a *User*, I want a search bar, so that i can find the desirable book.                                                               |  
+| US01               | View Products List                   | high     | As a *User*, I want a products list, so that I can see the books that are available in the store.                                    |
+| US02               | Browse Product Categories            | high     | As a *User*, I want a filter, so that I can specify the books by category, author, year, publisher, etc.                             |
+| US03               | View Product Details                 | high     | As a *User*, I want to be able to see the book's details, so that I get to know more about it.                                       |
+| US04               | View Product Reviews                 | high     | As a *User*, I want to be able to see a book reviews, so that I have a vague idea of its quality.                                    |
+| US05               | Add Product to Shopping Cart         | high     | As a *User*, I want a shopping cart, so that I can add items that I might want.                                                      |
+| US06               | Manage Shopping Cart                 | high     | As a *User*, I want a shopping cart, so that I can manage the items I wanted and decide if I want to remove any of them.             |
+| US07               | Search Products                      | high     | As a *User*, I want a search bar, so that I can find the desirable book.                                                             |
+| US08               | Product on Cart Price Change         | high     | As a *User*, I want to be notified of changes on the cart's products, so that I am up to date with the current prices.               |  
 
 Table 2: User user stories.
 
 #### 2.2. Visitor
 
-| Identifier | Name                       | Priority | Description                                                                                                                                         |
-| ---------- | -------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| US08       | Sign In                    | high     | As a *Visitor*, I want to authenticate into the system, so that i can access a buyers or an administrators privileges.                               |
-| US09       | Register                   | high     | As a *Visitor*, I want to register myself into the system, so that i can authenticate myself into the system.                                        |  
+| Identifier | Name                       | Priority | Description                                                                                                                                        |
+|------------|----------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| US09       | Sign In                    | high     | As a *Visitor*, I want to authenticate into the system, so that I can access an administrator/authenticated user's privileges.                     |
+| US10       | Register                   | high     | As a *Visitor*, I want to register myself into the system, so that I can authenticate myself into the system.                                      |  
 
 Table 3: Visitor user stories.
 
 #### 2.3. Authenticated User
 
-(table)
+| Identifier         | Name                                   | Priority | Description                                                                                                                                                 |
+|--------------------|----------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| US11               | View Purchase History                  | high     | As an *Authenticated User*, I want a purchase history, so that I can track my purchases along the way.                                                      |
+| US12               | Add Products to Wishlist               | high     | As an *Authenticated User*, I want a wishlist, so that I can add books that I might want to it.                                                             |
+| US13               | Manage Wishlist                        | high     | As an *Authenticated User*, I want a wishlist, so that I can mantain track of books that I might want to buy.                                               |
+| US14               | Review Product                         | high     | As an *Authenticated User*, I want to be able to review a book, so that both the author, shop, and other users can know my opinion on the book.             |
+| US15               | Checkout                               | high     | As an *Authenticated User*, I want to be able to checkout my shopping cart, so that I can get the products I want.                                          |
+| US16               | Edit Review                            | high     | As an *Authenticated User*, I want to be able to edit a review of mine, so that I can correct mistakes or in case my opinion on the book changes.           |
+| US17               | Remove Review                          | high     | As an *Authenticated User*, I want to be able to remove a review of mine, so that other users may not see a review I no longer want to be visible.          |
+| US18               | Logout                                 | high     | As an *Authenticated User*, I want to be able to logout, so that I can end my user session at the moment.                                                   |
+| US19               | Delete Account                         | high     | As an *Authenticated User*, I want to be able to delete my account, so that it no longer exists on the system.                                              |
+| US20               | Product in Wishlist Available          | high     | As an *Authenticated User*, I want to be notified if a product on my wishlist is available, so that I can consider buying it.                               |  
 
 Table 4: Authenticated User user stories.
 
 #### 2.4. Buyer
 
-(table)
+| Identifier         | Name                                   | Priority | Description                                                                                                                                                 |
+|--------------------|----------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| US21               | Review Purchased Product               | high     | As a *Buyer*, I want to be able to review a purchased book, so that the users can see what my thoughts were on the experience/process.                        |
+| US22               | Track Order                            | high     | As a *Buyer*, I want to be able to track my order, so that I know when to expect it and to know if something went wrong with the process in general.          |
+| US23               | Cancel Order                           | high     | As a *Buyer*, I want to be able to cancel my order, so that if I no longer want a certain product I purchased, I can return it.                               |
+| US24               | Payment Approved                       | high     | As a *Buyer*, I want to be notified if my payment was approved, so that I can be sure that the purchase process is going well.                                |
+| US25               | Change in Order Processing Stage       | high     | As a *Buyer*, I want to be notified of a change in the order's processing, so that I'm up to date with this stage.                                            |  
 
 Table 5: Buyer user stories.
 
-#### 2.4. Administrator
+#### 2.5. Administrator
 
 | Identifier         | Name                                  | Priority | Description                                                                                                                                                   |
 |--------------------|---------------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US31 (FR.601)      | Add Product                           | high     | As an *Administrator*, I want to be able to add books to the store, so that i can keep it updated with new releases.                                          |
-| US32 (FR.602)      | Manage Products Information           | high     | As an *Administrator*, I want to be able to manage a products information, so that it is updated and users are not mistaken.                                  |
-| US33 (FR.603)      | Manage Products Stock                 | high     | As an *Administrator*, I want to be able to manage a products stock, so that it is updated and users are not mistaken.                                        |
-| US34 (FR.604)      | Manage Products Categories            | high     | As an *Administrator*, I want to be able to manage a products categories, so that it is updated and users are not mistaken.                                   |
-| US35 (FR.605)      | View User's Purchase History          | high     | As an *Administrator*, I want to see a user's purchase history, so that i can see if everything is correct and they are not doing anything nefarious.         |
-| US36 (FR.606)      | Manage Order Status                   | high     | As an *Administrator*, I want to be able to manage order status, so that i can keep it updated to the user.                                                   |  
+| US26               | Add Product                           | high     | As an *Administrator*, I want to be able to add books to the store, so that I can keep it updated with new releases.                                          |
+| US27               | Manage Products Information           | high     | As an *Administrator*, I want to be able to manage a products information, so that it is updated and users are not mistaken.                                  |
+| US28               | Manage Products Stock                 | high     | As an *Administrator*, I want to be able to manage a products stock, so that it is updated and users are not mistaken.                                        |
+| US29               | Manage Products Categories            | high     | As an *Administrator*, I want to be able to manage a products categories, so that it is updated and users are not mistaken.                                   |
+| US30               | View User's Purchase History          | high     | As an *Administrator*, I want to see a user's purchase history, so that I can see if everything is correct and they are not doing anything nefarious.         |
+| US31               | Manage Order Status                   | high     | As an *Administrator*, I want to be able to manage order status, so that I can keep it updated to the user.                                                   |
+| US32               | Administer User Accounts              | high     | As an *Administrator*, I want to administrate user accounts, so that I can have some control over them and keep the system clean.                             |
+| US33               | Block/Unblock Users                   | high     | As an *Administrator*, I want to block or unblock user accounts, so that the system stays healthy and the users notice some kind of authority.                |
+| US34               | Delete User Account                   | high     | As an *Administrator*, I want to delete user accounts, so that the system stays healthy and with no spam/harmful accounts.                                    |  
 
 Table 6: Administrator user stories.
 
