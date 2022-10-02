@@ -15,7 +15,7 @@ This is it! The book you need, the experience you want, whenever you like.
 
 ## Artefacts Checklist
 
-- The artefacts checklist is available at: <docs.google.com/spreadsheets @ g.uporto>
+- The artefacts checklist is available at: https://docs.google.com/spreadsheets/d/12nL0ETwC-9O1vw9y6Mdk9U8Dht9xw6nBLfkgmh79gzo/edit#gid=537406521
 
 ## Team
 
