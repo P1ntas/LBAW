@@ -142,7 +142,9 @@ Table 7: Off The Shelf business rules.
 | TR10       | Scalability     | The system must be prepared to deal with the growth in the number of users and their actions.                                                                                                                                 |
 | TR11       | Ethics          | The system must respect the ethical principles in software development (for example, personal user details, or usage data, should not be collected nor shared without full acknowledgement and authorization from its owner). |  
 
-Table 8: Off The Shelf technical requirements.
+Table 8: Off The Shelf technical requirements.  
+
+- The most critical technical requirements are TR03 (as we want the user to have a pleasent experience), TR05 (determines the way our system is suposed to be developed) and TR08 (since this is a shop and payments/physical products are involved).
 
 #### 3.3. Restrictions
 
