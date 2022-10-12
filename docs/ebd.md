@@ -1,15 +1,24 @@
 # EBD: Database Specification Component
 
-> Project vision.
+This is it! The book you need, the experience you want, whenever you like.
 
 ## A4: Conceptual Data Model
 
-> Brief presentation of the artefact goals.
+The Conceptual Data Model contains the identification and description of the entities and relationships that are relevant to the database specification.
+
+A UML class diagram is used to document the model.
+
+The class diagram is developed by starting to include only the classes and its relationships in order not to overload the diagram too early in the process. In the following iterations additional detail is included, namely: class attributes, attribute domains, multiplicity of associations, and additional restrictions in OCL.
+
+A professional diagram drawing tool that supports UML is recommended.
 
 ### 1. Class diagram
 
-> UML class diagram containing the classes, associations, multiplicity and roles.  
-> For each class, the attributes, associations and constraints are included in the class diagram.
+The UML diagram in Figure 1 presents the main organisational entities, the relationships between them, attributes and their domains, and the multiplicity of relationships for the **Off The Shelf** platform.
+
+![img](images/UML.png)  
+
+Figure 1: Off The Shelf conceptual data model in UML.
 
 ### 2. Additional Business Rules
  
