@@ -1,0 +1,99 @@
+PRAGMA foreign_keys = ON;
+BEGIN TRANSACTION;
+.mode columns
+.headers on
+.nullvalue NULL
+
+
+DROP TABLE IF EXISTS User;
+
+CREATE TABLE User (
+  id INTEGER PRIMARY KEY,
+  username VARCHAR NOT NULL,      
+  password VARCHAR NOT NULL,                  
+  name     VARCHAR,
+  adress   VARCHAR DEFAULT 'Undefined',
+  email    VARCHAR NOT NULL UNIQUE,
+  phone    VARCHAR DEFAULT 'Empty',
+  photo STRING DEFAULT "default.jpg"              
+);
+
+DROP TABLE IF EXISTS Book;
+
+CREATE TABLE Book (
+  id INTEGER PRIMARY KEY,
+  title VARCHAR NOT NULL,      
+  isbn INTEGER NOT NULL,
+  year INTEGER NOT NULL,   
+  price INTEGER  NOT NULL CHECK(price >= 0),               
+  edition INTEGER NOT NULL,
+  collection INTEGER REFERENCES collections(id) ON DELETE CASCADE,
+  category INTEGER NOT NULL REFERENCES category(id) ON DELETE CASCADE,
+  author INTEGER NOT NULL REFERENCES author(id) ON DELETE CASCADE,
+  publisher INTEGER NOT NULL REFERENCES publisher(id) ON DELETE CASCADE, 
+  photo STRING DEFAULT "default.jpg"                           
+);
+
+DROP TABLE IF EXISTS Review;
+
+CREATE TABLE Review (
+  id INTEGER PRIMARY KEY,
+  rating INTEGER NOT NULL CHECK (rating>=  0 AND rating<=5),
+  user INTEGER NOT NULL REFERENCES user(id) ON DELETE CASCADE, 
+  book INTEGER NOT NULL REFERENCES book(id) ON DELETE CASCADE,
+  comment VARCHAR NOT NULL,
+  date DATE NOT NULL
+);
+
+DROP TABLE IF EXISTS Category;
+
+CREATE TABLE Category (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR NOT NULL
+);
+
+DROP TABLE IF EXISTS Collection;
+
+CREATE TABLE Collection (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR NOT NULL
+);
+
+DROP TABLE IF EXISTS Author;
+
+CREATE TABLE Author (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR NOT NULL
+);
+
+DROP TABLE IF EXISTS Publisher;
+
+CREATE TABLE Publisher (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR NOT NULL
+);
+
+DROP TABLE IF EXISTS Purchase;
+
+CREATE TABLE Purchase (
+  id INTEGER PRIMARY KEY,
+  date DATE NOT NULL,
+  state VARCHAR NOT NULL,
+  user INTEGER NOT NULL REFERENCES user(id) ON DELETE CASCADE, 
+  book INTEGER NOT NULL REFERENCES book(id) ON DELETE CASCADE,
+);
+
+DROP TABLE IF EXISTS Admin;
+
+CREATE TABLE Admin (
+  id INTEGER PRIMARY KEY,
+  user INTEGER NOT NULL REFERENCES user(id) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS FAQ;
+
+CREATE TABLE FAQ (
+  id INTEGER PRIMARY KEY,
+  question VARCHAR NOT NULL,
+  answer VARCHAR NOT NULL
+);
