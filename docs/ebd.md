@@ -70,7 +70,7 @@ Figure 1: Off The Shelf conceptual data model in UML.
 | --------------  | ---                |
 | **Keys**        | {question, answer} |
 | **Functional Dependencies:** |       |
-| none            |                    |
+| none           |none                |
 | **NORMAL FORM** | BCNF               |
 
 
