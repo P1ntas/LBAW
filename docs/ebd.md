@@ -6,12 +6,6 @@ This is it! The book you need, the experience you want, whenever you like.
 
 The Conceptual Data Model contains the identification and description of the entities and relationships that are relevant to the database specification.
 
-A UML class diagram is used to document the model.
-
-The class diagram is developed by starting to include only the classes and its relationships in order not to overload the diagram too early in the process. In the following iterations additional detail is included, namely: class attributes, attribute domains, multiplicity of associations, and additional restrictions in OCL.
-
-A professional diagram drawing tool that supports UML is recommended.
-
 ### 1. Class diagram
 
 The UML diagram in Figure 1 presents the main organisational entities, the relationships between them, attributes and their domains, and the multiplicity of relationships for the **Off The Shelf** platform.
@@ -34,15 +28,30 @@ Figure 1: Off The Shelf conceptual data model in UML.
 
 ### 1. Relational Schema
 
-> The Relational Schema includes the relation schemas, attributes, domains, primary keys, foreign keys and other integrity rules: UNIQUE, DEFAULT, NOT NULL, CHECK.  
 > Relation schemas are specified in the compact notation:  
 
 | Relation reference | Relation Compact Notation                        |
 | ------------------ | ------------------------------------------------ |
-| R01                | Table1(__id__, attribute NN)                     |
-| R02                | Table2(__id__, attribute → Table1 NN)            |
-| R03                | Table3(__id1__, id2 → Table2, attribute UK NN)   |
-| R04                | Table4((__id1__, __id2__) → Table3, id3, attribute CK attribute > 0) |
+| R01                | FAQ (**question**, **answer**)|
+| R02                | admin (**idAdmin**, name NN, email UK NN, password NN)|
+| R03                | photo (**idPhoto**, image NN, idBook->book, idUser->user UK, idAdmin->admin UK)|
+| R04                | publisher (**idPublisher**, name NN)|
+| R05                | author (**idAuthor**, name NN)|
+| R06                | book_author (**idBook**->book, **idAuthor**->author)|
+| R07                | collection (**idCollection**, name NN)|
+| R08                | book_collection (**idBook**->book, **idCollection**->collection)|
+| R09                | category (**idCategory**, name NN)|
+| R10                | review (**idReview**, rating NN CK rating>0 AND rating<=5, comment, date NN, idBook->book NN, idUser->user NN)|
+| R11                | purchase (**idPurchase**, date NN, idUser->user NN)|
+| R12                | received (**idPurchase**->purchase)|
+| R13                | dispatched (**idPurchase**->purchase)|
+| R14                | delivered (**idPurchase**->purchase)|
+| R15                | purchase_book (**idPurchase**->purchase, **idBook**->book)|
+| R16                | delivery (**idDelivery**, arrival NN, address NN, cost NN CK cost >= 0, idPurchase->purchase UK NN)|
+| R17                | book (**idBook**, title NN, isbn NN, year, price NN CK price >= 0, edition, idCategory->category NN, idPublisher->publisher)|
+| R18                | user (**idUser**, username NN, email UK NN, password NN, address, phone)|
+| R19                | wishlist (**idUser**->user, **idBook**->book)|
+| R20                | cart (**idUser**->user, **idBook**->book)|
 
 ### 2. Domains
 
@@ -51,20 +60,162 @@ Figure 1: Off The Shelf conceptual data model in UML.
 | Domain Name | Domain Specification           |
 | ----------- | ------------------------------ |
 | Today	      | DATE DEFAULT CURRENT_DATE      |
-| Priority    | ENUM ('High', 'Medium', 'Low') |
+| State    | ENUM ('Received','Dispached','Delivered') |
 
 ### 3. Schema validation
 
 > To validate the Relational Schema obtained from the Conceptual Model, all functional dependencies are identified and the normalization of all relation schemas is accomplished. Should it be necessary, in case the scheme is not in the Boyce–Codd Normal Form (BCNF), the relational schema is refined using normalization.  
 
-| **TABLE R01**   | User               |
+| **TABLE R01**   | FAQ                |
 | --------------  | ---                |
-| **Keys**        | { id }, { email }  |
+| **Keys**        | {question, answer} |
 | **Functional Dependencies:** |       |
-| FD0101          | id → {email, name} |
-| FD0102          | email → {id, name} |
-| ...             | ...                |
+| none            |                    |
 | **NORMAL FORM** | BCNF               |
+
+
+| **TABLE R02**   | admin              |
+| --------------  | ---                |
+| **Keys**        | {idAdmin}, {email} |
+| **Functional Dependencies:** |       |
+| FD0101          | idAdmin -> {name, email, password}  |
+| FD0101          | email -> {idAdmin, name, password}  |
+| **NORMAL FORM** | BCNF               |
+
+
+| **TABLE R03**   | photo             |
+| --------------  | ---                |
+| **Keys**        | {idPhoto}, {idUser}, {idAdmin} |
+| **Functional Dependencies:** |       |
+| FD0101          | idPhoto -> {image, idBook, idUser, idAdmin}  |
+| FD0101          | idUser -> {idPhoto, image, idBook, idAdmin}  |
+| FD0101          | idAdmin -> {idPhoto, image, idBook, idUser}  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R04**   | publisher             |
+| --------------  | ---                |
+| **Keys**        | {idPublisher} |
+| **Functional Dependencies:** |       |
+| FD0101          | idPublisher -> {name}  |
+| **NORMAL FORM** | BCNF               |
+
+
+| **TABLE R05**   | author             |
+| --------------  | ---                |
+| **Keys**        | {idAuthor} |
+| **Functional Dependencies:** |       |
+| FD0101          | idAuthor -> {name}  |
+| **NORMAL FORM** | BCNF               |
+
+
+| **TABLE R06**   | book_author             |
+| --------------  | ---                |
+| **Keys**        | {idBook, idAuthor} |
+| **Functional Dependencies:** |       |
+| none|none  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R07**   | collection             |
+| --------------  | ---                |
+| **Keys**        | {idCollection} |
+| **Functional Dependencies:** |       |
+| FD0101          | idCollection -> {name}  |
+| **NORMAL FORM** | BCNF               |
+
+
+| **TABLE R08**   | book_collection             |
+| --------------  | ---                |
+| **Keys**        | {idBook, idCollection} |
+| **Functional Dependencies:** |       |
+| none|none  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R09**   | category             |
+| --------------  | ---                |
+| **Keys**        | {idCategory} |
+| **Functional Dependencies:** |       |
+| FD0101          | idCategory -> {name}  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R10**   | review             |
+| --------------  | ---                |
+| **Keys**        | {idReview} |
+| **Functional Dependencies:** |       |
+| FD0101          | idReview -> {rating, comment, date, idBook, idUser} |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R11**   | puchase            |
+| --------------  | ---                |
+| **Keys**        |  {idPurchase} |
+| **Functional Dependencies:** |       |
+| FD0101          | idPurchase -> {date, idUser} |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R12**   |received            |
+| --------------  | ---                |
+| **Keys**        |  {idPurchase} |
+| **Functional Dependencies:** |       |
+| none|none  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R13**   | dispached           |
+| --------------  | ---                |
+| **Keys**        |  {idPurchase} |
+| **Functional Dependencies:** |       |
+| none|none  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R14**   | delivered          |
+| --------------  | ---                |
+| **Keys**        |  {idPurchase} |
+| **Functional Dependencies:** |       |
+| none|none  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R15**   | purchase_book          |
+| --------------  | ---                |
+| **Keys**        |  {idPurchase, idBook} |
+| **Functional Dependencies:** |       |
+| none|none  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R16**   | delivery         |
+| --------------  | ---                |
+| **Keys**        |  {idDelivery}, {idPurchase} |
+| **Functional Dependencies:** |       |
+| FD0101          | idDelivery -> {arrival, address, cost, idPurchase} |
+| FD0101          | idPurchase -> {idDelivery, arrival, address, cost} |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R17**   | book         |
+| --------------  | ---                |
+| **Keys**        | {idBook} |
+| **Functional Dependencies:** |       |
+| FD0101          | idBook -> {title, isbn, year, price, edition, idCategory, idPublisher} |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R18**   | user         |
+| --------------  | ---                |
+| **Keys**        |{idUser}, {email} |
+| **Functional Dependencies:** |       |
+| FD0101          | idUser -> {username, email, password, address, phone} |
+| FD0101          | email -> {idUser, username, password, address, phone}|
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R19**   | wishlist         |
+| --------------  | ---                |
+| **Keys**        | {idUser, idBook} |
+| **Functional Dependencies:** |       |
+| none|none  |
+| **NORMAL FORM** | BCNF               |
+
+| **TABLE R20**   | cart         |
+| --------------  | ---                |
+| **Keys**        | {idUser, idBook} |
+| **Functional Dependencies:** |       |
+| none|none  |
+| **NORMAL FORM** | BCNF               |
+
 
 > If necessary, description of the changes necessary to convert the schema to BCNF.  
 > Justification of the BCNF.  
