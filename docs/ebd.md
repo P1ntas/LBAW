@@ -84,8 +84,8 @@ Legend:
 | --------------  | ---                |
 | **Keys**        | {idAdmin}, {email} |
 | **Functional Dependencies:** |       |
-| FD0101          | idAdmin -> {name, email, password}  |
-| FD0101          | email -> {idAdmin, name, password}  |
+| FD0201          | idAdmin -> {name, email, password}  |
+| FD0202          | email -> {idAdmin, name, password}  |
 | **NORMAL FORM** | BCNF               |
 
 
@@ -93,16 +93,16 @@ Legend:
 | --------------  | ---                |
 | **Keys**        | {idPhoto}, {idUser}, {idAdmin} |
 | **Functional Dependencies:** |       |
-| FD0101          | idPhoto -> {image, idBook, idUser, idAdmin}  |
-| FD0101          | idUser -> {idPhoto, image, idBook, idAdmin}  |
-| FD0101          | idAdmin -> {idPhoto, image, idBook, idUser}  |
+| FD0301          | idPhoto -> {image, idBook, idUser, idAdmin}  |
+| FD0302          | idUser -> {idPhoto, image, idBook, idAdmin}  |
+| FD0303          | idAdmin -> {idPhoto, image, idBook, idUser}  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R04**   | publisher             |
 | --------------  | ---                |
 | **Keys**        | {idPublisher} |
 | **Functional Dependencies:** |       |
-| FD0101          | idPublisher -> {name}  |
+| FD0401          | idPublisher -> {name}  |
 | **NORMAL FORM** | BCNF               |
 
 
@@ -110,7 +110,7 @@ Legend:
 | --------------  | ---                |
 | **Keys**        | {idAuthor} |
 | **Functional Dependencies:** |       |
-| FD0101          | idAuthor -> {name}  |
+| FD0501          | idAuthor -> {name}  |
 | **NORMAL FORM** | BCNF               |
 
 
@@ -125,7 +125,7 @@ Legend:
 | --------------  | ---                |
 | **Keys**        | {idCollection} |
 | **Functional Dependencies:** |       |
-| FD0101          | idCollection -> {name}  |
+| FD0701          | idCollection -> {name}  |
 | **NORMAL FORM** | BCNF               |
 
 
@@ -140,21 +140,21 @@ Legend:
 | --------------  | ---                |
 | **Keys**        | {idCategory} |
 | **Functional Dependencies:** |       |
-| FD0101          | idCategory -> {name}  |
+| FD0901          | idCategory -> {name}  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R10**   | review             |
 | --------------  | ---                |
 | **Keys**        | {idReview} |
 | **Functional Dependencies:** |       |
-| FD0101          | idReview -> {rating, comment, date, idBook, idUser} |
+| FD1001          | idReview -> {rating, comment, date, idBook, idUser} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R11**   | puchase            |
 | --------------  | ---                |
 | **Keys**        |  {idPurchase} |
 | **Functional Dependencies:** |       |
-| FD0101          | idPurchase -> {date, idUser} |
+| FD1101          | idPurchase -> {date, idUser} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R12**   |received            |
@@ -189,23 +189,23 @@ Legend:
 | --------------  | ---                |
 | **Keys**        |  {idDelivery}, {idPurchase} |
 | **Functional Dependencies:** |       |
-| FD0101          | idDelivery -> {arrival, address, cost, idPurchase} |
-| FD0101          | idPurchase -> {idDelivery, arrival, address, cost} |
+| FD1601          | idDelivery -> {arrival, address, cost, idPurchase} |
+| FD1602          | idPurchase -> {idDelivery, arrival, address, cost} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R17**   | book         |
 | --------------  | ---                |
 | **Keys**        | {idBook} |
 | **Functional Dependencies:** |       |
-| FD0101          | idBook -> {title, isbn, year, price, edition, idCategory, idPublisher} |
+| FD1701          | idBook -> {title, isbn, year, price, edition, idCategory, idPublisher} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R18**   | user         |
 | --------------  | ---                |
 | **Keys**        |{idUser}, {email} |
 | **Functional Dependencies:** |       |
-| FD0101          | idUser -> {username, email, password, address, phone} |
-| FD0101          | email -> {idUser, username, password, address, phone}|
+| FD1801          | idUser -> {username, email, password, address, phone} |
+| FD1802          | email -> {idUser, username, password, address, phone}|
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R19**   | wishlist         |
