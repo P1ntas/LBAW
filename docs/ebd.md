@@ -53,6 +53,12 @@ Figure 1: Off The Shelf conceptual data model in UML.
 | R19                | wishlist (**idUser**->user, **idBook**->book)|
 | R20                | cart (**idUser**->user, **idBook**->book)|
 
+Legend:
+ - UK = UNIQUE KEY
+ - NN = NOT NULL
+ - DF = DEFAULT
+ - CK = CHECK
+
 ### 2. Domains
 
 > The specification of additional domains can also be made in a compact form, using the notation:  
