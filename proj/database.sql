@@ -4,6 +4,16 @@ PRAGMA foreign_keys = ON;
 .nullvalue NULL
 BEGIN TRANSACTION;
 
+-----------------------------------------
+-- Types
+-----------------------------------------
+
+CREATE TYPE purchaseState AS ENUM ('Received', 'Dispatched', 'Delivered');
+
+-----------------------------------------
+-- Tables
+-----------------------------------------
+
 -- Table: FAQ
 DROP TABLE IF EXISTS FAQ;
 
@@ -86,8 +96,8 @@ CREATE TABLE Book (
     year INTEGER,   
     price NUMERIC(9, 2) NOT NULL CHECK (price >= 0),               
     bookEdition INTEGER,
-    idCategory INTEGER NOT NULL REFERENCES Category(idCategory) ON DELETE CASCADE,
-    idPublisher INTEGER REFERENCES Publisher(idPublisher) ON DELETE CASCADE                         
+    idCategory INTEGER NOT NULL REFERENCES Category(idCategory) ON UPDATE CASCADE ON DELETE CASCADE,
+    idPublisher INTEGER REFERENCES Publisher(idPublisher) ON UPDATE CASCADE ON DELETE CASCADE                         
 );
 
 -- Table: Photo
