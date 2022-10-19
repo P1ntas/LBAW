@@ -16,8 +16,9 @@ Figure 1: Off The Shelf conceptual data model in UML.
 
 ### 2. Additional Business Rules
  
-> Business rules can be included in the UML diagram as UML notes or in a table in this section.
+Additional business rules or restrictions that cannot be conveyed in the UML class diagram, are described in text as UML notes in the diagram or as independent notes in this section.  
 
+- BR01. A book can only be purchased if its stock value is positive.
 
 ---
 
@@ -42,16 +43,13 @@ A textual compact notation is used to document the relational schemas.
 | R08                | book_collection (**id_book**->book, **id_collection**->collection)|
 | R09                | category (**id_category**, name NN)|
 | R10                | review (**id_review**, rating NN CK rating>0 AND rating<=5, comment, date NN DF Today, id_book->book NN, id_user->user NN)|
-| R11                | purchase (**id_purchase**, date NN DF Today, id_user->user NN)|
-| R12                | received (**id_purchase**->purchase)|
-| R13                | dispatched (**id_purchase**->purchase)|
-| R14                | delivered (**id_purchase**->purchase)|
-| R15                | purchase_book (**id_purchase**->purchase, **id_book**->book)|
-| R16                | delivery (**id_delivery**, arrival NN, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
-| R17                | book (**id_book**, title NN, isbn UK NN, year, price NN CK price >= 0, stock NN CK stock >= 0, edition, description, id_category->category NN, id_publisher->publisher)|
-| R18                | user (**id_user**, username NN, email UK NN, password NN, address, phone, blocked NN DF FALSE)|
-| R19                | wishlist (**id_user**->user, **id_book**->book)|
-| R20                | cart (**id_user**->user, **id_book**->book)|
+| R11                | purchase (**id_purchase**, date NN DF Today, id_user->user NN, state NN CK state IN States)|
+| R12                | purchase_book (**id_purchase**->purchase, **id_book**->book)|
+| R13                | delivery (**id_delivery**, arrival NN, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
+| R14                | book (**id_book**, title NN, isbn UK NN, year, price NN CK price >= 0, stock NN CK stock >= 0, edition, description, id_category->category NN, id_publisher->publisher)|
+| R15                | user (**id_user**, username NN, email UK NN, password NN, address, phone, blocked NN DF FALSE)|
+| R16                | wishlist (**id_user**->user, **id_book**->book)|
+| R17                | cart (**id_user**->user, **id_book**->book)|
 
 Legend:
  - UK = UNIQUE KEY
@@ -66,7 +64,7 @@ Specification of additional domains:
 | Domain Name | Domain Specification           |
 | ----------- | ------------------------------ |
 | Today	      | DATE DEFAULT CURRENT_DATE      |
-| State    | ENUM ('Received','Dispached','Delivered') |
+| States    | ENUM ('Received','Dispached','Delivered') |
 
 ### 3. Schema validation
 
@@ -157,66 +155,45 @@ To validate the Relational Schema obtained from the Conceptual Data Model, all f
 | FD1101          | {id_purchase} -> {date, id_user} |
 | **NORMAL FORM** | BCNF               |
 
-| **TABLE R12**   |received            |
-| --------------  | ---                |
-| **Keys**        |  {id_purchase} |
-| **Functional Dependencies:** |       |
-| none|none  |
-| **NORMAL FORM** | BCNF               |
-
-| **TABLE R13**   | dispached           |
-| --------------  | ---                |
-| **Keys**        |  {id_purchase} |
-| **Functional Dependencies:** |       |
-| none|none  |
-| **NORMAL FORM** | BCNF               |
-
-| **TABLE R14**   | delivered          |
-| --------------  | ---                |
-| **Keys**        |  {id_purchase} |
-| **Functional Dependencies:** |       |
-| none|none  |
-| **NORMAL FORM** | BCNF               |
-
-| **TABLE R15**   | purchase_book          |
+| **TABLE R12**   | purchase_book          |
 | --------------  | ---                |
 | **Keys**        |  {id_purchase, id_book} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
-| **TABLE R16**   | delivery         |
+| **TABLE R13**   | delivery         |
 | --------------  | ---                |
 | **Keys**        |  {id_delivery}, {id_purchase} |
 | **Functional Dependencies:** |       |
-| FD1601          | {id_delivery} -> {arrival, address, cost, id_purchase} |
-| FD1602          | {id_purchase} -> {id_delivery, arrival, address, cost} |
+| FD1301          | {id_delivery} -> {arrival, address, cost, id_purchase} |
+| FD1302          | {id_purchase} -> {id_delivery, arrival, address, cost} |
 | **NORMAL FORM** | BCNF               |
 
-| **TABLE R17**   | book         |
+| **TABLE R14**   | book         |
 | --------------  | ---                |
 | **Keys**        | {id_book}, {isbn} |
 | **Functional Dependencies:** |       |
-| FD1701          | {id_book} -> {title, isbn, year, price, stock, edition, description, id_category, id_publisher} |
-| FD1702          | {isbn} -> {id_book, title, year, price, stock, edition, description, id_category, id_publisher} |
+| FD1401          | {id_book} -> {title, isbn, year, price, stock, edition, description, id_category, id_publisher} |
+| FD1402          | {isbn} -> {id_book, title, year, price, stock, edition, description, id_category, id_publisher} |
 | **NORMAL FORM** | BCNF               |
 
-| **TABLE R18**   | user         |
+| **TABLE R15**   | user         |
 | --------------  | ---                |
 | **Keys**        |{id_user}, {email} |
 | **Functional Dependencies:** |       |
-| FD1801          | {id_user} -> {username, email, password, address, phone, blocked} |
-| FD1802          | {email} -> {id_user, username, password, address, phone, blocked}|
+| FD1501          | {id_user} -> {username, email, password, address, phone, blocked} |
+| FD1502          | {email} -> {id_user, username, password, address, phone, blocked}|
 | **NORMAL FORM** | BCNF               |
 
-| **TABLE R19**   | wishlist         |
+| **TABLE R16**   | wishlist         |
 | --------------  | ---                |
 | **Keys**        | {id_user, id_book} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
-| **TABLE R20**   | cart         |
+| **TABLE R17**   | cart         |
 | --------------  | ---                |
 | **Keys**        | {id_user, id_book} |
 | **Functional Dependencies:** |       |
@@ -246,21 +223,18 @@ The workload includes an estimate of the number of tuples for each relation and 
 | R03                | photo        | tens of thousands | dozens per day |
 | R04                | publisher        | hundreds | one per day |
 | R05                | author       | thousands | one per day |
-| R06                | book_author        | thousands | ... |
-| R07                | collection        | hundreds | no growth |
-| R08                | book_collection        | hundreds | ... |
-| R09                | category        | hundreds | no growth |
-| R10                | review        | thousands | no growth |
-| R11                | purchase        | tens of thousands | no growth |
-| R12                | received        | tens of thousands | no growth |
-| R13                | dispatched        | tens of thousands | no growth |
-| R14                | delivered        | tens of thousands | no growth |
-| R15                | purchase_book        | tens of thousands | ... |
-| R16                | delivery        | tens of thousands | no growth |
-| R17                | book       | tens of thousands | dozens per day |
-| R18                | user        | tens of thousands | dozens per day |
-| R19                | wishlist        | tens of thousands | ... |
-| R20                | cart        | tens of thousands | ... |
+| R06                | book_author        | thousands | one per day |
+| R07                | collection        | hundreds | one per day |
+| R08                | book_collection        | hundreds | one per day |
+| R09                | category        | hundreds | one per month |
+| R10                | review        | tens of thousands | hundreds per week |
+| R11                | purchase        | tens of thousands | hundreds per day |
+| R12                | purchase_book        | tens of thousands | hundreds per day |
+| R13                | delivery        | tens of thousands | hundreds per day |
+| R14                | book       | thousands | one per day |
+| R15                | user        | tens of thousands | dozens per day |
+| R16                | wishlist        | tens of thousands | hundreds per day |
+| R17                | cart        | tens of thousands | hundreds per week |
 
 ### 2. Proposed Indices
 
