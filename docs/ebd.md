@@ -24,11 +24,11 @@ Figure 1: Off The Shelf conceptual data model in UML.
 
 ## A5: Relational Schema, validation and schema refinement
 
-> Brief presentation of the artefact goals.
+This artifact contains the Relational Schema obtained by mapping from the Conceptual Data Model. The Relational Schema includes each relation schema, attributes, domains, primary keys, foreign keys and other integrity rules: UNIQUE, DEFAULT, NOT NULL, CHECK.
 
 ### 1. Relational Schema
 
-> Relation schemas are specified in the compact notation:  
+A textual compact notation is used to document the relational schemas. 
 
 | Relation reference | Relation Compact Notation                        |
 | ------------------ | ------------------------------------------------ |
@@ -61,7 +61,7 @@ Legend:
 
 ### 2. Domains
 
-> The specification of additional domains can also be made in a compact form, using the notation:  
+Specification of additional domains:
 
 | Domain Name | Domain Specification           |
 | ----------- | ------------------------------ |
@@ -70,7 +70,7 @@ Legend:
 
 ### 3. Schema validation
 
-> To validate the Relational Schema obtained from the Conceptual Model, all functional dependencies are identified and the normalization of all relation schemas is accomplished. Should it be necessary, in case the scheme is not in the Boyce–Codd Normal Form (BCNF), the relational schema is refined using normalization.  
+To validate the Relational Schema obtained from the Conceptual Data Model, all functional dependencies are identified and the normalization of all relation schemas is accomplished.
 
 | **TABLE R01**   | faq                |
 | --------------  | ---                |
@@ -222,22 +222,21 @@ Legend:
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
-
-> If necessary, description of the changes necessary to convert the schema to BCNF.  
-> Justification of the BCNF.  
-
+Because all relations are in the Boyce–Codd Normal Form (BCNF), the relational schema is also in the BCNF and, therefore, the schema does not need to be further normalised.
 
 ---
 
-
 ## A6: Indexes, triggers, transactions and database population
 
-> Brief presentation of the artefact goals.
+This artifact contains the physical schema of the database, the identification and characterisation of the indexes, the support of data integrity rules with triggers and the definition of the database user-defined functions.
+
+Furthermore, it also shows the database transactions needed to assure the integrity of the data in the presence of concurrent accesses. For each transaction, the isolation level is explicitly stated and justified.
+
+This artifact also contains the database's workload as well as the complete database creation script, including all SQL necessary to define all integrity constraints, indexes and triggers. Finally, this artifact also includes a separate script with INSERT statements to populate the database.
 
 ### 1. Database Workload
  
-> A study of the predicted system load (database load).
-> Estimate of tuples at each relation.
+The workload includes an estimate of the number of tuples for each relation and also the estimated growth.
 
 | **Relation reference** | **Relation Name** | **Order of magnitude**        | **Estimated growth** |
 | ------------------ | ------------- | ------------------------- | -------- |
