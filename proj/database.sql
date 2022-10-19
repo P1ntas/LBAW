@@ -8,196 +8,198 @@ BEGIN TRANSACTION;
 -- Types
 -----------------------------------------
 
-CREATE TYPE purchaseState AS ENUM ('Received', 'Dispatched', 'Delivered');
+CREATE TYPE purchase_state AS ENUM ('Received', 'Dispatched', 'Delivered');
 
 -----------------------------------------
 -- Tables
 -----------------------------------------
 
--- Table: FAQ
-DROP TABLE IF EXISTS FAQ;
+-- Note that some plural names were adopted because of reserved words in PostgreSQL.
 
-CREATE TABLE FAQ (
+-- Table: faq
+DROP TABLE IF EXISTS faq;
+
+CREATE TABLE faq (
     question TEXT,
     answer TEXT,
     PRIMARY KEY (question, answer)
 );
 
--- Table: Admins
-DROP TABLE IF EXISTS Admins;
+-- Table: admins
+DROP TABLE IF EXISTS admins;
 
-CREATE TABLE Admins (
-    idAdmin INTEGER PRIMARY KEY,
-    adminName TEXT NOT NULL,
+CREATE TABLE admins (
+    id_admin INTEGER PRIMARY KEY,
+    admin_name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    adminPassword TEXT NOT NULL
+    admin_password TEXT NOT NULL
 );
 
--- Table: Publisher
-DROP TABLE IF EXISTS Publisher;
+-- Table: publisher
+DROP TABLE IF EXISTS publisher;
 
-CREATE TABLE Publisher (
-    idPublisher INTEGER PRIMARY KEY,
-    publisherName TEXT NOT NULL
+CREATE TABLE publisher (
+    id_publisher INTEGER PRIMARY KEY,
+    publisher_name TEXT NOT NULL
 );
 
--- Table: Author
-DROP TABLE IF EXISTS Author;
+-- Table: author
+DROP TABLE IF EXISTS author;
 
-CREATE TABLE Author (
-    idAuthor INTEGER PRIMARY KEY,
-    authorName TEXT NOT NULL
+CREATE TABLE author (
+    id_author INTEGER PRIMARY KEY,
+    author_name TEXT NOT NULL
 );
 
--- Table: Collections
-DROP TABLE IF EXISTS Collections;
+-- Table: collections
+DROP TABLE IF EXISTS collections;
 
-CREATE TABLE Collections (
-    idCollection INTEGER PRIMARY KEY,
-    collectionName TEXT NOT NULL
+CREATE TABLE collections (
+    id_collection INTEGER PRIMARY KEY,
+    collection_name TEXT NOT NULL
 );
 
--- Table: Category
-DROP TABLE IF EXISTS Category;
+-- Table: category
+DROP TABLE IF EXISTS category;
 
-CREATE TABLE Category (
-    idCategory INTEGER PRIMARY KEY,
-    categoryName TEXT NOT NULL
+CREATE TABLE category (
+    id_category INTEGER PRIMARY KEY,
+    category_name TEXT NOT NULL
 );
 
--- Table: User
-DROP TABLE IF EXISTS User;
+-- Table: users
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE User (
-    idUser INTEGER PRIMARY KEY,
+CREATE TABLE users (
+    id_user INTEGER PRIMARY KEY,
     username TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,      
-    userPassword TEXT NOT NULL,                  
-    userAddress TEXT,
+    user_password TEXT NOT NULL,                  
+    user_address TEXT,
     phone CHAR(9)             
 );
 
--- Table: Purchase
-DROP TABLE IF EXISTS Purchase;
+-- Table: purchase
+DROP TABLE IF EXISTS purchase;
 
-CREATE TABLE Purchase (
-    idPurchase INTEGER PRIMARY KEY,
-    purchaseDate DATE NOT NULL,
-    idUser INTEGER NOT NULL REFERENCES User(idUser) ON DELETE CASCADE 
+CREATE TABLE purchase (
+    id_purchase INTEGER PRIMARY KEY,
+    purchase_date DATE NOT NULL,
+    id_user INTEGER NOT NULL REFERENCES users(id_user) ON DELETE CASCADE 
 );
 
--- Table: Book
-DROP TABLE IF EXISTS Book;
+-- Table: book
+DROP TABLE IF EXISTS book;
 
-CREATE TABLE Book (
-    idBook INTEGER PRIMARY KEY,
+CREATE TABLE book (
+    id_book INTEGER PRIMARY KEY,
     title TEXT NOT NULL,      
     isbn INTEGER NOT NULL,
     year INTEGER,   
     price NUMERIC(9, 2) NOT NULL CHECK (price >= 0),               
-    bookEdition INTEGER,
-    idCategory INTEGER NOT NULL REFERENCES Category(idCategory) ON UPDATE CASCADE ON DELETE CASCADE,
-    idPublisher INTEGER REFERENCES Publisher(idPublisher) ON UPDATE CASCADE ON DELETE CASCADE                         
+    book_edition INTEGER,
+    id_category INTEGER NOT NULL REFERENCES category(id_category) ON UPDATE CASCADE ON DELETE CASCADE,
+    id_publisher INTEGER REFERENCES publisher(id_publisher) ON UPDATE CASCADE ON DELETE CASCADE                         
 );
 
--- Table: Photo
-DROP TABLE IF EXISTS Photo;
+-- Table: photo
+DROP TABLE IF EXISTS photo;
 
-CREATE TABLE Photo (
-    idPhoto INTEGER PRIMARY KEY,
-    photoImage TEXT NOT NULL,      
-    idBook INTEGER REFERENCES Book(idBook) ON UPDATE CASCADE ON DELETE CASCADE,
-    idUser INTEGER UNIQUE REFERENCES User(idUser) ON UPDATE CASCADE ON DELETE CASCADE,
-    idAdmin INTEGER UNIQUE REFERENCES Admins(idAdmin) ON UPDATE CASCADE ON DELETE CASCADE           
+CREATE TABLE photo (
+    id_photo INTEGER PRIMARY KEY,
+    photo_image TEXT NOT NULL,      
+    id_book INTEGER REFERENCES book(id_book) ON UPDATE CASCADE ON DELETE CASCADE,
+    id_user INTEGER UNIQUE REFERENCES users(id_user) ON UPDATE CASCADE ON DELETE CASCADE,
+    id_admin INTEGER UNIQUE REFERENCES admins(id_admin) ON UPDATE CASCADE ON DELETE CASCADE           
 );
 
--- Table: BookAuthor
-DROP TABLE IF EXISTS BookAuthor;
+-- Table: book_author
+DROP TABLE IF EXISTS book_author;
 
-CREATE TABLE BookAuthor (
-    idBook INTEGER REFERENCES Book(idBook) ON DELETE CASCADE,
-    idAuthor INTEGER REFERENCES Author(idAuthor) ON DELETE CASCADE,
-    PRIMARY KEY (idBook, idAuthor)                       
+CREATE TABLE book_author (
+    id_book INTEGER REFERENCES book(id_book) ON DELETE CASCADE,
+    id_author INTEGER REFERENCES author(id_author) ON DELETE CASCADE,
+    PRIMARY KEY (id_book, id_author)                       
 );
 
--- Table: BookCollection
-DROP TABLE IF EXISTS BookCollection;
+-- Table: book_collection
+DROP TABLE IF EXISTS book_collection;
 
-CREATE TABLE BookCollection (
-    idBook INTEGER REFERENCES Book(idBook) ON DELETE CASCADE,
-    idCollection INTEGER REFERENCES Collections(idCollection) ON DELETE CASCADE,
-    PRIMARY KEY (idBook, idCollection)                 
+CREATE TABLE book_collection (
+    id_book INTEGER REFERENCES book(id_book) ON DELETE CASCADE,
+    id_collection INTEGER REFERENCES collections(id_collection) ON DELETE CASCADE,
+    PRIMARY KEY (id_book, id_collection)                 
 );
 
--- Table: Review
-DROP TABLE IF EXISTS Review;
+-- Table: review
+DROP TABLE IF EXISTS review;
 
-CREATE TABLE Review (
-    idReview INTEGER PRIMARY KEY,
+CREATE TABLE review (
+    id_review INTEGER PRIMARY KEY,
     rating NUMERIC(1, 2) NOT NULL CHECK (rating > 0 AND rating <= 5),
     comment TEXT,
-    reviewDate DATE NOT NULL,
-    idBook INTEGER NOT NULL REFERENCES Book(idBook) ON UPDATE CASCADE ON DELETE CASCADE,
-    idUser INTEGER NOT NULL REFERENCES User(idUser) ON UPDATE CASCADE ON DELETE CASCADE          
+    review_date DATE NOT NULL,
+    id_book INTEGER NOT NULL REFERENCES book(id_book) ON UPDATE CASCADE ON DELETE CASCADE,
+    id_user INTEGER NOT NULL REFERENCES users(id_user) ON UPDATE CASCADE ON DELETE CASCADE          
 );
 
--- Table: Received
-DROP TABLE IF EXISTS Received;
+-- Table: received
+DROP TABLE IF EXISTS received;
 
-CREATE TABLE Received (
-    idPurchase INTEGER PRIMARY KEY REFERENCES Purchase(idPurchase) ON UPDATE CASCADE ON DELETE CASCADE         
+CREATE TABLE received (
+    id_purchase INTEGER PRIMARY KEY REFERENCES purchase(id_purchase) ON UPDATE CASCADE ON DELETE CASCADE         
 );
 
--- Table: Dispatched
-DROP TABLE IF EXISTS Dispatched;
+-- Table: dispatched
+DROP TABLE IF EXISTS dispatched;
 
-CREATE TABLE Dispatched (
-    idPurchase INTEGER PRIMARY KEY REFERENCES Purchase(idPurchase) ON UPDATE CASCADE ON DELETE CASCADE         
+CREATE TABLE dispatched (
+    id_purchase INTEGER PRIMARY KEY REFERENCES purchase(id_purchase) ON UPDATE CASCADE ON DELETE CASCADE         
 );
 
--- Table: Delivered
-DROP TABLE IF EXISTS Delivered;
+-- Table: delivered
+DROP TABLE IF EXISTS delivered;
 
-CREATE TABLE Delivered (
-    idPurchase INTEGER PRIMARY KEY REFERENCES Purchase(idPurchase) ON UPDATE CASCADE ON DELETE CASCADE         
+CREATE TABLE delivered (
+    id_purchase INTEGER PRIMARY KEY REFERENCES purchase(id_purchase) ON UPDATE CASCADE ON DELETE CASCADE         
 );
 
--- Table: PurchaseBook
-DROP TABLE IF EXISTS PurchaseBook;
+-- Table: purchase_book
+DROP TABLE IF EXISTS purchase_book;
 
-CREATE TABLE PurchaseBook (
-    idPurchase INTEGER REFERENCES Purchase(idPurchase) ON DELETE CASCADE,
-    idBook INTEGER REFERENCES Book(idBook) ON DELETE CASCADE,
-    PRIMARY KEY (idPurchase, idBook)        
+CREATE TABLE purchase_book (
+    id_purchase INTEGER REFERENCES purchase(id_purchase) ON DELETE CASCADE,
+    id_book INTEGER REFERENCES book(id_book) ON DELETE CASCADE,
+    PRIMARY KEY (id_purchase, id_book)        
 );
 
--- Table: Delivery
-DROP TABLE IF EXISTS Delivery;
+-- Table: delivery
+DROP TABLE IF EXISTS delivery;
 
-CREATE TABLE Delivery (
-    idDelivery INTEGER PRIMARY KEY,
+CREATE TABLE delivery (
+    id_delivery INTEGER PRIMARY KEY,
     arrival DATE NOT NULL,
-    deliveryAddress TEXT NOT NULL,
+    delivery_address TEXT NOT NULL,
     cost NUMERIC(9, 2) NOT NULL CHECK (cost >= 0),
-    idPurchase INTEGER NOT NULL UNIQUE REFERENCES Purchase(idPurchase) ON UPDATE CASCADE ON DELETE CASCADE   
+    id_purchase INTEGER NOT NULL UNIQUE REFERENCES purchase(id_purchase) ON UPDATE CASCADE ON DELETE CASCADE   
 );
 
--- Table: Wishlist
-DROP TABLE IF EXISTS Wishlist;
+-- Table: wishlist
+DROP TABLE IF EXISTS wishlist;
 
-CREATE TABLE Wishlist (
-    idUser INTEGER REFERENCES User(idUser) ON DELETE CASCADE,
-    idBook INTEGER REFERENCES Book(idBook) ON DELETE CASCADE,
-    PRIMARY KEY (idUser, idBook)        
+CREATE TABLE wishlist (
+    id_user INTEGER REFERENCES users(id_user) ON DELETE CASCADE,
+    id_book INTEGER REFERENCES book(id_book) ON DELETE CASCADE,
+    PRIMARY KEY (id_user, id_book)        
 );
 
--- Table: Cart
-DROP TABLE IF EXISTS Cart;
+-- Table: cart
+DROP TABLE IF EXISTS cart;
 
-CREATE TABLE Cart (
-    idUser INTEGER REFERENCES User(idUser) ON DELETE CASCADE,
-    idBook INTEGER REFERENCES Book(idBook) ON DELETE CASCADE,
-    PRIMARY KEY (idUser, idBook)        
+CREATE TABLE cart (
+    id_user INTEGER REFERENCES users(id_user) ON DELETE CASCADE,
+    id_book INTEGER REFERENCES book(id_book) ON DELETE CASCADE,
+    PRIMARY KEY (id_user, id_book)        
 );
 
 COMMIT TRANSACTION;

@@ -32,7 +32,7 @@ Figure 1: Off The Shelf conceptual data model in UML.
 
 | Relation reference | Relation Compact Notation                        |
 | ------------------ | ------------------------------------------------ |
-| R01                | FAQ (**question**, **answer**)|
+| R01                | faq (**question**, **answer**)|
 | R02                | admin (**id_admin**, name NN, email UK NN, password NN)|
 | R03                | photo (**id_photo**, image NN, id_book->book, id_user->user UK, id_admin->admin UK)|
 | R04                | publisher (**id_publisher**, name NN)|
@@ -72,7 +72,7 @@ Legend:
 
 > To validate the Relational Schema obtained from the Conceptual Model, all functional dependencies are identified and the normalization of all relation schemas is accomplished. Should it be necessary, in case the scheme is not in the Boyce–Codd Normal Form (BCNF), the relational schema is refined using normalization.  
 
-| **TABLE R01**   | FAQ                |
+| **TABLE R01**   | faq                |
 | --------------  | ---                |
 | **Keys**        | {question, answer} |
 | **Functional Dependencies:** |       |
