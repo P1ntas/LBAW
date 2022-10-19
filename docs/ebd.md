@@ -240,26 +240,26 @@ The workload includes an estimate of the number of tuples for each relation and 
 
 | **Relation reference** | **Relation Name** | **Order of magnitude**        | **Estimated growth** |
 | ------------------ | ------------- | ------------------------- | -------- |
-| R01                | faq        | dozens | order per time |
-| R02                | admin        | units | dozens per month |
-| R03                | photo        | tens of thousands | hundreds per day |
-| R04                | publisher        | hundreds | no growth |
-| R05                | author       | thousands | no growth |
-| R06                | book_author        | thousands | no growth |
+| R01                | faq        | dozens | one per month |
+| R02                | admin        | units | no growth |
+| R03                | photo        | tens of thousands | dozens per day |
+| R04                | publisher        | hundreds | one per day |
+| R05                | author       | thousands | one per day |
+| R06                | book_author        | thousands | ... |
 | R07                | collection        | hundreds | no growth |
-| R08                | book_collection        | hundreds | no growth |
+| R08                | book_collection        | hundreds | ... |
 | R09                | category        | hundreds | no growth |
 | R10                | review        | thousands | no growth |
 | R11                | purchase        | tens of thousands | no growth |
 | R12                | received        | tens of thousands | no growth |
 | R13                | dispatched        | tens of thousands | no growth |
 | R14                | delivered        | tens of thousands | no growth |
-| R15                | purchase_book        | tens of thousands | no growth |
+| R15                | purchase_book        | tens of thousands | ... |
 | R16                | delivery        | tens of thousands | no growth |
-| R17                | book       | tens of thousands | no growth |
-| R18                | user        | tens of thousands | no growth |
-| R19                | wishlist        | tens of thousands | no growth |
-| R20                | cart        | tens of thousands | no growth |
+| R17                | book       | tens of thousands | dozens per day |
+| R18                | user        | tens of thousands | dozens per day |
+| R19                | wishlist        | tens of thousands | ... |
+| R20                | cart        | tens of thousands | ... |
 
 ### 2. Proposed Indices
 
