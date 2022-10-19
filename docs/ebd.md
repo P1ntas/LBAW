@@ -33,25 +33,25 @@ Figure 1: Off The Shelf conceptual data model in UML.
 | Relation reference | Relation Compact Notation                        |
 | ------------------ | ------------------------------------------------ |
 | R01                | FAQ (**question**, **answer**)|
-| R02                | admin (**idAdmin**, name NN, email UK NN, password NN)|
-| R03                | photo (**idPhoto**, image NN, idBook->book, idUser->user UK, idAdmin->admin UK)|
-| R04                | publisher (**idPublisher**, name NN)|
-| R05                | author (**idAuthor**, name NN)|
-| R06                | book_author (**idBook**->book, **idAuthor**->author)|
-| R07                | collection (**idCollection**, name NN)|
-| R08                | book_collection (**idBook**->book, **idCollection**->collection)|
-| R09                | category (**idCategory**, name NN)|
-| R10                | review (**idReview**, rating NN CK rating>0 AND rating<=5, comment, date NN, idBook->book NN, idUser->user NN)|
-| R11                | purchase (**idPurchase**, date NN, idUser->user NN)|
-| R12                | received (**idPurchase**->purchase)|
-| R13                | dispatched (**idPurchase**->purchase)|
-| R14                | delivered (**idPurchase**->purchase)|
-| R15                | purchase_book (**idPurchase**->purchase, **idBook**->book)|
-| R16                | delivery (**idDelivery**, arrival NN, address NN, cost NN CK cost >= 0, idPurchase->purchase UK NN)|
-| R17                | book (**idBook**, title NN, isbn NN, year, price NN CK price >= 0, edition, idCategory->category NN, idPublisher->publisher)|
-| R18                | user (**idUser**, username NN, email UK NN, password NN, address, phone)|
-| R19                | wishlist (**idUser**->user, **idBook**->book)|
-| R20                | cart (**idUser**->user, **idBook**->book)|
+| R02                | admin (**id_admin**, name NN, email UK NN, password NN)|
+| R03                | photo (**id_photo**, image NN, id_book->book, id_user->user UK, id_admin->admin UK)|
+| R04                | publisher (**id_publisher**, name NN)|
+| R05                | author (**id_author**, name NN)|
+| R06                | book_author (**id_book**->book, **id_author**->author)|
+| R07                | collection (**id_collection**, name NN)|
+| R08                | book_collection (**id_book**->book, **id_collection**->collection)|
+| R09                | category (**id_category**, name NN)|
+| R10                | review (**id_review**, rating NN CK rating>0 AND rating<=5, comment, date NN, id_book->book NN, id_user->user NN)|
+| R11                | purchase (**id_purchase**, date NN, id_user->user NN)|
+| R12                | received (**id_purchase**->purchase)|
+| R13                | dispatched (**id_purchase**->purchase)|
+| R14                | delivered (**id_purchase**->purchase)|
+| R15                | purchase_book (**id_purchase**->purchase, **id_book**->book)|
+| R16                | delivery (**id_delivery**, arrival NN, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
+| R17                | book (**id_book**, title NN, isbn NN, year, price NN CK price >= 0, edition, id_category->category NN, id_publisher->publisher)|
+| R18                | user (**id_user**, username NN, email UK NN, password NN, address, phone)|
+| R19                | wishlist (**id_user**->user, **id_book**->book)|
+| R20                | cart (**id_user**->user, **id_book**->book)|
 
 Legend:
  - UK = UNIQUE KEY
@@ -82,142 +82,142 @@ Legend:
 
 | **TABLE R02**   | admin              |
 | --------------  | ---                |
-| **Keys**        | {idAdmin}, {email} |
+| **Keys**        | {id_admin}, {email} |
 | **Functional Dependencies:** |       |
-| FD0201          | idAdmin -> {name, email, password}  |
-| FD0202          | email -> {idAdmin, name, password}  |
+| FD0201          | {id_admin} -> {name, email, password}  |
+| FD0202          | {email} -> {id_admin, name, password}  |
 | **NORMAL FORM** | BCNF               |
 
 
 | **TABLE R03**   | photo             |
 | --------------  | ---                |
-| **Keys**        | {idPhoto}, {idUser}, {idAdmin} |
+| **Keys**        | {id_photo}, {id_user}, {id_admin} |
 | **Functional Dependencies:** |       |
-| FD0301          | idPhoto -> {image, idBook, idUser, idAdmin}  |
-| FD0302          | idUser -> {idPhoto, image, idBook, idAdmin}  |
-| FD0303          | idAdmin -> {idPhoto, image, idBook, idUser}  |
+| FD0301          | {id_photo} -> {image, id_book, id_user, id_admin}  |
+| FD0302          | {id_user} -> {id_photo, image, id_book, id_admin}  |
+| FD0303          | {id_admin} -> {id_photo, image, id_book, id_user}  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R04**   | publisher             |
 | --------------  | ---                |
-| **Keys**        | {idPublisher} |
+| **Keys**        | {id_publisher} |
 | **Functional Dependencies:** |       |
-| FD0401          | idPublisher -> {name}  |
+| FD0401          | {id_publisher} -> {name}  |
 | **NORMAL FORM** | BCNF               |
 
 
 | **TABLE R05**   | author             |
 | --------------  | ---                |
-| **Keys**        | {idAuthor} |
+| **Keys**        | {id_author} |
 | **Functional Dependencies:** |       |
-| FD0501          | idAuthor -> {name}  |
+| FD0501          | {id_author} -> {name}  |
 | **NORMAL FORM** | BCNF               |
 
 
 | **TABLE R06**   | book_author             |
 | --------------  | ---                |
-| **Keys**        | {idBook, idAuthor} |
+| **Keys**        | {id_book, id_author} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R07**   | collection             |
 | --------------  | ---                |
-| **Keys**        | {idCollection} |
+| **Keys**        | {id_collection} |
 | **Functional Dependencies:** |       |
-| FD0701          | idCollection -> {name}  |
+| FD0701          | {id_collection} -> {name}  |
 | **NORMAL FORM** | BCNF               |
 
 
 | **TABLE R08**   | book_collection             |
 | --------------  | ---                |
-| **Keys**        | {idBook, idCollection} |
+| **Keys**        | {id_book, id_collection} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R09**   | category             |
 | --------------  | ---                |
-| **Keys**        | {idCategory} |
+| **Keys**        | {id_category} |
 | **Functional Dependencies:** |       |
-| FD0901          | idCategory -> {name}  |
+| FD0901          | {id_category} -> {name}  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R10**   | review             |
 | --------------  | ---                |
-| **Keys**        | {idReview} |
+| **Keys**        | {id_review} |
 | **Functional Dependencies:** |       |
-| FD1001          | idReview -> {rating, comment, date, idBook, idUser} |
+| FD1001          | {id_review} -> {rating, comment, date, id_book, id_user} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R11**   | puchase            |
 | --------------  | ---                |
-| **Keys**        |  {idPurchase} |
+| **Keys**        |  {id_purchase} |
 | **Functional Dependencies:** |       |
-| FD1101          | idPurchase -> {date, idUser} |
+| FD1101          | {id_purchase} -> {date, id_user} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R12**   |received            |
 | --------------  | ---                |
-| **Keys**        |  {idPurchase} |
+| **Keys**        |  {id_purchase} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R13**   | dispached           |
 | --------------  | ---                |
-| **Keys**        |  {idPurchase} |
+| **Keys**        |  {id_purchase} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R14**   | delivered          |
 | --------------  | ---                |
-| **Keys**        |  {idPurchase} |
+| **Keys**        |  {id_purchase} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R15**   | purchase_book          |
 | --------------  | ---                |
-| **Keys**        |  {idPurchase, idBook} |
+| **Keys**        |  {id_purchase, id_book} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R16**   | delivery         |
 | --------------  | ---                |
-| **Keys**        |  {idDelivery}, {idPurchase} |
+| **Keys**        |  {id_delivery}, {id_purchase} |
 | **Functional Dependencies:** |       |
-| FD1601          | idDelivery -> {arrival, address, cost, idPurchase} |
-| FD1602          | idPurchase -> {idDelivery, arrival, address, cost} |
+| FD1601          | {id_delivery} -> {arrival, address, cost, id_purchase} |
+| FD1602          | {id_purchase} -> {id_delivery, arrival, address, cost} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R17**   | book         |
 | --------------  | ---                |
-| **Keys**        | {idBook} |
+| **Keys**        | {id_book} |
 | **Functional Dependencies:** |       |
-| FD1701          | idBook -> {title, isbn, year, price, edition, idCategory, idPublisher} |
+| FD1701          | {id_book} -> {title, isbn, year, price, edition, id_category, id_publisher} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R18**   | user         |
 | --------------  | ---                |
-| **Keys**        |{idUser}, {email} |
+| **Keys**        |{id_user}, {email} |
 | **Functional Dependencies:** |       |
-| FD1801          | idUser -> {username, email, password, address, phone} |
-| FD1802          | email -> {idUser, username, password, address, phone}|
+| FD1801          | {id_user} -> {username, email, password, address, phone} |
+| FD1802          | {email} -> {id_user, username, password, address, phone}|
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R19**   | wishlist         |
 | --------------  | ---                |
-| **Keys**        | {idUser, idBook} |
+| **Keys**        | {id_user, id_book} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R20**   | cart         |
 | --------------  | ---                |
-| **Keys**        | {idUser, idBook} |
+| **Keys**        | {id_user, id_book} |
 | **Functional Dependencies:** |       |
 | none|none  |
 | **NORMAL FORM** | BCNF               |
