@@ -29,7 +29,7 @@ CREATE TABLE faq (
 DROP TABLE IF EXISTS admins;
 
 CREATE TABLE admins (
-    id_admin INTEGER PRIMARY KEY,
+    id_admin SERIAL PRIMARY KEY,
     admin_name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     admin_password TEXT NOT NULL
@@ -39,7 +39,7 @@ CREATE TABLE admins (
 DROP TABLE IF EXISTS publisher;
 
 CREATE TABLE publisher (
-    id_publisher INTEGER PRIMARY KEY,
+    id_publisher SERIAL PRIMARY KEY,
     publisher_name TEXT NOT NULL
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE publisher (
 DROP TABLE IF EXISTS author;
 
 CREATE TABLE author (
-    id_author INTEGER PRIMARY KEY,
+    id_author SERIAL PRIMARY KEY,
     author_name TEXT NOT NULL
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE author (
 DROP TABLE IF EXISTS collections;
 
 CREATE TABLE collections (
-    id_collection INTEGER PRIMARY KEY,
+    id_collection SERIAL PRIMARY KEY,
     collection_name TEXT NOT NULL
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE collections (
 DROP TABLE IF EXISTS category;
 
 CREATE TABLE category (
-    id_category INTEGER PRIMARY KEY,
+    id_category SERIAL PRIMARY KEY,
     category_name TEXT NOT NULL
 );
 
@@ -71,33 +71,37 @@ CREATE TABLE category (
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-    id_user INTEGER PRIMARY KEY,
+    id_user SERIAL PRIMARY KEY,
     username TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,      
     user_password TEXT NOT NULL,                  
     user_address TEXT,
-    phone CHAR(9)             
+    phone CHAR(9),
+    blocked BOOLEAN DEFAULT FALSE NOT NULL            
 );
 
 -- Table: purchase
 DROP TABLE IF EXISTS purchase;
 
 CREATE TABLE purchase (
-    id_purchase INTEGER PRIMARY KEY,
-    purchase_date DATE NOT NULL,
-    id_user INTEGER NOT NULL REFERENCES users(id_user) ON DELETE CASCADE 
+    id_purchase SERIAL PRIMARY KEY,
+    purchase_date TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
+    id_user INTEGER NOT NULL REFERENCES users(id_user) ON DELETE CASCADE,
+    TYPE purchase_state NOT NULL
 );
 
 -- Table: book
 DROP TABLE IF EXISTS book;
 
 CREATE TABLE book (
-    id_book INTEGER PRIMARY KEY,
+    id_book SERIAL PRIMARY KEY,
     title TEXT NOT NULL,      
-    isbn INTEGER NOT NULL,
-    year INTEGER,   
-    price NUMERIC(9, 2) NOT NULL CHECK (price >= 0),               
+    isbn INTEGER NOT NULL UNIQUE,
+    year INTEGER,  
+    price NUMERIC(9, 2) NOT NULL CHECK (price >= 0),
+    stock INTEGER NOT NULL CHECK (stock >= 0),           
     book_edition INTEGER,
+    book_description TEXT,
     id_category INTEGER NOT NULL REFERENCES category(id_category) ON UPDATE CASCADE ON DELETE CASCADE,
     id_publisher INTEGER REFERENCES publisher(id_publisher) ON UPDATE CASCADE ON DELETE CASCADE                         
 );
@@ -106,7 +110,7 @@ CREATE TABLE book (
 DROP TABLE IF EXISTS photo;
 
 CREATE TABLE photo (
-    id_photo INTEGER PRIMARY KEY,
+    id_photo SERIAL PRIMARY KEY,
     photo_image TEXT NOT NULL,      
     id_book INTEGER REFERENCES book(id_book) ON UPDATE CASCADE ON DELETE CASCADE,
     id_user INTEGER UNIQUE REFERENCES users(id_user) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -135,33 +139,12 @@ CREATE TABLE book_collection (
 DROP TABLE IF EXISTS review;
 
 CREATE TABLE review (
-    id_review INTEGER PRIMARY KEY,
-    rating NUMERIC(1, 2) NOT NULL CHECK (rating > 0 AND rating <= 5),
+    id_review SERIAL PRIMARY KEY,
+    rating NUMERIC(1, 2) NOT NULL CHECK (rating >= 0 AND rating <= 5),
     comment TEXT,
-    review_date DATE NOT NULL,
+    review_date TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
     id_book INTEGER NOT NULL REFERENCES book(id_book) ON UPDATE CASCADE ON DELETE CASCADE,
     id_user INTEGER NOT NULL REFERENCES users(id_user) ON UPDATE CASCADE ON DELETE CASCADE          
-);
-
--- Table: received
-DROP TABLE IF EXISTS received;
-
-CREATE TABLE received (
-    id_purchase INTEGER PRIMARY KEY REFERENCES purchase(id_purchase) ON UPDATE CASCADE ON DELETE CASCADE         
-);
-
--- Table: dispatched
-DROP TABLE IF EXISTS dispatched;
-
-CREATE TABLE dispatched (
-    id_purchase INTEGER PRIMARY KEY REFERENCES purchase(id_purchase) ON UPDATE CASCADE ON DELETE CASCADE         
-);
-
--- Table: delivered
-DROP TABLE IF EXISTS delivered;
-
-CREATE TABLE delivered (
-    id_purchase INTEGER PRIMARY KEY REFERENCES purchase(id_purchase) ON UPDATE CASCADE ON DELETE CASCADE         
 );
 
 -- Table: purchase_book
@@ -177,8 +160,8 @@ CREATE TABLE purchase_book (
 DROP TABLE IF EXISTS delivery;
 
 CREATE TABLE delivery (
-    id_delivery INTEGER PRIMARY KEY,
-    arrival DATE NOT NULL,
+    id_delivery SERIAL PRIMARY KEY,
+    arrival TIMESTAMP WITH TIME ZONE NOT NULL,
     delivery_address TEXT NOT NULL,
     cost NUMERIC(9, 2) NOT NULL CHECK (cost >= 0),
     id_purchase INTEGER NOT NULL UNIQUE REFERENCES purchase(id_purchase) ON UPDATE CASCADE ON DELETE CASCADE   
