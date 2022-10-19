@@ -47,7 +47,7 @@ A textual compact notation is used to document the relational schemas.
 | R13                | dispatched (**id_purchase**->purchase)|
 | R14                | delivered (**id_purchase**->purchase)|
 | R15                | purchase_book (**id_purchase**->purchase, **id_book**->book)|
-| R16                | delivery (**id_delivery**, arrival NN DF Today, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
+| R16                | delivery (**id_delivery**, arrival NN, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
 | R17                | book (**id_book**, title NN, isbn UK NN, year, price NN CK price >= 0, stock NN CK stock >= 0, edition, description, id_category->category NN, id_publisher->publisher)|
 | R18                | user (**id_user**, username NN, email UK NN, password NN, address, phone, blocked NN DF FALSE)|
 | R19                | wishlist (**id_user**->user, **id_book**->book)|
