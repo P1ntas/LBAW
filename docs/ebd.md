@@ -41,15 +41,15 @@ A textual compact notation is used to document the relational schemas.
 | R07                | collection (**id_collection**, name NN)|
 | R08                | book_collection (**id_book**->book, **id_collection**->collection)|
 | R09                | category (**id_category**, name NN)|
-| R10                | review (**id_review**, rating NN CK rating>0 AND rating<=5, comment, date NN, id_book->book NN, id_user->user NN)|
-| R11                | purchase (**id_purchase**, date NN, id_user->user NN)|
+| R10                | review (**id_review**, rating NN CK rating>0 AND rating<=5, comment, date NN DF Today, id_book->book NN, id_user->user NN)|
+| R11                | purchase (**id_purchase**, date NN DF Today, id_user->user NN)|
 | R12                | received (**id_purchase**->purchase)|
 | R13                | dispatched (**id_purchase**->purchase)|
 | R14                | delivered (**id_purchase**->purchase)|
 | R15                | purchase_book (**id_purchase**->purchase, **id_book**->book)|
-| R16                | delivery (**id_delivery**, arrival NN, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
+| R16                | delivery (**id_delivery**, arrival NN DF Today, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
 | R17                | book (**id_book**, title NN, isbn UK NN, year, price NN CK price >= 0, stock NN CK stock >= 0, edition, id_category->category NN, id_publisher->publisher)|
-| R18                | user (**id_user**, username NN, email UK NN, password NN, address, phone, blocked NN)|
+| R18                | user (**id_user**, username NN, email UK NN, password NN, address, phone, blocked NN DF FALSE)|
 | R19                | wishlist (**id_user**->user, **id_book**->book)|
 | R20                | cart (**id_user**->user, **id_book**->book)|
 
