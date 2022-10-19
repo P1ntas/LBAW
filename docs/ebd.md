@@ -48,8 +48,8 @@ A textual compact notation is used to document the relational schemas.
 | R14                | delivered (**id_purchase**->purchase)|
 | R15                | purchase_book (**id_purchase**->purchase, **id_book**->book)|
 | R16                | delivery (**id_delivery**, arrival NN, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
-| R17                | book (**id_book**, title NN, isbn NN, year, price NN CK price >= 0, edition, id_category->category NN, id_publisher->publisher)|
-| R18                | user (**id_user**, username NN, email UK NN, password NN, address, phone)|
+| R17                | book (**id_book**, title NN, isbn UK NN, year, price NN CK price >= 0, stock NN CK stock >= 0, edition, id_category->category NN, id_publisher->publisher)|
+| R18                | user (**id_user**, username NN, email UK NN, password NN, address, phone, blocked NN)|
 | R19                | wishlist (**id_user**->user, **id_book**->book)|
 | R20                | cart (**id_user**->user, **id_book**->book)|
 
@@ -195,17 +195,18 @@ To validate the Relational Schema obtained from the Conceptual Data Model, all f
 
 | **TABLE R17**   | book         |
 | --------------  | ---                |
-| **Keys**        | {id_book} |
+| **Keys**        | {id_book}, {isbn} |
 | **Functional Dependencies:** |       |
-| FD1701          | {id_book} -> {title, isbn, year, price, edition, id_category, id_publisher} |
+| FD1701          | {id_book} -> {title, isbn, year, price, stock, edition, id_category, id_publisher} |
+| FD1702          | {isbn} -> {id_book, title, year, price, stock, edition, id_category, id_publisher} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R18**   | user         |
 | --------------  | ---                |
 | **Keys**        |{id_user}, {email} |
 | **Functional Dependencies:** |       |
-| FD1801          | {id_user} -> {username, email, password, address, phone} |
-| FD1802          | {email} -> {id_user, username, password, address, phone}|
+| FD1801          | {id_user} -> {username, email, password, address, phone, blocked} |
+| FD1802          | {email} -> {id_user, username, password, address, phone, blocked}|
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R19**   | wishlist         |
