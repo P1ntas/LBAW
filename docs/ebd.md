@@ -48,7 +48,7 @@ A textual compact notation is used to document the relational schemas.
 | R14                | delivered (**id_purchase**->purchase)|
 | R15                | purchase_book (**id_purchase**->purchase, **id_book**->book)|
 | R16                | delivery (**id_delivery**, arrival NN DF Today, address NN, cost NN CK cost >= 0, id_purchase->purchase UK NN)|
-| R17                | book (**id_book**, title NN, isbn UK NN, year, price NN CK price >= 0, stock NN CK stock >= 0, edition, id_category->category NN, id_publisher->publisher)|
+| R17                | book (**id_book**, title NN, isbn UK NN, year, price NN CK price >= 0, stock NN CK stock >= 0, edition, description, id_category->category NN, id_publisher->publisher)|
 | R18                | user (**id_user**, username NN, email UK NN, password NN, address, phone, blocked NN DF FALSE)|
 | R19                | wishlist (**id_user**->user, **id_book**->book)|
 | R20                | cart (**id_user**->user, **id_book**->book)|
@@ -197,8 +197,8 @@ To validate the Relational Schema obtained from the Conceptual Data Model, all f
 | --------------  | ---                |
 | **Keys**        | {id_book}, {isbn} |
 | **Functional Dependencies:** |       |
-| FD1701          | {id_book} -> {title, isbn, year, price, stock, edition, id_category, id_publisher} |
-| FD1702          | {isbn} -> {id_book, title, year, price, stock, edition, id_category, id_publisher} |
+| FD1701          | {id_book} -> {title, isbn, year, price, stock, edition, description, id_category, id_publisher} |
+| FD1702          | {isbn} -> {id_book, title, year, price, stock, edition, description, id_category, id_publisher} |
 | **NORMAL FORM** | BCNF               |
 
 | **TABLE R18**   | user         |
