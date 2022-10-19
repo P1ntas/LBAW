@@ -240,11 +240,26 @@ The workload includes an estimate of the number of tuples for each relation and 
 
 | **Relation reference** | **Relation Name** | **Order of magnitude**        | **Estimated growth** |
 | ------------------ | ------------- | ------------------------- | -------- |
-| R01                | Table1        | units|dozens|hundreds|etc | order per time |
-| R02                | Table2        | units|dozens|hundreds|etc | dozens per month |
-| R03                | Table3        | units|dozens|hundreds|etc | hundreds per day |
-| R04                | Table4        | units|dozens|hundreds|etc | no growth |
-
+| R01                | faq        | dozens | order per time |
+| R02                | admin        | units | dozens per month |
+| R03                | photo        | tens of thousands | hundreds per day |
+| R04                | publisher        | hundreds | no growth |
+| R05                | author       | thousands | no growth |
+| R06                | book_author        | thousands | no growth |
+| R07                | collection        | hundreds | no growth |
+| R08                | book_collection        | hundreds | no growth |
+| R09                | category        | hundreds | no growth |
+| R10                | review        | thousands | no growth |
+| R11                | purchase        | tens of thousands | no growth |
+| R12                | received        | tens of thousands | no growth |
+| R13                | dispatched        | tens of thousands | no growth |
+| R14                | delivered        | tens of thousands | no growth |
+| R15                | purchase_book        | tens of thousands | no growth |
+| R16                | delivery        | tens of thousands | no growth |
+| R17                | book       | tens of thousands | no growth |
+| R18                | user        | tens of thousands | no growth |
+| R19                | wishlist        | tens of thousands | no growth |
+| R20                | cart        | tens of thousands | no growth |
 
 ### 2. Proposed Indices
 
