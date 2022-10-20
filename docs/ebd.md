@@ -264,7 +264,7 @@ CREATE INDEX user_purchase ON purchase USING hash (id_user);
 | **Justification**   | The action of getting the books of a chosen category is quite frequent. Filtering is done by exact match, thus an hash type index would be best suited. However, since we also want to apply clustering based on this index, and clustering is not possible on hash type indexes, we opted for a b-tree index. Update frequency is low and cardinality is medium so it's a good candidate for clustering.   |
 ```sql
 CREATE INDEX book_category ON book USING btree (id_category);
-CLUSTER book USING id_category;
+CLUSTER book USING book_category;
 ```
 
 | **Index**           | IDX03                                  |
@@ -274,7 +274,7 @@ CLUSTER book USING id_category;
 | **Type**            | Hash             |
 | **Cardinality**     | Medium |
 | **Clustering**      | No               |
-| **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. For clustering on table ‘review’, id_book is the most interesting since obtaining all reviews for a given book is a frequent request. However, expected update frequency is medium, so no clustering is proposed   |
+| **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. For clustering on table ‘review’, id_book is the most interesting since obtaining the reviews for a given book is a frequent request. However, expected update frequency is medium, so no clustering is proposed   |
 ```sql
 CREATE INDEX book_review ON review USING hash (id_book);
 ```
