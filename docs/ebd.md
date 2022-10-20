@@ -248,7 +248,7 @@ Performance indexes are applied to improve the performance of select queries. Th
 | **Attribute**       | id_user   |
 | **Type**            | Hash              |
 | **Cardinality**     | Medium |
-| **Clustering**      | Yes                |
+| **Clustering**      | No                |
 | **Justification**   | Table ‘purchase’ is frequently accessed to view a user’s purchase history. Filtering is done by exact match, thus an hash type is best suited. Expected update frequency is medium, so no clustering is proposed.   |
 ```sql
 CREATE INDEX user_purchase ON purchase USING hash (id_user);
@@ -273,7 +273,7 @@ CLUSTER book USING id_category;
 | **Attribute**       | id_book   |
 | **Type**            | Hash             |
 | **Cardinality**     | Medium |
-| **Clustering**      | Yes               |
+| **Clustering**      | No               |
 | **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. For clustering on table ‘review’, id_book is the most interesting since obtaining all reviews for a given book is a frequent request. However, expected update frequency is medium, so no clustering is proposed   |
 ```sql
 CREATE INDEX book_review ON review USING hash (id_book);
