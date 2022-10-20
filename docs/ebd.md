@@ -269,7 +269,7 @@ The workload includes an estimate of the number of tuples for each relation and 
 | **Type**            | Hash             |
 | **Cardinality**     | Medium |
 | **Clustering**      | Yes               |
-| **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. ‘id_book’ is the most interesting candidate index since obtaining all reviews for a given book is a frequent request. Clustering is recomended since the cardinality is medium.   |
+| **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. ‘id_book’ is the logical candidate index since obtaining all reviews for a given book is a frequent request. Clustering is recomended since the cardinality is medium.   |
 
 ```sql
 CREATE INDEX book_review ON review USING hash (id_book);
