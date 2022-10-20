@@ -338,11 +338,42 @@ CREATE INDEX search_idx ON work USING GIN (tsvectors);
  
 > Transactions needed to assure the integrity of the data.  
 
-| SQL Reference   | Transaction Name                    |
+| Transaction     | TRAN01                              |
 | --------------- | ----------------------------------- |
-| Justification   | Justification for the transaction.  |
-| Isolation level | Isolation level of the transaction. |
+| Justification   | Verifies that all books in collections and cart are in stock. As we use only Selects, it's READ ONLY.  |
+| Isolation level | SERIALIZABLE READ ONLY |
 | `Complete SQL Code`                                   ||
+```SQL 
+BEGIN TRANSACTION; 
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+
+SELECT collection_name from collections inner join book_collection, book
+    where stock != 0
+    order by collection_name ASC LIMIT 5;
+
+SELECT title from book inner join cart
+    where stock > 0
+    order by title ASC;
+
+END TRANSACTION;
+```
+
+
+| Transaction     | TRAN02                             |
+| --------------- | ----------------------------------- |
+| Justification   | Makes sure inserts into `users` and `book` are done correctly. We use REPEATABLE READ as we should only access data commited before the beginning of the transaction; otherwise, there might be conflicts and there could be confliting entries in the database  |
+| Isolation level | REPEATABLE READ |
+| `Complete SQL Code`                                   ||
+```SQL 
+BEGIN TRANSACTION; 
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+
+INSERT INTO users VALUES ($username, $email, $user_password, $user_address, $phone, $blocked);
+
+INSERT INTO book VALUES ($title,  $isbn, $year, $price, $stock, $book_edition, $book_description, $id_category, $id_publisher);
+
+END TRANSACTION;
+```
 
 
 ## Annex A. SQL Code
