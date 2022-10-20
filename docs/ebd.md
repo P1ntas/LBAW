@@ -291,7 +291,7 @@ Full-text search indexes are applied to provide keyword based search over record
 | **Clustering**      | No                |
 | **Justification**   | To provide full-text search features to look for works based on matching titles. The index type is GIN because the indexed fields are not expected to change often.  |
 ```sql
--- Add column to work to store computed ts_vectors.
+-- Add column to book to store computed ts_vectors.
 ALTER TABLE book
 ADD COLUMN tsvectors TSVECTOR;
 
