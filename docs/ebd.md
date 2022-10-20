@@ -254,13 +254,16 @@ The workload includes an estimate of the number of tuples for each relation and 
 
 | **Index**           | IDX02                                  |
 | ---                 | ---                                    |
-| **Relation**        | Relation where the index is applied    |
-| **Attribute**       | Attribute where the index is applied   |
-| **Type**            | B-tree, Hash, GiST or GIN              |
-| **Cardinality**     | Attribute cardinality: low/medium/high |
-| **Clustering**      | Clustering of the index                |
-| **Justification**   | Justification for the proposed index   |
-| `SQL code`                                                  ||
+| **Relation**        | book    |
+| **Attribute**       | id_category   |
+| **Type**            | Hash              |
+| **Cardinality**     | Medium |
+| **Clustering**      | Yes               |
+| **Justification**   | The action of getting the books of a chosen category is quite frequent. Filtering is done by exact match, thus an hash type is best suited. ‘id_category’ is the logical candidate index since obtaining the category of a given book is a frequent request. Clustering is recomended since the cardinality is medium.   |
+```sql
+CREATE INDEX book_category ON book USING hash (id_category);
+CLUSTER book USING id_category;
+```
 
 | **Index**           | IDX03                                  |
 | ---                 | ---                                    |
@@ -270,7 +273,6 @@ The workload includes an estimate of the number of tuples for each relation and 
 | **Cardinality**     | Medium |
 | **Clustering**      | Yes               |
 | **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. ‘id_book’ is the logical candidate index since obtaining all reviews for a given book is a frequent request. Clustering is recomended since the cardinality is medium.   |
-
 ```sql
 CREATE INDEX book_review ON review USING hash (id_book);
 CLUSTER review USING book_review;
