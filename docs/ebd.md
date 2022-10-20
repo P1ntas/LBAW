@@ -274,10 +274,9 @@ CLUSTER book USING id_category;
 | **Type**            | Hash             |
 | **Cardinality**     | Medium |
 | **Clustering**      | Yes               |
-| **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. ‘id_book’ is the logical candidate index since obtaining all reviews for a given book is a frequent request. Clustering is recomended since the cardinality is medium.   |
+| **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. For clustering on table ‘review’, id_book is the most interesting since obtaining all reviews for a given book is a frequent request. However, expected update frequency is medium, so no clustering is proposed   |
 ```sql
 CREATE INDEX book_review ON review USING hash (id_book);
-CLUSTER review USING book_review;
 ```
 
 #### 2.2. Full-text Search Indices 
