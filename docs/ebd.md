@@ -240,28 +240,30 @@ The workload includes an estimate of the number of tuples for each relation and 
 
 #### 2.1. Performance Indices
  
-> Indices proposed to improve performance of the identified queries.
+Performance indexes are applied to improve the performance of select queries. These are the ones proposed.
 
 | **Index**           | IDX01                                  |
 | ---                 | ---                                    |
-| **Relation**        | Relation where the index is applied    |
-| **Attribute**       | Attribute where the index is applied   |
-| **Type**            | B-tree, Hash, GiST or GIN              |
-| **Cardinality**     | Attribute cardinality: low/medium/high |
-| **Clustering**      | Clustering of the index                |
-| **Justification**   | Justification for the proposed index   |
-| `SQL code`                                                  ||
+| **Relation**        | purchase    |
+| **Attribute**       | id_user   |
+| **Type**            | Hash              |
+| **Cardinality**     | Medium |
+| **Clustering**      | Yes                |
+| **Justification**   | Table ‘purchase’ is frequently accessed to view a user’s purchase history. Filtering is done by exact match, thus an hash type is best suited. Expected update frequency is medium, so no clustering is proposed.   |
+```sql
+CREATE INDEX user_purchase ON purchase USING hash (id_user);
+```
 
 | **Index**           | IDX02                                  |
 | ---                 | ---                                    |
 | **Relation**        | book    |
 | **Attribute**       | id_category   |
-| **Type**            | Hash              |
+| **Type**            | B-tree              |
 | **Cardinality**     | Medium |
 | **Clustering**      | Yes               |
-| **Justification**   | The action of getting the books of a chosen category is quite frequent. Filtering is done by exact match, thus an hash type is best suited. ‘id_category’ is the logical candidate index since obtaining the category of a given book is a frequent request. Clustering is recomended since the cardinality is medium.   |
+| **Justification**   | The action of getting the books of a chosen category is quite frequent. Filtering is done by exact match, thus an hash type index would be best suited. However, since we also want to apply clustering based on this index, and clustering is not possible on hash type indexes, we opted for a b-tree index. Update frequency is low and cardinality is medium so it's a good candidate for clustering.   |
 ```sql
-CREATE INDEX book_category ON book USING hash (id_category);
+CREATE INDEX book_category ON book USING btree (id_category);
 CLUSTER book USING id_category;
 ```
 
