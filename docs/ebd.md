@@ -281,17 +281,49 @@ CREATE INDEX book_review ON review USING hash (id_book);
 
 #### 2.2. Full-text Search Indices 
 
-> The system being developed must provide full-text search features supported by PostgreSQL. Thus, it is necessary to specify the fields where full-text search will be available and the associated setup, namely all necessary configurations, indexes definitions and other relevant details.  
+Full-text search indexes are applied to provide keyword based search over records of the database. Results using FTS are ranked by relevance and can use signals from multiple tables and with different weights.
 
-| **Index**           | IDX01                                  |
+| **Index**           | IDX04                                  |
 | ---                 | ---                                    |
-| **Relation**        | Relation where the index is applied    |
-| **Attribute**       | Attribute where the index is applied   |
-| **Type**            | B-tree, Hash, GiST or GIN              |
-| **Clustering**      | Clustering of the index                |
-| **Justification**   | Justification for the proposed index   |
-| `SQL code`                                                  ||
+| **Relation**        | book    |
+| **Attribute**       | title   |
+| **Type**            | GIN              |
+| **Clustering**      | No                |
+| **Justification**   | To provide full-text search features to look for works based on matching titles. The index type is GIN because the indexed fields are not expected to change often.  |
+```sql
+-- Add column to work to store computed ts_vectors.
+ALTER TABLE book
+ADD COLUMN tsvectors TSVECTOR;
 
+-- Create a function to automatically update ts_vectors.
+CREATE FUNCTION book_search_update() RETURNS TRIGGER AS $$
+BEGIN
+ IF TG_OP = 'INSERT' THEN
+        NEW.tsvectors = (
+         setweight(to_tsvector('english', NEW.title), 'A')
+        );
+ END IF;
+ IF TG_OP = 'UPDATE' THEN
+         IF (NEW.title <> OLD.title) THEN
+           NEW.tsvectors = (
+             setweight(to_tsvector('english', NEW.title), 'A')
+           );
+         END IF;
+ END IF;
+ RETURN NEW;
+END $$
+LANGUAGE plpgsql;
+
+-- Create a trigger before insert or update on book.
+CREATE TRIGGER book_search_update
+ BEFORE INSERT OR UPDATE ON book
+ FOR EACH ROW
+ EXECUTE PROCEDURE book_search_update();
+
+
+-- Finally, create a GIN index for ts_vectors.
+CREATE INDEX search_idx ON work USING GIN (tsvectors);
+```
 
 ### 3. Triggers
  
