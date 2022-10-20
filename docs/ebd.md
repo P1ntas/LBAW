@@ -270,10 +270,11 @@ The workload includes an estimate of the number of tuples for each relation and 
 | **Cardinality**     | Medium |
 | **Clustering**      | Clustering of the index                |
 | **Justification**   | Yes   |
-| `SQL code`                                                  |
-| ```sql CREATE INDEX book_review ON review USING hash (id_book);
-CLUSTER review USING book_review; ``` |
-
+| `SQL code`                                               ||
+```sql
+CREATE INDEX book_review ON review USING hash (id_book);
+CLUSTER review USING book_review;
+```
 
 #### 2.2. Full-text Search Indices 
 
