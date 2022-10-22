@@ -327,12 +327,49 @@ CREATE INDEX search_idx ON work USING GIN (tsvectors);
 
 ### 3. Triggers
  
-> User-defined functions and trigger procedures that add control structures to the SQL language or perform complex computations, are identified and described to be trusted by the database server. Every kind of function (SQL functions, Stored procedures, Trigger procedures) can take base types, composite types, or combinations of these as arguments (parameters). In addition, every kind of function can return a base type or a composite type. Functions can also be defined to return sets of base or composite values.  
+Triggers and user defined functions are used to automate tasks depending on changes to the database. Business rules are usually enforced using a combination of triggers and user defined functions. 
 
 | **Trigger**      | TRIGGER01                              |
 | ---              | ---                                    |
-| **Description**  | Trigger description, including reference to the business rules involved |
-| `SQL code`                                             ||
+| **Description**  | A book whose stock is non-positive cannot be purchased |
+```sql
+------------------
+```
+
+| **Trigger**      | TRIGGER02                              |
+| ---              | ---                                    |
+| **Description**  | A book's stock decreases by 1 after a purchase.  |
+```sql
+-------------------
+```
+
+| **Trigger**      | TRIGGER03                              |
+| ---              | ---                                    |
+| **Description**  | A book is removed from an user's wishlist after the user adds it to the shopping cart.  |
+```sql
+-------------------
+```
+
+| **Trigger**      | TRIGGER04                              |
+| ---              | ---                                    |
+| **Description**  | A book is removed from an user's shopping cart after the user purchases it.  |
+```sql
+-------------------
+```
+
+| **Trigger**      | TRIGGER05                              |
+| ---              | ---                                    |
+| **Description**  | A blocked user can't submit reviews.  |
+```sql
+-------------------
+```
+
+| **Trigger**      | TRIGGER06                              |
+| ---              | ---                                    |
+| **Description**  | A blocked user can't purchase books.  |
+```sql
+-------------------
+```
 
 ### 4. Transactions
  
@@ -374,7 +411,6 @@ INSERT INTO book VALUES ($title,  $isbn, $year, $price, $stock, $book_edition, $
 
 END TRANSACTION;
 ```
-
 
 ## Annex A. SQL Code
 
