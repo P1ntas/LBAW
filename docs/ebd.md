@@ -391,7 +391,7 @@ CREATE TRIGGER wishlist_to_cart
 | **Trigger**      | TRIGGER04                              |
 | ---              | ---                                    |
 | **Description**  | A book is removed from an user's shopping cart after the user purchases it.  |
-```SQL
+```sql
 CREATE FUNCTION cart_purchased() RETURNS TRIGGER AS
 $BODY$
 BEGIN
@@ -410,14 +410,42 @@ CREATE TRIGGER cart_purchased
 | ---              | ---                                    |
 | **Description**  | A blocked user can't submit reviews.  |
 ```sql
--------------------
+CREATE FUNCTION blocked_review() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+        IF EXISTS (SELECT * FROM users WHERE id_user = NEW.id_user AND blocked = TRUE) THEN
+           RAISE EXCEPTION 'Blocked users cannot submit reviews.';
+        END IF;
+        RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER blocked_review
+        BEFORE INSERT ON review
+        FOR EACH ROW
+        EXECUTE PROCEDURE blocked_review();
 ```
 
 | **Trigger**      | TRIGGER06                              |
 | ---              | ---                                    |
 | **Description**  | A blocked user can't purchase books.  |
 ```sql
--------------------
+CREATE FUNCTION blocked_purchase() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+        IF EXISTS (SELECT * FROM users WHERE id_user = NEW.id_user AND blocked = TRUE) THEN
+           RAISE EXCEPTION 'Blocked users cannot purchase books.';
+        END IF;
+        RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER blocked_purchase
+        BEFORE INSERT ON purchase
+        FOR EACH ROW
+        EXECUTE PROCEDURE blocked_purchase();
 ```
 
 ### 4. Transactions
