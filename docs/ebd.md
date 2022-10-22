@@ -336,7 +336,7 @@ Triggers and user defined functions are used to automate tasks depending on chan
 CREATE FUNCTION book_available() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT * FROM book WHERE id_book = NEW.id_book AND stock <= 0) THEN
+        IF EXISTS (SELECT * FROM book WHERE id_book = NEW.id_book AND stock = 0) THEN
            RAISE EXCEPTION 'This book is out of stock.';
         END IF;
         RETURN NEW;
@@ -514,8 +514,9 @@ Changes made to the first submission:
 1. ..
 
 ***
-GROUP21gg, DD/MM/2021
- 
-* Group member 1 name, email (Editor)
-* Group member 2 name, email
-* ...
+GROUP2232, 23/10/2022
+
+* Afonso da Silva Pinto, up202008014@fe.up.pt
+* Afonso José Pinheiro Oliveira Esteves Abreu, up202008552@fe.up.pt
+* Diogo Filipe Ferreira da Silva, up202004288@fe.up.pt
+* Rúben Lourinha Monteiro, up202006478@fe.up.pt
