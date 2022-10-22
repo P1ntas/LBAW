@@ -333,28 +333,77 @@ Triggers and user defined functions are used to automate tasks depending on chan
 | ---              | ---                                    |
 | **Description**  | A book whose stock is non-positive cannot be purchased |
 ```sql
-------------------
+CREATE FUNCTION book_available() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+        IF EXISTS (SELECT * FROM book WHERE id_book = NEW.id_book AND stock <= 0) THEN
+           RAISE EXCEPTION 'This book is out of stock.';
+        END IF;
+        RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER book_available
+        BEFORE INSERT ON purchase_book
+        FOR EACH ROW
+        EXECUTE PROCEDURE book_available();
 ```
 
 | **Trigger**      | TRIGGER02                              |
 | ---              | ---                                    |
-| **Description**  | A book's stock decreases by 1 after a purchase.  |
+| **Description**  | A book's stock decreases by 1 after a single purchase.  |
 ```sql
--------------------
+CREATE FUNCTION book_purchased() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+        UPDATE book
+        SET stock = stock - 1
+        WHERE "id_book" = New."id_book"
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER book_purchased
+        AFTER INSERT ON purchase_book
+        EXECUTE PROCEDURE book_purchased();
 ```
 
 | **Trigger**      | TRIGGER03                              |
 | ---              | ---                                    |
 | **Description**  | A book is removed from an user's wishlist after the user adds it to the shopping cart.  |
 ```sql
--------------------
+CREATE FUNCTION wishlist_to_cart() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+        DELETE FROM wishlist
+        WHERE "id_user" = New."id_user"
+        AND "id_book" = New."id_book"
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER wishlist_to_cart 
+        AFTER INSERT ON cart
+        EXECUTE PROCEDURE wishlist_to_cart();
 ```
 
 | **Trigger**      | TRIGGER04                              |
 | ---              | ---                                    |
 | **Description**  | A book is removed from an user's shopping cart after the user purchases it.  |
 ```sql
--------------------
+CREATE FUNCTION cart_purchased() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+        DELETE FROM cart
+        WHERE "id_user" = New."id_user"
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER cart_purchased 
+        AFTER INSERT ON purchase
+        EXECUTE PROCEDURE cart_purchased();
 ```
 
 | **Trigger**      | TRIGGER05                              |
@@ -379,8 +428,7 @@ Triggers and user defined functions are used to automate tasks depending on chan
 | --------------- | ----------------------------------- |
 | Justification   | Verifies that all books in collections and cart are in stock. As we use only Selects, it's READ ONLY.  |
 | Isolation level | SERIALIZABLE READ ONLY |
-| `Complete SQL Code`                                   ||
-```SQL 
+```sql 
 BEGIN TRANSACTION; 
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
 
@@ -395,13 +443,11 @@ SELECT title from book inner join cart
 END TRANSACTION;
 ```
 
-
 | Transaction     | TRAN02                             |
 | --------------- | ----------------------------------- |
 | Justification   | Makes sure inserts into `users` and `book` are done correctly. We use REPEATABLE READ as we should only access data commited before the beginning of the transaction; otherwise, there might be conflicts and there could be confliting entries in the database  |
 | Isolation level | REPEATABLE READ |
-| `Complete SQL Code`                                   ||
-```SQL 
+```sql 
 BEGIN TRANSACTION; 
 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 
