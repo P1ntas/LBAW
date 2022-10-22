@@ -331,7 +331,7 @@ Triggers and user defined functions are used to automate tasks depending on chan
 
 | **Trigger**      | TRIGGER01                              |
 | ---              | ---                                    |
-| **Description**  | A book whose stock is non-positive cannot be purchased |
+| **Description**  | A book whose stock is non-positive cannot be purchased. |
 ```sql
 CREATE FUNCTION book_available() RETURNS TRIGGER AS
 $BODY$
@@ -450,7 +450,7 @@ CREATE TRIGGER blocked_purchase
 
 ### 4. Transactions
  
-> Transactions needed to assure the integrity of the data.  
+Transactions are used to assure the integrity of the data when multiple operations are necessary. 
 
 | Transaction     | TRAN01                              |
 | --------------- | ----------------------------------- |
