@@ -391,7 +391,7 @@ CREATE TRIGGER wishlist_to_cart
 | **Trigger**      | TRIGGER04                              |
 | ---              | ---                                    |
 | **Description**  | A book is removed from an user's shopping cart after the user purchases it.  |
-```sql
+```SQL
 CREATE FUNCTION cart_purchased() RETURNS TRIGGER AS
 $BODY$
 BEGIN
