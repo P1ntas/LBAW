@@ -42,7 +42,39 @@ INSERT INTO admins VALUES
   (6573,"Berk Buchanan","berkbuchanan2943@icloud.org","VjN1fv4Z2WV"),
   (8202,"Dara Burks","daraburks@icloud.net","MeQ3yq3D7TG"),
   (6306,"Trevor Malone","trevormalone5887@hotmai.org","FhC6jd3X1VV");
-
+INSERT INTO admins VALUES
+  (2178,"Kaye Weeks","kayeweeks550@google.com","SjK6ya7D6TA"),
+  (5254,"Herman Dorsey","hermandorsey9307@yahoo.com","TrI1lf7L7XT"),
+  (3220,"Kimberly Maldonado","kimberlymaldonado6857@google.org","DpR4tn7T8IQ"),
+  (8615,"Jana Roach","janaroach2537@icloud.org","BwS5ge3T6GH"),
+  (7260,"Travis Parker","travisparker6806@google.net","FuW8sj5F6FD"),
+  (8763,"Alfreda Mcmahon","alfredamcmahon6324@outlook.net","EiN3jx4O6FN"),
+  (9326,"Candace Williams","candacewilliams7395@outlook.org","BxF9sa9Q0CV"),
+  (7454,"Alisa Donaldson","alisadonaldson6175@yahoo.org","CiP2mi6T4CI"),
+  (1171,"Tad Fitzpatrick","tadfitzpatrick3428@yahoo.org","HrE6co7D8XH"),
+  (7384,"Beverly Parks","beverlyparks@yahoo.org","JeY7jo1O9LF");
+INSERT INTO admins VALUES
+  (9471,"Andrew Alexander","andrewalexander@google.net","UnX2eb0O1GK"),
+  (4454,"Brenden Alford","brendenalford@yahoo.org","PiU5jk0J3NS"),
+  (1192,"Otto Burton","ottoburton1363@icloud.org","HjL3ol1D6AK"),
+  (7767,"Tatyana Briggs","tatyanabriggs5373@yahoo.com","HqW8fh2S8BA"),
+  (1742,"Yetta Calderon","yettacalderon@google.com","UhV7pk7O7PJ"),
+  (6201,"Hilda Schneider","hildaschneider2062@outlook.com","HlF1oy2F1FW"),
+  (8894,"Hilel Kane","hilelkane3691@google.org","JlO6mt3Q8LT"),
+  (8838,"Samson Preston","samsonpreston8171@icloud.net","RoX6em0S4BJ"),
+  (2505,"Jasper Mayer","jaspermayer@icloud.org","CmV7kl5D7VW"),
+  (7099,"Vielka Norman","vielkanorman8246@icloud.net","PyC4kf7F8YW");
+INSERT INTO admins VALUES
+  (4517,"Christine Gray","christinegray@google.org","HwO5md4J7DL"),
+  (9992,"Elmo Barton","elmobarton5734@outlook.net","OlX3fd1T4QE"),
+  (3301,"Sasha Crosby","sashacrosby1184@outlook.com","GnG5mw3T4YU"),
+  (9684,"Anthony Drake","anthonydrake4095@google.com","WpV5kv9Q4YX"),
+  (5655,"Isadora Guerra","isadoraguerra@hotmai.org","InU9vr8N4IO"),
+  (8002,"Kylynn Sweet","kylynnsweet@yahoo.net","MxW3fr9O1TE"),
+  (8676,"Madonna Vang","madonnavang@google.net","HkI3ca6B0BH"),
+  (7204,"Shannon Mills","shannonmills308@hotmai.net","IdL1jg1M8UX"),
+  (9492,"Elliott Doyle","elliottdoyle@outlook.com","OjU9ev2S4SH"),
+  (3236,"Juliet Montgomery","julietmontgomery@outlook.org","KqS3vl2S3EQ");
 
 
 /*Publisher*/
@@ -176,7 +208,28 @@ INSERT INTO users VALUES
   (4813, "Harriet Tyler" , "harriettyler@icloud.com"      , "Hl1c27YhX7DK", "Ap #530-451 Nulla. St."             , "0800 876 8887"  , "Yes"),
   (6312, "John Bean"     , "johnbean@outlook.com"         , "Ku6x81PsO5VO", "Ap #391-2361 Enim Rd."              , "(016977) 4132"  , "No"),
   (6317, "Colt Mcgee"    , "coltmcgee@hotmail.edu"        , "Ul4v13PaU7ME", "8470 Sem Av."                       , "(0141) 649 7276", "No");
-
+INSERT INTO users VALUES
+  (5678,"Caryn Savage","carynsavage5347@yahoo.com","Lh5b53RrF2NF","427-6336 Erat. St.","07172 122210","No"),
+  (1555,"Emerald Simpson","emeraldsimpson@yahoo.edu","Nj1j14RyC3QM","522-8972 Nam Road","07624 079533","Yes"),
+  (3568,"Samantha Robinson","samantharobinson@google.net","Kj6g76RkD3NJ","437-691 Id, Street","07276 714978","Yes"),
+  (9397,"Britanney Boyer","britanneyboyer@hotmail.edu","Th1p81YwJ9ST","287-4462 Erat Street","07302 187546","No"),
+  (7295,"Baker Herring","bakerherring398@outlook.net","Ug6k66VoS6HO","P.O. Box 405, 3346 Diam Street","0800 792456","Yes"),
+  (2399,"Malachi Wagner","malachiwagner2630@yahoo.org","Bo2c98ImG4JM","458-5762 Eu, Av.","(01182) 79065","No"),
+  (5978,"Jordan Burnett","jordanburnett6347@icloud.org","Zf3s86TyU3TL","3977 Eu Road","0800 177 6745","Yes"),
+  (5358,"Maite Todd","maitetodd@yahoo.edu","Ll8j83PyV9UA","Ap #390-7619 Suspendisse Rd.","076 1469 8539","Yes"),
+  (8536,"Rhonda Norton","rhondanorton@hotmail.com","Ih1c26UkP4YK","P.O. Box 853, 4472 Massa. Av.","0841 953 4374","No"),
+  (3451,"Emery Sellers","emerysellers5460@outlook.org","Up1b27LcA5ZU","Ap #173-8311 Viverra. Rd.","076 7613 2788","Yes");
+INSERT INTO users VALUES
+  (8428,"Giselle Marshall","gisellemarshall@outlook.net","Yf4r13VvV7OT","929-294 Luctus Road","0845 46 44","No"),
+  (5371,"Anika Dunn","anikadunn@google.com","Xc5l22HhX5RX","Ap #483-1333 Integer Rd.","0872 426 2773","No"),
+  (4169,"Dai Macias","daimacias3314@icloud.net","Gd6n50OoJ8NL","306-8798 Rutrum. Av.","(0121) 142 1536","Yes"),
+  (5148,"Jessica Garrett","jessicagarrett9683@icloud.edu","Yw3j31HxD5PA","Ap #104-3266 Lacinia Avenue","(016977) 2104","Yes"),
+  (7211,"Audra Lowery","audralowery5397@icloud.edu","Wy2j56KwO6HP","550-6475 Aliquam Road","0845 46 46","Yes"),
+  (7331,"Melanie Riggs","melanieriggs3829@outlook.net","Fp2f31OiI5QX","729-9959 Lorem Rd.","056 7840 5828","No"),
+  (2863,"Kirk Delaney","kirkdelaney7896@icloud.com","Ux4o26GuV6QL","Ap #894-3832 Feugiat Rd.","070 5864 4622","No"),
+  (4632,"Noble Herring","nobleherring@icloud.com","Gb2s65QgX6XA","Ap #460-2401 Donec Av.","0800 205 6284","Yes"),
+  (5175,"Caesar Osborne","caesarosborne8677@icloud.net","Wl3o65RiS1KW","754-2268 Duis St.","0800 163 9200","Yes"),
+  (2861,"Barrett Bell","barrettbell3569@google.net","Xj5p44TsE4AR","P.O. Box 244, 8737 Erat, St.","070 6771 3061","Yes");
 
 /*Purchase*/
 /*(id_purchase, purchase_date, id_user, purchase_state)*/
@@ -258,38 +311,38 @@ INSERT INTO photo VALUES
   (1019, "https://", 4111, 5300, 8202),
   (8832, "http://" , 4601, 4502, 6306);
 INSERT INTO photo VALUES
-  (1940, "http://" , 7671, 7814, 3030),
-  (7667, "http://" , 1855, 1112, 3223),
-  (3637, "http://" , 1418, 1878, 1012),
-  (1154, "http://" , 5546, 6259, 5188),
-  (7253, "http://" , 3468, 2608, 2274),
-  (3287, "https://", 9478, 7686, 4114),
-  (2616, "http://" , 5871, 4357, 9954),
-  (1599, "http://" , 1080, 4066, 6573),
-  (4352, "http://" , 4002, 5300, 8202),
-  (9503, "https://", 7337, 4502, 6306);
+  (1940, "http://" , 7671, 5678, 2178),
+  (7667, "http://" , 1855, 1555, 5254),
+  (3637, "http://" , 1418, 3568, 3220),
+  (1154, "http://" , 5546, 9397, 8615),
+  (7253, "http://" , 3468, 7295, 7260),
+  (3287, "https://", 9478, 2399, 8763),
+  (2616, "http://" , 5871, 5978, 9326),
+  (1599, "http://" , 1080, 5358, 7454),
+  (4352, "http://" , 4002, 8536, 1171),
+  (9503, "https://", 7337, 3451, 7384);
 INSERT INTO photo VALUES
-  (6402, "https://", 6890, 6635, 3030),
-  (7174, "http://" , 7421, 7281, 3223),
-  (6151, "http://" , 3359, 3145, 1012),
-  (7935, "https://", 7211, 6516, 5188),
-  (8043, "https://", 6356, 6947, 2274),
-  (4802, "http://" , 2821, 7380, 4114),
-  (7147, "https://", 4288, 1141, 9954),
-  (2519, "https://", 6021, 4813, 6573),
-  (3435, "https://", 1451, 6312, 8202),
-  (4058, "http://" , 7368, 6317, 6306);
+  (6402, "https://", 6890, 6635, 9471),
+  (7174, "http://" , 7421, 7281, 4454),
+  (6151, "http://" , 3359, 3145, 1192),
+  (7935, "https://", 7211, 6516, 7767),
+  (8043, "https://", 6356, 6947, 1742),
+  (4802, "http://" , 2821, 7380, 6201),
+  (7147, "https://", 4288, 1141, 8894),
+  (2519, "https://", 6021, 4813, 8838),
+  (3435, "https://", 1451, 6312, 2505),
+  (4058, "http://" , 7368, 6317, 7099);
 INSERT INTO photo VALUES
-  (9483, "https://", 6086, 6635, 3030),
-  (6593, "http://" , 7817, 7281, 3223),
-  (4197, "https://", 8544, 3145, 1012),
-  (7854, "https://", 4975, 6516, 5188),
-  (1423, "http://" , 9103, 6947, 2274),
-  (6411, "https://", 9069, 7380, 4114),
-  (5548, "http://" , 2317, 1141, 9954),
-  (7255, "http://" , 3649, 4813, 6573),
-  (6043, "https://", 1277, 6312, 8202),
-  (7953, "https://", 1968, 6317, 6306);
+  (9483, "https://", 6086, 8428, 4517),
+  (6593, "http://" , 7817, 5371, 9992),
+  (4197, "https://", 8544, 4169, 3301),
+  (7854, "https://", 4975, 5148, 9684),
+  (1423, "http://" , 9103, 7211, 5655),
+  (6411, "https://", 9069, 7331, 8002),
+  (5548, "http://" , 2317, 2863, 8676),
+  (7255, "http://" , 3649, 4632, 7204),
+  (6043, "https://", 1277, 5175, 9492),
+  (7953, "https://", 1968, 2861, 3236);
 
 
 /*Book_Author*/
@@ -547,3 +600,4 @@ INSERT INTO cart VALUES
   (4813,7693),
   (6312,5335),
   (6317,9922);
+
