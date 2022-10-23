@@ -823,7 +823,7 @@ CREATE TRIGGER blocked_purchase
 
 ### A.2. Database population
 
-- Link to database creation script: [population.sql](/proj/population.sql)
+- Link to database population script: [population.sql](/proj/population.sql)
 
 ```sql
 ---------------------
