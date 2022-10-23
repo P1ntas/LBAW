@@ -823,7 +823,11 @@ CREATE TRIGGER blocked_purchase
 
 ### A.2. Database population
 
-> Only a sample of the database population script may be included here, e.g. the first 10 lines. The full script must be available in the repository.
+- Link to database creation script: [population.sql](/proj/population.sql)
+
+```sql
+---------------------
+```
 
 ---
 
