@@ -8,7 +8,7 @@ The Conceptual Data Model contains the identification and description of the ent
 
 ### 1. Class diagram
 
-The UML diagram in Figure 1 presents the main organisational entities, the relationships between them, attributes and their domains, and the multiplicity of relationships for the **Off The Shelf** platform.
+The UML diagram in Figure 1 presents the main organizational entities, the relationships between them, attributes and their domains, and the multiplicity of relationships for the **Off The Shelf** platform.
 
 ![img](images/UML.png)  
 
