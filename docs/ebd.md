@@ -492,7 +492,7 @@ The complete SQL code (i.e. including CREATE statements but also indices, trigge
 
 ### A.1. Database schema
 
-- Link to database creation script: [creation.sql](/../proj/creation.sql)
+- Link to database creation script: [creation.sql](/proj/creation.sql)
 
 ```sql
 -----------------------------------------
