@@ -274,7 +274,7 @@ CLUSTER book USING book_category;
 | **Type**            | Hash             |
 | **Cardinality**     | Medium |
 | **Clustering**      | No               |
-| **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. For clustering on table ‘review’, id_book is the most interesting since obtaining the reviews for a given book is a frequent request. However, expected update frequency is medium, so no clustering is proposed   |
+| **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. For clustering on table ‘review’, id_book is the most interesting since obtaining the reviews for a given book is a frequent request. However, expected update frequency is medium, so no clustering is proposed.   |
 ```sql
 CREATE INDEX book_review ON review USING hash (id_book);
 ```
@@ -491,6 +491,8 @@ END TRANSACTION;
 The complete SQL code (i.e. including CREATE statements but also indices, triggers, stored procedures and user defined functions) is included as an annex to the EBD component. The database creation script and the database population script are included as separate elements.
 
 ### A.1. Database schema
+
+- Link to database creation script: [creation.sql](/../proj/creation.sql)
 
 ```sql
 -----------------------------------------
