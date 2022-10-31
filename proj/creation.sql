@@ -3,9 +3,9 @@
 -- Use this code to drop and create a schema.
 -- In this case, the DROP TABLE statements can be removed.
 --
--- DROP SCHEMA lbaw2232 CASCADE;
--- CREATE SCHEMA lbaw2232;
--- SET search_path TO lbaw2232;
+-- DROP SCHEMA offtheshelf CASCADE;
+-- CREATE SCHEMA offtheshelf;
+-- SET search_path TO offtheshelf;
 -----------------------------------------
 
 -----------------------------------------
@@ -94,7 +94,7 @@ CREATE TABLE offtheshelf.users (
 CREATE TABLE offtheshelf.book (
     id_book SERIAL PRIMARY KEY,
     title TEXT NOT NULL,      
-    isbn INTEGER NOT NULL UNIQUE,
+    isbn NUMERIC NOT NULL UNIQUE,
     year INTEGER,  
     price NUMERIC(9, 2) NOT NULL CHECK (price >= 0),
     stock INTEGER NOT NULL CHECK (stock >= 0),           
