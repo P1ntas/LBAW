@@ -831,263 +831,306 @@ CREATE TRIGGER blocked_purchase
 
 ```sql
 /*
-Populate Tables (sample of the database population script)
+Populate Tables
 */
 
 /*Faq*/
 /*(question, answer)*/
 /*20*/
-INSERT INTO faq VALUES
-  ("Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Phasellus ornare. Fusce","natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam"),
-  ("commodo hendrerit. Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu","a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed diam lorem, auctor quis, tristique ac, eleifend vitae, erat. Vivamus nisi. Mauris nulla. Integer urna. Vivamus molestie dapibus ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula. Nullam feugiat placerat velit. Quisque varius. Nam"),
-  ("sed pede nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus","Duis volutpat nunc sit amet metus. Aliquam erat volutpat. Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget"),
-  ("Proin mi. Aliquam gravida mauris ut mi. Duis risus odio, auctor vitae, aliquet nec, imperdiet nec, leo. Morbi neque tellus, imperdiet non, vestibulum nec, euismod in, dolor. Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam auctor, velit eget","velit eu sem. Pellentesque ut ipsum ac mi eleifend egestas. Sed pharetra, felis eget varius ultrices, mauris ipsum porta elit, a feugiat tellus lorem eu metus. In lorem. Donec elementum, lorem"),
-  ("eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas.","nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie"),
-  ("dignissim tempor arcu. Vestibulum ut eros non enim commodo hendrerit. Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit","Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget mollis lectus pede et risus. Quisque libero lacus, varius et, euismod et, commodo at, libero. Morbi accumsan laoreet ipsum."),
-  ("sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam ornare, libero at auctor ullamcorper, nisl arcu iaculis enim, sit amet ornare lectus justo eu","dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et,"),
-  ("scelerisque neque sed sem egestas blandit. Nam nulla magna, malesuada vel, convallis in, cursus et, eros. Proin ultrices. Duis volutpat nunc","sagittis augue, eu tempor erat neque non quam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna, malesuada vel, convallis in,"),
-  ("Nam porttitor scelerisque neque. Nullam nisl. Maecenas malesuada fringilla est. Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper","lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum magna. Cras convallis"),
-  ("ligula tortor, dictum eu, placerat eget, venenatis a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam laoreet, libero et tristique","pede. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque");
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Phasellus ornare. Fusce'                                                    , 'natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('commodo hendrerit. Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu'                                                                 , 'a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed diam lorem, auctor quis, tristique ac, eleifend vitae, erat. Vivamus nisi. Mauris nulla. Integer urna. Vivamus molestie dapibus ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula. Nullam feugiat placerat velit. Quisque varius. Nam');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('sed pede nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus'                           , 'Duis volutpat nunc sit amet metus. Aliquam erat volutpat. Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('Proin mi. Aliquam gravida mauris ut mi. Duis risus odio, auctor vitae, aliquet nec, imperdiet nec, leo. Morbi neque tellus, imperdiet non, vestibulum nec, euismod in, dolor. Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam auctor, velit eget'      , 'velit eu sem. Pellentesque ut ipsum ac mi eleifend egestas. Sed pharetra, felis eget varius ultrices, mauris ipsum porta elit, a feugiat tellus lorem eu metus. In lorem. Donec elementum, lorem');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas.'                                                                                                                                                                            , 'nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('dignissim tempor arcu. Vestibulum ut eros non enim commodo hendrerit. Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit'                                                                                                                             , 'Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget mollis lectus pede et risus. Quisque libero lacus, varius et, euismod et, commodo at, libero. Morbi accumsan laoreet ipsum.');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam ornare, libero at auctor ullamcorper, nisl arcu iaculis enim, sit amet ornare lectus justo eu'                                                                                                        , 'dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et,');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('scelerisque neque sed sem egestas blandit. Nam nulla magna, malesuada vel, convallis in, cursus et, eros. Proin ultrices. Duis volutpat nunc'                                                                                                                                           , 'sagittis augue, eu tempor erat neque non quam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna, malesuada vel, convallis in,');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('Nam porttitor scelerisque neque. Nullam nisl. Maecenas malesuada fringilla est. Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper'                                                                                        , 'lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum magna. Cras convallis');
+INSERT INTO offtheshelf.faq(question, answer) VALUES ('ligula tortor, dictum eu, placerat eget, venenatis a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam laoreet, libero et tristique'                                                                                                                              , 'pede. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque');
 
 /*Admins*/
 /*(id_admin, admin_name, email, admin_password)*/
 /*10*/
-INSERT INTO admins VALUES
-  (3030,"Stuart Maxwell","stuartmaxwell7851@icloud.com","JtV8zo5B8JN"),
-  (3223,"Addison Chambers","addisonchambers2592@outlook.com","WxY6xi4I0MY"),
-  (1012,"Iona Fletcher","ionafletcher@hotmai.com","JcI5tp4H7JO"),
-  (5188,"Madeline Tate","madelinetate@yahoo.com","XdC9ew2N8PN"),
-  (2274,"Oleg Hensley","oleghensley5863@outlook.net","QmI1jj5Y4HI"),
-  (4114,"Janna Roberts","jannaroberts6170@icloud.org","MdH6gw8J1CS"),
-  (9954,"Rhona Perez","rhonaperez3509@icloud.com","AwT6nm6I4UF"),
-  (6573,"Berk Buchanan","berkbuchanan2943@icloud.org","VjN1fv4Z2WV"),
-  (8202,"Dara Burks","daraburks@icloud.net","MeQ3yq3D7TG"),
-  (6306,"Trevor Malone","trevormalone5887@hotmai.org","FhC6jd3X1VV");
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (1 , 'Stuart Maxwell'    , 'stuartmaxwell7851@icloud.com'    , 'JtV8zo5B8JN');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (2 , 'Addison Chambers'  , 'addisonchambers2592@outlook.com' , 'WxY6xi4I0MY');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (3 , 'Iona Fletcher'     , 'ionafletcher@hotmai.com'         , 'JcI5tp4H7JO');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (4 , 'Madeline Tate'     , 'madelinetate@yahoo.com'          , 'XdC9ew2N8PN');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (5 , 'Oleg Hensley'      , 'oleghensley5863@outlook.net'     , 'QmI1jj5Y4HI');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (6 , 'Janna Roberts'     , 'jannaroberts6170@icloud.org'     , 'MdH6gw8J1CS');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (7 , 'Rhona Perez'       , 'rhonaperez3509@icloud.com'       , 'AwT6nm6I4UF');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (8 , 'Berk Buchanan'     , 'berkbuchanan2943@icloud.org'     , 'VjN1fv4Z2WV');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (9 , 'Dara Burks'        , 'daraburks@icloud.net'            , 'MeQ3yq3D7TG');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (10, 'Trevor Malone'     , 'trevormalone5887@hotmai.org'     , 'FhC6jd3X1VV');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (11, 'Kaye Weeks'        , 'kayeweeks550@google.com'         , 'SjK6ya7D6TA');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (12, 'Herman Dorsey'     , 'hermandorsey9307@yahoo.com'      , 'TrI1lf7L7XT');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (13, 'Kimberly Maldonado', 'kimberlymaldonado6857@google.org', 'DpR4tn7T8IQ');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (14, 'Jana Roach'        , 'janaroach2537@icloud.org'        , 'BwS5ge3T6GH');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (15, 'Travis Parker'     , 'travisparker6806@google.net'     , 'FuW8sj5F6FD');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (16, 'Alfreda Mcmahon'   , 'alfredamcmahon6324@outlook.net'  , 'EiN3jx4O6FN');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (17, 'Candace Williams'  , 'candacewilliams7395@outlook.org' , 'BxF9sa9Q0CV');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (18, 'Alisa Donaldson'   , 'alisadonaldson6175@yahoo.org'    , 'CiP2mi6T4CI');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (19, 'Tad Fitzpatrick'   , 'tadfitzpatrick3428@yahoo.org'    , 'HrE6co7D8XH');
+INSERT INTO offtheshelf.admins(id_admin, admin_name, email, admin_password) VALUES (20, 'Beverly Parks'     , 'beverlyparks@yahoo.org'          , 'JeY7jo1O9LF');
 
 /*Publisher*/
 /*(id_publisher, publisher_name)*/
 /*20*/
-INSERT INTO publisher VALUES
-  (5746,"quam"),
-  (9469,"Nam tempor"),
-  (1313,"congue"),
-  (7050,"sit amet"),
-  (2056,"Ut"),
-  (9698,"nisl. Maecenas"),
-  (3921,"Quisque ornare"),
-  (4797,"ipsum porta"),
-  (3876,"erat"),
-  (8130,"commodo at,");
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (1 , 'quam');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (2 , 'Nam tempor');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (3 , 'congue');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (4 , 'sit amet');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (5 , 'Ut');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (6 , 'nisl. Maecenas');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (7 , 'Quisque ornare');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (8 , 'ipsum porta');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (9 , 'erat');
+INSERT INTO offtheshelf.publisher(id_publisher, publisher_name) VALUES (10, 'commodo at,');
 
 /*Author*/
 /*(id_author, author_name)*/
 /*20*/
-INSERT INTO author VALUES
-  (7695,"quis"),
-  (2832,"ipsum"),
-  (4702,"commodo ipsum."),
-  (8874,"nisl. Quisque"),
-  (2768,"urna suscipit"),
-  (5912,"Nullam"),
-  (2424,"ut,"),
-  (2773,"a,"),
-  (4483,"Ut"),
-  (9641,"porttitor eros");
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (1 , 'quis');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (2 , 'ipsum');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (3 , 'commodo ipsum.');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (4 , 'nisl. Quisque');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (5 , 'urna suscipit');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (6 , 'Nullam');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (7 , 'ut,');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (8 , 'a,');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (9 , 'Ut');
+INSERT INTO offtheshelf.author(id_author, author_name) VALUES (10, 'porttitor eros');
 
 /*Collections*/
 /*(id_collection, collection_name)*/
 /*20*/
-INSERT INTO collections VALUES
-  (1149,"mollis."),
-  (9944,"velit"),
-  (2187,"malesuada id,"),
-  (9895,"orci,"),
-  (3311,"nisl sem,"),
-  (7813,"lorem,"),
-  (3705,"Morbi"),
-  (4005,"neque."),
-  (3254,"senectus et"),
-  (2964,"dis parturient");
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (1 ,'mollis.');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (2 ,'velit');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (3 ,'malesuada id,');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (4 ,'orci,');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (5 ,'nisl sem,');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (6 ,'lorem,');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (7 ,'Morbi');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (8 ,'neque.');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (9 ,'senectus et');
+INSERT INTO offtheshelf.collections(id_collection, collection_name) VALUES (10,'dis parturient');
 
 /*Category*/
 /*(id_category, category_name)*/
 /*20*/
-INSERT INTO category VALUES
-  (1931,"cursus et,"),
-  (8947,"dui"),
-  (1508,"libero et"),
-  (7138,"gravida"),
-  (1305,"dictum"),
-  (3431,"erat"),
-  (3286,"tellus"),
-  (8912,"sit"),
-  (5836,"cursus"),
-  (4306,"ultricies");
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (1 ,'cursus et,');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (2 ,'dui');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (3 ,'libero et');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (4 ,'gravida');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (5 ,'dictum');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (6 ,'erat');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (7 ,'tellus');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (8 ,'sit');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (9 ,'cursus');
+INSERT INTO offtheshelf.category(id_category, category_name) VALUES (10,'ultricies');
 
 /*Users*/
 /*(id_user, username, email, user_password, user_address, phone, blocked)*/
 /*20*/
-INSERT INTO users VALUES
-  (7814, "Amaya Martinez"   , "amayamartinez@hotmail.org"  , "Yi5j66VlF4DJ", "696 Magna. Street"            , "0800 835 4424"  , "No"),
-  (1112, "Josephine Morales", "josephinemorales@yahoo.org" , "Pw2y92MsY9NU", "Ap #600-1576 In St."          , "070 2878 8712"  , "No"),
-  (1878, "Sonya Kent"       , "sonyakent@yahoo.org"        , "Uh3p40MpI3ZY", "384-8823 A St."               , "0800 1111"      , "No"),
-  (6259, "Kadeem Cooley"    , "kadeemcooley8001@icloud.edu", "Hn5f12WzL2LV", "P.O. Box 630, 1505 Est Street", "0343 125 3166"  , "Yes"),
-  (2608, "Richard Duke"     , "richardduke8656@hotmail.edu", "Qr5i67XkI3II", "Ap #706-5476 Laoreet Ave"     , "055 4356 9231"  , "No"),
-  (7686, "Ina Blanchard"    , "inablanchard@outlook.org"   , "Vd1s68SyH7SY", "578-9276 Ut Road"             , "(024) 1529 2472", "No"),
-  (4357, "Castor Craig"     , "castorcraig@outlook.edu"    , "Se1p60RhV8NC", "Ap #985-2331 Auctor Av."      , "0851 856 6448"  , "No"),
-  (4066, "Haley Barker"     , "haleybarker@yahoo.org"      , "Lj9w14OqT6GL", "P.O. Box 472, 9907 Urna Rd."  , "070 5019 6658"  , "Yes"),
-  (5300, "Alden Hale"       , "aldenhale@icloud.net"       , "Gl2j03OzT4LQ", "896-8186 Cras Road"           , "070 8547 5067"  , "No"),
-  (4502, "Randall Bass"     , "randallbass@hotmail.org"    , "Ns1j33XsR6LY", "P.O. Box 498, 7984 Risus. Rd.", "0800 1111"      , "No");
-
-/*Purchase*/
-/*(id_purchase, purchase_date, id_user, purchase_state)*/
-/*10*/
-INSERT INTO purchase VALUES
-  (2729,"2022-07-13 14:03:42 +9:00",8020, 'Received'),
-  (8131,"2022-01-30 09:05:56 +8:00",6286, 'Received'),
-  (7922,"2021-12-22 22:21:03 -4:00",3197, 'Received'),
-  (9730,"2021-04-04 12:17:47 -4:00",1242, 'Received'),
-  (9061,"2021-07-04 01:43:53 -8:00",4701, 'Dispatched'),
-  (3332,"2022-03-22 16:50:18 +2:00",3616, 'Dispatched'),
-  (1942,"2021-10-18 22:29:36 +7:00",4525, 'Dispatched'),
-  (2356,"2021-07-17 17:33:03 -0:00",2932, 'Dispatched'),
-  (9666,"2021-11-13 13:42:04 +9:00",8904, 'Delivered'),
-  (3604,"2022-04-05 05:17:14 +4:00",3770, 'Delivered');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (1 , 'Amaya Martinez'   , 'amayamartinez@hotmail.org'    , 'Yi5j66VlF4DJ', '696 Magna. Street'                  , '935235731', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (2 , 'Josephine Morales', 'josephinemorales@yahoo.org'   , 'Pw2y92MsY9NU', 'Ap #600-1576 In St.'                , '935235732', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (3 , 'Sonya Kent'       , 'sonyakent@yahoo.org'          , 'Uh3p40MpI3ZY', '384-8823 A St.'                     , '935235733', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (4 , 'Kadeem Cooley'    , 'kadeemcooley8001@icloud.edu'  , 'Hn5f12WzL2LV', 'P.O. Box 630, 1505 Est Street'      , '935235734', 'Yes');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (5 , 'Richard Duke'     , 'richardduke8656@hotmail.edu'  , 'Qr5i67XkI3II', 'Ap #706-5476 Laoreet Ave'           , '935235735', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (6 , 'Ina Blanchard'    , 'inablanchard@outlook.org'     , 'Vd1s68SyH7SY', '578-9276 Ut Road'                   , '935235736', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (7 , 'Castor Craig'     , 'castorcraig@outlook.edu'      , 'Se1p60RhV8NC', 'Ap #985-2331 Auctor Av.'            , '935235737', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (8 , 'Haley Barker'     , 'haleybarker@yahoo.org'        , 'Lj9w14OqT6GL', 'P.O. Box 472, 9907 Urna Rd.'        , '935235738', 'Yes');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (9 , 'Alden Hale'       , 'aldenhale@icloud.net'         , 'Gl2j03OzT4LQ', '896-8186 Cras Road'                 , '935235739', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (10, 'Randall Bass'     , 'randallbass@hotmail.org'      , 'Ns1j33XsR6LY', 'P.O. Box 498, 7984 Risus. Rd.'      , '935235711', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (11, 'Olivia Diaz'      , 'oliviadiaz8518@icloud.edu'    , 'Lm6r01GaB1WH', '150-8182 Eu Street'                 , '935235721', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (12, 'Noelle Ramos'     , 'noelleramos@outlook.org'      , 'Qo6o02IeL7PK', '160-3034 Ipsum. Av.'                , '935235731', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (13, 'Lacy Rosa'        , 'lacyrosa@google.org'          , 'Ub8k23TkE4FW', '5418 Lorem Av.'                     , '935235741', 'Yes');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (14, 'Zephr Mcknight'   , 'zephrmcknight1657@hotmail.org', 'Ql5w29UlG4PW', 'Ap #446-1037 Mauris Rd.'            , '935235751', 'Yes');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (15, 'Brooke Winters'   , 'brookewinters@outlook.net'    , 'Hj2h09JjZ4OF', '975 Semper St.'                     , '935235761', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (16, 'Dorian Craig'     , 'doriancraig@yahoo.edu'        , 'Ds3c51WlF0RB', '698-3560 Nulla Street'              , '935235771', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (17, 'Zelda Pugh'       , 'zeldapugh@outlook.org'        , 'Mq3s43NiE8FV', 'P.O. Box 373, 6965 Tincidunt Avenue', '935235781', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (18, 'Harriet Tyler'    , 'harriettyler@icloud.com'      , 'Hl1c27YhX7DK', 'Ap #530-451 Nulla. St.'             , '935235791', 'Yes');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (19, 'John Bean'        , 'johnbean@outlook.com'         , 'Ku6x81PsO5VO', 'Ap #391-2361 Enim Rd.'              , '935235131', 'No');
+INSERT INTO offtheshelf.users(id_user, username, email, user_password, user_address, phone, blocked) VALUES (20, 'Colt Mcgee'       , 'coltmcgee@hotmail.edu'        , 'Ul4v13PaU7ME', '8470 Sem Av.'                       , '935235231', 'No');
 
 /*Book*/
-/*(id_book, title, isbn, year, prive, stock, book_edition, book_description, id_category, id_publisher)*/
+/*(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher)*/
 /*40*/
-INSERT INTO book VALUES
-  (5675, "aliquam arcu. Aliquam ultrices iaculis odio.", 5351034105, 1918, "112.90", 5 , 5, "est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor."                                                                                                                                                                                                                                                  , 1931, 5746),
-  (7237, "dolor. Donec fringilla. Donec feugiat metus" , 4733319526, 1970, "162.18", 29, 6, "commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at"                                                                                                                                                        , 8947, 9469),
-  (9930, "ornare, elit elit fermentum risus, at"       , 3638368148, 2022, "7.07"  , 4 , 0, "nulla. In tincidunt congue turpis. In condimentum. Donec at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque scelerisque dui. Suspendisse ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris erat eget ipsum. Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat."                                    , 1508, 1313),
-  (9058, "egestas a, dui. Cras pellentesque. Sed"      , 1559765489, 1962, "111.84", 30, 4, "eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida. Praesent eu nulla at sem molestie sodales. Mauris blandit enim consequat purus. Maecenas libero est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum."                                                                                                                                                                   , 7138, 7050),
-  (5531, "Quisque tincidunt pede ac urna. Ut"          , 7100265623, 2022, "55.89" , 18, 3, "sit amet ornare lectus justo eu arcu. Morbi sit amet massa. Quisque porttitor eros nec tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec, diam. Duis mi enim, condimentum eget, volutpat ornare, facilisis eget, ipsum. Donec sollicitudin adipiscing ligula. Aenean gravida nunc sed pede. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque"                                                                                                 , 1305, 2056),
-  (6934, "libero. Proin mi. Aliquam gravida mauris"    , 3985700232, 2007, "177.01", 2 , 7, "tempor lorem, eget mollis lectus pede et risus. Quisque libero lacus, varius et, euismod et, commodo at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut dolor dapibus gravida."                                                                                                                                                        , 3431, 9698),
-  (1617, "orci lacus vestibulum lorem, sit amet"       , 7807449319, 1948, "179.27", 1 , 2, "ut, nulla. Cras eu tellus eu augue porttitor interdum. Sed auctor odio a purus. Duis elementum, dui quis accumsan convallis, ante lectus convallis est, vitae sodales nisi magna sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est"                                                                                            , 3286, 3921),
-  (1738, "vel est tempor bibendum. Donec felis"        , 7155626270, 1904, "39.49" , 37, 7, "bibendum. Donec felis orci, adipiscing non, luctus sit amet, faucibus ut, nulla. Cras eu tellus eu augue porttitor interdum. Sed auctor odio a purus. Duis elementum, dui quis accumsan convallis, ante lectus convallis est, vitae sodales nisi magna sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est ac mattis semper, dui", 8912, 4797),
-  (4111, "ultricies sem magna nec quam. Curabitur"     , 6001574761, 1925, "152.70", 23, 4, "Duis dignissim tempor arcu. Vestibulum ut eros non enim commodo hendrerit. Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus leo, in lobortis"                                                                                                            , 5836, 3876),
-  (4601, "ornare, lectus ante dictum mi, ac"           , 1009054957, 2017, "92.34" , 23, 7, "ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In mi pede, nonummy ut, molestie in, tempus eu, ligula. Aenean euismod mauris eu elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit"                                                                                                                                                                        , 4306, 8130);
-
-/*Photo*/
-/*(id_photo,photo_image,id_book,id_user,id_admin)*/
-/*40*/
-INSERT INTO photo VALUES
-  (9105, "https://", 5675, 7814, 3030),
-  (7623, "https://", 7237, 1112, 3223),
-  (5116, "https://", 9930, 1878, 1012),
-  (8408, "https://", 9058, 6259, 5188),
-  (4958, "http://" , 5531, 2608, 2274),
-  (1988, "https://", 6934, 7686, 4114),
-  (1363, "https://", 1617, 4357, 9954),
-  (6250, "http://" , 1738, 4066, 6573),
-  (1019, "https://", 4111, 5300, 8202),
-  (8832, "http://" , 4601, 4502, 6306);
-
-/*Book_Author*/
-/*(id_book, id_author)*/
-/*40*/
-INSERT INTO book_author VALUES
-  (5675,7695),
-  (7237,2832),
-  (9930,4702),
-  (9058,8874),
-  (5531,2768),
-  (6934,5912),
-  (1617,2424),
-  (1738,2773),
-  (4111,4483),
-  (4601,9641);
-
-/*Book_Collection*/
-/*(id_book, id_collections)*/
-/*40*/
-INSERT INTO book_collection VALUES
-  (5675,1149),
-  (7237,9944),
-  (9930,2187),
-  (9058,9895),
-  (5531,3311),
-  (6934,7813),
-  (1617,3705),
-  (1738,4005),
-  (4111,3254),
-  (4601,2964);
-
-/*Review*/
-/*(id_review, rating, comment, review_date, id_book, id_user)*/
-/*40*/
-INSERT INTO review VALUES
-  (4, 2, "Mauris nulla. Integer urna. Vivamus molestie dapibus ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula. Nullam feugiat placerat"                                                                                                                                                                                                     , "2022-03-11 08:27:08  +8:00" , 5675, 7814),
-  (4, 3, "neque. Sed eget lacus. Mauris non dui nec urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum"                                                                                                                                                                                                                                                      , "2022-12-23 23:36:01 +1:00", 7237, 1112),
-  (7, 3, "lorem, auctor quis, tristique ac, eleifend vitae, erat. Vivamus nisi. Mauris nulla. Integer urna. Vivamus molestie dapibus ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula. Nullam feugiat placerat velit. Quisque varius. Nam porttitor scelerisque neque. Nullam"                                                                , "2022-11-17 23:02:59  +9:00" , 9930, 1878),
-  (6, 1, "sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam ornare, libero at auctor ullamcorper,", "2023-03-01 04:41:22  +7:00" , 9058, 6259),
-  (1, 4, "malesuada fringilla est. Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper egestas, urna justo faucibus lectus, a sollicitudin orci sem eget massa. Suspendisse eleifend. Cras sed leo. Cras vehicula aliquet libero. Integer in magna. Phasellus"                                                  , "2023-05-03 19:57:31 +1:00", 5531, 2608),
-  (1, 2, "mattis semper, dui lectus rutrum urna, nec luctus felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis"                                                                                                                    , "2022-03-04 22:39:46 +5:00", 6934, 7686),
-  (5, 1, "Cras convallis convallis dolor. Quisque tincidunt pede ac urna. Ut tincidunt vehicula risus. Nulla eget metus eu erat"                                                                                                                                                                                                                                            , "2023-02-25 10:52:24 +1:00", 1617, 4357),
-  (1, 3, "eget massa. Suspendisse eleifend. Cras sed leo. Cras vehicula aliquet libero. Integer in magna. Phasellus dolor elit, pellentesque a, facilisis non, bibendum sed, est. Nunc laoreet lectus quis massa. Mauris"                                                                                                                                                   , "2023-03-07 00:09:53 +2:00", 1738, 4066),
-  (5, 1, "magna. Phasellus dolor elit, pellentesque a, facilisis non, bibendum sed,"                                                                                                                                                                                                                                                                                        , "2023-03-24 22:41:05 +2:00", 4111, 5300),
-  (7, 0, "nec luctus felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim,"                                                                                                                                                                                                                      , "2023-09-14 00:05:19  +8:00" , 4601, 4502);
-
-/*Purchase_book*/
-/*(id_purchase, id_book)*/
-/*40*/
-INSERT INTO purchase_book VALUES
-  (6457,5675),
-  (6319,7237),
-  (5911,9930),
-  (7600,9058),
-  (6605,5531),
-  (5143,6934),
-  (8716,1617),
-  (9028,1738),
-  (4585,4111),
-  (8364,4601);
-
-/*Delivery*/
-/*(id_delivery, arrival, delivery_address, cost, id_purchase)*/
-/*40*/
-INSERT INTO delivery VALUES
-  (2626, "2023-05-18 03:50:35  +0:00" , "335-2063 Ligula. St."        , "131.96", 1340),
-  (3638, "2023-09-09 10:14:51  +4:00" , "596-213 In St."              , "104.86", 1757),
-  (1029, "2023-06-28 03:00:56  +9:00" , "432-7822 Parturient Av."     , "104.80", 9731),
-  (8297, "2022-08-27 12:03:07  +3:00" , "979-3302 Suspendisse Road"   , "174.59", 5930),
-  (6032, "2023-01-26 05:53:02 +10:00", "257-1328 Sed Road"           , "156.08", 7683),
-  (9842, "2022-10-26 04:46:01  +4:00" , "Ap #490-8898 Eleifend Ave"   , "54.71" , 7724),
-  (3314, "2023-02-18 11:06:34  +1:00" , "Ap #132-901 Pellentesque St.", "146.63", 3006),
-  (5034, "2023-02-16 00:21:30 +13:00", "Ap #912-1067 Tempor Av."     , "68.53" , 9888),
-  (4490, "2023-07-08 20:19:33  +1:00" , "Ap #336-634 Pede, Street"    , "193.12", 3450),
-  (8828, "2023-07-13 04:37:46  +0:00" , "385-9529 Placerat Road"      , "122.76", 8632);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (1 , 'aliquam arcu. Aliquam ultrices iaculis odio.'     , 5351034105, 1918, '112.90', 5 , 5, 'est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor.'                                                                                                                                                                                                                                                                                , 1 , 1 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (2 , 'dolor. Donec fringilla. Donec feugiat metus'      , 4733319526, 1970, '162.18', 29, 6, 'commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at'                                                                                                                                                                                      , 2 , 2 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (3 , 'ornare, elit elit fermentum risus, at'            , 3638368148, 2022, '7.07'  , 4 , 0, 'nulla. In tincidunt congue turpis. In condimentum. Donec at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque scelerisque dui. Suspendisse ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris erat eget ipsum. Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat.'                                                                  , 3 , 3 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (4 , 'egestas a, dui. Cras pellentesque. Sed'           , 1559765489, 1962, '111.84', 30, 4, 'eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida. Praesent eu nulla at sem molestie sodales. Mauris blandit enim consequat purus. Maecenas libero est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum.'                                                                                                                                                                                                 , 4 , 4 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (5 , 'Quisque tincidunt pede ac urna. Ut'               , 7100265623, 2022, '55.89' , 18, 3, 'sit amet ornare lectus justo eu arcu. Morbi sit amet massa. Quisque porttitor eros nec tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec, diam. Duis mi enim, condimentum eget, volutpat ornare, facilisis eget, ipsum. Donec sollicitudin adipiscing ligula. Aenean gravida nunc sed pede. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque'                                                                                                                               , 5 , 5 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (6 , 'libero. Proin mi. Aliquam gravida mauris'         , 3985700232, 2007, '177.01', 2 , 7, 'tempor lorem, eget mollis lectus pede et risus. Quisque libero lacus, varius et, euismod et, commodo at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut dolor dapibus gravida.'                                                                                                                                                                                      , 6 , 6 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (7 , 'orci lacus vestibulum lorem, sit amet'            , 7807449319, 1948, '179.27', 1 , 2, 'ut, nulla. Cras eu tellus eu augue porttitor interdum. Sed auctor odio a purus. Duis elementum, dui quis accumsan convallis, ante lectus convallis est, vitae sodales nisi magna sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est'                                                                                                                          , 7 , 7 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (8 , 'vel est tempor bibendum. Donec felis'             , 7155626270, 1904, '39.49' , 37, 7, 'bibendum. Donec felis orci, adipiscing non, luctus sit amet, faucibus ut, nulla. Cras eu tellus eu augue porttitor interdum. Sed auctor odio a purus. Duis elementum, dui quis accumsan convallis, ante lectus convallis est, vitae sodales nisi magna sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est ac mattis semper, dui'                              , 8 , 8 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (9 , 'ultricies sem magna nec quam. Curabitur'          , 6001574761, 1925, '152.70', 23, 4, 'Duis dignissim tempor arcu. Vestibulum ut eros non enim commodo hendrerit. Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus leo, in lobortis'                                                                                                                                          , 9 , 9 );
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (10, 'ornare, lectus ante dictum mi, ac'                , 1009054957, 2017, '92.34' , 23, 7, 'ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In mi pede, nonummy ut, molestie in, tempus eu, ligula. Aenean euismod mauris eu elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit'                                                                                                                                                                                                      , 10, 10);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (11, 'mi lorem, vehicula et, rutrum eu,'                , 4021295362, 1902, '115.63', 10, 7, 'enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo. Praesent'                                                                                                                                                                                 , 11, 11);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (12, 'habitant morbi tristique senectus et netus'       , 2296228739, 1955, '87.29' , 36, 2, 'ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas. Aliquam nec enim. Nunc ut erat. Sed nunc est, mollis non, cursus non, egestas a, dui. Cras pellentesque. Sed dictum. Proin eget odio.'                                                                                                                                                                                                                                                                    , 12, 12);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (13, 'viverra. Donec tempus, lorem fringilla ornare'    , 4165265219, 1963, '190.06', 15, 9, 'eu tempor erat neque non quam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna, malesuada vel, convallis in, cursus et, eros. Proin ultrices. Duis volutpat'                                                                                                                                                                                                                                                                    , 13, 13);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (14, 'blandit congue. In scelerisque scelerisque dui.'  , 1387719406, 1953, '118.66', 37, 2, 'accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis velit justo nec ante. Maecenas mi felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh dolor, nonummy ac, feugiat non, lobortis quis, pede. Suspendisse'                                                                                                                                      , 14, 14);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (15, 'mattis ornare, lectus ante dictum mi,'            , 4626286507, 1910, '189.28', 25, 2, 'a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis.'                                                                                                                                                                                                                                                                         , 15, 15);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (16, 'ultricies dignissim lacus. Aliquam rutrum lorem'  , 6780079320, 1926, '104.15', 28, 2, 'In at pede. Cras vulputate velit eu sem. Pellentesque ut ipsum ac mi eleifend egestas. Sed pharetra, felis eget varius ultrices, mauris ipsum porta elit, a feugiat tellus lorem eu metus. In lorem. Donec elementum, lorem ut aliquam iaculis, lacus pede sagittis augue, eu tempor erat'                                                                                                                                                                                                                                                                                      , 16, 16);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (17, 'urna suscipit nonummy. Fusce fermentum fermentum' , 8775074045, 1910, '6.44'  , 3 , 2, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eget magna. Suspendisse tristique neque venenatis lacus. Etiam bibendum fermentum metus. Aenean sed pede nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'                                                                                                                 , 17, 17);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (18, 'Duis mi enim, condimentum eget, volutpat'         , 6101435705, 1927, '37.27' , 29, 3, 'sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam'                                                                                                                                                                          , 18, 18);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (19, 'id, blandit at, nisi. Cum sociis'                 , 3523753213, 1934, '84.92' , 17, 4, 'commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget mollis lectus pede et risus. Quisque libero lacus, varius et, euismod et, commodo at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt,'                                                                 , 19, 19);
+INSERT INTO offtheshelf.book(id_book, title, isbn, year, price, stock, book_edition, book_description, id_category, id_publisher) VALUES (20, 'iaculis quis, pede. Praesent eu dui.'             , 5100753229, 1964, '171.18', 12, 3, 'Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo.'                                                                                                                                                                                                         , 20, 20);
 
 /*Wishlist*/
 /*(id_user, id_book)*/
 /*20*/
-INSERT INTO wishlist VALUES
-  (7814,5675),
-  (1112,7237),
-  (1878,9930),
-  (6259,9058),
-  (2608,5531),
-  (7686,6934),
-  (4357,1617),
-  (4066,1738),
-  (5300,4111),
-  (4502,4601);
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (1 ,1 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (2 ,2 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (3 ,3 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (4 ,4 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (5 ,5 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (6 ,6 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (7 ,7 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (8 ,8 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (9 ,9 );
+INSERT INTO offtheshelf.wishlist(id_user, id_book) VALUES (10,10);
 
 /*Cart*/
 /*(id_user, id_book)*/
 /*20*/
-INSERT INTO cart VALUES
-  (7814,5675),
-  (1112,7237),
-  (1878,9930),
-  (6259,9058),
-  (2608,5531),
-  (7686,6934),
-  (4357,1617),
-  (4066,1738),
-  (5300,4111),
-  (4502,4601);
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (1 ,1 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (2 ,2 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (3 ,3 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (4 ,4 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (5 ,5 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (6 ,6 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (7 ,7 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (8 ,8 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (9 ,9 );
+INSERT INTO offtheshelf.cart(id_user, id_book) VALUES (10,10);
+
+/*Purchase*/
+/*(id_purchase, purchase_date, id_user, state_purchase)*/
+/*10*/
+INSERT INTO offtheshelf.purchase(id_purchase, purchase_date, id_user, state_purchase) VALUES (1 ,'2022-07-13 14:03:42 +9:00',1 , 'Received');
+INSERT INTO offtheshelf.purchase(id_purchase, purchase_date, id_user, state_purchase) VALUES (2 ,'2022-01-30 09:05:56 +8:00',2 , 'Received');
+INSERT INTO offtheshelf.purchase(id_purchase, purchase_date, id_user, state_purchase) VALUES (3 ,'2021-12-22 22:21:03 -4:00',3 , 'Received');
+INSERT INTO offtheshelf.purchase(id_purchase, purchase_date, id_user, state_purchase) VALUES (4 ,'2021-04-04 12:17:47 -4:00',4 , 'Received');
+INSERT INTO offtheshelf.purchase(id_purchase, purchase_date, id_user, state_purchase) VALUES (5 ,'2021-07-04 01:43:53 -8:00',5 , 'Dispatched');
+
+/*Photo*/
+/*(id_photo, photo_image, id_book, id_user, id_admin)*/
+/*40*/
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (1 , 'https://', 1 , 1 , 1 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (2 , 'https://', 2 , 2 , 2 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (3 , 'https://', 3 , 3 , 3 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (4 , 'https://', 4 , 4 , 4 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (5 , 'http://' , 5 , 5 , 5 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (6 , 'https://', 6 , 6 , 6 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (7 , 'https://', 7 , 7 , 7 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (8 , 'http://' , 8 , 8 , 8 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (9 , 'https://', 9 , 9 , 9 );
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (10, 'http://' , 10, 10, 10);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (11, 'http://' , 11, 11, 11);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (12, 'http://' , 12, 12, 12);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (13, 'http://' , 13, 13, 13);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (14, 'http://' , 14, 14, 14);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (15, 'http://' , 15, 15, 15);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (16, 'https://', 16, 16, 16);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (17, 'http://' , 17, 17, 17);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (18, 'http://' , 18, 18, 18);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (19, 'http://' , 19, 19, 19);
+INSERT INTO offtheshelf.photo(id_photo, photo_image, id_book, id_user, id_admin) VALUES (20, 'https://', 20, 20, 20);
+
+/*Book_Author*/
+/*(id_book, id_author)*/
+/*40*/
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (1 ,1 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (2 ,2 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (3 ,3 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (4 ,4 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (5 ,5 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (6 ,6 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (7 ,7 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (8 ,8 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (9 ,9 );
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (10,10);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (11,11);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (12,12);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (13,13);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (14,14);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (15,15);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (16,16);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (17,17);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (18,18);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (19,19);
+INSERT INTO offtheshelf.book_author(id_book, id_author) VALUES (20,20);
+
+/*Book_Collection*/
+/*(id_book, id_collection)*/
+/*40*/
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (1 ,1 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (2 ,2 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (3 ,3 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (4 ,4 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (5 ,5 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (6 ,6 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (7 ,7 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (8 ,8 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (9 ,9 );
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (10,10);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (11,11);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (12,12);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (13,13);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (14,14);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (15,15);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (16,16);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (17,17);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (18,18);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (19,19);
+INSERT INTO offtheshelf.book_collection(id_book, id_collection) VALUES (20,20);
+
+/*Review*/
+/*(id_review, rating, comment, review_date, id_book, id_user)*/
+/*40*/
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (1 , 2, 'Mauris nulla. Integer urna. Vivamus molestie dapibus ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula. Nullam feugiat placerat'                                                                                                                                                                                                     , '2022-03-11 08:27:08  +8:00', 1 , 1 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (2 , 3, 'neque. Sed eget lacus. Mauris non dui nec urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum'                                                                                                                                                                                                                                                      , '2022-12-23 23:36:01 +1:00' , 2 , 2 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (3 , 3, 'lorem, auctor quis, tristique ac, eleifend vitae, erat. Vivamus nisi. Mauris nulla. Integer urna. Vivamus molestie dapibus ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula. Nullam feugiat placerat velit. Quisque varius. Nam porttitor scelerisque neque. Nullam'                                                                , '2022-11-17 23:02:59  +9:00', 3 , 3 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (4 , 1, 'sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam ornare, libero at auctor ullamcorper,', '2023-03-01 04:41:22  +7:00', 4 , 4 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (5 , 4, 'malesuada fringilla est. Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper egestas, urna justo faucibus lectus, a sollicitudin orci sem eget massa. Suspendisse eleifend. Cras sed leo. Cras vehicula aliquet libero. Integer in magna. Phasellus'                                                  , '2023-05-03 19:57:31 +1:00' , 5 , 5 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (6 , 2, 'mattis semper, dui lectus rutrum urna, nec luctus felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis'                                                                                                                    , '2022-03-04 22:39:46 +5:00' , 6 , 6 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (7 , 1, 'Cras convallis convallis dolor. Quisque tincidunt pede ac urna. Ut tincidunt vehicula risus. Nulla eget metus eu erat'                                                                                                                                                                                                                                            , '2023-02-25 10:52:24 +1:00' , 7 , 7 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (8 , 3, 'eget massa. Suspendisse eleifend. Cras sed leo. Cras vehicula aliquet libero. Integer in magna. Phasellus dolor elit, pellentesque a, facilisis non, bibendum sed, est. Nunc laoreet lectus quis massa. Mauris'                                                                                                                                                   , '2023-03-07 00:09:53 +2:00' , 8 , 8 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (9 , 1, 'magna. Phasellus dolor elit, pellentesque a, facilisis non, bibendum sed,'                                                                                                                                                                                                                                                                                        , '2023-03-24 22:41:05 +2:00' , 9 , 9 );
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (10, 0, 'nec luctus felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim,'                                                                                                                                                                                                                      , '2023-09-14 00:05:19  +8:00', 10, 10);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (11, 4, 'vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'                                            , '2021-12-31 06:21:17  +1:00', 11, 11);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (12, 5, 'velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper egestas, urna justo faucibus lectus,'                                                                                                                                                                                                                                                    , '2023-06-05 06:09:36 +3:00' , 12, 12);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (13, 1, 'ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis'                                     , '2021-12-25 20:24:57  +6:00', 13, 13);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (14, 1, 'Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend'                                                                                                                                                                                                                                                                                 , '2021-12-09 03:57:43 +1:00' , 14, 14);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (15, 3, 'egestas nunc sed libero. Proin sed turpis nec mauris blandit mattis.'                                                                                                                                                                                                                                                                                             , '2023-03-14 12:21:30  +6:00', 15, 15);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (16, 4, 'Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque scelerisque dui. Suspendisse ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris'                                                                                                                                  , '2022-03-24 05:22:52 +10:00', 16, 16);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (17, 2, 'erat volutpat. Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget'                                                                                                                                                                                                 , '2022-02-19 03:49:33 +11:00', 17, 17);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (18, 4, 'tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est ac mattis semper, dui lectus rutrum urna, nec luctus felis purus ac tellus. Suspendisse sed dolor. Fusce'                     , '2021-12-31 05:55:52  +9:00', 18, 18);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (19, 3, 'Duis gravida. Praesent eu nulla at sem molestie sodales. Mauris blandit'                                                                                                                                                                                                                                                                                          , '2023-10-12 00:16:35 +11:00', 19, 19);
+INSERT INTO offtheshelf.review(id_review, rating, comment, review_date, id_book, id_user) VALUES (20, 4, 'quam quis diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce aliquet magna a neque. Nullam ut nisi a odio semper cursus. Integer mollis. Integer tincidunt aliquam arcu.'                                                                                                                                  , '2021-11-01 15:40:53 +11:00', 20, 20);
+
+/*Purchase_book*/
+/*(id_purchase, id_book)*/
+/*40*/
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (1 ,1 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (2 ,2 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (3 ,3 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (4 ,4 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (5 ,5 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (6 ,6 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (7 ,7 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (8 ,8 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (9 ,9 );
+INSERT INTO offtheshelf.purchase_book(id_purchase, id_book) VALUES (10,10);
+
+/*Delivery*/
+/*(id_delivery, arrival, delivery_address, cost, id_purchase)*/
+/*40*/
+INSERT INTO offtheshelf.delivery(id_delivery, arrival, delivery_address, cost, id_purchase) VALUES (1 , '2023-05-18 03:50:35  +0:00', '335-2063 Ligula. St.'        , '131.96', 1 );
+INSERT INTO offtheshelf.delivery(id_delivery, arrival, delivery_address, cost, id_purchase) VALUES (2 , '2023-09-09 10:14:51  +4:00', '596-213 In St.'              , '104.86', 2 );
+INSERT INTO offtheshelf.delivery(id_delivery, arrival, delivery_address, cost, id_purchase) VALUES (3 , '2023-06-28 03:00:56  +9:00', '432-7822 Parturient Av.'     , '104.80', 3 );
+INSERT INTO offtheshelf.delivery(id_delivery, arrival, delivery_address, cost, id_purchase) VALUES (4 , '2022-08-27 12:03:07  +3:00', '979-3302 Suspendisse Road'   , '174.59', 4 );
+INSERT INTO offtheshelf.delivery(id_delivery, arrival, delivery_address, cost, id_purchase) VALUES (5 , '2023-01-26 05:53:02 +10:00', '257-1328 Sed Road'           , '156.08', 5 );
 
 -- removed for brevity
 
