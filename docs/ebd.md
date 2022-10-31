@@ -251,7 +251,7 @@ Performance indexes are applied to improve the performance of select queries. Th
 | **Clustering**      | No                |
 | **Justification**   | Table ‘purchase’ is frequently accessed to view a user’s purchase history. Filtering is done by exact match, thus an hash type is best suited. Expected update frequency is medium, so no clustering is proposed.   |
 ```sql
-CREATE INDEX user_purchase ON purchase USING hash (id_user);
+CREATE INDEX user_purchase ON offtheshelf.purchase USING hash (id_user);
 ```
 
 | **Index**           | IDX02                                  |
@@ -263,8 +263,8 @@ CREATE INDEX user_purchase ON purchase USING hash (id_user);
 | **Clustering**      | Yes               |
 | **Justification**   | The action of getting the books of a chosen category is quite frequent. Filtering is done by exact match, thus an hash type index would be best suited. However, since we also want to apply clustering based on this index, and clustering is not possible on hash type indexes, we opted for a b-tree index. Update frequency is low and cardinality is medium so it's a good candidate for clustering.   |
 ```sql
-CREATE INDEX book_category ON book USING btree (id_category);
-CLUSTER book USING book_category;
+CREATE INDEX book_category ON offtheshelf.book USING btree (id_category);
+CLUSTER offtheshelf.book USING book_category;
 ```
 
 | **Index**           | IDX03                                  |
@@ -276,7 +276,7 @@ CLUSTER book USING book_category;
 | **Clustering**      | No               |
 | **Justification**   | Table ‘review’ is frequently accessed to obtain a book’s reviews. Filtering is done by exact match, thus an hash type is best suited. For clustering on table ‘review’, id_book is the most interesting since obtaining the reviews for a given book is a frequent request. However, expected update frequency is medium, so no clustering is proposed.   |
 ```sql
-CREATE INDEX book_review ON review USING hash (id_book);
+CREATE INDEX book_review ON offtheshelf.review USING hash (id_book);
 ```
 
 #### 2.2. Full-text Search Indices 
@@ -292,11 +292,11 @@ Full-text search indexes are applied to provide keyword based search over record
 | **Justification**   | To provide full-text search features to look for works based on matching titles. The index type is GIN because the indexed fields are not expected to change often.  |
 ```sql
 -- Add column to book to store computed ts_vectors.
-ALTER TABLE book
+ALTER TABLE offtheshelf.book
 ADD COLUMN tsvectors TSVECTOR;
 
 -- Create a function to automatically update ts_vectors.
-CREATE FUNCTION book_search_update() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION book_search_update() RETURNS TRIGGER AS $$
 BEGIN
  IF TG_OP = 'INSERT' THEN
         NEW.tsvectors = (
@@ -316,13 +316,13 @@ LANGUAGE plpgsql;
 
 -- Create a trigger before insert or update on book.
 CREATE TRIGGER book_search_update
- BEFORE INSERT OR UPDATE ON book
+ BEFORE INSERT OR UPDATE ON offtheshelf.book
  FOR EACH ROW
  EXECUTE PROCEDURE book_search_update();
 
 
 -- Finally, create a GIN index for ts_vectors.
-CREATE INDEX search_idx ON work USING GIN (tsvectors);
+CREATE INDEX search_idx ON offtheshelf.book USING GIN (tsvectors);
 ```
 
 ### 3. Triggers
@@ -333,10 +333,10 @@ Triggers and user defined functions are used to automate tasks depending on chan
 | ---              | ---                                    |
 | **Description**  | A book whose stock is non-positive cannot be purchased. |
 ```sql
-CREATE FUNCTION book_available() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION book_available() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT * FROM book WHERE id_book = NEW.id_book AND stock = 0) THEN
+        IF EXISTS (SELECT * FROM offtheshelf.book WHERE id_book = NEW.id_book AND stock = 0) THEN
            RAISE EXCEPTION 'This book is out of stock.';
         END IF;
         RETURN NEW;
@@ -345,7 +345,7 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER book_available
-        BEFORE INSERT ON purchase_book
+        BEFORE INSERT ON offtheshelf.purchase_book
         FOR EACH ROW
         EXECUTE PROCEDURE book_available();
 ```
@@ -354,18 +354,18 @@ CREATE TRIGGER book_available
 | ---              | ---                                    |
 | **Description**  | A book's stock decreases by 1 after a single purchase.  |
 ```sql
-CREATE FUNCTION book_purchased() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION book_purchased() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        UPDATE book
+        UPDATE offtheshelf.book
         SET stock = stock - 1
-        WHERE "id_book" = NEW."id_book"
+        WHERE "id_book" = NEW."id_book";
 END
 $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER book_purchased
-        AFTER INSERT ON purchase_book
+        AFTER INSERT ON offtheshelf.purchase_book
         EXECUTE PROCEDURE book_purchased();
 ```
 
@@ -373,18 +373,18 @@ CREATE TRIGGER book_purchased
 | ---              | ---                                    |
 | **Description**  | A book is removed from an user's wishlist after the user adds it to the shopping cart.  |
 ```sql
-CREATE FUNCTION wishlist_to_cart() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION wishlist_to_cart() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        DELETE FROM wishlist
+        DELETE FROM offtheshelf.wishlist
         WHERE "id_user" = NEW."id_user"
-        AND "id_book" = NEW."id_book"
+        AND "id_book" = NEW."id_book";
 END
 $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER wishlist_to_cart 
-        AFTER INSERT ON cart
+        AFTER INSERT ON offtheshelf.cart
         EXECUTE PROCEDURE wishlist_to_cart();
 ```
 
@@ -392,17 +392,17 @@ CREATE TRIGGER wishlist_to_cart
 | ---              | ---                                    |
 | **Description**  | A book is removed from an user's shopping cart after the user purchases it.  |
 ```sql
-CREATE FUNCTION cart_purchased() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION cart_purchased() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        DELETE FROM cart
-        WHERE "id_user" = NEW."id_user"
+        DELETE FROM offtheshelf.cart
+        WHERE "id_user" = NEW."id_user";
 END
 $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER cart_purchased 
-        AFTER INSERT ON purchase
+        AFTER INSERT ON offtheshelf.purchase
         EXECUTE PROCEDURE cart_purchased();
 ```
 
@@ -410,10 +410,10 @@ CREATE TRIGGER cart_purchased
 | ---              | ---                                    |
 | **Description**  | A blocked user can't submit reviews.  |
 ```sql
-CREATE FUNCTION blocked_review() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION blocked_review() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT * FROM users WHERE id_user = NEW.id_user AND blocked = TRUE) THEN
+        IF EXISTS (SELECT * FROM offtheshelf.users WHERE id_user = NEW.id_user AND blocked = TRUE) THEN
            RAISE EXCEPTION 'Blocked users cannot submit reviews.';
         END IF;
         RETURN NEW;
@@ -422,7 +422,7 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER blocked_review
-        BEFORE INSERT ON review
+        BEFORE INSERT ON offtheshelf.review
         FOR EACH ROW
         EXECUTE PROCEDURE blocked_review();
 ```
@@ -431,10 +431,10 @@ CREATE TRIGGER blocked_review
 | ---              | ---                                    |
 | **Description**  | A blocked user can't purchase books.  |
 ```sql
-CREATE FUNCTION blocked_purchase() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION blocked_purchase() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT * FROM users WHERE id_user = NEW.id_user AND blocked = TRUE) THEN
+        IF EXISTS (SELECT * FROM offtheshelf.users WHERE id_user = NEW.id_user AND blocked = TRUE) THEN
            RAISE EXCEPTION 'Blocked users cannot purchase books.';
         END IF;
         RETURN NEW;
@@ -443,7 +443,7 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER blocked_purchase
-        BEFORE INSERT ON purchase
+        BEFORE INSERT ON offtheshelf.purchase
         FOR EACH ROW
         EXECUTE PROCEDURE blocked_purchase();
 ```
@@ -460,11 +460,11 @@ Transactions are used to assure the integrity of the data when multiple operatio
 BEGIN TRANSACTION; 
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
 
-SELECT collection_name from collections inner join book_collection, book
+SELECT collection_name from offtheshelf.collections inner join offtheshelf.book_collection, offtheshelf.book
     where stock != 0
     order by collection_name ASC LIMIT 5;
 
-SELECT title from book inner join cart
+SELECT title from offtheshelf.book inner join offtheshelf.cart
     where stock > 0
     order by title ASC;
 
@@ -479,9 +479,9 @@ END TRANSACTION;
 BEGIN TRANSACTION; 
 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 
-INSERT INTO users VALUES ($username, $email, $user_password, $user_address, $phone, $blocked);
+INSERT INTO offtheshelf.users VALUES ($username, $email, $user_password, $user_address, $phone, $blocked);
 
-INSERT INTO book VALUES ($title,  $isbn, $year, $price, $stock, $book_edition, $book_description, $id_category, $id_publisher);
+INSERT INTO offtheshelf.book VALUES ($title,  $isbn, $year, $price, $stock, $book_edition, $book_description, $id_category, $id_publisher);
 
 END TRANSACTION;
 ```
