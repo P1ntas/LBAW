@@ -119,10 +119,9 @@ This section contains business rules, technical requirements and other non-funct
 | Identifier | Name          | Description                                                                                                                             |
 |------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | BR01       | Admin         | Administrator accounts are independent of the user accounts, i.e. they cannot buy products.                                             |
-| BR02       | Username      | There can't be 2 or more users with the same username.                                                                                  |
-| BR03       | Book In Stock | A book can only be bought by a authenticated user if there's at least one available in stock.                                           |
-| BR04       | Review Score  | Buyers need to give a score to a book in order to submit a review.                                                                      |
-| BR05       | Book Info     | When looking at a specific book, the user should be able to see its author, publisher, year, price, a picture and a brief description.  |  
+| BR02       | Book In Stock | A book can only be bought by a authenticated user if there's at least one available in stock.                                           |
+| BR03       | Review Score  | Buyers need to give a score to a book in order to submit a review.                                                                      |
+| BR04       | Book Info     | When looking at a specific book, the user should be able to see its author, publisher, year, price, a picture and a brief description.  |  
 
 Table 7: Off The Shelf business rules.
 
@@ -209,8 +208,8 @@ Figure 3: User Profile wireframe.
 ## Revision history
 
 Changes made to the first submission:
-1. Item 1
-1. ...
+1. Business rule which stated usernames were unique was removed. 
+2. ...
 
 ***
 GROUP2232, DD/MM/2022
