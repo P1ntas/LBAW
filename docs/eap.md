@@ -38,24 +38,24 @@ This section defines the permissions used in the modules to establish the condit
 
 <table>
     <tr>
-        <td>PUB</td>
+        <td><b>PUB</b></td>
         <td>Public</td>
-        <td>Group of users without privileges.</td>
+        <td>Users without any privileges.</td>
     </tr>
     <tr>
-        <td>USR</td>
+        <td><b>USR</b></td>
         <td>User</td>
-        <td>Authenticated user.</td>
+        <td>Authenticated users.</td>
     </tr>
     <tr>
-        <td>OWN</td>
-        <td>Owner</td>
-        <td>Group of users that can update their profiles and have privileges regarding their purchases and reviews.</td>
+        <td><b>BYR</b></td>
+        <td>Buyer</td>
+        <td>Group of users that can update their profiles and have privileges regarding their purchases and reviews, as well as books added to their wishlists and carts.</td>
     </tr>
     <tr>
-        <td>ADM</td>
+        <td><b>ADM</b></td>
         <td>Administrator</td>
-        <td>Group of administrators.</td>
+        <td>System administrators, able to edit both products, users and system related information.</td>
     </tr>
 </table>
 
