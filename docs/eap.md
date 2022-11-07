@@ -2,17 +2,62 @@
 
 > Project vision.
 
-## A7: Web Resources Specification
+# A7: Web Resources Documentation
 
-> Brief presentation of the artefact's goals.
+This artifact documents the  architecture of the web application to be developed, indicating the catalog of resources, the properties of each resource, and the format of JSON responses. This specification adheres to the OpenAPI standard using YAML.
 
-### 1. Overview
+## 1. Overview
 
-> Identify and overview the modules that will be part of the application.  
+An overview of the web application to implement is presented in this section, where the modules are identified and briefly described. The web resources associated with each module are detailed in the individual documentation of each module inside the OpenAPI specification.
 
-### 2. Permissions
+<table>
+    <tr>
+        <td>M01: Authentication and Profile</td>
+        <td> Web resources associated with the user authentication and management. Includes features such as user information (and being able to edit it), registration and login/logout actions.</td>
+    </tr>
+    <tr>
+        <td>M02: Products and Categories</td>
+        <td>Web resources associated with the search, filtering and listing of the products available to the user. For administrator profiles, you'll also be able to edit and/or delete these items.</td>
+    </tr>
+    <tr>
+        <td>M03: Reviews, cart and Wishlist</td>
+        <td>Web resources associated with product's reviews. Users will be able to add, edit and remove reviews. If a user's profile gets deleted, the review will still be viewable with the **[Deleted]** tag instead of the username.</td>
+    </tr>
+    <td>M04: Cart, Wishlist and Collections</td>
+        <td>Web resources associated with product's attributes aggregations, such as cart and wishlist. Users will be able to add and remove products from their wishlist. If a book is no longer in the database, it will just disappear from the wishlist. The cart and the collections will have the same behaviour as the wishlist, with the exception of latter being only editable by administrators.</td>
+    </tr>
+    <tr>
+        <td>M05: Administration and Static Pages</td>
+        <td>Web resources associated with static content, such as: about, contact and faq. The administrator will not only be able to edit these pages, but will also manage users and products, as well as their respective information</td>
+    </tr>
+</table>
 
-> Define the permissions used by each module, necessary to access its data and features.  
+## 2. Permissions
+
+This section defines the permissions used in the modules to establish the conditions of access to resources.
+
+<table>
+    <tr>
+        <td>PUB</td>
+        <td>Public</td>
+        <td>Group of users without privileges.</td>
+    </tr>
+    <tr>
+        <td>USR</td>
+        <td>User</td>
+        <td>Authenticated user.</td>
+    </tr>
+    <tr>
+        <td>OWN</td>
+        <td>Owner</td>
+        <td>Group of users that can update their profiles and have privileges regarding their purchases and reviews.</td>
+    </tr>
+    <tr>
+        <td>ADM</td>
+        <td>Administrator</td>
+        <td>Group of administrators.</td>
+    </tr>
+</table>
 
 ### 3. OpenAPI Specification
 
