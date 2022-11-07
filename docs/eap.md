@@ -20,7 +20,7 @@ An overview of the web application to implement is presented in this section, wh
         <td>Web resources associated with the search, filtering and listing of the products available to the user. For administrator profiles, you'll also be able to edit and/or delete these items.</td>
     </tr>
     <tr>
-        <td>M03: Reviews, cart and Wishlist</td>
+        <td>M03: Reviews</td>
         <td>Web resources associated with product's reviews. Users will be able to add, edit and remove reviews. If a user's profile gets deleted, the review will still be viewable with the <b>[Deleted]</b> tag instead of the username.</td>
     </tr>
     <td>M04: Cart, Wishlist and Collections</td>
