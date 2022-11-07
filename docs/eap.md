@@ -21,7 +21,7 @@ An overview of the web application to implement is presented in this section, wh
     </tr>
     <tr>
         <td>M03: Reviews, cart and Wishlist</td>
-        <td>Web resources associated with product's reviews. Users will be able to add, edit and remove reviews. If a user's profile gets deleted, the review will still be viewable with the **[Deleted]** tag instead of the username.</td>
+        <td>Web resources associated with product's reviews. Users will be able to add, edit and remove reviews. If a user's profile gets deleted, the review will still be viewable with the <b>[Deleted]</b> tag instead of the username.</td>
     </tr>
     <td>M04: Cart, Wishlist and Collections</td>
         <td>Web resources associated with product's attributes aggregations, such as cart and wishlist. Users will be able to add and remove products from their wishlist. If a book is no longer in the database, it will just disappear from the wishlist. The cart and the collections will have the same behaviour as the wishlist, with the exception of latter being only editable by administrators.</td>
