@@ -178,7 +178,74 @@ paths:
          description: 'Ok. Show User Profile UI'
        '404':
           description: 'Not Found. Show 404 message'
- 
+
+   patch:
+      operationId: R107
+      summary: 'R107: Edit Profile'
+      description: 'Edit account information. Access: ACO'
+      tags:
+        - 'M01: Authentication and Profile'
+
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                user_password:
+                  type: string
+                user_address:
+                  type: string
+                phone:
+                  type: integer
+
+      responses:
+        '200':
+          description: 'Successful'
+        "401":
+          description: "Unauthorized"
+
+    delete:
+      operationId: R108
+      summary: 'R108: Delete Account'
+      description: 'Delete account. Access: ACO, ADM'
+      tags:
+        - 'M01: Authentication and Profile'
+
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Successful'
+
+  /settings:
+    get:
+      operationId: R109
+      summary: 'R109: View Account Settings'
+      description: 'Show account settings page. Access: ACO'
+      tags:
+        - 'M01: Authentication and Profile'
+
+      responses:
+        '200':
+          description: 'Successful'
+        "401":
+          description: "Unauthorized"
 
  /api/productsAndCategories:
    get:
