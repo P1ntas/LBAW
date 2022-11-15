@@ -247,6 +247,66 @@ paths:
         "401":
           description: "Unauthorized"
 
+    patch:
+      operationId: R110
+      summary: 'R110: Edit Account Settings. Access: ACO'
+      description: 'Edit account settings'
+      tags:
+        - 'M01: Authentication and Profile'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                allowNoti:
+                  type: boolean
+                commentNoti:
+                  type: boolean
+                PurchaseCompleted:
+                  type: boolean
+                Username:
+                  type: string
+                Email:
+                  type: string
+                Adress:
+                  type: string
+                Phone:
+                  type: integer
+                Password:
+                  type: string
+                blocked:
+                  type: boolean
+
+      responses:
+        '200':
+          description: 'Successful'
+        "401":
+          description: "Unauthorized"     
+
+  /avatars/{img}:
+    get:
+      operationId: R111
+      summary: 'R111: Get Avatar'
+      description: 'Get avatar image from local storage. Access: USR'
+      tags:
+        - 'M01: Authentication and Profile'
+
+      parameters:
+        - in: path
+          name: img
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Ok'
+        "404":
+          description: "Not Found" 
+
  /api/productsAndCategories:
    get:
      operationId: R201
@@ -314,3 +374,53 @@ paths:
                      type: string
        '400':
           description: Bad Request
+
+    post:
+      operationId: R202
+      summary: 'R202: Create Product'
+      description: 'Processes the product creation . Access: ADM'
+      tags:
+        - 'M02: Products and Categories'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                   id_book:
+                     type: integer
+                   title:
+                     type: string
+                   year:
+                     type: integer
+                   price:
+                     type: numeric
+                   book_description:
+                     type: string
+                   type:
+                     type: string
+                   publisher:
+                     type: string
+              required:
+                - id_book
+                - title
+                - year
+                - type
+                - publisher
+      
+        responses:
+        '302':
+          description: 'Redirect after processing the new product information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful creation. Redirect to product overview.'
+                  value: '/product/{id}/overview'
+                302Failure:
+                  description: 'Failed creation. Redirect to user dashboard.'
+                  value: '/dashboard'
