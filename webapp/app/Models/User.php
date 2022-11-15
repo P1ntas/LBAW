@@ -8,32 +8,61 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
-    // Don't add create and update timestamps in database.
+    public $table = 'offtheshelf.users';
     public $timestamps  = false;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
+    public $fillable = [
+        'username',
+        'email',
+        'user_password',
+        'user_address',
+        'phone',
+        'blocked'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    protected $casts = [
+        'id_user' => 'integer',
+        'username' => 'text',
+        'email' => 'text',
+        'user_password' => 'text',
+        'user_address' => 'address',
+        'phone' => 'char',
+        'blocked' => 'boolean'
+    ];
+
     protected $hidden = [
-        'password', 'remember_token',
+        'user_password', 'remember_token',
     ];
 
-    /**
-     * The cards this user owns.
-     */
-     public function cards() {
-      return $this->hasMany('App\Models\Card');
+    public static $rules = [
+        // rules
+    ];
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(\App\Models\Book::class, 'offtheshelf.wishlist');
+    }
+
+    public function carts()
+    {
+        return $this->belongsToMany(\App\Models\Book::class, 'offtheshelf.cart');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(\App\Models\Review::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(\App\Models\Purchase::class);
+    }
+
+    public function photo()
+    {
+        return $this->hasOne(\App\Models\Photo::class);
+    }
+
+    public function isBlocked() {
+        return $this->blocked;
     }
 }
