@@ -1,24 +1,24 @@
 openapi: 3.0.0
 
 info:
- version: '1.0'
- title: 'LBAW Off The Shelf Web API'
- description: 'Web Resources Specification (A7) for Off The Shelf'
+  version: '1.0'
+  title: 'LBAW Off The Shelf Web API'
+  description: 'Web Resources Specification (A7) for Off The Shelf'
 
 servers:
 - url: http://lbaw.fe.up.pt
- description: Production server
+  description: Production server
 
 externalDocs:
- description: Find more info here.
- url: https://web.fe.up.pt/~ssn/wiki/teach/lbaw/medialib/a07
+  description: Find more info here.
+  url: 
 
 tags:
- - name: 'M01: Authentication and Profile'
- - name: 'M02: Products and Categories'
- - name: 'M03: Reviews'
- - name: 'M04: Cart, Wishlist and Collections'
- - name: 'M05: Administration and Static Pages'
+  - name: 'M01: Authentication and Profile'
+  - name: 'M02: Products and Categories'
+  - name: 'M03: Reviews'
+  - name: 'M04: Cart, Wishlist and Collections'
+  - name: 'M05: Administration and Static Pages'
 
 paths:
  /login:
