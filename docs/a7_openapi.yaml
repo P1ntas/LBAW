@@ -424,3 +424,611 @@ paths:
                 302Failure:
                   description: 'Failed creation. Redirect to user dashboard.'
                   value: '/dashboard'
+
+ /api/productsAndCategories/{id}:
+    get:
+      operationId: R203
+      summary: 'R203: Get Product Information'
+      description: "Get product information as JSON. Access: RDR"
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              properties:
+                   id_book:
+                     type: integer
+                   title:
+                     type: string
+                   year:
+                     type: integer
+                   price:
+                     type: numeric
+                   book_description:
+                     type: string
+                   type:
+                     type: string
+                   publisher:
+                     type: string
+              required:
+                - id_book
+                - title
+                - year
+                - type
+                - publisher
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+    delete:
+      operationId: R204
+      summary: 'R204: Delete Product'
+      description: 'Delete a product. Access: RDR'
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after processing the deletion request.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful. Redirect to user dashboard.'
+                  value: '/dashboard'
+                302Failure:
+                  description: 'Failed. Redirect to user dashboard.'
+                  value: '/dashboard'
+        "400":
+          description: "Bad Request. Must have at least one owner in the project"
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+    patch:
+      operationId: R205
+      summary: 'R205: Update Product'
+      description: 'Processes the product attributes. Access: OWN'
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+                 properties:
+                   id_book:
+                     type: integer
+                   title:
+                     type: string
+                   year:
+                     type: integer
+                   price:
+                     type: numeric
+                   book_description:
+                     type: string
+                   type:
+                     type: string
+                   publisher:
+                     type: string
+
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+ /api/productsAndCategories/{id}/book:
+    get:
+      operationId: R206
+      summary: "R206: Search Books"
+      description: "Searches for books and returns the results as JSON. Access: RDR"
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: query
+          description: String to use for full-text search
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: category
+          description: Category of the tasks
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: status
+          description: Status of the tasks
+          schema:
+            type: string
+            enum: ['Waiting', 'Not Started', 'In Progress', 'Completed']
+          required: false
+
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                 properties:
+                   id_book:
+                     type: integer
+                   title:
+                     type: string
+                   year:
+                     type: integer
+                   price:
+                     type: numeric
+                   book_description:
+                     type: string
+                   type:
+                     type: string
+                   publisher:
+                     type: string
+        '400':
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+    post:
+      operationId: R207
+      summary: 'R207: Create Book'
+      description: 'Processes the task creation form submission. Access: EDT'
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+                 properties:
+                   id_book:
+                     type: integer
+                   title:
+                     type: string
+                   year:
+                     type: integer
+                   price:
+                     type: numeric
+                   book_description:
+                     type: string
+                   type:
+                     type: string
+                   publisher:
+                     type: string
+
+      responses:
+        '302':
+          description: 'Redirect after processing the new task information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful creation. Redirect to task card.'
+                  value: '/project/{id}/overview'
+                302Failure:
+                  description: 'Failed creation. Redirect to project dashboard.'
+                  value: '/project/{id}/overview'
+        '400':
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+ /api/productsAndCategories/{id}/book/{book}/category:
+    post:
+      operationId: R208
+      summary: 'R208: Add a category'
+      description: 'Add a category to a task. Access: EDT'
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: query
+          schema:
+            type: string
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: integer
+              required:
+                - tag
+
+      responses:
+        "200":
+          description: "OK"
+        "403":
+          description: "Forbidden access"
+        "404":
+          description: "Tag not found"
+    
+    delete:
+      operationId: R209
+      summary: 'R209: Delete Category'
+      description: 'Delete a category. Access: RDR'
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after processing the deletion request.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful. Redirect to user dashboard.'
+                  value: '/dashboard'
+                302Failure:
+                  description: 'Failed. Redirect to user dashboard.'
+                  value: '/dashboard'
+        "400":
+          description: "Bad Request. Must have at least one owner in the project"
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+    patch:
+      operationId: R210
+      summary: 'R210: Update Category'
+      description: 'Processes the category attributes. Access: OWN'
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+                 properties:
+                tag:
+                  type: integer
+              required:
+                - tag
+
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+ /api/productsAndCategories/{id}/book/{task}/comment:
+    post:
+      operationId: R210
+      summary: 'R210: Add a comment'
+      description: 'Add a comment to a book. Access: RDR'
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                parent:
+                  type: integer
+              required:
+                - comment
+
+      responses:
+        "200":
+          description: "OK"
+        "403":
+          description: "Forbidden access"
+        "404":
+          description: "Tag not found"
+ 
+    delete:
+      operationId: R211
+      summary: 'R211: Delete a comment'
+      description: 'Delete a comment. Access: RDR'
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after processing the deletion request.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful. Redirect to user dashboard.'
+                  value: '/dashboard'
+                302Failure:
+                  description: 'Failed. Redirect to user dashboard.'
+                  value: '/dashboard'
+        "400":
+          description: "Bad Request. Must have at least one owner in the project"
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+    patch:
+      operationId: R212
+      summary: 'R212: Update Comment'
+      description: 'Processes the comment changes. Access: OWN'
+      tags:
+        - 'M02: Products and Categories'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+                 properties:
+                tag:
+                  type: integer
+              required:
+                - tag
+
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+ /api/productsAndCategories/{id}/book/{task}/review:
+    post:
+      operationId: R301
+      summary: 'R301: Add a review'
+      description: 'Add a review to a book. Access: RDR'
+      tags:
+        - 'M03: Reviews'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                parent:
+                  type: integer
+              required:
+                - comment
+
+      responses:
+        "200":
+          description: "OK"
+        "403":
+          description: "Forbidden access"
+        "404":
+          description: "Tag not found"
+    
+    delete:
+      operationId: R302
+      summary: 'R302: Delete Review'
+      description: 'Delete a review. Access: RDR'
+      tags:
+        - 'M03: Reviews'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after processing the deletion request.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful. Redirect to user dashboard.'
+                  value: '/dashboard'
+                302Failure:
+                  description: 'Failed. Redirect to user dashboard.'
+                  value: '/dashboard'
+        "400":
+          description: "Bad Request. Must have at least one owner in the project"
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+    patch:
+      operationId: R303
+      summary: 'R303: Update Review'
+      description: 'Processes the review changes. Access: OWN'
+      tags:
+        - 'M03: Reviews'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+                 properties:
+                comment:
+                  type: string
+                parent:
+                  type: integer
+              required:
+                - comment
+
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+ /faqs:
+    get:
+      operationId: R401
+      summary: 'R401: View Faqs Page'
+      description: "View Frequently Asked Questions page. Access: PUB"
+      tags:
+        - 'M04: Administration and Static Pages'
+
+      responses:
+        '200':
+          description: 'OK. Show '
+
+ /admin/users:
+    get:
+      operationId: R402
+      summary: 'R402: View User Management page'
+      description: "View user management page. Access: ADM"
+      tags:
+        - 'M04: Administration and Static pages'
+
+      responses:
+        '200':
+          description: 'OK. Show [UI17](https://git.fe.up.pt/lbaw/lbaw2021/lbaw2134/-/wikis/ER#ui17-admin-manage-users)'
+        "403":
+          description: "Forbidden access"
