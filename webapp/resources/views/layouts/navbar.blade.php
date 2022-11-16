@@ -14,12 +14,12 @@
             <div>
               <a href="{{ URL::to('/') }}">Books</a>
               <a href="{{ URL::to('/') }}">My Profile</a>
-              <a href=
+              <a href="{{ route('logout') }}"
                  onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
               </a>
-              <form id="logout-form" action="{{ URL::to('/') }}" method="POST" style="display: none;">
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
               </form>
             </div>
