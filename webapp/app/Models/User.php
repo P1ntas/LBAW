@@ -11,9 +11,9 @@ class User extends Authenticatable
     public $table = 'users';
     public $timestamps  = false;
     public $fillable = [
-        'username',
+        'name',
         'email',
-        'user_password',
+        'password',
         'user_address',
         'phone',
         'blocked'
@@ -21,16 +21,16 @@ class User extends Authenticatable
 
     protected $casts = [
         'id_user' => 'integer',
-        'username' => 'text',
+        'name' => 'text',
         'email' => 'text',
-        'user_password' => 'text',
+        'password' => 'text',
         'user_address' => 'address',
         'phone' => 'char',
         'blocked' => 'boolean'
     ];
 
     protected $hidden = [
-        'user_password', 'remember_token',
+        'password', 'remember_token',
     ];
 
     public static $rules = [
