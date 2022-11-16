@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\Admin as Authenticatable;
 class Admin extends Authenticatable
 {
     use Notifiable;
-    public $table = 'offtheshelf.admins';
+    public $table = 'admins';
     public $timestamps  = false;
     public $fillable = [
         'admin_name',

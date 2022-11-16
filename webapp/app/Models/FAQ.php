@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FAQ extends Model
 {
-    public $table = 'offtheshelf.faq';
+    public $table = 'faq';
     public $timestamps  = false;
 
     protected $casts = [

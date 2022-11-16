@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
-    public $table = 'offtheshelf.photo';
+    public $table = 'photo';
     public $timestamps  = false;
     public $fillable = [
         'photo_image',

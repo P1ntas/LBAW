@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    public $table = 'offtheshelf.book';
+    public $table = 'book';
     public $timestamps  = false;
     public $fillable = [
         'title',
@@ -49,27 +49,27 @@ class Book extends Model
 
     public function authors()
     {
-        return $this->belongsToMany(\App\Models\Author::class, 'offtheshelf.book_author');
+        return $this->belongsToMany(\App\Models\Author::class, 'book_author');
     }
 
     public function collections()
     {
-        return $this->belongsToMany(\App\Models\Collection::class, 'offtheshelf.book_collection');
+        return $this->belongsToMany(\App\Models\Collection::class, 'book_collection');
     }
 
     public function purchases()
     {
-        return $this->belongsToMany(\App\Models\Purchase::class, 'offtheshelf.purchase_book');
+        return $this->belongsToMany(\App\Models\Purchase::class, 'purchase_book');
     }
 
     public function wishlists()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'offtheshelf.wishlist');
+        return $this->belongsToMany(\App\Models\User::class, 'wishlist');
     }
 
     public function carts()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'offtheshelf.cart');
+        return $this->belongsToMany(\App\Models\User::class, 'cart');
     }
 
     public function photos()

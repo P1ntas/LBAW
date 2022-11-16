@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
-    public $table = 'offtheshelf.purchase';
+    public $table = 'purchase';
     public $timestamps  = false;
     public $fillable = [
         'purchase_date',
@@ -32,7 +32,7 @@ class Purchase extends Model
 
     public function books()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'offtheshelf.purchase_book');
+        return $this->belongsToMany(\App\Models\Book::class, 'purchase_book');
     }
 
     public function delivery()

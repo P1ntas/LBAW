@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public $table = 'offtheshelf.category';
+    public $table = 'category';
     public $timestamps  = false;
     public $fillable = [
         'category_name'

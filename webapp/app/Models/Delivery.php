@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
 {
-    public $table = 'offtheshelf.delivery';
+    public $table = 'delivery';
     public $timestamps  = false;
     public $fillable = [
         'arrival',

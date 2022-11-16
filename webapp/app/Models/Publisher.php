@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Publisher extends Model
 {
-    public $table = 'offtheshelf.publisher';
+    public $table = 'publisher';
     public $timestamps  = false;
     public $fillable = [
         'publisher_name'

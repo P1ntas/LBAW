@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    public $table = 'offtheshelf.users';
+    public $table = 'users';
     public $timestamps  = false;
     public $fillable = [
         'username',
@@ -39,12 +39,12 @@ class User extends Authenticatable
 
     public function wishlists()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'offtheshelf.wishlist');
+        return $this->belongsToMany(\App\Models\Book::class, 'wishlist');
     }
 
     public function carts()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'offtheshelf.cart');
+        return $this->belongsToMany(\App\Models\Book::class, 'cart');
     }
 
     public function reviews()

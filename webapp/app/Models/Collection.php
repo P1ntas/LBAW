@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collection extends Model
 {
-    public $table = 'offtheshelf.collections';
+    public $table = 'collections';
     public $timestamps  = false;
     public $fillable = [
         'collection_name'
@@ -23,6 +23,6 @@ class Collection extends Model
 
     public function books()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'offtheshelf.book_collection');
+        return $this->belongsToMany(\App\Models\Book::class, 'book_collection');
     }
 }

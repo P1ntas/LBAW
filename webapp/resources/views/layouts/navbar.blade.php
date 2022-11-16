@@ -14,7 +14,7 @@
             <div>
               <a href="{{ URL::to('/') }}">Books</a>
               <a href="{{ URL::to('/') }}">My Profile</a>
-              <a href="{{ URL::to('/') }}"
+              <a href=
                  onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
@@ -29,7 +29,7 @@
           <li>
             <a href="#">Auth</a>
             <div>
-              <a href="{{ URL::to('/') }}">Login</a>
+              <a href="{{ route('login') }}">Login</a>
               <a href="{{ URL::to('/') }}">Register</a>
             </div>
           </li>

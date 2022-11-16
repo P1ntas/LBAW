@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
-    public $table = 'offtheshelf.author';
+    public $table = 'author';
     public $timestamps  = false;
     public $fillable = [
         'author_name'
@@ -23,6 +23,6 @@ class Author extends Model
 
     public function books()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'offtheshelf.book_author');
+        return $this->belongsToMany(\App\Models\Book::class, 'book_author');
     }
 }
