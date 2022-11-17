@@ -12,15 +12,6 @@ class Author extends Model
         'author_name'
     ];
 
-    protected $casts = [
-        'id_author' => 'integer',
-        'author_name' => 'text'
-    ];
-
-    public static $rules = [
-        // rules        
-    ];
-
     public function books()
     {
         return $this->belongsToMany(\App\Models\Book::class, 'book_author');

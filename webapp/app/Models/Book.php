@@ -20,23 +20,6 @@ class Book extends Model
         'id_publisher'
     ];
 
-    protected $casts = [
-        'id_book' => 'integer',
-        'title' => 'text',
-        'isbn' => 'numeric',
-        'year' => 'integer',
-        'price' => 'numeric'
-        'stock' => 'numeric',
-        'book_edition' => 'integer',
-        'book_description' => 'text',
-        'id_category' => 'integer',
-        'id_publisher' => 'integer'
-    ];
-
-    public static $rules = [
-        // rules        
-    ];
-
     public function category()
     {
         return $this->belongsTo(\App\Models\Category::class);

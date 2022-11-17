@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+
     public $table = 'users';
     public $timestamps  = false;
     public $fillable = [
@@ -19,23 +20,7 @@ class User extends Authenticatable
         'blocked'
     ];
 
-    protected $casts = [
-        'id_user' => 'integer',
-        'name' => 'text',
-        'email' => 'text',
-        'password' => 'text',
-        'user_address' => 'address',
-        'phone' => 'char',
-        'blocked' => 'boolean'
-    ];
-
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    public static $rules = [
-        // rules
-    ];
+    protected $hidden = ['password'];
 
     public function wishlists()
     {

@@ -17,16 +17,25 @@
         // Fix for Firefox autofocus CSS bug
         // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
     </script>
-    <script type="text/javascript" src={{ asset('js/app.js') }} defer>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer>
 </script>
   </head>
   <body>
     <main>
-      @include('layouts.navbar')
+      <header>
+        <h1><a href="{{ url('/') }}">Off The Shelf</a></h1>
+        @if (Auth::check())
+        <a class="button" href="{{ url('/logout') }}"> Logout </a> <span>{{ Auth::user()->name }}</span>
+        <a class="button" href="/users/{{Auth::user()->id}}">Profile</a>
+        @else
+        <a class="button" href="{{ url('/login') }}">Login</a>
+        <a class="button" href="{{ url('/register') }}">Register</a>
+        @endif
+        <a class="button" href="{{ url('/books') }}">Books</a>
+      </header>
       <section id="content">
         @yield('content')
       </section>
-      @include('layouts.footer')
     </main>
   </body>
 </html>
