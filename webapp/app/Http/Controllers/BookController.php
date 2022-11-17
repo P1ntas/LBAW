@@ -2,105 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Book;
 
-use App\Repositories\BookRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
-use Flash;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Response;
-
-class BookController extends AppBaseController
+class BookController extends Controller
 {
-    private $bookRepository;
-
-    public function __construct(BookRepository $bookRepo)
+    public function show($id)
     {
-        $this->bookRepository = $bookRepo;
+      $book = Book::find($id);
+      return view('pages.book', ['book' => $book]);
     }
 
-    public function index(Request $request)
+    public function list()
     {
-        $this->bookRepository->pushCriteria(new RequestCriteria($request));
-        $books = $this->bookRepository->all();
-
-        return view('books.index')->with('books', $books);
+      $books = Book::orderBy('id')->get();
+      return view('pages.books', ['books' => $books]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('books.create');
+      $book = new Book();
+
+      $this->authorize('create', $book);
+
+      $book->title = $request->input('title');
+      // inputs fields
+      $book->save();
+
+      return $book;
     }
 
-    public function store(Request $request)
+    public function delete(Request $request, $id)
     {
-        $input = $request->all();
+      $book = Book::find($id);
 
-        $book = $this->bookRepository->create($input);
+      $this->authorize('delete', $book);
+      $book->delete();
 
-        Flash::success('Book saved successfully.');
-
-        return redirect(route('books.index'));
-    }
-
-    public function show($id_book)
-    {
-        $book = $this->bookRepository->findWithoutFail($id_book);
-
-        if (empty($book)) {
-            Flash::error('Book not found');
-
-            return redirect(route('books.index'));
-        }
-
-        return view('books.show')->with('book', $book);
-    }
-
-    public function edit($id_book)
-    {
-        $book = $this->bookRepository->findWithoutFail($id_book);
-
-        if (empty($book)) {
-            Flash::error('Book not found');
-
-            return redirect(route('books.index'));
-        }
-
-        return view('books.edit')->with('book', $book);
-    }
-
-    public function update($id_book, Request $request)
-    {
-        $book = $this->bookRepository->findWithoutFail($id_book);
-
-        if (empty($book)) {
-            Flash::error('Book not found');
-
-            return redirect(route('books.index'));
-        }
-
-        $book = $this->bookRepository->update($request->all(), $id_book);
-
-        Flash::success('Book updated successfully.');
-
-        return redirect(route('books.index'));
-    }
-
-    public function destroy($id_book)
-    {
-        $book = $this->bookRepository->findWithoutFail($id_book);
-
-        if (empty($book)) {
-            Flash::error('Book not found');
-
-            return redirect(route('books.index'));
-        }
-
-        $this->bookRepository->delete($id_book);
-
-        Flash::success('Book deleted successfully.');
-
-        return redirect(route('books.index'));
+      return $book;
     }
 }

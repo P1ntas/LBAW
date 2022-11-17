@@ -12,15 +12,6 @@ class Collection extends Model
         'collection_name'
     ];
 
-    protected $casts = [
-        'id_collection' => 'integer',
-        'collection_name' => 'text'
-    ];
-
-    public static $rules = [
-        // rules        
-    ];
-
     public function books()
     {
         return $this->belongsToMany(\App\Models\Book::class, 'book_collection');

@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <p>Off The Shelf</p>
+    <p>Home content.</p>
 </div>
 
 @endsection
