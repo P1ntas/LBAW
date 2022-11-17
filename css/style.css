@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Open+Sans:wght@300;800&display=swap');
+
+* {
+    font-family: 'Lora', serif;
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#fLink {
+    float: left;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow: auto;
+}
+
+header {
+    background-color: rgb(248, 244, 172);
+    color: rgb(20, 18, 90);
+    margin: 0px 0px 0px 0px;
+}
+
+#headerWrapper {
+    width: 100%;
+}
+
+#hSearchText {
+    border-radius: 2em;
+    border: 0.1em solid black;
+}
+.hambMenu li {
+    list-style: none;
+}
+  
+.hamburguer a {
+    text-decoration: none;
+}
+  
+.hamburguer {
+    min-height: 3.75em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5px;
+    width: 100%;
+}
+  
+.hambMenu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 3.125em;
+    gap: 0;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    transition: 0.4s;
+    left: -100%;
+}
+  
+.hLink {
+    transition: 0.7s ease;
+}
+  
+.hLink:hover {
+    color: gold;
+    text-shadow:0px 0px 3px gold;
+  
+}
+  
+.hambMenu.active {
+    left: 0;
+}
+  
+.item {
+    margin: 1em 0;
+}
+  
+#hamb {
+    display: block;
+    cursor: pointer;
+    top: 0.5em;
+}
+  
+.bar {
+    display: block;
+    width: 1.5625em;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: rgb(20, 18, 90)
+}
+  
+#hamb.active .bar:nth-child(2) {
+    opacity: 0;
+}
+  
+#hamb.active .bar:nth-child(1) {
+    transform: translateY(0.5em) rotate(45deg);
+}
+  
+#hamb.active .bar:nth-child(3) {
+    transform: translateY(-0.5em) rotate(-45deg);
+}
+
+footer {
+    background-color: rgb(51, 49, 57);
+    color: white;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+    bottom: 0;
+    position: relative;
+    clear: both;
+    min-height: 3.75em;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+footer > p {
+    text-align: right;
+    margin-right: 2em;
+    margin-top: 2em;
+}
