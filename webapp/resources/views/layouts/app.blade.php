@@ -30,6 +30,7 @@
         @else
         <a class="button" href="{{ url('/login') }}">Login</a>
         <a class="button" href="{{ url('/register') }}">Register</a>
+        <a class="button" href="/users/1">Profile</a>
         @endif
         <a class="button" href="{{ url('/books') }}">Books</a>
       </header>

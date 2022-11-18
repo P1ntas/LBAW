@@ -16,8 +16,8 @@ class Book extends Model
         'stock',
         'book_edition',
         'book_description',
-        'id_category',
-        'id_publisher'
+        'category_id',
+        'publisher_id'
     ];
 
     public function category()
@@ -32,27 +32,27 @@ class Book extends Model
 
     public function authors()
     {
-        return $this->belongsToMany(\App\Models\Author::class, 'book_author');
+        return $this->belongsToMany(\App\Models\Author::class, 'book_author', 'book_id', 'author_id');
     }
 
     public function collections()
     {
-        return $this->belongsToMany(\App\Models\Collection::class, 'book_collection');
+        return $this->belongsToMany(\App\Models\Collection::class, 'book_collection', 'book_id', 'collection_id');
     }
 
     public function purchases()
     {
-        return $this->belongsToMany(\App\Models\Purchase::class, 'purchase_book');
+        return $this->belongsToMany(\App\Models\Purchase::class, 'purchase_book', 'book_id', 'purchase_id');
     }
 
     public function wishlists()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'wishlist');
+        return $this->belongsToMany(\App\Models\User::class, 'wishlist', 'book_id', 'user_id');
     }
 
     public function carts()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'cart');
+        return $this->belongsToMany(\App\Models\User::class, 'cart', 'book_id', 'user_id');
     }
 
     public function photos()

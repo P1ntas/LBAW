@@ -13,20 +13,30 @@ class BookController extends Controller
     public function show($id)
     {
       $book = Book::find($id);
+
+      if (empty($book)) {
+        Flash::error('Book not found');
+        return redirect('/');
+      }
+
       return view('pages.book', ['book' => $book]);
     }
 
     public function list()
     {
-      $books = Book::orderBy('id')->get();
+      $books = Book::all();
+
+      if (empty($books)) {
+        Flash::error('No books');
+        return redirect('/');
+      }
+
       return view('pages.books', ['books' => $books]);
     }
 
     public function create(Request $request)
     {
       $book = new Book();
-
-      $this->authorize('create', $book);
 
       $book->title = $request->input('title');
       // inputs fields
@@ -39,9 +49,12 @@ class BookController extends Controller
     {
       $book = Book::find($id);
 
-      $this->authorize('delete', $book);
-      $book->delete();
+      if (empty($book)) {
+        Flash::error('Book not found');
+        return redirect('/');
+      }
 
+      $book->delete();
       return $book;
     }
 }

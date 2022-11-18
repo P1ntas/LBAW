@@ -24,12 +24,12 @@ class User extends Authenticatable
 
     public function wishlists()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'wishlist');
+        return $this->belongsToMany(\App\Models\Book::class, 'wishlist', 'user_id', 'book_id');
     }
 
     public function carts()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'cart');
+        return $this->belongsToMany(\App\Models\Book::class, 'cart', 'user_id', 'book_id');
     }
 
     public function reviews()

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
+    public $table = 'purchase';
     public $timestamps  = false;
 
     public $fillable = [
@@ -21,7 +22,7 @@ class Purchase extends Model
 
     public function books()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'purchase_book');
+        return $this->belongsToMany(\App\Models\Book::class, 'purchase_book', 'purchase_id', 'book_id');
     }
 
     public function delivery()

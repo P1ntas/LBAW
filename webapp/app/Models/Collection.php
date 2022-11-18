@@ -14,6 +14,6 @@ class Collection extends Model
 
     public function books()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'book_collection');
+        return $this->belongsToMany(\App\Models\Book::class, 'book_collection', 'collection_id', 'book_id');
     }
 }
