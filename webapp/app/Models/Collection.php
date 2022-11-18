@@ -9,7 +9,7 @@ class Collection extends Model
     public $table = 'collections';
     public $timestamps  = false;
     public $fillable = [
-        'collection_name'
+        'name'
     ];
 
     public function books()

@@ -56,29 +56,29 @@ CREATE TABLE faq (
 
 CREATE TABLE admins (
     id SERIAL PRIMARY KEY,
-    admin_name TEXT NOT NULL,
+    name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    admin_password TEXT NOT NULL
+    password TEXT NOT NULL
 );
 
 CREATE TABLE publisher (
     id SERIAL PRIMARY KEY,
-    publisher_name TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE author (
     id SERIAL PRIMARY KEY,
-    author_name TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE collections (
     id SERIAL PRIMARY KEY,
-    collection_name TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE category (
     id SERIAL PRIMARY KEY,
-    category_name TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE users (
@@ -182,6 +182,13 @@ INSERT INTO publisher VALUES (DEFAULT, 'PortoEditora');
 
 INSERT INTO book VALUES (DEFAULT, 'Lord of The Rings'     , 5351034105, 1918, '112.90', 5 , 5, 'est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor.'    , 1 , 1 );
 INSERT INTO book VALUES (DEFAULT, 'The Human History'      , 4733319526, 1970, '162.18', 29, 6, 'commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at'  , 2 , 2 );
+
+INSERT INTO author VALUES (DEFAULT, 'Jose Saramago');
+INSERT INTO author VALUES (DEFAULT, 'J K Rowling');
+
+INSERT INTO book_author VALUES (1, 1);
+INSERT INTO book_author VALUES (1, 2);
+INSERT INTO book_author VALUES (2, 2);
 
 -----------------------------------------
 -- INDEXES

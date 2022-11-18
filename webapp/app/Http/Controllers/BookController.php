@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Book;
+use App\Models\Category;
+use App\Models\Publisher;
+use App\Models\Author;
+use App\Models\Review;
 
 class BookController extends Controller
 {
@@ -18,7 +22,19 @@ class BookController extends Controller
         return redirect('/');
       }
 
-      return view('pages.book', ['book' => $book]);
+      $category = Category::find($book->category_id);
+      $publisher = Publisher::find($book->publisher_id);
+      if (empty($category) || empty($publisher)) {
+        return redirect('/');
+      }
+
+      return view('pages.book', [
+        'book' => $book, 
+        'category' => $category, 
+        'publisher' => $publisher,
+        'authors' => $book->authors,
+        'reviews' => $book->reviews
+      ]);
     }
 
     public function list()

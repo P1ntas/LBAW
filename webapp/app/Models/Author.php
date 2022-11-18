@@ -9,7 +9,7 @@ class Author extends Model
     public $table = 'author';
     public $timestamps  = false;
     public $fillable = [
-        'author_name'
+        'name'
     ];
 
     public function books()
