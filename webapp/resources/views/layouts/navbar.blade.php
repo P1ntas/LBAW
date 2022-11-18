@@ -2,6 +2,7 @@
   <a href="{{ url('/') }}">Off The Shelf</a>
   <hr>
   @auth 
+    <a href="/users/{{Auth::user()->id}}">{{ Auth::user()->name }}</a>
     <a href="{{ url('logout') }}">Logout</a>
   @endauth 
   @guest 
