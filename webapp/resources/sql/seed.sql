@@ -170,18 +170,18 @@ CREATE TABLE delivery (
 Populate Tables
 */
 
-INSERT INTO users VALUES (1, 'Joana Lopes'   , 'joanalopes@gmail.com'    , '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street'                  , '935235731', 'No');
+INSERT INTO users VALUES (DEFAULT, 'Joana Lopes'   , 'joanalopes@gmail.com'    , '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT);
 
-INSERT INTO category VALUES (1,'fantasy');
-INSERT INTO category VALUES (2,'history');
-INSERT INTO category VALUES (3,'comedy');
+INSERT INTO category VALUES (DEFAULT,'fantasy');
+INSERT INTO category VALUES (DEFAULT,'history');
+INSERT INTO category VALUES (DEFAULT,'comedy');
 
-INSERT INTO publisher VALUES (1, 'ASA');
-INSERT INTO publisher VALUES (2, 'LEIA');
-INSERT INTO publisher VALUES (3, 'PortoEditora');
+INSERT INTO publisher VALUES (DEFAULT, 'ASA');
+INSERT INTO publisher VALUES (DEFAULT, 'LEIA');
+INSERT INTO publisher VALUES (DEFAULT, 'PortoEditora');
 
-INSERT INTO book VALUES (1, 'Lord of The Rings'     , 5351034105, 1918, '112.90', 5 , 5, 'est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor.'    , 1 , 1 );
-INSERT INTO book VALUES (2, 'The Human History'      , 4733319526, 1970, '162.18', 29, 6, 'commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at'  , 2 , 2 );
+INSERT INTO book VALUES (DEFAULT, 'Lord of The Rings'     , 5351034105, 1918, '112.90', 5 , 5, 'est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor.'    , 1 , 1 );
+INSERT INTO book VALUES (DEFAULT, 'The Human History'      , 4733319526, 1970, '162.18', 29, 6, 'commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at'  , 2 , 2 );
 
 -----------------------------------------
 -- INDEXES
