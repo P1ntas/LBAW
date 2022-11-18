@@ -15,7 +15,6 @@ class BookController extends Controller
       $book = Book::find($id);
 
       if (empty($book)) {
-        Flash::error('Book not found');
         return redirect('/');
       }
 
@@ -27,7 +26,6 @@ class BookController extends Controller
       $books = Book::all();
 
       if (empty($books)) {
-        Flash::error('No books');
         return redirect('/');
       }
 
@@ -50,7 +48,6 @@ class BookController extends Controller
       $book = Book::find($id);
 
       if (empty($book)) {
-        Flash::error('Book not found');
         return redirect('/');
       }
 

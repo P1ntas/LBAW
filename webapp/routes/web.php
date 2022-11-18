@@ -17,3 +17,4 @@ Route::get('books/{id}', 'BookController@show')->where(['id' => '[0-9]+']);
 // Users
 Route::get('/users', 'UserController@list');
 Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+']);
+Route::get('/users/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);

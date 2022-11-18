@@ -33,9 +33,19 @@
 
     <label for="user_address">Address</label>
     <input id="user_address" type="text" name="user_address" value="{{ old('user_address') }}">
+    @if ($errors->has('user_address'))
+    <span class="error">
+        {{ $errors->first('user_address') }}
+    </span>
+    @endif
 
     <label for="phone">Phone Number</label>
     <input id="phone" type="tel" name="phone" value="{{ old('phone') }}">
+    @if ($errors->has('phone'))
+    <span class="error">
+        {{ $errors->first('phone') }}
+    </span>
+    @endif
 
     <input type="hidden" name="blocked" value="FALSE">
 
