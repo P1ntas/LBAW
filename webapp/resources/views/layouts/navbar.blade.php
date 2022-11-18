@@ -1,40 +1,11 @@
-<nav>
-  <div>
-    <button type="button">
-      <span></span>
-    </button>
-    <a href="{{ URL::to('/') }}">Off The Shelf</a>
-    <div>
-      <ul>
-        @auth
-          <li>
-            <a href="#">
-              <i></i> {{ Auth::user()->name }}
-            </a>
-            <div>
-              <a href="{{ URL::to('/') }}">Books</a>
-              <a href="{{ URL::to('/') }}">My Profile</a>
-              <a href="{{ route('logout') }}"
-                 onclick="event.preventDefault();
-                 document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-              </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-              </form>
-            </div>
-          </li>
-        @endauth
-        @guest
-          <li>
-            <a href="#">Auth</a>
-            <div>
-              <a href="{{ route('login') }}">Login</a>
-              <a href="{{ URL::to('/') }}">Register</a>
-            </div>
-          </li>
-        @endguest
-      </ul>
-    </div>
-  </div>
-</nav>
+<header id="navbar">
+  <a href="{{ url('/') }}">Off The Shelf</a>
+  <hr>
+  @auth 
+    <a href="{{ url('logout') }}">Logout</a>
+  @endauth 
+  @guest 
+    <a href="{{ url('login') }}">Login</a>
+    <a href="{{ url('register') }}">Register</a>
+  @endguest
+</header>
