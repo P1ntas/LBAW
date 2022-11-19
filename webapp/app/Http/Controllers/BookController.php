@@ -19,19 +19,14 @@ class BookController extends Controller
       $book = Book::find($id);
 
       if (empty($book)) {
-        return redirect('/');
-      }
-
-      $category = Category::find($book->category_id);
-      $publisher = Publisher::find($book->publisher_id);
-      if (empty($category) || empty($publisher)) {
+        // to do
         return redirect('/');
       }
 
       return view('pages.book', [
         'book' => $book, 
-        'category' => $category, 
-        'publisher' => $publisher,
+        'category' => $book->category, 
+        'publisher' => $book->publisher,
         'authors' => $book->authors,
         'reviews' => $book->reviews
       ]);
@@ -42,6 +37,7 @@ class BookController extends Controller
       $books = Book::all();
 
       if (empty($books)) {
+        // to do
         return redirect('/');
       }
 

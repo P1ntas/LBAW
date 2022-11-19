@@ -14,6 +14,7 @@
     @endforeach
     <p>Reviews:</p>
     @foreach ($reviews as $review)
+        <p>From: {{ $review->user->name }}</p>
         <p>Date: {{ $review->review_date }}</p>
         <p>Rating: {{ $review->rating }}</p>
         <p>Comment: {{ $review->comment }}</p>
