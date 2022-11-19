@@ -12,6 +12,12 @@
     @foreach ($authors as $author)
         <p>{{ $author->name }}</p>
     @endforeach
+    @auth 
+        <form method="POST" action="/api/books/{{$book->id}}">
+            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+            <input type="submit" value="Add to cart">
+        </form>
+    @endauth
     <p>Reviews:</p>
     @foreach ($reviews as $review)
         <p>From: {{ $review->user->name }}</p>

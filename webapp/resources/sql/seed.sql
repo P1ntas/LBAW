@@ -282,7 +282,8 @@ $BODY$
 BEGIN
         UPDATE book
         SET stock = stock - 1
-        WHERE "id" = NEW."id";
+        WHERE id = NEW.id;
+        RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;
@@ -298,8 +299,9 @@ CREATE OR REPLACE FUNCTION wishlist_to_cart() RETURNS TRIGGER AS
 $BODY$
 BEGIN
         DELETE FROM wishlist
-        WHERE "user_id" = NEW."user_id"
-        AND "book_id" = NEW."book_id";
+        WHERE user_id = NEW.user_id
+        AND book_id = NEW.book_id;
+        RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;
@@ -315,7 +317,8 @@ CREATE OR REPLACE FUNCTION cart_purchased() RETURNS TRIGGER AS
 $BODY$
 BEGIN
         DELETE FROM cart
-        WHERE "user_id" = NEW."user_id";
+        WHERE user_id = NEW.user_id;
+        RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;

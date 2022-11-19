@@ -50,7 +50,7 @@ class Book extends Model
         return $this->belongsToMany(\App\Models\User::class, 'wishlist', 'book_id', 'user_id');
     }
 
-    public function cart()
+    public function carts()
     {
         return $this->belongsToMany(\App\Models\User::class, 'cart', 'book_id', 'user_id');
     }

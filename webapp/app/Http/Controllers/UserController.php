@@ -152,4 +152,16 @@ class UserController extends Controller
         $user->cart()->detach();
         return redirect('/');
     }
+
+    public function addToCart(Request $request, $id) {
+        $user = User::find($request->user_id);
+  
+        if (empty($user)) {
+          // to do
+          return redirect('/');
+        }
+  
+        $user->cart()->attach($id);
+        return redirect('/');
+    }
 }
