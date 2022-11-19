@@ -17,7 +17,6 @@ CREATE SCHEMA offtheshelf;
 SET search_path TO offtheshelf;
 
 DROP TABLE IF EXISTS faq CASCADE;
-DROP TABLE IF EXISTS admins CASCADE;
 DROP TABLE IF EXISTS publisher CASCADE;
 DROP TABLE IF EXISTS author CASCADE;
 DROP TABLE IF EXISTS collections CASCADE;
@@ -54,13 +53,6 @@ CREATE TABLE faq (
     PRIMARY KEY (question, answer)
 );
 
-CREATE TABLE admins (
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL
-);
-
 CREATE TABLE publisher (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL
@@ -88,7 +80,8 @@ CREATE TABLE users (
     password TEXT NOT NULL,                  
     user_address TEXT,
     phone CHAR(9),
-    blocked BOOLEAN DEFAULT FALSE NOT NULL            
+    blocked BOOLEAN DEFAULT FALSE NOT NULL,
+    admin_perms BOOLEAN DEFAULT FALSE NOT NULL     
 );
 
 CREATE TABLE book (
@@ -127,8 +120,7 @@ CREATE TABLE photo (
     id SERIAL PRIMARY KEY,
     photo_image TEXT NOT NULL,      
     book_id INTEGER REFERENCES book(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    user_id INTEGER UNIQUE REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    admin_id INTEGER UNIQUE REFERENCES admins(id) ON UPDATE CASCADE ON DELETE CASCADE           
+    user_id INTEGER UNIQUE REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE      
 );
 
 CREATE TABLE book_author (
@@ -170,7 +162,8 @@ CREATE TABLE delivery (
 Populate Tables
 */
 
-INSERT INTO users VALUES (DEFAULT, 'Joana Lopes', 'joanalopes@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Joana Lopes', 'joanalopes@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '987654321', DEFAULT, TRUE);
 
 INSERT INTO category VALUES (DEFAULT,'Fantasy');
 INSERT INTO category VALUES (DEFAULT,'History');

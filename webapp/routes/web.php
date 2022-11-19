@@ -19,6 +19,10 @@ Route::get('/users', 'UserController@list');
 Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+']);
 Route::get('/users/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
 
+// Admins
+Route::get('/admins/{id}', 'UserController@show')->where(['id' => '[0-9]+']);
+Route::get('/admins/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
+
 // Purchases
 Route::get('/users/{id}/purchases', 'PurchaseController@listByUser')->where(['id' => '[0-9]+']);
 

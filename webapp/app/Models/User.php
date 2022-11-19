@@ -17,7 +17,8 @@ class User extends Authenticatable
         'password',
         'user_address',
         'phone',
-        'blocked'
+        'blocked',
+        'admin_perms'
     ];
 
     protected $hidden = ['password'];
@@ -49,5 +50,9 @@ class User extends Authenticatable
 
     public function isBlocked() {
         return $this->blocked;
+    }
+
+    public function isAdmin() {
+        return $this->admin_perms;
     }
 }

@@ -20,14 +20,19 @@ class UserController extends Controller
             return redirect('/');
         }
 
+        if ($user->isAdmin()) {
+            return view('pages.admin', ['admin' => $user]);
+        }
+
         return view('pages.user', ['user' => $user]);
     }
 
     public function list()
     {
-        $users = User::all();
+        $users = User::where('admin_perms', FALSE)->get();;
 
         if (empty($users)) {
+            // to do
             return redirect('/');
         }
 
@@ -39,11 +44,12 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (empty($user)) {
+            // to do
             return redirect('/');
         }
 
-        if ($user->id != Auth::id()) {
-            return view('pages.user', ['user' => Auth::user()]);
+        if ($user->isAdmin()) {
+            return view('pages.edit_admin', ['admin' => $user]);
         }
 
         return view('pages.edit_user', ['user' => $user]);
@@ -96,14 +102,19 @@ class UserController extends Controller
             $user->user_address = null;
         }
 
-        if (isset($request->user_address)) {
+        if (isset($request->user_phone)) {
             $user->phone = $request->phone;
         }
         else {
             $user->phone = null;
         }
 
-        $user->blocked = $request->blocked;
+        if (isset($request->blocked)) {
+            $user->blocked = $request->blocked;
+        }
+        else {
+            $user->blocked = $user->blocked;
+        }
 
         $user->save();
         return redirect('/');
