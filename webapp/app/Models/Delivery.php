@@ -12,7 +12,7 @@ class Delivery extends Model
         'arrival',
         'delivery_address',
         'cost',
-        'id_purchase'
+        'purchase_id'
     ];
 
     public function purchase()

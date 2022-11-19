@@ -164,4 +164,17 @@ class UserController extends Controller
         $user->cart()->attach($id);
         return redirect('/');
     }
+
+    public function checkoutInfo($id)
+    {
+        $books = User::find($id)->cart()->get();
+
+        return view('pages.checkout', ['books' => $books]);
+    }
+
+    public function getCartBooks($id) {
+        $books = User::find($id)->cart()->get();
+        
+        return $books;
+    }
 }

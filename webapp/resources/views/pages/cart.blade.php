@@ -9,6 +9,7 @@
     <input type="submit" value="Clear cart">
   </form>
   @each('partials.cart_book', $books, 'book')
+  <a href="/users/{{Auth::user()->id}}/cart/checkout">Proceed to checkout</a>
 </section>
 
 @endsection

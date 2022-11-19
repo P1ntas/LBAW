@@ -24,3 +24,6 @@ Route::post('/users/{id}/cart', 'UserController@manageCart')->where(['id' => '[0
 
 // Books
 Route::post('/books/{id}', 'UserController@addToCart')->where(['id' => '[0-9]+']);
+
+// Purchases
+Route::post('/users/{id}/cart/checkout', 'PurchaseController@checkout')->where(['id' => '[0-9]+']);

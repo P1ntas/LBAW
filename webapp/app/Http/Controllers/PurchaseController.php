@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Purchase;
+use App\Models\Delivery;
 
 class PurchaseController extends Controller
 {
@@ -37,31 +38,39 @@ class PurchaseController extends Controller
       return view('pages.purchases', ['purchases' => $purchases]);
     }
 
-    public function listByUser($id) {
+    public function listByUser($id)
+    {
         $purchases = Purchase::where('user_id', $id)->get();
 
         return view('pages.purchases', ['purchases' => $purchases]);
     }
 
-    public function create(Request $request)
+    public function create(Request $request, $id)
     {
       $purchase = new Purchase();
 
-      // inputs fields
+      $purchase->user_id = $id;
+      $purchase->state_purchase = $request->state_purchase;
       $purchase->save();
 
       return $purchase;
     }
 
-    public function delete(Request $request, $id)
+    private function purchaseBooks($purchase, $books)
     {
-      $purchase = Purchase::find($id);
-
-      if (empty($purchase)) {
-        return redirect('/');
+      foreach ($books as $book) {
+        $purchase->books()->attach($book->id);
       }
+    }
 
-      $purchase->delete();
-      return $purchase;
+    public function checkout(Request $request, $id)
+    {
+      $purchase = $this->create($request, $id);
+      $delivery = app('App\Http\Controllers\DeliveryController')->create($request, $purchase->id);
+      $books = app('App\Http\Controllers\UserController')->getCartBooks($id);
+
+      $this->purchaseBooks($purchase, $books);
+
+      return redirect('/');
     }
 }

@@ -170,7 +170,7 @@ CREATE TABLE delivery (
 Populate Tables
 */
 
-INSERT INTO users VALUES (DEFAULT, 'Joana Lopes'   , 'joanalopes@gmail.com'    , '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Joana Lopes', 'joanalopes@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT);
 
 INSERT INTO category VALUES (DEFAULT,'Fantasy');
 INSERT INTO category VALUES (DEFAULT,'History');
@@ -180,8 +180,8 @@ INSERT INTO publisher VALUES (DEFAULT, 'ASA');
 INSERT INTO publisher VALUES (DEFAULT, 'LEIA');
 INSERT INTO publisher VALUES (DEFAULT, 'PortoEditora');
 
-INSERT INTO book VALUES (DEFAULT, 'Lord of The Rings', 5351034105, 1918, '112.90', 5, 5, 'est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor.', 1, 1);
-INSERT INTO book VALUES (DEFAULT, 'The Human History', 4733319526, 1970, '162.18', 29, 6, 'commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at', 2, 2);
+INSERT INTO book VALUES (DEFAULT, 'Lord of The Rings', 5351034105, 1918, '9.99', 5, 5, 'est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor.', 1, 1);
+INSERT INTO book VALUES (DEFAULT, 'The Human History', 4733319526, 1970, '7.99', 29, 6, 'commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at', 2, 2);
 
 INSERT INTO author VALUES (DEFAULT, 'Jose Saramago');
 INSERT INTO author VALUES (DEFAULT, 'J K Rowling');
@@ -190,17 +190,17 @@ INSERT INTO book_author VALUES (1, 1);
 INSERT INTO book_author VALUES (1, 2);
 INSERT INTO book_author VALUES (2, 2);
 
-INSERT INTO purchase VALUES (DEFAULT, '2022-07-13 14:03:42 +9:00', 1, 'Received');
-INSERT INTO purchase VALUES (DEFAULT, '2022-01-30 09:05:56 +8:00', 1, 'Dispatched');
-INSERT INTO purchase VALUES (DEFAULT, '2021-12-22 22:21:03 -4:00', 1, 'Delivered');
-
-INSERT INTO purchase_book VALUES (1, 1);
-INSERT INTO purchase_book VALUES (2, 2);
-INSERT INTO purchase_book VALUES (3, 1);
-
-INSERT INTO delivery VALUES (DEFAULT, '2023-05-18 03:50:35  +0:00', '335-2063 Ligula. St.', '131.96', 1);
-INSERT INTO delivery VALUES (DEFAULT, '2023-09-09 10:14:51  +4:00', '596-213 In St.', '104.86', 2);
-INSERT INTO delivery VALUES (DEFAULT, '2023-06-28 03:00:56  +9:00', '432-7822 Parturient Av.', '104.80', 3);
+--INSERT INTO purchase VALUES (DEFAULT, '2022-07-13 14:03:42 +9:00', 1, 'Received');
+--INSERT INTO purchase VALUES (DEFAULT, '2022-01-30 09:05:56 +8:00', 1, 'Dispatched');
+--INSERT INTO purchase VALUES (DEFAULT, '2021-12-22 22:21:03 -4:00', 1, 'Delivered');
+--
+--INSERT INTO purchase_book VALUES (1, 1);
+--INSERT INTO purchase_book VALUES (2, 2);
+--INSERT INTO purchase_book VALUES (3, 1);
+--
+--INSERT INTO delivery VALUES (DEFAULT, '2023-05-18 03:50:35  +0:00', '335-2063 Ligula. St.', '131.96', 1);
+--INSERT INTO delivery VALUES (DEFAULT, '2023-09-09 10:14:51  +4:00', '596-213 In St.', '104.86', 2);
+--INSERT INTO delivery VALUES (DEFAULT, '2023-06-28 03:00:56  +9:00', '432-7822 Parturient Av.', '104.80', 3);
 
 INSERT INTO cart VALUES (1, 1);
 INSERT INTO cart VALUES (1, 2);
@@ -261,7 +261,7 @@ CREATE INDEX search_idx ON book USING GIN (tsvectors);
 CREATE OR REPLACE FUNCTION book_available() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT * FROM book WHERE id = NEW.id AND stock = 0) THEN
+        IF EXISTS (SELECT * FROM book WHERE id = NEW.book_id AND stock = 0) THEN
            RAISE EXCEPTION 'This book is out of stock.';
         END IF;
         RETURN NEW;
@@ -282,7 +282,7 @@ $BODY$
 BEGIN
         UPDATE book
         SET stock = stock - 1
-        WHERE id = NEW.id;
+        WHERE id = NEW.book_id;
         RETURN NEW;
 END
 $BODY$
