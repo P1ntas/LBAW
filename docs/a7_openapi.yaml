@@ -582,22 +582,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                properties:
-                   id_book:
-                     type: integer
-                   title:
-                     type: string
-                   year:
-                     type: integer
-                   price:
-                     type: number
-                   book_description:
-                     type: string
-                   type:
-                     type: string
-                   publisher:
-                     type: string
+                  $ref: '#'
         '400':
           description: Bad Request
         "403":
