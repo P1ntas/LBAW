@@ -9,31 +9,45 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    // Don't add create and update timestamps in database.
+    public $table = 'users';
     public $timestamps  = false;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
+    public $fillable = [
+        'name',
+        'email',
+        'password',
+        'user_address',
+        'phone',
+        'blocked'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password'];
 
-    /**
-     * The cards this user owns.
-     */
-     public function cards() {
-      return $this->hasMany('App\Models\Card');
+    public function wishlists()
+    {
+        return $this->belongsToMany(\App\Models\Book::class, 'wishlist', 'user_id', 'book_id');
+    }
+
+    public function carts()
+    {
+        return $this->belongsToMany(\App\Models\Book::class, 'cart', 'user_id', 'book_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(\App\Models\Review::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(\App\Models\Purchase::class);
+    }
+
+    public function photo()
+    {
+        return $this->hasOne(\App\Models\Photo::class);
+    }
+
+    public function isBlocked() {
+        return $this->blocked;
     }
 }
