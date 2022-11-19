@@ -97,28 +97,29 @@ paths:
                  description: 'Successful logout. Redirect to login form.'
                  value: '/login'
 
- register:
-   get:
-     operationId: R104
-     summary: 'R104: Register Form'
-     description: 'Provide new user registration form. Access: PUB'
-     tags:
-       - 'M01: Authentication and Profile'
-     responses:
-       '200':
-         description: 'Ok. Show Sign-Up UI'
-       '302':
-          description: 'Redirect if user is logged in.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Authenticated. Redirect to user dashboard.'
-                  value: '/dashboard'
 
-   post:
+ /register:
+
+    get:
+      operationId: R104
+      summary: 'R104: Register Form'
+      description: 'Provide new user registration form. Access: PUB'
+      tags:
+        - 'M01: Authentication and Profile'
+      responses:
+        '200':
+          description: 'Ok. Show Sign-Up UI'
+        '302':
+            description: 'Redirect if user is logged in.'
+            headers:
+              Location:
+                schema:
+                  type: string
+                examples:
+                  302Success:
+                    description: 'Authenticated. Redirect to user dashboard.'
+                    value: '/dashboard'
+    post:
      operationId: R105
      summary: 'R105: Register Action'
      description: 'Processes the new user registration form submission. Access: PUB'
@@ -215,7 +216,7 @@ paths:
         "401":
           description: "Unauthorized"
 
-    delete:
+   delete:
       operationId: R108
       summary: 'R108: Delete Account'
       description: 'Delete account. Access: ACO, ADM'
@@ -233,7 +234,7 @@ paths:
         '200':
           description: 'Successful'
 
-  /settings:
+ /settings:
     get:
       operationId: R109
       summary: 'R109: View Account Settings'
@@ -284,10 +285,11 @@ paths:
         '200':
           description: 'Successful'
         "401":
-          description: "Unauthorized"     
+          description: "Unauthorized"
 
-  /avatars/{img}:
-    get:
+
+ /avatars/{img}:
+   get:
       operationId: R111
       summary: 'R111: Get Avatar'
       description: 'Get avatar image from local storage. Access: USR'
@@ -356,26 +358,12 @@ paths:
              schema:
                type: array
                items:
-                 type: object
-                 properties:
-                   id_book:
-                     type: integer
-                   title:
-                     type: string
-                   year:
-                     type: integer
-                   price:
-                     type: numeric
-                   book_description:
-                     type: string
-                   type:
-                     type: string
-                   publisher:
-                     type: string
-       '400':
-          description: Bad Request
+                $ref: '#'
 
-    post:
+       '400':
+          description: "Bad Request"
+
+   post:
       operationId: R202
       summary: 'R202: Create Product'
       description: 'Processes the product creation . Access: ADM'
@@ -396,7 +384,7 @@ paths:
                    year:
                      type: integer
                    price:
-                     type: numeric
+                     type: number
                    book_description:
                      type: string
                    type:
@@ -410,7 +398,7 @@ paths:
                 - type
                 - publisher
       
-        responses:
+      responses:
         '302':
           description: 'Redirect after processing the new product information.'
           headers:
@@ -424,3 +412,127 @@ paths:
                 302Failure:
                   description: 'Failed creation. Redirect to user dashboard.'
                   value: '/dashboard'
+
+ /cart:
+   post:
+      operationId: R401
+      summary: "R401: Add books to cart"
+      description: "Adds books to user's cart. Access: USR"
+      tags:
+        - 'M04: Cart, Wishlist and Collections'
+
+      responses:
+      
+
+
+ /wishlist:
+   post:
+      operationId: R402
+      summary: "R402: Add books to whislist"
+      description: "Adds books to user's whislist. Access: USR"
+      tags:
+        - 'M04: Cart, Wishlist and Collections'
+
+      responses:
+
+
+ /collections:
+   post:
+      operationId: R403
+      summary: "R403: Add books to collection"
+      description: "Adds books to a collection. Access: ADM"
+      tags:
+        - 'M04: Cart, Wishlist and Collections'
+
+      responses:
+
+
+ /api/search:
+    get:
+      operationId: R501
+      summary: "R501: Search User API"
+      description: "Searches for users and returns the results as JSON. Access: USR"
+      tags:
+        - 'M05: Administration and Static Pages'
+
+      parameters:
+        - in: query
+          name: query
+          description: String to use for full-text search
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#'
+        '400':
+          description: Bad Request
+  
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        picture:
+          type: string
+          format: binary
+
+    Product:
+      type: object
+      properties:
+        id_book:
+          type: integer
+        title:
+          type: string
+        year:
+          type: integer
+        price:
+          type: number
+        book_description:
+          type: string
+        publisher:
+          type: string
+
+    TaskSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+          enum: ['Received', 'Dispatched', 'Delivered']
+
+    CheckListItem:
+      type: object
+      properties:
+        name:
+          type: string
+        completed:
+          type: boolean
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        author:
+          $ref: '#'
+        comment_date:
+          type: string
+        comment_text:
+          type: string
+        parent:
+          type: integer
