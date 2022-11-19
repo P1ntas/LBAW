@@ -980,38 +980,227 @@ paths:
         "404":
           description: Not Found
 
- /cart:
-   post:
+
+ /api/CartWishlistAndCollections/Cart:
+   patch:
       operationId: R401
-      summary: "R401: Add books to cart"
-      description: "Adds books to user's cart. Access: USR"
+      summary: "R401: Update cart"
+      description: "Update books in a user's cart. Access: USR"
       tags:
         - 'M04: Cart, Wishlist and Collections'
 
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id_user: 
+                  type: integer
+                id_book:
+                  type: integer
+              required:
+                - id_user
+                - id_book
+
       responses:
+        "200":
+          description: Success
+        "404":
+          description: Not Found
       
 
 
- /wishlist:
-   post:
+ /api/CartWishlistAndCollections/whislist:
+   patch:
       operationId: R402
-      summary: "R402: Add books to whislist"
-      description: "Adds books to user's whislist. Access: USR"
+      summary: "R402: Update whislist"
+      description: "Update books in a user's whislist. Access: USR"
       tags:
         - 'M04: Cart, Wishlist and Collections'
 
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id_user: 
+                  type: integer
+                id_book:
+                  type: integer
+              required:
+                - id_user
+                - id_book
+
       responses:
+        "200":
+          description: Success
+        "404":
+          description: Not Found
 
 
- /collections:
-   post:
+ /api/CartWishlistAndCollections/Collections:
+   get:
       operationId: R403
-      summary: "R403: Add books to collection"
-      description: "Adds books to a collection. Access: ADM"
+      summary: 'R404: Get collection'
+      description: 'Get the collection of a book. Access: USR, ADM'
       tags:
         - 'M04: Cart, Wishlist and Collections'
 
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
       responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                   id_book:
+                    type: integer
+                   id_collection:
+                    type: integer
+                required:
+                  - id_collection
+
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+   post:
+      operationId: R404
+      summary: 'R404: Add a collection'
+      description: 'Add a collection to a book. Access: ADM'
+      tags:
+        - 'M04: Cart, Wishlist and Collections'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id_book:
+                  type: integer
+                id_collection:
+                  type: integer
+              required:
+                - id_book
+                - id_collection
+      responses:
+        "200":
+          description: "OK"
+        "403":
+          description: "Forbidden access"
+        "404":
+          description: "Tag not found"
+
+   delete:
+      operationId: R405
+      summary: 'R302: Delete collection'
+      description: 'Delete a collection from a book. Access: ADM'
+      tags:
+        - 'M04: Cart, Wishlist and Collections'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after processing the deletion request.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful. Redirect to user dashboard.'
+                  value: '/dashboard'
+                302Failure:
+                  description: 'Failed. Redirect to user dashboard.'
+                  value: '/dashboard'
+        "400":
+          description: "Bad Request. Must have at least one owner in the project"
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+
+   patch:
+      operationId: R403
+      summary: "R403: Update collection"
+      description: "Update callection of given book. Access: ADM"
+      tags:
+        - 'M04: Cart, Wishlist and Collections'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id_book: 
+                  type: integer
+                id_collection:
+                  type: integer
+              required:
+                - id_book
+                - id_collection
+
+      responses:
+        "200":
+          description: Success
+        "404":
+          description: Not Found
 
  /faqs:
     get:
@@ -1040,11 +1229,11 @@ paths:
           description: "Forbidden access"
 
 
- /api/search:
+ /api/AdmnistrationAndStaticPages:
     get:
       operationId: R503
       summary: "R503: Search User API"
-      description: "Searches for users and returns the results as JSON. Access: USR"
+      description: "Searches for users and returns the results as JSON. Access: ADM"
       tags:
         - 'M05: Administration and Static Pages'
 
