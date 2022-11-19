@@ -45,12 +45,12 @@ class Book extends Model
         return $this->belongsToMany(\App\Models\Purchase::class, 'purchase_book', 'book_id', 'purchase_id');
     }
 
-    public function wishlists()
+    public function wishlist()
     {
         return $this->belongsToMany(\App\Models\User::class, 'wishlist', 'book_id', 'user_id');
     }
 
-    public function carts()
+    public function cart()
     {
         return $this->belongsToMany(\App\Models\User::class, 'cart', 'book_id', 'user_id');
     }

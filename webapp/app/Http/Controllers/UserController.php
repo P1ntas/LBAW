@@ -120,4 +120,36 @@ class UserController extends Controller
         $user->delete();
         return $user;
     }
+
+    public function shoppingCart($id) {
+        $books = User::find($id)->cart()->get();
+
+        return view('pages.cart', ['books' => $books]);
+    }
+
+    public function manageCart(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            // to do
+            return redirect('/');
+        }
+
+        $user->cart()->detach($request->book_id);
+        return redirect('/');
+    }
+
+    public function clearCart(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            // to do
+            return redirect('/');
+        }
+
+        $user->cart()->detach();
+        return redirect('/');
+    }
 }

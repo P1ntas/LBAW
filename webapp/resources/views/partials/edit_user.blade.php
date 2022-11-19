@@ -1,5 +1,5 @@
 <article class="user" data-id="{{ $user->id }}">
-    <form method="POST" action="/api/users/{{Auth::user()->id}}">
+    <form method="POST" action="/api/users/{{Auth::user()->id}}/edit">
         {{ csrf_field() }}
 
         <label for="name">Name</label>

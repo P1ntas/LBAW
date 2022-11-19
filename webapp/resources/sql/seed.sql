@@ -202,6 +202,9 @@ INSERT INTO delivery VALUES (DEFAULT, '2023-05-18 03:50:35  +0:00', '335-2063 Li
 INSERT INTO delivery VALUES (DEFAULT, '2023-09-09 10:14:51  +4:00', '596-213 In St.', '104.86', 2);
 INSERT INTO delivery VALUES (DEFAULT, '2023-06-28 03:00:56  +9:00', '432-7822 Parturient Av.', '104.80', 3);
 
+INSERT INTO cart VALUES (1, 1);
+INSERT INTO cart VALUES (1, 2);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------

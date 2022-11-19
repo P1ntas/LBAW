@@ -15,4 +15,9 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', 'Auth\LoginController@getUser');
 
-Route::post('/users/{id}', 'UserController@update')->where(['id' => '[0-9]+']);
+// Users
+Route::post('/users/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
+
+// Cart
+Route::get('/users/{id}/cart', 'UserController@clearCart')->where(['id' => '[0-9]+']);
+Route::post('/users/{id}/cart', 'UserController@manageCart')->where(['id' => '[0-9]+']);

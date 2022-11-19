@@ -22,12 +22,12 @@ class User extends Authenticatable
 
     protected $hidden = ['password'];
 
-    public function wishlists()
+    public function wishlist()
     {
         return $this->belongsToMany(\App\Models\Book::class, 'wishlist', 'user_id', 'book_id');
     }
 
-    public function carts()
+    public function cart()
     {
         return $this->belongsToMany(\App\Models\Book::class, 'cart', 'user_id', 'book_id');
     }
