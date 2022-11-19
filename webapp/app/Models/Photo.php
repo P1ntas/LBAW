@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
+    public $table = 'photo';
     public $timestamps  = false;
-
     public $fillable = [
         'photo_image',
         'id_book',

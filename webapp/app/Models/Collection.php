@@ -9,11 +9,11 @@ class Collection extends Model
     public $table = 'collections';
     public $timestamps  = false;
     public $fillable = [
-        'collection_name'
+        'name'
     ];
 
     public function books()
     {
-        return $this->belongsToMany(\App\Models\Book::class, 'book_collection');
+        return $this->belongsToMany(\App\Models\Book::class, 'book_collection', 'collection_id', 'book_id');
     }
 }

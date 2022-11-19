@@ -9,7 +9,7 @@ class Publisher extends Model
     public $table = 'publisher';
     public $timestamps  = false;
     public $fillable = [
-        'publisher_name'
+        'name'
     ];
 
     public function books()

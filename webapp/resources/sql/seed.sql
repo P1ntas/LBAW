@@ -56,29 +56,29 @@ CREATE TABLE faq (
 
 CREATE TABLE admins (
     id SERIAL PRIMARY KEY,
-    admin_name TEXT NOT NULL,
+    name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    admin_password TEXT NOT NULL
+    password TEXT NOT NULL
 );
 
 CREATE TABLE publisher (
     id SERIAL PRIMARY KEY,
-    publisher_name TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE author (
     id SERIAL PRIMARY KEY,
-    author_name TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE collections (
     id SERIAL PRIMARY KEY,
-    collection_name TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE category (
     id SERIAL PRIMARY KEY,
-    category_name TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE users (
@@ -100,47 +100,47 @@ CREATE TABLE book (
     stock INTEGER NOT NULL CHECK (stock >= 0),           
     book_edition INTEGER,
     book_description TEXT,
-    id_category INTEGER NOT NULL REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    id_publisher INTEGER REFERENCES publisher(id) ON UPDATE CASCADE ON DELETE CASCADE                         
+    category_id INTEGER NOT NULL REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    publisher_id INTEGER REFERENCES publisher(id) ON UPDATE CASCADE ON DELETE CASCADE                         
 );
 
 CREATE TABLE wishlist (
-    id_user INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    id_book INTEGER REFERENCES book(id) ON DELETE CASCADE,
-    PRIMARY KEY (id_user, id_book)        
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    book_id INTEGER REFERENCES book(id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, book_id)        
 );
 
 CREATE TABLE cart (
-    id_user INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    id_book INTEGER REFERENCES book(id) ON DELETE CASCADE,
-    PRIMARY KEY (id_user, id_book)        
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    book_id INTEGER REFERENCES book(id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, book_id)        
 );
 
 CREATE TABLE purchase (
     id SERIAL PRIMARY KEY,
     purchase_date TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
-    id_user INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     state_purchase purchase_state NOT NULL
 );
 
 CREATE TABLE photo (
     id SERIAL PRIMARY KEY,
     photo_image TEXT NOT NULL,      
-    id_book INTEGER REFERENCES book(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    id_user INTEGER UNIQUE REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    id_admin INTEGER UNIQUE REFERENCES admins(id) ON UPDATE CASCADE ON DELETE CASCADE           
+    book_id INTEGER REFERENCES book(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    user_id INTEGER UNIQUE REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    admin_id INTEGER UNIQUE REFERENCES admins(id) ON UPDATE CASCADE ON DELETE CASCADE           
 );
 
 CREATE TABLE book_author (
-    id_book INTEGER REFERENCES book(id) ON DELETE CASCADE,
-    id_author INTEGER REFERENCES author(id) ON DELETE CASCADE,
-    PRIMARY KEY (id_book, id_author)                       
+    book_id INTEGER REFERENCES book(id) ON DELETE CASCADE,
+    author_id INTEGER REFERENCES author(id) ON DELETE CASCADE,
+    PRIMARY KEY (book_id, author_id)                       
 );
 
 CREATE TABLE book_collection (
-    id_book INTEGER REFERENCES book(id) ON DELETE CASCADE,
-    id_collection INTEGER REFERENCES collections(id) ON DELETE CASCADE,
-    PRIMARY KEY (id_book, id_collection)                 
+    book_id INTEGER REFERENCES book(id) ON DELETE CASCADE,
+    collection_id INTEGER REFERENCES collections(id) ON DELETE CASCADE,
+    PRIMARY KEY (book_id, collection_id)                 
 );
 
 CREATE TABLE review (
@@ -148,14 +148,14 @@ CREATE TABLE review (
     rating INTEGER NOT NULL CHECK (rating >= 0 AND rating <= 5),
     comment TEXT,
     review_date TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
-    id_book INTEGER NOT NULL REFERENCES book(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    id_user INTEGER NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE          
+    book_id INTEGER NOT NULL REFERENCES book(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE          
 );
 
 CREATE TABLE purchase_book (
-    id_purchase INTEGER REFERENCES purchase(id) ON DELETE CASCADE,
-    id_book INTEGER REFERENCES book(id) ON DELETE CASCADE,
-    PRIMARY KEY (id_purchase, id_book)        
+    purchase_id INTEGER REFERENCES purchase(id) ON DELETE CASCADE,
+    book_id INTEGER REFERENCES book(id) ON DELETE CASCADE,
+    PRIMARY KEY (purchase_id, book_id)        
 );
 
 CREATE TABLE delivery (
@@ -163,16 +163,16 @@ CREATE TABLE delivery (
     arrival TIMESTAMP WITH TIME ZONE NOT NULL,
     delivery_address TEXT NOT NULL,
     cost NUMERIC(9, 2) NOT NULL CHECK (cost >= 0),
-    id_purchase INTEGER NOT NULL UNIQUE REFERENCES purchase(id) ON UPDATE CASCADE ON DELETE CASCADE   
+    purchase_id INTEGER NOT NULL UNIQUE REFERENCES purchase(id) ON UPDATE CASCADE ON DELETE CASCADE   
 );
 
 /*
 Populate Tables
 */
 
-INSERT INTO users VALUES (DEFAULT , 'Joana Lopes'   , 'joanalopes@gmail.com'    , '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street'                  , '935235731', 'No');
+INSERT INTO users VALUES (DEFAULT, 'Joana Lopes'   , 'joanalopes@gmail.com'    , '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT);
 
-INSERT INTO category VALUES (DEFAULT ,'fantasy');
+INSERT INTO category VALUES (DEFAULT,'fantasy');
 INSERT INTO category VALUES (DEFAULT,'history');
 INSERT INTO category VALUES (DEFAULT,'comedy');
 
@@ -183,16 +183,23 @@ INSERT INTO publisher VALUES (DEFAULT, 'PortoEditora');
 INSERT INTO book VALUES (DEFAULT, 'Lord of The Rings'     , 5351034105, 1918, '112.90', 5 , 5, 'est, congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor.'    , 1 , 1 );
 INSERT INTO book VALUES (DEFAULT, 'The Human History'      , 4733319526, 1970, '162.18', 29, 6, 'commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at'  , 2 , 2 );
 
+INSERT INTO author VALUES (DEFAULT, 'Jose Saramago');
+INSERT INTO author VALUES (DEFAULT, 'J K Rowling');
+
+INSERT INTO book_author VALUES (1, 1);
+INSERT INTO book_author VALUES (1, 2);
+INSERT INTO book_author VALUES (2, 2);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------
 
-CREATE INDEX user_purchase ON purchase USING hash (id_user);
+CREATE INDEX user_purchase ON purchase USING hash (user_id);
 
-CREATE INDEX book_category ON book USING btree (id_category);
+CREATE INDEX book_category ON book USING btree (category_id);
 CLUSTER book USING book_category;
 
-CREATE INDEX book_review ON review USING hash (id_book);
+CREATE INDEX book_review ON review USING hash (book_id);
 
 -- FTS INDEXES
 
@@ -276,8 +283,8 @@ CREATE OR REPLACE FUNCTION wishlist_to_cart() RETURNS TRIGGER AS
 $BODY$
 BEGIN
         DELETE FROM wishlist
-        WHERE "id_user" = NEW."id_user"
-        AND "id_book" = NEW."id_book";
+        WHERE "user_id" = NEW."user_id"
+        AND "book_id" = NEW."book_id";
 END
 $BODY$
 LANGUAGE plpgsql;
@@ -293,7 +300,7 @@ CREATE OR REPLACE FUNCTION cart_purchased() RETURNS TRIGGER AS
 $BODY$
 BEGIN
         DELETE FROM cart
-        WHERE "id_user" = NEW."id_user";
+        WHERE "user_id" = NEW."user_id";
 END
 $BODY$
 LANGUAGE plpgsql;

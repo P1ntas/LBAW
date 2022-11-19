@@ -2,105 +2,122 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\UserRepository;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Flash;
-use App\Http\Controllers\Redirect;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
-class UserController extends AppBaseController
+use App\Models\User;
+
+class UserController extends Controller
 {
-    private $userRepository;
-
-    public function __construct(UserRepository $userRepo)
-    {
-        $this->userRepository = $userRepo;
-    }
-
-    public function index(Request $request)
-    {
-        return view('users.show')->with('user', Auth::user());
-        $this->userRepository->pushCriteria(new RequestCriteria($request));
-        $users = $this->userRepository->all();
-
-        return view('users.index')->with('users', $users);
-    }
-
     public function show($id)
     {
-        $user = $this->userRepository->findWithoutFail($id);
+        $user = User::find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
-
-            return redirect(route('users.index'));
+            return redirect('/');
         }
 
-        return view('users.show')->with('user', $user);
+        return view('pages.user', ['user' => $user]);
+    }
+
+    public function list()
+    {
+        $users = User::all();
+
+        if (empty($users)) {
+            return redirect('/');
+        }
+
+        return view('pages.users', ['users' => $users]);
     }
 
     public function edit($id)
     {
-        $user = $this->userRepository->findWithoutFail($id);
+        $user = User::find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
-
-            return redirect(route('users.index'));
+            return redirect('/');
         }
 
-        if($user->id != Auth::id()) {
-            return view('users.show')->with('user', Auth::user());
+        if ($user->id != Auth::id()) {
+            return view('pages.user', ['user' => Auth::user()]);
         }
 
-        return view('users.edit')->with('user', $user);
+        return view('pages.edit_user', ['user' => $user]);
     }
 
-    public function update($id, Request $request)
-    {
-        $this->validate($request, [
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'name' => 'required|string|max:255'
+    public function update(Request $request, $id) {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            return redirect('/');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'string|max:255',
+            'email' => [Rule::unique('users')->ignore($user->id), 'string', 'email', 'max:255'],
+            'user_address' => 'string|min:8|max:255',
+            'phone' => 'regex:/^[1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9]$/'
         ]);
 
-        $user = $this->userRepository->findWithoutFail($id);
-
-        if (empty($user)) {
-            Flash::error('User not found');
-
-            return redirect(route('users.index'));
+        if ($validator->fails()) {
+            return redirect('/');
         }
 
-        if($request->image != null) {
-            $imageName = 'user-' . $id . '.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('img/users/'), $imageName);
+        if ($request->password != $request->password_confirmation) {
+            return redirect('/');
+        }
+
+        if (isset($request->password)) {
+            $validator = Validator::make($request->all(), [
+                'password' => 'string|min:3'
+            ]);
     
-            $request->merge(['img' => $imageName]);
+            if ($validator->fails()) {
+                return redirect('/');
+            }
+
+            if ($request->password == $request->password_confirmation) {
+                $user->password = bcrypt($request->password);
+            }
         }
-        $user = $this->userRepository->update(array_filter($request->all()), $id);
 
-        Flash::success('User updated successfully.');
+        $user->id = $id;
+        $user->name = $request->name;
+        $user->email = $request->email;
 
-        return redirect(route('users.show', $user));
+        if (isset($request->user_address)) {
+            $user->user_address = $request->user_address;
+        }
+        else {
+            $user->user_address = null;
+        }
+
+        if (isset($request->user_address)) {
+            $user->phone = $request->phone;
+        }
+        else {
+            $user->phone = null;
+        }
+
+        $user->blocked = $request->blocked;
+
+        $user->save();
+        return redirect('/');
     }
 
-    public function destroy($id)
+    public function delete(Request $request, $id)
     {
-        $user = $this->userRepository->findWithoutFail($id);
+        $user = User::find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
-
-            return redirect(route('users.index'));
+            return redirect('/');
         }
 
-        $this->userRepository->delete($id);
-
-        Flash::success('User deleted successfully.');
-
-        return redirect(route('users.index'));
+        $user->delete();
+        return $user;
     }
 }

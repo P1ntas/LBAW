@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
 {
+    public $table = 'delivery';
     public $timestamps  = false;
-
     public $fillable = [
         'arrival',
         'delivery_address',
