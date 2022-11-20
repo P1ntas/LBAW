@@ -393,7 +393,7 @@ header {
     width: 15em;
 }
 
-.photo_button {
+.edit_button {
     width: 15em;
     height: 3em;
     border-radius: 3em;
@@ -412,7 +412,7 @@ header {
     margin: 1.5em auto;
 }
 
-.photo_button:hover {
+.edit_button:hover {
     background-color: rgb(20, 18, 90);
     border-color: rgb(20, 18, 90);
     color: white;
