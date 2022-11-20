@@ -188,4 +188,11 @@ class UserController extends Controller
         
         return $books;
     }
+
+    public function search(Request $request)
+    {
+      $users = User::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->get();
+      
+      return view('pages.users', ['users' => $users]);
+    }
 }

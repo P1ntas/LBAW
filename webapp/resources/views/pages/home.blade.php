@@ -5,7 +5,14 @@
 @section('content')
 
 <div class="container">
-    <p>Home content.</p>
+    <a href="{{ url('books') }}">Books</a>
+    @auth
+        @if (Auth::user()->isAdmin())
+            <a href="{{ url('users') }}">Users</a>
+        @else
+            <a href="/users/{{Auth::user()->id}}/purchases">Purchase History</a>
+        @endif
+    @endauth
 </div>
 
 @endsection

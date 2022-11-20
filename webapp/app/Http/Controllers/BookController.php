@@ -66,4 +66,11 @@ class BookController extends Controller
       $book->delete();
       return $book;
     }
+
+    public function search(Request $request)
+    {
+      $books = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->get();
+      
+      return view('pages.books', ['books' => $books]);
+    }
 }

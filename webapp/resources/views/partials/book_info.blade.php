@@ -3,7 +3,7 @@
     <p>ISBN: {{ $book->isbn }}</p>
     <p>Year: {{ $book->year }}</p>
     <p>Price: {{ $book->price }} €</p>
-    <p>Stock: {{ $book->stock }}</p>
+    <p>Stock: {{ $book->stock }} units</p>
     <p>Edition: {{ $book->book_edition }}</p>
     <p>Description: {{ $book->book_description }}</p>
     <p>Category: {{ $category->name }}</p>
