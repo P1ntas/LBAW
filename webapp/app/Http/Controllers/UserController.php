@@ -180,7 +180,7 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function clearCart(Request $request, $id)
+    public function clearCart($id)
     {
         $user = User::find($id);
 
