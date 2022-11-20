@@ -1477,7 +1477,8 @@ M05: Administration and Static Pages
 
 ### 2. Prototype
 
-The prototype is available at 
+The prototype is available at https://lbaw2232.lbaw.fe.up.pt  
+- There were issues regarding the process of publishing our image since the **docker login git.fe.up.pt:5050** command was not working.
 
 Credentials:
 - admin user: 1234
