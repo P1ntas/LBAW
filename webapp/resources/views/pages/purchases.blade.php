@@ -5,6 +5,7 @@
 @section('content')
 
 <section id="purchases">
+  <p>Purchase History</p>
   @each('partials.purchase', $purchases, 'purchase')
 </section>
 

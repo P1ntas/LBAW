@@ -1,5 +1,5 @@
 <header id="navbar">
-  <a href="{{ url('/') }}">Off The Shelf</a>
+  <h1><a href="{{ url('/') }}">Off The Shelf</a></h1>
   <hr>
   @auth
     @if (Auth::user()->isAdmin())

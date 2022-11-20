@@ -1,4 +1,5 @@
 <article class="purchase" data-id="{{ $purchase->id }}">
+    <hr>
     <p>Checkout date: {{ $purchase->purchase_date }}</p>
     <p>Book(s):</p>
     @php ($finalcost = 1.50)
