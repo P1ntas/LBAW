@@ -17,6 +17,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (empty($user)) {
+            // error
             return redirect('/');
         }
 
@@ -32,10 +33,11 @@ class UserController extends Controller
         $users = User::where('admin_perms', FALSE)->get();;
 
         if (empty($users)) {
-            // to do
+            // error
             return redirect('/');
         }
 
+        $this->authorize('list', User::class);
         return view('pages.users', ['users' => $users]);
     }
 
@@ -59,21 +61,47 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (empty($user)) {
+            // error
             return redirect('/');
         }
+
+        //$this->authorize('update', User::class);
 
         $validator = Validator::make($request->all(), [
             'name' => 'string|max:255',
             'email' => [Rule::unique('users')->ignore($user->id), 'string', 'email', 'max:255'],
-            'user_address' => 'string|min:8|max:255',
             'phone' => 'regex:/^[1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9]$/'
         ]);
 
         if ($validator->fails()) {
+            // error
             return redirect('/');
         }
 
+        if (isset($request->user_address)) {
+            $validator = Validator::make($request->all(), [
+                'user_address' => 'string|min:8|max:255'
+            ]);
+
+            if ($validator->fails()) {
+                // error
+                return redirect('/');
+            }
+        }
+
+        if (isset($request->phone)) {
+            $validator = Validator::make($request->all(), [
+                'phone' => 'regex:/^[1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9]$/'
+            ]);
+
+            if ($validator->fails()) {
+                // error
+                return $validator;
+            }
+        }
+
         if ($request->password != $request->password_confirmation) {
+            // error
             return redirect('/');
         }
 
@@ -83,6 +111,7 @@ class UserController extends Controller
             ]);
     
             if ($validator->fails()) {
+                // error
                 return redirect('/');
             }
 
@@ -91,7 +120,6 @@ class UserController extends Controller
             }
         }
 
-        $user->id = $id;
         $user->name = $request->name;
         $user->email = $request->email;
 
@@ -99,14 +127,14 @@ class UserController extends Controller
             $user->user_address = $request->user_address;
         }
         else {
-            $user->user_address = null;
+            $user->user_address = $user->user_address;
         }
 
         if (isset($request->user_phone)) {
             $user->phone = $request->phone;
         }
         else {
-            $user->phone = null;
+            $user->phone = $user->phone;
         }
 
         if (isset($request->blocked)) {
@@ -117,7 +145,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        return redirect('/');
+        return redirect()->back();
     }
 
     public function delete(Request $request, $id)
@@ -135,6 +163,7 @@ class UserController extends Controller
     public function shoppingCart($id) {
         $books = User::find($id)->cart()->get();
 
+        $this->authorize('viewCart', User::class);
         return view('pages.cart', ['books' => $books]);
     }
 
@@ -148,7 +177,7 @@ class UserController extends Controller
         }
 
         $user->cart()->detach($request->book_id);
-        return redirect('/');
+        return redirect()->back();
     }
 
     public function clearCart(Request $request, $id)
@@ -161,7 +190,7 @@ class UserController extends Controller
         }
 
         $user->cart()->detach();
-        return redirect('/');
+        return redirect()->back();
     }
 
     public function addToCart(Request $request, $id) {
@@ -173,7 +202,7 @@ class UserController extends Controller
         }
   
         $user->cart()->attach($id);
-        return redirect('/');
+        return redirect()->back();
     }
 
     public function checkoutInfo($id)

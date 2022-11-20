@@ -16,6 +16,7 @@ class PurchaseController extends Controller
       $purchase = Purchase::find($id);
 
       if (empty($purchase)) {
+        // error
         return redirect('/');
       }
 
@@ -32,6 +33,7 @@ class PurchaseController extends Controller
       $purchases = Purchase::all();
 
       if (empty($purchases)) {
+        // error
         return redirect('/');
       }
 

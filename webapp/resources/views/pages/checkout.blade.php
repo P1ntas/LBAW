@@ -19,12 +19,14 @@
     <input type="hidden" name="state_purchase" value="Received">
     <input type="hidden" name="cost" value="1.50">
 
-    @php ($finalprice = 1.50)
-    @foreach ($books as $book)
-      @php ($finalprice += $book->price)
-    @endforeach
+    <p>Delivery cost: 1.50 €</p>
 
-    <p>Final price: {{$finalprice}} €</p>
+    @php ($finalcost = 1.50)
+    @foreach ($books as $book)
+      @php ($finalcost += $book->price)
+    @endforeach
+    <p>Final cost: {{$finalcost}} €</p>
+
     <button type="submit">Checkout</button>
     <a href="/users/{{Auth::user()->id}}/cart">Cancel</a>
   </form>

@@ -60,6 +60,7 @@ class BookController extends Controller
       $book = Book::find($id);
 
       if (empty($book)) {
+        // error
         return redirect('/');
       }
 

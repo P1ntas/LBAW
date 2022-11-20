@@ -48,6 +48,7 @@
     @endif
 
     <input type="hidden" name="blocked" value="FALSE">
+    <input type="hidden" name="admin_perms" value="FALSE">
 
     <p>Fields marked with * must be filled.</p>
 

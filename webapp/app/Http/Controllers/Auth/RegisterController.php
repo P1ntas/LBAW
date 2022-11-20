@@ -20,13 +20,40 @@ class RegisterController extends Controller
 
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'user_address' => 'string|min:8|max:255',
-            'phone' => 'regex:/^[1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9]$/'
+            'password' => 'required|string|min:6|confirmed'
         ]);
+
+        if ($validator->fails()) {
+            // error
+            return $validator;
+        }
+
+        if (isset($data['user_address'])) {
+            $validator = Validator::make($data, [
+                'user_address' => 'string|min:8|max:255'
+            ]);
+
+            if ($validator->fails()) {
+                // error
+                return $validator;
+            }
+        }
+
+        if (isset($data['phone'])) {
+            $validator = Validator::make($data, [
+                'phone' => 'regex:/^[1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9]$/'
+            ]);
+
+            if ($validator->fails()) {
+                // error
+                return $validator;
+            }
+        }
+
+        return $validator;
     }
 
     protected function create(array $data)
@@ -37,7 +64,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'user_address' => $data['user_address'],
             'phone' => $data['phone'],
-            'blocked' => $data['blocked']
+            'blocked' => $data['blocked'],
+            'admin_perms' => $data['admin_perms']
         ]);
     }
 }
