@@ -1393,23 +1393,35 @@ components:
 
 ## A8: Vertical prototype
 
-> Brief presentation of the artefact goals.
+The Vertical Prototype includes the implementation of the features marked as necessary (with an asterisk) in the common and theme requirements documents. This artifact aims to validate the architecture presented, also serving to gain familiarity with the technologies used in the project.
 
 ### 1. Implemented Features
 
 #### 1.1. Implemented User Stories
 
-> Identify the user stories that were implemented in the prototype.  
+The user stories that were implemented in the prototype are described in the following table.
 
 | User Story reference | Name                   | Priority                   | Description                   |
 | -------------------- | ---------------------- | -------------------------- | ----------------------------- |
-| US01                 | Name of the user story | Priority of the user story | Description of the user story |
+| US01               | View Products List                   | high     | As a *User*, I want a products list, so that I can see the books that are available in the store.                                    |
+| US03               | View Product Details                 | high     | As a *User*, I want to be able to see the book's details, so that I get to know more about it.                                       |
+| US04               | View Product Reviews                 | high     | As a *User*, I want to be able to see a book reviews, so that I have a vague idea of its quality.                                    |
+| US05               | Add Product to Shopping Cart         | high     | As a *User*, I want a shopping cart, so that I can add items that I might want.                                                      |
+| US06               | Manage Shopping Cart                 | high     | As a *User*, I want a shopping cart, so that I can manage the items I wanted and decide if I want to remove any of them.             |
+| US07               | Search Products                      | high     | As a *User*, I want a search bar, so that I can find the desirable book.                                                             |
+| US09       | Sign In                    | high     | As a *Visitor*, I want to authenticate into the system, so that I can access an administrator/authenticated user's privileges.                     |
+| US10       | Register                   | high     | As a *Visitor*, I want to register myself into the system, so that I can authenticate myself into the system.                                      |  
+| US11               | View Purchase History                  | high     | As an *Authenticated User*, I want a purchase history, so that I can track my purchases along the way.                                                      |
+| US15               | Checkout                               | high     | As an *Authenticated User*, I want to be able to checkout my shopping cart, so that I can get the products I want.                                          |
+| US18               | Logout                                 | high     | As an *Authenticated User*, I want to be able to logout, so that I can end my user session at the moment.                                                   |
+| US32               | Administer User Accounts              | high     | As an *Administrator*, I want to administrate user accounts, so that I can have some control over them and keep the system clean.                             |
+| US33               | Block/Unblock Users                   | high     | As an *Administrator*, I want to block or unblock user accounts, so that the system stays healthy and the users notice some kind of authority.                |
 
 ...
 
 #### 1.2. Implemented Web Resources
 
-> Identify the web resources that were implemented in the prototype.  
+The web resources that were implemented in the prototype are described in the next section.
 
 > Module M01: Module Name  
 
@@ -1425,8 +1437,14 @@ components:
 
 ### 2. Prototype
 
-> URL of the prototype plus user credentials necessary to test all features.  
-> Link to the prototype source code in the group's git repository.  
+The prototype is available at 
+
+Credentials:
+- admin user: 1234
+- regular user: 1234
+
+The code is available at
+https://git.fe.up.pt/lbaw/lbaw2223/lbaw2232/-/tree/main/webapp
 
 ---
 
