@@ -51,33 +51,26 @@
             </div>
         </header>
         <main>
-            <div id="login">
-                <div class="formul">
-                    <div class="button_rectangle">
-                        <div id="log"></div>
-                        <button type="button" class="button_log" onclick="">Login</button>
-                        <button type="button" class="button_log" onclick="">Register</button>
-                    </div>
-                    <form id="loginForm" class="inputs" action="../action/action_login.php" method="post">
-                        <input type="text" name="email/username" class="words" placeholder="email/username" required="required">
-                        <input type="password" name="password" class="words" placeholder="password" required="required">
-                        <button type="submit" class="sub">Login</button>
-                    </form>
-                    <form id="register" class="inputs" action="../action/action_register.php" method="post">
-                        <input type="email" name="email" class="words" placeholder="email" required="required">
-                        <input type="password" name="password" class="words" placeholder="password" required="required">
-                        <input type="password" name="repeat" class="words" placeholder="repeat password" required="required">
-                        <input type="username" name="username" class="words" placeholder="username" required="required">
-                        <input type="first_name" name="first_name" class="words" placeholder="first name" required="required">
-                        <input type="last_name" name="last_name" class="words" placeholder="last name" required="required">
-                        <input type="checkbox" id="owner" name="check" class="check" value="owner" onclick="">
-                        <label for="owner" class="Iam"> I am an admin</label> <br>
-                        <input type="checkbox" id="customer" name="check" class="check" value="customer" onclick="">
-                        <label for="customer" class="Iam"> I am a client</label>
-                        <button type="submit" class="sub">Register</button> 
-                    </form>
-                </div>
+            <!-- Edit Profile starts here-->
+            <h1>Editar Conta</h1>
+            <div id="editWrapper">
+                <img src="../pictures/default.jpg" id="userPic" alt="userPicture">
+                <br/>
+                <button type="submit" class="photo_button">
+                    <figcaption>Mudar foto <iconify-icon icon="mdi:pencil"></iconify-icon></figcaption>
+                </button>
             </div>
+            <form id="fedit" action="" method="post">
+                <input type="email" name="email" class="editor" placeholder="email">
+                <input type="username" name="username" class="editor" placeholder="username">
+                <input type="password" name="password" class="editor" placeholder="password">
+                <input type="password" name="repeat" class="editor" placeholder="repeat password">
+                <input type="name" name="name" class="editor" placeholder="name">
+                <input type="address" name="address" class="editor" placeholder="address">
+                <input type="phone" name="phone" class="editor" placeholder="phone number">
+                <button type="submit" class="photo_button">Confirmar mudanças</button> 
+            </form>
+            <!--Edit Profile ends here-->
         </main>
         <footer>
             <ul id="fItems">

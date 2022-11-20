@@ -8,7 +8,7 @@ function register() {
     z.style.left = "5.625em";
 }
 
-    function login() {
+function login() {
     x.style.left = "6.25em";
     y.style.left = "31.25em";
     z.style.left = "0em";

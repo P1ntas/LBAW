@@ -41,21 +41,23 @@ img {
     height: auto;
 }
 
+button {
+    cursor: pointer;
+}
+
 #imgTitle {
     display: flex;
     flex-direction: row;
     flex-flow: column;
-    width: 40%;
+    width: 55%;
 }
 
 #imgTitle > img {
-    display: block;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-
     padding: 1em;
 }
 
@@ -76,27 +78,86 @@ header {
     padding: 1em;
     min-height: 3.125em;
     border-radius: 0 0 1.5em 1.5em;
+    margin-bottom: 1em;
 }
 
 #headerWrapper {
     width: 100%;
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+    clear: both;
+    justify-content: space-between;
 }
 
+#headerWrapper2 {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+    clear: both;
+    justify-content: space-between;
+    float: right;
+}
 
 #hSearch {
-    width: 15%;
+    width: 14em;
+    position: relative;
+    clear: both;
+    color: rgb(20, 18, 90);
+}
+
+#magnifierSearch {
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+    font-size: 1em;
+    margin: 2.3em 0 0 1em;
 }
 
 #hSearchText {
     border-radius: 2em;
-    border: 0.1em solid black;
+    border: 0.1em solid rgb(20, 18, 90);
+    padding-left: 0.5em;
+}
+
+#headerButtons {
+    margin: 1.6em 0 0 0;
+    color: rgb(20, 18, 90);
+}
+
+#addWish {
+    padding: 0;
+    border: none;
+    background: none;
+    -webkit-appearance: inherit;
+    -moz-appearance: inherit;
+    -o-appearance: inherit;
+    appearance: inherit;
+    font-size: 2em;
+    color: inherit;
+}
+
+#hCart {
+    padding: 0;
+    border: none;
+    background: none;
+    -webkit-appearance: inherit;
+    -moz-appearance: inherit;
+    -o-appearance: inherit;
+    appearance: inherit;
+    color: inherit;
+    margin-left: 1em;
 }
 
 #cart {
     object-fit: cover;
     width: 1em;
     font-size: 3em;
+    color: inherit;
+}
+
+#hLog {
+    margin: 2.2em 0 0 0;
 }
 
 .hambMenu li {
@@ -109,11 +170,12 @@ header {
   
 #hamburguer {
     min-height: 3.75em;
-
+    margin: 2.2em 0.2em 0 1em;
     justify-content: space-between;
     align-items: center;
     padding: 0 1.5px;
     float: right;
+    clear: both;
 }
   
 #hambMenu {
@@ -182,10 +244,29 @@ header {
     width: 4em;
     font-size: 1em;
     font-weight: 600;
+    padding: 0;
+    border: none;
+    background: none;
+    -webkit-appearance: inherit;
+    -moz-appearance: inherit;
+    -o-appearance: inherit;
+    appearance: inherit;
+    color: rgb(20, 18, 90);
+}
+
+#headerLogin:hover {
+    text-shadow:
+    -0.1px -0.1px 0 rgb(20, 18, 90),
+    0.1px -0.1px 0 rgb(20, 18, 90),
+    -0.1px 0.1px 0 rgb(20, 18, 90),
+    0.1px 0.1px 0 rgb(20, 18, 90);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 #login {
-    background-image: url("../pictures/server.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -282,6 +363,7 @@ header {
     outline: none;
     border-radius: 1.5625em;
     color: rgb(20, 18, 90);
+    margin-top: 1em;
 }
 
 .sub:hover {
@@ -294,18 +376,117 @@ header {
 }
 
 #loginForm {
-    left: 6.25em;
-    
+    left: 6.25em; 
 }
 
 #loginForm button{
     margin-top: 1em;
-    
+}
+
+#editWrapper{
+    width: 15em;
+    float: right;
+    align-items: center;
+}
+
+#editWrapper > img {
+    width: 15em;
+}
+
+.photo_button {
+    width: 15em;
+    height: 3em;
+    border-radius: 3em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: white;
+    color: rgb(176, 172, 71);
+    border: 0.4em solid rgb(176, 172, 71);
+    text-shadow:
+    -0.1px -0.1px 0 rgb(176, 172, 71),
+    0.1px -0.1px 0 rgb(176, 172, 71),
+    -0.1px 0.1px 0 rgb(176, 172, 71),
+    0.1px 0.1px 0 rgb(176, 172, 71);
+    margin: 1.5em auto;
+}
+
+.photo_button:hover {
+    background-color: rgb(20, 18, 90);
+    border-color: rgb(20, 18, 90);
+    color: white;
+    text-shadow:
+    -0.1px -0.1px 0 rgb(20, 18, 90),
+    0.1px -0.1px 0 rgb(20, 18, 90),
+    -0.1px 0.1px 0 rgb(20, 18, 90),
+    0.1px 0.1px 0 rgb(20, 18, 90);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+#fedit { 
+    width: 40%;
+}
+
+.editor {
+    width: 100%;
+    padding: 0.625em 0;
+    padding-left: 0.3em;
+    margin: 0.3125em;
+    border: 0.1em solid;
+    border-radius: 0.4em;
+    outline: none;
+    background: transparent;
 }
 
 #register {
     left: 37.5em;
     top: 7.5em;
+}
+
+#returnBook {
+    display: inline-flex;
+    flex-direction: row;
+    flex-flow: row;
+    flex: 1;
+    font-size: 1.5em;
+}
+#returnBook h1 {
+    font-size: 0.8em !important;
+    font-weight: normal;
+    margin: 0 0 0 0.2em;
+}
+
+#bookInfo > button {
+    float: right;
+    cursor: pointer;
+}
+
+#buy {
+    margin: 0.7em 0.5em 0 0;
+    border-radius: 0.4em;
+    width: 10em;
+    height: 2.5em;
+    border: 0;
+    color: rgb(248, 244, 172);
+    background-color: rgb(20, 18, 90);
+}
+
+#buy:hover {
+    background-color: rgb(248, 244, 172);
+    text-shadow:
+    -0.1px -0.1px 0 rgb(248, 244, 172),
+    0.1px -0.1px 0 rgb(248, 244, 172),
+    -0.1px 0.1px 0 rgb(248, 244, 172),
+    0.1px 0.1px 0 rgb(248, 244, 172);
+    -webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    color: rgb(20, 18, 90);
 }
 
 footer {

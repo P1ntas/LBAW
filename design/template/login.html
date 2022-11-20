@@ -8,6 +8,7 @@
         <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
         <script src="../javascript/header.js" defer></script>
         <script src="../javascript/login.js" defer></script>
+        <script src="../javascript/checkbox.js" defer></script>
     </head>
     <body>
         <header>
@@ -51,25 +52,27 @@
             </div>
         </header>
         <main>
+            <!-- login starts here-->
             <div id="login">
                 <div class="formul">
                     <div class="button_rectangle">
                         <div id="log"></div>
-                        <button type="button" class="button_log" onclick="">Login</button>
-                        <button type="button" class="button_log" onclick="">Register</button>
+                        <button type="button" class="button_log" onclick="login()">Login</button>
+                        <button type="button" class="button_log" onclick="register()">Register</button>
                     </div>
-                    <form id="loginForm" class="inputs" action="../action/action_login.php" method="post">
+                    <form id="loginForm" class="inputs" action="" method="post">
                         <input type="text" name="email/username" class="words" placeholder="email/username" required="required">
                         <input type="password" name="password" class="words" placeholder="password" required="required">
                         <button type="submit" class="sub">Login</button>
                     </form>
-                    <form id="register" class="inputs" action="../action/action_register.php" method="post">
+                    <form id="register" class="inputs" action="" method="post">
                         <input type="email" name="email" class="words" placeholder="email" required="required">
+                        <input type="username" name="username" class="words" placeholder="username" required="required">
                         <input type="password" name="password" class="words" placeholder="password" required="required">
                         <input type="password" name="repeat" class="words" placeholder="repeat password" required="required">
-                        <input type="username" name="username" class="words" placeholder="username" required="required">
-                        <input type="first_name" name="first_name" class="words" placeholder="first name" required="required">
-                        <input type="last_name" name="last_name" class="words" placeholder="last name" required="required">
+                        <input type="name" name="name" class="words" placeholder="name" required="required">
+                        <input type="address" name="address" class="words" placeholder="address">
+                        <input type="phone" name="phone" class="words" placeholder="phone number">
                         <input type="checkbox" id="owner" name="check" class="check" value="owner" onclick="">
                         <label for="owner" class="Iam"> I am an admin</label> <br>
                         <input type="checkbox" id="customer" name="check" class="check" value="customer" onclick="">
@@ -78,6 +81,7 @@
                     </form>
                 </div>
             </div>
+            <!--login ends here-->
         </main>
         <footer>
             <ul id="fItems">

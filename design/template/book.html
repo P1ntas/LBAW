@@ -51,33 +51,20 @@
             </div>
         </header>
         <main>
-            <div id="login">
-                <div class="formul">
-                    <div class="button_rectangle">
-                        <div id="log"></div>
-                        <button type="button" class="button_log" onclick="">Login</button>
-                        <button type="button" class="button_log" onclick="">Register</button>
-                    </div>
-                    <form id="loginForm" class="inputs" action="../action/action_login.php" method="post">
-                        <input type="text" name="email/username" class="words" placeholder="email/username" required="required">
-                        <input type="password" name="password" class="words" placeholder="password" required="required">
-                        <button type="submit" class="sub">Login</button>
-                    </form>
-                    <form id="register" class="inputs" action="../action/action_register.php" method="post">
-                        <input type="email" name="email" class="words" placeholder="email" required="required">
-                        <input type="password" name="password" class="words" placeholder="password" required="required">
-                        <input type="password" name="repeat" class="words" placeholder="repeat password" required="required">
-                        <input type="username" name="username" class="words" placeholder="username" required="required">
-                        <input type="first_name" name="first_name" class="words" placeholder="first name" required="required">
-                        <input type="last_name" name="last_name" class="words" placeholder="last name" required="required">
-                        <input type="checkbox" id="owner" name="check" class="check" value="owner" onclick="">
-                        <label for="owner" class="Iam"> I am an admin</label> <br>
-                        <input type="checkbox" id="customer" name="check" class="check" value="customer" onclick="">
-                        <label for="customer" class="Iam"> I am a client</label>
-                        <button type="submit" class="sub">Register</button> 
-                    </form>
-                </div>
+            <!--book starts here-->
+            <div id="returnBook">
+                <iconify-icon icon="mdi:arrow-left-bottom"></iconify-icon>
+                <h1>Return</h1>
             </div>
+            <div id="bookInfo">
+                <img src="../pictures/logo.png" alt="bookPhoto" id="bookP">
+                <button id="addWish" type="submit">
+                    <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
+                </button>
+                <button id="buy" type="submit">Comprar</button>
+                
+            </div>
+            <!--book ends here-->
         </main>
         <footer>
             <ul id="fItems">
