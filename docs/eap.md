@@ -1423,15 +1423,55 @@ The user stories that were implemented in the prototype are described in the fol
 
 The web resources that were implemented in the prototype are described in the next section.
 
-> Module M01: Module Name  
+M01: Authentication and Profile
 
 | Web Resource Reference | URL                            |
 | ---------------------- | ------------------------------ |
-| R01: Web resource name | URL to access the web resource |
+| R101: Login Form | GET /login |
+| R102: Login Action | POST /login |
+| R103: Logout Action | GET /logout |
+| R104: Register Form | GET /register |
+| R105: Register Action | POST /register |
+| R106: View User Profile | GET /users/{id} |
+| R107: Edit Profile Form | GET /users/{id}/edit |
+| R112: Edit Profile Action | POST /users/{id}/edit |
 
 ...
 
-> Module M02: Module Name  
+M02: Products and Categories
+
+| Web Resource Reference | URL                            |
+| ---------------------- | ------------------------------ |
+| R203: Get Product Information | GET /books/{id} |
+| R206: Search Book | POST /books/search |
+| R213: View Books List | GET /books |
+| R214: Add Product To Cart | POST /books/{id} |
+
+...
+
+M04: Cart, Wishlist and Collections
+
+| Web Resource Reference | URL                            |
+| ---------------------- | ------------------------------ |
+| R407: View Cart | GET /users/{id}/cart |
+| R408: Remove Product From Cart | POST /users/{id}/cart |
+| R409: Clear Cart | GET /users/{id}/cart/clear |
+| R410: Checkout Details | GET /users/{id}/cart/checkout |
+| R411: Checkout Action | POST /users/{id}/cart/checkout |
+| R412: View Purchase History | GET /users/{id}/purchases |
+
+...
+
+M05: Administration and Static Pages
+
+| Web Resource Reference | URL                            |
+| ---------------------- | ------------------------------ |
+| R502: View User Management Page | GET /users |
+| R503: Search User API | POST /users/search |
+| R504: View Admin Profile | GET /admins/{id} |
+| R505: Edit Admin Form | GET /admins/{id}/edit |
+| R506: Edit Admin Action | POST /admins/{id}/edit |
+| R507: View Home Page | GET / |
 
 ...
 
