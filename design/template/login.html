@@ -73,9 +73,9 @@
                         <input type="name" name="name" class="words" placeholder="name" required="required">
                         <input type="address" name="address" class="words" placeholder="address">
                         <input type="phone" name="phone" class="words" placeholder="phone number">
-                        <input type="checkbox" id="owner" name="check" class="check" value="owner" onclick="">
+                        <input type="checkbox" id="owner" name="check" class="check" value="owner" onclick="onlyOne(this)">
                         <label for="owner" class="Iam"> I am an admin</label> <br>
-                        <input type="checkbox" id="customer" name="check" class="check" value="customer" onclick="">
+                        <input type="checkbox" id="customer" name="check" class="check" value="customer" onclick="onlyOne(this)">
                         <label for="customer" class="Iam"> I am a client</label>
                         <button type="submit" class="sub">Register</button> 
                     </form>
