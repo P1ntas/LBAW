@@ -275,7 +275,6 @@ header {
     padding: 0;
     max-width: 100%;
     height: auto;
-    
 }
 
 
@@ -291,7 +290,9 @@ header {
     border-radius: 1.5em;
 }
 
-
+#log2 {
+    color: white;
+}
 
 .button_rectangle {
     display: flex;
