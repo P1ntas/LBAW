@@ -7,7 +7,8 @@
         <link rel="stylesheet" href="../css/style.css">
         <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
         <script src="../javascript/header.js" defer></script>
-        <script src="../javascript/login.js" defer></script>
+        <script src="../javascript/book.js" defer></script>
+
     </head>
     <body>
         <header>
@@ -62,13 +63,18 @@
                     <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
                 </button>
                 <button id="buy" type="submit">Comprar</button>
-                <nav id="bookDetails">
-                    <label id="description" class="bookLable">Sinopse</label>
+                <div id="bookDetails">
+                    <label id="description" class="bookLable activeLabel">Sinopse</label>
                     <label id="reviewBook" class="bookLable">Reviews</label>
-                    <label id="detailsBook" class="bookLable">Detalhes</label>
+                    <label id="details" class="bookLable">Detalhes</label>
                     <label id="autor" class="bookLable">Autor</label>
                     <label id="commentBook" class="bookLable">Comentários</label>
-                </nav>
+                </div>
+                <article id="bookDescription" class="bookContents">Lorem ipsum 1</article>
+                <article id="bookReview" class="bookContents hideBook">Lorem ipsum 2</article>
+                <article id="detailsBook" class="bookContents hideBook">Lorem ipsum 3</article>
+                <article id="bookAutor" class="bookContents hideBook">Lorem ipsum 4</article>
+                <article id="bookComments" class="bookContents hideBook">Lorem ipsum 5</article>
             </div>
             <!--book ends here-->
         </main>

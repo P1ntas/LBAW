@@ -512,6 +512,18 @@ header {
     color: rgb(20, 18, 90);
 }
 
+.bookLable {
+    cursor: pointer;
+}
+
+.activeLabel {
+    color: blue;
+}
+
+.hideBook {
+    visibility: hidden;
+}
+
 footer {
     background-color: rgb(51, 49, 57);
     color: white;
