@@ -30,7 +30,7 @@ class UserController extends Controller
 
     public function list()
     {
-        $users = User::where('admin_perms', FALSE)->get();;
+        $users = User::where('admin_perms', FALSE)->get();
 
         if (empty($users)) {
             // error
