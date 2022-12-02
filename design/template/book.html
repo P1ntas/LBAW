@@ -64,17 +64,66 @@
                 </button>
                 <button id="buy" type="submit">Comprar</button>
                 <div id="bookDetails">
-                    <label id="description" class="bookLable activeLabel">Sinopse</label>
-                    <label id="reviewBook" class="bookLable">Reviews</label>
-                    <label id="details" class="bookLable">Detalhes</label>
-                    <label id="autor" class="bookLable">Autor</label>
-                    <label id="commentBook" class="bookLable">Comentários</label>
+                    <span id="description" class="bookLable activeLabel">Sinopse</span>
+                    <span id="reviewBook" class="bookLable">Reviews</span>
+                    <span id="details" class="bookLable">Detalhes</span>
+                    <span id="autor" class="bookLable">Autor</span>
+                    <span id="commentBook" class="bookLable">Comentários</span>
                 </div>
-                <article id="bookDescription" class="bookContents">Lorem ipsum 1</article>
-                <article id="bookReview" class="bookContents hideBook">Lorem ipsum 2</article>
-                <article id="detailsBook" class="bookContents hideBook">Lorem ipsum 3</article>
-                <article id="bookAutor" class="bookContents hideBook">Lorem ipsum 4</article>
-                <article id="bookComments" class="bookContents hideBook">Lorem ipsum 5</article>
+                <div id="bookDetailed">
+                    <article id="bookDescription" class="bookContents">Lorem ipsum 1</article>
+                    <div id="bookReview" class="bookContents hideBook">
+                        <div id="revWrapper2">
+                            <div id="revWrapper">
+                                <div id="rating">
+                                    <p>5</p>
+                                    <iconify-icon icon="material-symbols:star" id="star" style="color: #ffc700;"></iconify-icon>
+                                </div>
+                                <div id="revHeader">
+                                    <a href="#" class="username">username</a>
+                                    <img src="../pictures/default.jpg" alt="userPhoto" class="bookU">
+                                </div>
+                            </div>
+                            <p>Content of review</p>
+                        </div>
+                    </div>
+                    <table id="detailsBook" class="bookContents hideBook">
+                        <tr>
+                            <td class="detailsHeader">Título:</td>
+                            <td class="detailsText">O Senhor dos Anéis</td>
+                        </tr>
+                        <tr>
+                            <td class="detailsHeader">ISBN:</td>
+                            <td class="detailsText">978-3-16-148410-0</td>
+                        </tr>
+                        <tr>
+                            <td class="detailsHeader">Ano:</td>
+                            <td class="detailsText">1954</td>
+                        </tr>
+                        <tr>
+                            <td class="detailsHeader">Edição:</td>
+                            <td class="detailsText">13</td>
+                        </tr>
+                        <tr>
+                            <td class="detailsHeader">Género:</td>
+                            <td class="detailsText">Fantasia</td>
+                        </tr>
+                        <tr>
+                            <td class="detailsHeader">Editora:</td>
+                            <td class="detailsText">Porto Editora</td>
+                        </tr>
+                    </table>
+                    <div id="bookAutor" class="bookContents hideBook">Lorem ipsum 4</div>
+                    <div id="bookComments" class="bookContents hideBook">
+                        <div id="comBook">
+                            <div id="comHeader">
+                                <a href="#" class="username">username</a>
+                                <img src="../pictures/default.jpg" alt="userPhoto" class="bookU">
+                            </div>
+                        <p id="comCont">Contents of comment</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--book ends here-->
         </main>
