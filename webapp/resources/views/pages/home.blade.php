@@ -13,6 +13,7 @@
             <a href="/users/{{Auth::user()->id}}/purchases">Purchase History</a>
         @endif
     @endauth
+    <a href="/about">About Us</a>
 </div>
 
 @endsection

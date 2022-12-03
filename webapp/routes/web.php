@@ -31,3 +31,6 @@ Route::get('users/{id}/purchases', 'PurchaseController@listByUser')->where(['id'
 // Cart
 Route::get('users/{id}/cart', 'UserController@shoppingCart')->where(['id' => '[0-9]+']);
 Route::get('users/{id}/cart/checkout', 'UserController@checkoutInfo')->where(['id' => '[0-9]+']);
+
+// About us
+Route::get('about', 'AboutController@show');
