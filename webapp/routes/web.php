@@ -1,7 +1,7 @@
 <?php
 
 // Home
-Route::get('/', 'HomeController@show');
+Route::get('/', 'StaticController@index');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -33,4 +33,4 @@ Route::get('users/{id}/cart', 'UserController@shoppingCart')->where(['id' => '[0
 Route::get('users/{id}/cart/checkout', 'UserController@checkoutInfo')->where(['id' => '[0-9]+']);
 
 // About us
-Route::get('about', 'AboutController@show');
+Route::get('about', 'StaticController@about');
