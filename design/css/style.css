@@ -103,24 +103,28 @@ header {
     position: relative;
     clear: both;
     color: rgb(20, 18, 90);
+    display: flex;
+    margin-right: 1.5em;
 }
 
 #magnifierSearch {
     background-color: transparent;
     border: 0;
     color: inherit;
-    font-size: 1em;
-    margin: 2.3em 0 0 1em;
+    font-size: 1.7em;
+    margin: 0.2em 0 0 1em;
 }
 
 #hSearchText {
     border-radius: 2em;
+    height: 2.4em;
     border: 0.1em solid rgb(20, 18, 90);
-    padding-left: 0.5em;
+    padding-left: 1em;
+    margin-top: 2.8em;
 }
 
 #headerButtons {
-    margin: 1.6em 0 0 0;
+    margin: 1.6em 1.5em 0 0;
     color: rgb(20, 18, 90);
 }
 
@@ -145,7 +149,7 @@ header {
     -o-appearance: inherit;
     appearance: inherit;
     color: inherit;
-    margin-left: 1em;
+    margin-left: 2em;
 }
 
 #cart {
@@ -156,7 +160,7 @@ header {
 }
 
 #hLog {
-    margin: 2.2em 0 0 0;
+    margin: 2.2em 1.5em 0 0;
 }
 
 .hambMenu li {
@@ -169,7 +173,7 @@ header {
   
 #hamburguer {
     min-height: 3.75em;
-    margin: 2.2em 0.2em 0 1em;
+    margin: 2.2em 0.8em 0 1em;
     justify-content: space-between;
     align-items: center;
     padding: 0 1.5px;
@@ -240,6 +244,37 @@ header {
     transform: translateY(-0.5em) rotate(-45deg);
 }
 
+#userPopup {
+    width: 7em;
+    height: auto;
+    margin: 1em 0 0 0;
+    right: 4.3em;
+    background-color: white;
+    border: 1px solid rgb(20, 18, 90);
+    border-radius: 0.3em;
+    position: absolute;
+    transition: all 0s ease 0.1s;
+    visibility: hidden;
+}
+
+#userActions {
+    padding: 0;
+    margin: 0.3em 0 0.3em 0;
+    text-align: center;
+}
+
+#userActions li:hover {
+    text-shadow:
+    -0.4px -0.4px 0 rgb(20, 18, 90),
+    0.4px -0.4px 0 rgb(20, 18, 90),
+    -0.4px 0.4px 0 rgb(20, 18, 90),
+    0.4px 0.4px 0 rgb(20, 18, 90);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
 #headerLogin {
     width: 4em;
     font-size: 1em;
@@ -264,6 +299,16 @@ header {
     -moz-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+}
+
+#headerLogin:hover + #userPopup {
+    transition: 0s;
+    visibility: visible;
+}
+
+#headerLogin + #userPopup:hover {
+    transition: 0s;
+    visibility: visible;
 }
 
 #login {
