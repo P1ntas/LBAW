@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
+use App\Models\FAQ;
+
 class StaticController extends Controller
 {
   public function index()
@@ -18,10 +22,14 @@ class StaticController extends Controller
   }
 
   public function faq() {
-    return view('pages.faq');
+    
+    $faqs = FAQ::all();
+
+    return view('pages.faq', ['faqs' => $faqs]);
+
   }
 
-  public function contact() {
-    return view('pages.contact');
+  public function contacts() {
+    return view('pages.contacts');
   }
 }

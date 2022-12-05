@@ -34,3 +34,9 @@ Route::get('users/{id}/cart/checkout', 'UserController@checkoutInfo')->where(['i
 
 // About us
 Route::get('about', 'StaticController@about');
+
+// FAQ
+Route::get('faq', 'StaticController@faq');
+
+// Contacts
+Route::get('contacts', 'StaticController@contacts');
