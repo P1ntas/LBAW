@@ -676,3 +676,33 @@ footer > p {
     margin-right: 2em;
     margin-top: 2em;
 }
+
+
+#rowAboutUS {
+    display: table;
+}
+
+#col1AboutUs {
+    width: 40%;
+    float: left;
+    padding: 2em;
+    margin-left: 3em;
+    text-align: justify;
+}
+
+#titleAboutUs {
+    font-size: 3em;
+    color: rgb(20, 18, 90)
+}
+
+#col2AboutUs {
+    width: 33.33%;
+    float: right;
+    padding: 50px;
+}
+
+#imgAboutUs {
+    max-width: 25em;
+    max-height: 25em;
+    box-shadow: 1em 1em 1em rgb(172, 172, 172);
+}
