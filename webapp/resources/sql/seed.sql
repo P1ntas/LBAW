@@ -217,6 +217,9 @@ INSERT INTO cart VALUES (3, 3);
 INSERT INTO faq VALUES ('This is a question','This is an answer');
 INSERT INTO faq VALUES ('What do i do if i cant find a book i want','try to search better \_/(O-O)\_/');
 
+INSERT INTO wishlist VALUES (3, 2);
+INSERT INTO wishlist VALUES (3, 3);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------

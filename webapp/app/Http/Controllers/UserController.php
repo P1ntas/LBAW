@@ -218,6 +218,43 @@ class UserController extends Controller
         return $books;
     }
 
+    public function wishlist($id) {
+        $books = User::find($id)->wishlist()->get();
+
+        if (empty($books)) {
+            // to do
+            return redirect('/');
+        }
+
+        return view('pages.wishlist', ['books' => $books]);
+    }
+
+    public function clearWishlist($id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            // to do
+            return redirect('/');
+        }
+
+        $user->wishlist()->detach();
+        return redirect()->back();
+    }
+
+    public function manageWishlist(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            // to do
+            return redirect('/');
+        }
+
+        $user->wishlist()->detach($request->book_id);
+        return redirect()->back();
+    }
+
     public function search(Request $request)
     {
       $users = User::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->get();
