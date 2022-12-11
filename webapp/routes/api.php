@@ -31,6 +31,8 @@ Route::post('/users/{id}/wishlist', 'UserController@manageWishlist')->where(['id
 
 // Books
 Route::post('/books/{id}', 'UserController@addToCart')->where(['id' => '[0-9]+']);
+Route::post('/books/{id}', 'UserController@addToWishlist')->where(['id' => '[0-9]+']);
+Route::post('/books/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
 
 // Purchases
 Route::post('/users/{id}/cart/checkout', 'PurchaseController@checkout')->where(['id' => '[0-9]+']);

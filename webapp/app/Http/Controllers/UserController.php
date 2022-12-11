@@ -255,6 +255,18 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function addToWishlist(Request $request, $id) {
+        $user = User::find($request->user_id);
+  
+        if (empty($user)) {
+          // to do
+          return redirect('/');
+        }
+  
+        $user->wishlist()->attach($id);
+        return redirect()->back();
+    }
+
     public function search(Request $request)
     {
       $users = User::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->get();

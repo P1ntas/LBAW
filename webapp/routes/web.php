@@ -14,6 +14,7 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('books', 'BookController@list');
 Route::post('books/search', 'BookController@search');
 Route::get('books/{id}', 'BookController@show')->where(['id' => '[0-9]+']);
+//Route::get('books/{id}/edit', 'BookController@edit')->where(['id' => '[0-9]+']);
 
 // Users
 Route::get('users', 'UserController@list');
