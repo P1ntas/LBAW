@@ -737,6 +737,36 @@ header {
     max-width: 20em;
 }
 
+#pWrapper {
+    margin: 0em 0 0 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#purchase {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+#purchase::after {
+    content: "";
+    width: 155%;
+    border-bottom: 0.1em solid rgb(175, 175, 175);
+}
+
+#imgPurchase {
+    float: right;
+    cursor: pointer;
+    width: 5em;
+    margin: 1em 10em 0 0;
+}
+
+#purchaseData > p {
+    font-weight: 600;
+}
+
 footer {
     background-color: rgb(51, 49, 57);
     color: white;
