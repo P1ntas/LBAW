@@ -719,18 +719,23 @@ header {
     width: 75%;
 }
 
-#redWrapper {
+.redWrapper {
     text-align: center;
     position: relative;
     height: 100%;
 }
 
-#redWrapper2 {
+.redWrapper2 {
     text-align: inherit;
     position: absolute;
     top: 50%;
     margin-top: -12em;
     width: 100%;
+}
+
+#check {
+    width: 240;
+    height: 240;
 }
 
 #catP {
@@ -741,6 +746,8 @@ header {
     margin: 0em 0 0 2em;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #purchase {

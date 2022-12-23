@@ -32,6 +32,13 @@
                 </div>
                 <div id="hLog">
                     <button id="headerLogin" type="submit">Login</button>
+                    <div id="userPopup">
+                        <ul id ="userActions">
+                            <li><a href="#">Purchases</a></li>
+                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="#">Sign out</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <nav id="hamburguer">
                     <ul id="hambMenu">
@@ -50,29 +57,12 @@
             </div>
         </header>
         <main>
-            <!-- Edit Book starts here-->
-            <h1>Editar Livro</h1>
-            <div id="editWrapper">
-                <img src="../pictures/default.jpg" id="userPic" alt="userPicture">
-                <br/>
-                <button type="submit" id="photo_button" class="edit_button">
-                    <figcaption>Mudar foto <iconify-icon icon="mdi:pencil"></iconify-icon></figcaption>
-                </button>
-                <button type="submit" id="delete_button" class="edit_button">Apagar Livro</button>
-            </div>
-            <form id="fedit" action="" method="post">
-                <input type="text" name="título" class="editor" placeholder="Título">
-                <input type="text" name="ISBN" class="editor" placeholder="ISBN">
-                <input type="range" max="2023" name="ano" class="editor" placeholder="Ano">
-                <input type="number" name="preço" class="editor" placeholder="Preço">
-                <input type="name" name="stock" class="editor" placeholder="Stock">
-                <input type="number" name="edição" class="editor" placeholder="Edição">
-                <input type="text" name="descrição" class="editor" placeholder="Descrição">
-                <input type="text" name="categoria" class="editor" placeholder="Categoria">
-                <input type="text" name="editora" class="editor" placeholder="editora">
-                <button type="submit" id="edit_button" class="edit_button">Confirmar mudanças</button> 
-            </form> 
-            <!--Edit Book ends here-->
+            <!-- Purchase redirect starts here -->
+            <div class="redWrapper">
+                <div class="redWrapper2">
+                    <iconify-icon icon="material-symbols:check-circle-outline-rounded" style="color: #008037;" width="240" height="240"></iconify-icon>                    <p>Item purchased. You'll be redirected to main page.</p>
+                </div>
+            <!-- Purchase redirect ends here -->
         </main>
         <footer>
             <ul id="fItems">
