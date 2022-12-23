@@ -822,3 +822,83 @@ footer > p {
     max-height: 25em;
     box-shadow: 1em 1em 1em rgb(172, 172, 172);
 }
+
+#rowContactUs{
+    display: table;
+}
+
+#col1ContactUs {
+    width: 40%;
+    float: left;
+    padding: 2em;
+    margin-left: 10em;
+    text-align: justify;
+    margin-top: 3em;
+}
+
+#titleContactUs {
+    font-size: 3em;
+    color: rgb(20, 18, 90)
+}
+
+#col2ContactUs {
+    width: 33.33%;
+    float: right;
+    padding: 50px;
+    text-align: center;
+    margin-right: 3em;
+}
+
+#titleContactUs {
+    font-size: 3em;
+    color: rgb(20, 18, 90)
+}
+
+#send_message{
+    width: 15em;
+    height: 3em;
+    border-radius: 3em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: white;
+    color: rgb(176, 172, 71);
+    border: 0.4em solid rgb(176, 172, 71);
+    text-shadow:
+    -0.1px -0.1px 0 rgb(176, 172, 71),
+    0.1px -0.1px 0 rgb(176, 172, 71),
+    -0.1px 0.1px 0 rgb(176, 172, 71),
+    0.1px 0.1px 0 rgb(176, 172, 71);
+    margin: 1.5em auto;
+}
+
+#send_message:hover{
+    background-color: rgb(20, 18, 90);
+    border-color: rgb(20, 18, 90);
+    color: white;
+    text-shadow:
+    -0.1px -0.1px 0 rgb(20, 18, 90),
+    0.1px -0.1px 0 rgb(20, 18, 90),
+    -0.1px 0.1px 0 rgb(20, 18, 90),
+    0.1px 0.1px 0 rgb(20, 18, 90);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+#inputContact{
+    width: 70%;
+}
+
+#messageContact{
+    height: 7em;
+}
+/*
+#mainContactUs{
+    background-image: url("../pictures/contactus.jpg");
+    background-size: cover;
+    
+}
+*/
