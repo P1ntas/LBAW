@@ -55,7 +55,7 @@ CREATE TABLE faq (
 
 CREATE TABLE publisher (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL
+    name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE author (
@@ -70,7 +70,7 @@ CREATE TABLE collections (
 
 CREATE TABLE category (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL
+    name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE users (

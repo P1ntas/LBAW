@@ -38,12 +38,28 @@ class BookController extends Controller
       return view('pages.books', ['books' => $books]);
     }
 
+    public function addBook($id) {
+      $categories = Category::all();
+      $publishers = Publisher::all();
+
+      return view('pages.add_book', ['categories' => $categories, 'publishers' => $publishers]);
+    }
+
     public function create(Request $request)
     {
       $book = new Book();
 
-      $book->title = $request->input('title');
-      // inputs fields
+      $book->title = $request->title;
+      $book->isbn = $request->isbn;
+      $book->year = $request->year;
+      $book->price = $request->price;
+      $book->stock = $request->stock;
+      $book->book_edition = $request->book_edition;
+      $book->book_description = $request->book_description;
+      $category = Category::where('name', $request->category_name)->first();
+      $book->category_id = $category->id;
+      $publisher = Publisher::where('name', $request->publisher_name)->first();
+      $book->publisher_id = $publisher->id;
       $book->save();
 
       return $book;
