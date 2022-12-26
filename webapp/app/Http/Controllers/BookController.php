@@ -23,13 +23,7 @@ class BookController extends Controller
         return redirect('/');
       }
 
-      return view('pages.book', [
-        'book' => $book, 
-        'category' => $book->category, 
-        'publisher' => $book->publisher,
-        'authors' => $book->authors,
-        'reviews' => $book->reviews
-      ]);
+      return view('pages.book', ['book' => $book]);
     }
 
     public function list()
@@ -66,6 +60,25 @@ class BookController extends Controller
 
       $book->delete();
       return $book;
+    }
+
+    public function review(Request $request, $id) {
+      $review = new Review();
+
+      $review->rating = $request->rating;
+      $review->comment = $request->comment;
+      $review->book_id = $id;
+      $review->user_id = $request->user_id;
+      $review->save();
+
+      return $review;
+    }
+
+    public function removeReview(Request $request, $id) {
+      $review = Review::where('book_id', $id)->where('user_id', $request->user_id)->first();
+      $review->delete();
+
+      return $review;
     }
 
     public function search(Request $request)
