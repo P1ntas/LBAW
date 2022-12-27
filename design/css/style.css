@@ -752,7 +752,7 @@ header {
 }
 
 #purchase {
-    margin-top: 2em;
+    margin-top: 1em;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -816,6 +816,14 @@ header {
 
 #imgCheckout {
     width: 2em;
+}
+
+.lTitle {
+    padding-left: 3em;
+    font-size: 2em;
+    font-weight: 800;
+    color: rgb(20, 18, 90);
+    height: auto;
 }
 
 #userSearch {
