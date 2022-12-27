@@ -818,6 +818,27 @@ header {
     width: 2em;
 }
 
+#userSearch {
+    width: 50%;
+    height: 2em;
+    font-size: 12px;
+    border-radius: 3em;
+    padding-left: 1em;
+    background-color: white;
+    color: rgb(176, 172, 71);
+    border: 0.2em solid rgb(176, 172, 71);
+    text-shadow:
+    -0.1px -0.1px 0 rgb(176, 172, 71),
+    0.1px -0.1px 0 rgb(176, 172, 71),
+    -0.1px 0.1px 0 rgb(176, 172, 71),
+    0.1px 0.1px 0 rgb(176, 172, 71);
+    margin: 1.5em auto;
+}
+
+#userWrapper {
+    text-align: center;
+}
+
 footer {
     background-color: rgb(51, 49, 57);
     color: white;
@@ -890,8 +911,8 @@ footer > p {
 
 #question {
     background-color: white;
-    margin-bottom: 20px;
-    padding: 15px 40px;
+    margin-bottom: 1.25em;
+    padding: 0.9em 2.5em;
     border-radius: 5px;
     box-shadow: 0 15px 25px rgba(0, 0, 50, 0.2);
 }
@@ -908,7 +929,7 @@ footer > p {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 15px 0;
+    padding: 0.9em 0;
 }
 
 .answer {
