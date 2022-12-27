@@ -28,6 +28,11 @@ Route::post('/books/{id}/edit', 'BookController@update')->where(['id' => '[0-9]+
 Route::post('/books/{id}/review', 'BookController@review')->where(['id' => '[0-9]+']);
 Route::post('/books/{id}/review/remove', 'BookController@removeReview')->where(['id' => '[0-9]+']);
 
+// Categories
+Route::post('/categories/search', 'CategoryController@search');
+Route::post('/categories/add', 'CategoryController@create');
+Route::get('/categories/{id}/remove', 'CategoryController@delete')->where(['id' => '[0-9]+']);
+
 // Purchases
 Route::post('/users/{id}/cart/checkout', 'PurchaseController@checkout')->where(['id' => '[0-9]+']);
 Route::post('/users/{id}/purchases/cancel', 'PurchaseController@cancelOrder')->where(['id' => '[0-9]+']);
