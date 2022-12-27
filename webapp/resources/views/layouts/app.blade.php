@@ -11,23 +11,20 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/milligram.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script type="text/javascript">
-        // Fix for Firefox autofocus CSS bug
-        // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
-    </script>
-    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js" defer></script>
+    <script type="text/javascript" src="{{ asset('js/header.js') }}" defer></script>
   </head>
   <body>
-    <hr>
-    @include('layouts.header')
-    <hr>
-    <section id="content">
-      @yield('content')
-    </section>
-    <hr>
-    @include('layouts.footer')
-    <hr>
+    <main>
+      @include('layouts.header')
+      <section id="content">
+        @yield('content')
+      </section>
+      @include('layouts.footer')
+    </main>
   </body>
 </html>
+

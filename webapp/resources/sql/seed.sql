@@ -162,70 +162,12 @@ CREATE TABLE delivery (
 Populate Tables
 */
 
--- password for all users: 1234
-INSERT INTO users VALUES (DEFAULT, 'Afonso Abreu', 'afonsoabreu@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Afonso Pinto', 'afonsopinto@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Ruben Monteiro', 'rubenmonteiro@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '696 Magna. Street', '987654321', DEFAULT, TRUE);
+-- password for all users: 123456
+INSERT INTO users VALUES (DEFAULT, 'Afonso Abreu', 'afonsoabreu@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Afonso Pinto', 'afonsopinto@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Ruben Monteiro', 'rubenmonteiro@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '987654321', DEFAULT, TRUE);
 -- last one is admin
-
-INSERT INTO category VALUES (DEFAULT, 'Fantasy');
-INSERT INTO category VALUES (DEFAULT, 'History');
-INSERT INTO category VALUES (DEFAULT, 'Comedy');
-INSERT INTO category VALUES (DEFAULT, 'Sports');
-INSERT INTO category VALUES (DEFAULT, 'Adventure');
-
-INSERT INTO publisher VALUES (DEFAULT, 'ASA');
-INSERT INTO publisher VALUES (DEFAULT, 'LEIA');
-INSERT INTO publisher VALUES (DEFAULT, 'PortoEditora');
-
-INSERT INTO book VALUES (DEFAULT, 'Lord Of The Rings', 5351034105, 2000, '9.99', 5, 3, 'An iconic story.', 1, 1);
-INSERT INTO book VALUES (DEFAULT, 'The Human History', 4733319526, 2009, '7.99', 29, 1, 'An educational book about the history of our species', 2, 2);
-INSERT INTO book VALUES (DEFAULT, 'Da Vinci Code', 5351034169, 2009, '10.99', 7, 1, 'An amazing adventure.', 5, 3);
-INSERT INTO book VALUES (DEFAULT, 'Football Rules', 5351034333, 2009, '6.99', 7, 1, 'The rules of the biggest sport in the world.', 4, 3);
-
-INSERT INTO author VALUES (DEFAULT, 'Jose Saramago');
-INSERT INTO author VALUES (DEFAULT, 'J K Rowling');
-INSERT INTO author VALUES (DEFAULT, 'André Telhado');
-INSERT INTO author VALUES (DEFAULT, 'Liam Tyson');
-
-INSERT INTO book_author VALUES (1, 4);
-INSERT INTO book_author VALUES (2, 2);
-INSERT INTO book_author VALUES (2, 3);
-INSERT INTO book_author VALUES (3, 1);
-INSERT INTO book_author VALUES (4, 3);
-
-INSERT INTO purchase VALUES (DEFAULT, '2022-07-13 14:03:42 +9:00', 1, 'Received');
-INSERT INTO purchase VALUES (DEFAULT, '2022-01-30 09:05:56 +8:00', 2, 'Dispatched');
-INSERT INTO purchase VALUES (DEFAULT, '2021-12-22 22:21:03 -4:00', 3, 'Delivered');
-
-INSERT INTO purchase_book VALUES (1, 1);
-INSERT INTO purchase_book VALUES (2, 2);
-INSERT INTO purchase_book VALUES (3, 3);
-
-INSERT INTO delivery VALUES (DEFAULT, '2022-10-18 03:50:35  +0:00', '335-2063 Ligula. St.', '131.96', 1);
-INSERT INTO delivery VALUES (DEFAULT, '2022-10-09 10:14:51  +4:00', '596-213 In St.', '104.86', 2);
-INSERT INTO delivery VALUES (DEFAULT, '2022-10-28 03:00:56  +9:00', '432-7822 Parturient Av.', '104.80', 3);
-
-INSERT INTO cart VALUES (1, 1);
-INSERT INTO cart VALUES (1, 2);
-INSERT INTO cart VALUES (2, 3);
-INSERT INTO cart VALUES (2, 4);
-INSERT INTO cart VALUES (3, 2);
-INSERT INTO cart VALUES (3, 3);
-
-INSERT INTO faq VALUES ('This is a question', 'This is an answer');
-INSERT INTO faq VALUES ('What do I do if I cant find a book I want?', 'Try to search better \_/(O-O)\_/');
-
-INSERT INTO wishlist VALUES (1, 1);
-INSERT INTO wishlist VALUES (1, 4);
-INSERT INTO wishlist VALUES (2, 1);
-INSERT INTO wishlist VALUES (3, 2);
-INSERT INTO wishlist VALUES (3, 3);
-
-INSERT INTO review VALUES (DEFAULT, 4, 'What a pleasent experience.', '2022-10-18 03:50:35  +0:00', 1, 1);
-INSERT INTO review VALUES (DEFAULT, 5, 'Very interesting.', '2022-10-18 03:50:35  +0:00', 2, 2);
-INSERT INTO review VALUES (DEFAULT, 3, 'Somewhat funny.', '2022-10-18 03:50:35  +0:00', 3, 3);
 
 -----------------------------------------
 -- INDEXES
