@@ -1,6 +1,5 @@
-<!--
 <article class="book" data-id="{{ $book->id }}">
-    <form method="POST" action="/api/books/{{books->id}}/edit">
+    <form method="POST" action="/api/books/{{$book->id}}/edit">
         {{ csrf_field() }}
 
         <label for="title">Title</label>
@@ -60,7 +59,6 @@
         @endif
         <label for="category">Category</label>
         <input id="category" type="text" name="category" value="{{$category->name}}">
-        # i dont really know this error thingy
         @if ($errors->has('category_id'))
         <span class="error">
             {{ $errors->first('category_id') }}
@@ -69,7 +67,6 @@
 
         <label for="publisher">Publisher</label>
         <input id="publisher" type="text" name="publisher" value="{{$publisher->name}}">
-        # i dont really know this error thingy
         @if ($errors->has('publisher'))
         <span class="error">
             {{ $errors->first('publisher') }}
@@ -78,7 +75,6 @@
 
         <label for="author">Author(s)</label>
         <input id="author" type="text" name="author" value="{{$author->name}}">
-        # i dont really know this error thingy
         @if ($errors->has('author'))
         <span class="error">
             {{ $errors->first('author') }}
@@ -92,4 +88,3 @@
         <a class="button button-outline" href="/books/{{$book->id}}">Cancel</a>
     </form>
 </article>
--->

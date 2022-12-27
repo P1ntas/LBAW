@@ -5,9 +5,9 @@
 @section('content')
   @include('partials.edit_book', [
     'book' => $book, 
-    'category' => $category, 
-    'publisher' => $publisher, 
-    'authors' => $authors,
-    'reviews' => $reviews
+ //   'category' => $category, 
+ //   'publisher' => $publisher, 
+ //   'authors' => $authors,
+ //   'reviews' => $reviews
   ])
 @endsection
