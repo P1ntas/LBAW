@@ -6,10 +6,10 @@
     <p>Stock: {{ $book->stock }} units</p>
     <p>Edition: {{ $book->book_edition }}</p>
     <p>Description: {{ $book->book_description }}</p>
-    <p>Category: {{ $category->name }}</p>
-    <p>Publisher: {{ $publisher->name }}</p>
+    <p>Category: {{ $book->category->name }}</p>
+    <p>Publisher: {{ $book->publisher->name }}</p>
     <p>Author(s):</p>
-    @foreach ($authors as $author)
+    @foreach ($book->authors as $author)
         <p>{{ $author->name }}</p>
     @endforeach
     @auth 
@@ -28,7 +28,7 @@
         <a href="/books/{{ $book->id }}/edit">Edit Book</a>
     @endif
     <p>Reviews:</p>
-    @foreach ($reviews as $review)
+    @foreach ($book->reviews as $review)
         <p>From: {{ $review->user->name }}</p>
         <p>Date: {{ $review->review_date }}</p>
         <p>Rating: {{ $review->rating }}</p>

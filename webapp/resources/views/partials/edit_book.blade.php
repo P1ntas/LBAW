@@ -3,7 +3,7 @@
         {{ csrf_field() }}
 
         <label for="title">Title</label>
-        <input id="title" type="text" name="title" value="{{$book->name}}">
+        <input id="title" type="text" name="title" value="{{$book->title}}">
         @if ($errors->has('title'))
         <span class="error">
             {{ $errors->first('title') }}
@@ -27,7 +27,7 @@
         @endif
 
         <label for="price">Price</label>
-        <input id="price" type="text" name="price" value="{{$book->price}} €">
+        <input id="price" type="text" name="price" value="{{$book->price}}">
         @if ($errors->has('price'))
         <span class="error">
             {{ $errors->first('price') }}
@@ -35,7 +35,7 @@
         @endif
 
         <label for="stock">Stock</label>
-        <input id="stock" type="text" name="stock" value="{{$book->stock}} units">
+        <input id="stock" type="text" name="stock" value="{{$book->stock}}">
         @if ($errors->has('stock'))
         <span class="error">
             {{ $errors->first('stock') }}
@@ -58,26 +58,18 @@
         </span>
         @endif
         <label for="category">Category</label>
-        <input id="category" type="text" name="category" value="{{$category->name}}">
-        @if ($errors->has('category_id'))
+        <input id="category" type="text" name="category" value="{{$book->category->name}}">
+        @if ($errors->has('category'))
         <span class="error">
-            {{ $errors->first('category_id') }}
+            {{ $errors->first('category') }}
         </span>
         @endif
 
         <label for="publisher">Publisher</label>
-        <input id="publisher" type="text" name="publisher" value="{{$publisher->name}}">
+        <input id="publisher" type="text" name="publisher" value="{{$book->publisher->name}}">
         @if ($errors->has('publisher'))
         <span class="error">
             {{ $errors->first('publisher') }}
-        </span>
-        @endif
-
-        <label for="author">Author(s)</label>
-        <input id="author" type="text" name="author" value="{{$author->name}}">
-        @if ($errors->has('author'))
-        <span class="error">
-            {{ $errors->first('author') }}
         </span>
         @endif
 

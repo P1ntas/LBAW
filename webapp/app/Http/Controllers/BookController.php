@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Models\Book;
 use App\Models\Category;
@@ -23,13 +24,7 @@ class BookController extends Controller
         return redirect('/');
       }
 
-      return view('pages.book', [
-        'book' => $book, 
-        'category' => $book->category, 
-        'publisher' => $book->publisher,
-        'authors' => $book->authors,
-        'reviews' => $book->reviews
-      ]);
+      return view('pages.book', ['book' => $book]);
     }
 
     public function list()
@@ -48,11 +43,32 @@ class BookController extends Controller
     {
       $book = new Book();
 
-      $book->title = $request->input('title');
-      // inputs fields
+      $book->title = $request->title;
+      $book->isbn = $request->isbn;
+      $book->year = $request->year;
+      $book->price = $request->price;
+      $book->stock = $request->stock;
+      $book->book_edition = $request->book_edition;
+      $book->book_description = $request->book_description;
+
+      $category = Category::where('name', $request->category_name)->first();
+      $book->category_id = $category->id;
+
+      $publisher = Publisher::where('name', $request->publisher_name)->first();
+      $book->publisher_id = $publisher->id;
+
       $book->save();
 
+      $author = Author::where('name', $request->author_name)->first();
+      if (empty($author)) {
+        $author = new Author();
+        $author->name = $request->author_name;
+        $author->save();
+      }
+      $book->authors()->attach($author);
+
       return $book;
+
     }
 
     public function delete(Request $request, $id)
@@ -83,13 +99,24 @@ class BookController extends Controller
     public function update(Request $request, $id) {
       $book = Book::find($id);
 
-      if (empty($book)) {
-          // error
-          return redirect('/');
-      }
+      $book->title = $request->title;
+      $book->isbn = $request->isbn;
+      $book->year = $request->year;
+      $book->price = $request->price;
+      $book->stock = $request->stock;
+      $book->book_edition = $request->book_edition;
+      $book->book_description = $request->book_description;
+
+      $category = Category::where('name', $request->category)->first();
+      $book->category_id = $category->id;
+
+      $publisher = Publisher::where('name', $request->publisher)->first();
+      $book->publisher_id = $publisher->id;
 
       $book->save();
-      return redirect()->back();
+
+      return Redirect::to('/books/$book->id');
+
   }
 
 
