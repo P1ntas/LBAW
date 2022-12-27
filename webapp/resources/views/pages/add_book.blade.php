@@ -87,6 +87,14 @@
       </span>
     @endif
 
+    <label for="author_name">Author *</label>
+    <input id="author_name" type="text" name="author_name" required>
+    @if ($errors->has('author_name'))
+      <span class="error">
+          {{ $errors->first('author_name') }}
+      </span>
+    @endif
+
     <p>Fields marked with * must be filled.</p>
 
     <button type="submit">Add book</button>

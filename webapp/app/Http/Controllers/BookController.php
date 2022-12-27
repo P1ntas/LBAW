@@ -29,18 +29,34 @@ class BookController extends Controller
     public function list()
     {
       $books = Book::all();
+      $categories = Category::all();
 
       if (empty($books)) {
         // to do
         return redirect('/');
       }
 
-      return view('pages.books', ['books' => $books]);
+      if (empty($categories)) {
+        // to do
+        return redirect('/');
+      }
+
+      return view('pages.books', ['books' => $books, 'categories' => $categories]);
     }
 
     public function addBook($id) {
       $categories = Category::all();
       $publishers = Publisher::all();
+
+      if (empty($categories)) {
+        // to do
+        return redirect('/');
+      }
+
+      if (empty($publishers)) {
+        // to do
+        return redirect('/');
+      }
 
       return view('pages.add_book', ['categories' => $categories, 'publishers' => $publishers]);
     }
@@ -56,11 +72,22 @@ class BookController extends Controller
       $book->stock = $request->stock;
       $book->book_edition = $request->book_edition;
       $book->book_description = $request->book_description;
+
       $category = Category::where('name', $request->category_name)->first();
       $book->category_id = $category->id;
+
       $publisher = Publisher::where('name', $request->publisher_name)->first();
       $book->publisher_id = $publisher->id;
+
       $book->save();
+
+      $author = Author::where('name', $request->author_name)->first();
+      if (empty($author)) {
+        $author = new Author();
+        $author->name = $request->author_name;
+        $author->save();
+      }
+      $book->authors()->attach($author);
 
       return $book;
     }
@@ -101,6 +128,27 @@ class BookController extends Controller
     {
       $books = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->get();
       
+      return view('pages.books', ['books' => $books]);
+    }
+
+    public function filter(Request $request) {
+      $query = Book::query();
+
+      if (isset($request->category_name)) {
+        $category = Category::where('name', $request->category_name)->first();
+        $query->where('category_id', $category->id);
+      }
+
+      if (isset($request->price_min)) {
+        $query->where('price', '>=', $request->price_min);
+      }
+
+      if (isset($request->price_max)) {
+        $query->where('price', '<=', $request->price_max);
+      }
+
+      $books = $query->get();
+
       return view('pages.books', ['books' => $books]);
     }
 }
