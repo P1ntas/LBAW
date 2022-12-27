@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 use App\Models\User;
 
@@ -156,8 +157,10 @@ class UserController extends Controller
             return redirect('/');
         }
 
-        $user->delete();
-        return $user;
+        $user->name = '[DELETED]';
+        $user->password = bcrypt(Str::random(8));
+        $user->save();
+        return redirect()->back();
     }
 
     public function shoppingCart($id) {
@@ -216,6 +219,55 @@ class UserController extends Controller
         $books = User::find($id)->cart()->get();
         
         return $books;
+    }
+
+    public function wishlist($id) {
+        $books = User::find($id)->wishlist()->get();
+
+        if (empty($books)) {
+            // to do
+            return redirect('/');
+        }
+
+        return view('pages.wishlist', ['books' => $books]);
+    }
+
+    public function clearWishlist($id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            // to do
+            return redirect('/');
+        }
+
+        $user->wishlist()->detach();
+        return redirect()->back();
+    }
+
+    public function manageWishlist(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            // to do
+            return redirect('/');
+        }
+
+        $user->wishlist()->detach($request->book_id);
+        return redirect()->back();
+    }
+
+    public function addToWishlist(Request $request, $id) {
+        $user = User::find($request->user_id);
+  
+        if (empty($user)) {
+          // to do
+          return redirect('/');
+        }
+  
+        $user->wishlist()->attach($id);
+        return redirect()->back();
     }
 
     public function search(Request $request)

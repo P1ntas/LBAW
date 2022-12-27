@@ -55,7 +55,7 @@ CREATE TABLE faq (
 
 CREATE TABLE publisher (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL
+    name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE author (
@@ -70,7 +70,7 @@ CREATE TABLE collections (
 
 CREATE TABLE category (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL
+    name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE users (
@@ -213,6 +213,19 @@ INSERT INTO cart VALUES (2, 3);
 INSERT INTO cart VALUES (2, 4);
 INSERT INTO cart VALUES (3, 2);
 INSERT INTO cart VALUES (3, 3);
+
+INSERT INTO faq VALUES ('This is a question', 'This is an answer');
+INSERT INTO faq VALUES ('What do I do if I cant find a book I want?', 'Try to search better \_/(O-O)\_/');
+
+INSERT INTO wishlist VALUES (1, 1);
+INSERT INTO wishlist VALUES (1, 4);
+INSERT INTO wishlist VALUES (2, 1);
+INSERT INTO wishlist VALUES (3, 2);
+INSERT INTO wishlist VALUES (3, 3);
+
+INSERT INTO review VALUES (DEFAULT, 4, 'What a pleasent experience.', '2022-10-18 03:50:35  +0:00', 1, 1);
+INSERT INTO review VALUES (DEFAULT, 5, 'Very interesting.', '2022-10-18 03:50:35  +0:00', 2, 2);
+INSERT INTO review VALUES (DEFAULT, 3, 'Somewhat funny.', '2022-10-18 03:50:35  +0:00', 3, 3);
 
 -----------------------------------------
 -- INDEXES

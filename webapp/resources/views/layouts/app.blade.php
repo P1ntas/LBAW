@@ -21,7 +21,7 @@
   </head>
   <body>
     <hr>
-    @include('layouts.navbar')
+    @include('layouts.header')
     <hr>
     <section id="content">
       @yield('content')

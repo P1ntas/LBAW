@@ -23,4 +23,11 @@ class DeliveryController extends Controller
 
       return $delivery;
     }
+
+    public function create(Request $request, $id) {
+      $delivery = Delivery::find($request->delivery_id);
+      $delivery->delete();
+      
+      return $delivery;
+    }
 }

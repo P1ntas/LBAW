@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 class StaticController extends Controller
 {
-  public function index()
-  {
+  public function home() {
     return view('pages.home');
   }
 
@@ -13,15 +12,13 @@ class StaticController extends Controller
     return view('pages.about');
   }
 
-  public function services() {
-    return view('pages.services');
-  }
-
   public function faq() {
-    return view('pages.faq');
+    $faqs = FAQ::all();
+
+    return view('pages.faq', ['faqs' => $faqs]);
   }
 
-  public function contact() {
-    return view('pages.contact');
+  public function contacts() {
+    return view('pages.contacts');
   }
 }

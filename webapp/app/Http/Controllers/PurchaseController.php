@@ -75,4 +75,20 @@ class PurchaseController extends Controller
 
       return redirect('/');
     }
+
+    public function cancelOrder(Request $request, $id) {
+      $purchase = Purchase::find($request->purchase_id);
+      $purchase->delete();
+      $delivery = app('App\Http\Controllers\DeliveryController')->delete($request, $id);
+
+      return redirect('/');
+    }
+
+    public function updateStatus(Request $request, $id) {
+      $purchase = Purchase::find($request->purchase_id);
+      $purchase->state_purchase = $request->status;
+      $purchase->save();
+
+      return redirect()->back();
+    }
 }
