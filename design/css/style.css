@@ -752,10 +752,23 @@ header {
 }
 
 #purchase {
+    margin-top: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+.Checkout {
     margin-top: 1em;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
+}
+
+.Checkout::after {
+    content: "";
+    width: 155%;
+    border-bottom: 0.1em solid rgb(175, 175, 175);
 }
 
 #purchase::after {
@@ -818,12 +831,18 @@ header {
     width: 2em;
 }
 
-.lTitle {
+.forIcons {
+    display: flex;
     padding-left: 3em;
     font-size: 2em;
     font-weight: 800;
     color: rgb(20, 18, 90);
-    height: auto;
+}
+
+.try1 {
+    margin: 1.2em 0 0 1em;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 #userSearch {
