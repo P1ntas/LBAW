@@ -17,6 +17,7 @@ Route::get('/faq', 'StaticController@faq');
 Route::get('/books', 'BookController@list');
 Route::get('/books/{id}', 'BookController@show')->where(['id' => '[0-9]+']);
 Route::post('/books/filter', 'BookController@filter');
+Route::post('/books/search', 'BookController@search');
 
 // Categories
 Route::get('/categories', 'CategoryController@list');

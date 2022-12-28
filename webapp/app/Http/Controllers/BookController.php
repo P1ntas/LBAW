@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Author;
 
 class BookController extends Controller
 {
@@ -85,5 +86,31 @@ class BookController extends Controller
             'price_min' => $request->price_min,
             'price_max' => $request->price_max
         ]);
-    }      
+    } 
+
+    public function search(Request $request)
+    {
+        $results = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(20);
+
+        if ($results->isEmpty()) {
+            $authors = Author::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->get();
+            $results = Book::whereHas('authors', function($query) use ($authors) {
+                $query->whereIn('author_id', $authors->pluck('id'));
+            })->paginate(20);
+        }
+
+        $categories = Category::all();
+
+        if ($categories->isEmpty()) {
+            Session::flash('notification', 'Categories not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect('/');
+        }
+        
+        return view('pages.books', [
+            'books' => $results,
+            'categories' => $categories
+        ]);
+    }
 }

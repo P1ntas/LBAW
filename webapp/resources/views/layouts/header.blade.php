@@ -13,12 +13,15 @@
           <iconify-icon icon="material-symbols:shopping-cart-outline-rounded" id="cart"></iconify-icon>
         </button>
       </div>
-      <div id="hSearch">
-        <button id="magnifierSearch">
-          <iconify-icon icon="simple-line-icons:magnifier"></iconify-icon>
-        </button>
-        <input id="hSearchText" type="text" placeholder="search">
-      </div>
+      <form method="POST" action="/books/search">
+        {{ csrf_field() }}
+        <div id="hSearch">
+          <button id="magnifierSearch">
+            <iconify-icon icon="simple-line-icons:magnifier"></iconify-icon>
+          </button>
+          <input id="hSearchText" type="text" name="search" placeholder="Type a book/author">
+        </div>
+      </form>
       <div id="hLog">
         <button id="headerLogin" type="submit">Login</button>
         <div id="userPopup">
