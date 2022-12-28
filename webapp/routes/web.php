@@ -12,3 +12,6 @@ Route::get('/', 'StaticController@home');
 Route::get('/about', 'StaticController@about');
 Route::get('/contacts', 'StaticController@contacts');
 Route::get('/faq', 'StaticController@faq');
+
+// Books
+Route::get('/books', 'BookController@list');
