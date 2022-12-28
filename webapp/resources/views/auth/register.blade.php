@@ -1,58 +1,50 @@
-@extends('layouts.app')
-
-@section('content')
-<form method="POST" action="{{ route('register') }}">
-    {{ csrf_field() }}
-
-    <label for="name">Name *</label>
-    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
-    @if ($errors->has('name'))
-      <span class="error">
-          {{ $errors->first('name') }}
-      </span>
-    @endif
-
-    <label for="email">Email *</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-    @if ($errors->has('email'))
-      <span class="error">
-          {{ $errors->first('email') }}
-      </span>
-    @endif
-
-    <label for="password">Password *</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-      <span class="error">
-          {{ $errors->first('password') }}
-      </span>
-    @endif
-
-    <label for="password-confirm">Confirm Password *</label>
-    <input id="password-confirm" type="password" name="password_confirmation" required>
-
-    <label for="user_address">Address</label>
-    <input id="user_address" type="text" name="user_address" value="{{ old('user_address') }}">
-    @if ($errors->has('user_address'))
+<form id="register" class="inputs" method="POST" action="/register">
+  {{ csrf_field() }}
+  
+  <input class="words" type="email" name="email" placeholder="email" required>
+  @if ($errors->has('email'))
     <span class="error">
-        {{ $errors->first('user_address') }}
+      {{ $errors->first('email') }}
     </span>
-    @endif
+  @endif
 
-    <label for="phone">Phone Number</label>
-    <input id="phone" type="tel" name="phone" value="{{ old('phone') }}">
-    @if ($errors->has('phone'))
+  <input class="words" type="text" name="name" placeholder="username" required>
+  @if ($errors->has('name'))
     <span class="error">
-        {{ $errors->first('phone') }}
+      {{ $errors->first('name') }}
     </span>
-    @endif
+  @endif
 
-    <input type="hidden" name="blocked" value="FALSE">
-    <input type="hidden" name="admin_perms" value="FALSE">
+  <input class="words" type="password" name="password" placeholder="password" required>
+  @if ($errors->has('password'))
+    <span class="error">
+      {{ $errors->first('password') }}
+    </span>
+  @endif
 
-    <p>Fields marked with * must be filled.</p>
+  <input class="words" type="password" name="password_confirmation" placeholder="repeat password" required>
+  @if ($errors->has('password_confirmation'))
+    <span class="error">
+      {{ $errors->first('password_confirmation') }}
+    </span>
+  @endif
+  
+  <input class="words" type="text" name="user_address" placeholder="address" required>
+  @if ($errors->has('user_address'))
+    <span class="error">
+      {{ $errors->first('user_address') }}
+    </span>
+  @endif
 
-    <button type="submit">Register</button>
-    <a class="button button-outline" href="{{ route('login') }}">Login</a>
+  <input class="words" type="tel" name="phone" placeholder="phone number">
+  @if ($errors->has('phone'))
+    <span class="error">
+      {{ $errors->first('phone') }}
+    </span>
+  @endif
+
+  <input type="hidden" name="blocked" value="FALSE">
+  <input type="hidden" name="admin_perms" value="FALSE">
+
+  <button type="submit" class="sub">Register</button> 
 </form>
-@endsection

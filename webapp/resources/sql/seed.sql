@@ -81,7 +81,8 @@ CREATE TABLE users (
     user_address TEXT,
     phone CHAR(9),
     blocked BOOLEAN DEFAULT FALSE NOT NULL,
-    admin_perms BOOLEAN DEFAULT FALSE NOT NULL     
+    admin_perms BOOLEAN DEFAULT FALSE NOT NULL,
+    remember_token VARCHAR    
 );
 
 CREATE TABLE book (
@@ -163,10 +164,10 @@ Populate Tables
 */
 
 -- password for all users: 123456
-INSERT INTO users VALUES (DEFAULT, 'Afonso Abreu', 'afonsoabreu@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Afonso Pinto', 'afonsopinto@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Ruben Monteiro', 'rubenmonteiro@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '987654321', DEFAULT, TRUE);
+INSERT INTO users VALUES (DEFAULT, 'Afonso Abreu', 'afonsoabreu@gmail.com', '$2y$10$BoAsL2bmrH4A4VScQ14nCOHu1A8DgYgOSMFkCMvQIJlw2cZWUTR0u', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Afonso Pinto', 'afonsopinto@gmail.com', '$2y$10$BoAsL2bmrH4A4VScQ14nCOHu1A8DgYgOSMFkCMvQIJlw2cZWUTR0u', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Ruben Monteiro', 'rubenmonteiro@gmail.com', '$2y$10$BoAsL2bmrH4A4VScQ14nCOHu1A8DgYgOSMFkCMvQIJlw2cZWUTR0u', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$10$BoAsL2bmrH4A4VScQ14nCOHu1A8DgYgOSMFkCMvQIJlw2cZWUTR0u', '696 Magna. Street', '987654321', DEFAULT, TRUE);
 -- last one is admin
 
 INSERT INTO faq VALUES ('This is a question', 'This is an answer');

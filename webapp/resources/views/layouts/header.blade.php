@@ -23,14 +23,19 @@
         </div>
       </form>
       <div id="hLog">
-        <button id="headerLogin" type="submit">Login</button>
-        <div id="userPopup">
-          <ul id ="userActions">
-            <li><a href="/">Purchases</a></li>
-            <li><a href="/">Edit Profile</a></li>
-            <li><a href="/">Sign out</a></li>
-          </ul>
-        </div>
+        @auth
+          <button id="headerLogin" type="submit">{{ Auth::user()->name }}</button>
+          <div id="userPopup">
+            <ul id ="userActions">
+              <li><a href="/">Purchases</a></li>
+              <li><a href="/">Edit Profile</a></li>
+              <li><a href="/logout">Sign out</a></li>
+            </ul>
+          </div>
+        @else
+          <a href="/login">Sign in</a>
+          <a href="/register">Sign up</a></li>
+        @endauth
       </div>
       <nav id="hamburguer">
         <ul id="hambMenu">

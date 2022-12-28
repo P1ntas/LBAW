@@ -11,7 +11,7 @@ class User extends Authenticatable
 
     public $table = 'users';
     public $timestamps  = false;
-    public $fillable = [
+    protected $fillable = [
         'name',
         'email',
         'password',
@@ -21,7 +21,7 @@ class User extends Authenticatable
         'admin_perms'
     ];
 
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'remember_token'];
 
     public function wishlist()
     {
