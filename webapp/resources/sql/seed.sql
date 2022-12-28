@@ -169,6 +169,9 @@ INSERT INTO users VALUES (DEFAULT, 'Ruben Monteiro', 'rubenmonteiro@gmail.com', 
 INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '987654321', DEFAULT, TRUE);
 -- last one is admin
 
+INSERT INTO faq VALUES ('This is a question', 'This is an answer');
+INSERT INTO faq VALUES ('What do I do if I cant find a book I want?', 'Try to search better \_/(O-O)\_/');
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------

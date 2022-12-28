@@ -14,17 +14,20 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/82c0a4cf1f.js" crossorigin="anonymous" defer></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js" defer></script>
     <script type="text/javascript" src="{{ asset('js/header.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/checkbox.js') }}" defer></script>
   </head>
   <body>
-    <main>
       @include('layouts.header')
-      <section id="content">
-        @yield('content')
-      </section>
+      <main>
+        <section id="content">
+          @yield('content')
+        </section>
+      </main>
       @include('layouts.footer')
-    </main>
   </body>
 </html>
 
