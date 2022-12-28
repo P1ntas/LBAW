@@ -439,6 +439,10 @@ header {
     width: 15em;
 }
 
+#edit_button {
+    margin-top: 1em;
+}
+
 .edit_button {
     width: 15em;
     height: 3em;
@@ -455,7 +459,11 @@ header {
     0.1px -0.1px 0 rgb(176, 172, 71),
     -0.1px 0.1px 0 rgb(176, 172, 71),
     0.1px 0.1px 0 rgb(176, 172, 71);
-    margin: 1.5em auto;
+    margin: 3em auto;
+}
+
+.block {
+    color: black;
 }
 
 .edit_button:hover {
@@ -602,11 +610,16 @@ header {
 .bookLable {
     cursor: pointer;
     flex: 0;
-    max-width: 10em;
+    max-width: 25%;
     height: 2em;
     text-align: center;
     flex: 1;
     line-height: 1.9em;
+}
+
+.trash {
+    font-size: 2em;
+    color: rgb(161, 17, 17);
 }
 
 .activeLabel {
@@ -643,6 +656,7 @@ header {
     float: left;
     flex-flow: row;
     flex-direction: row;
+    margin-left: -6em;
 }
 
 #rating > p {
@@ -662,19 +676,39 @@ header {
 #revHeader {
     float: right;
     width: auto;
-}
-
-#revHeader > a {
-    margin-right: 2em;
+    right: 0;
 }
 
 #revWrapper {
     width: 100%;
-    height: 3.5em;
+    height: 7em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 #revWrapper2 {
     border-bottom: 1px solid rgb(175, 175, 175);
+}
+
+#addReview {
+    margin-top: 3em;
+}
+
+#editUser {
+    font-size: 30px;
+    color: rgb(20, 18, 90);
+    cursor: pointer;
+}
+
+#try2 {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    width: 2em;
+    margin: 0 0 0 0;
+}
+
+#try2:first-child {
+    color: rgb(161, 17, 17);
 }
 
 #comHeader {
@@ -702,7 +736,7 @@ header {
 
 #detailsBook {
     border-collapse: collapse;
-    width: 52.3%;
+    width: 44em;
     height: 22.1em;
 }
 
@@ -751,27 +785,96 @@ header {
     overflow-y: auto;
 }
 
+.trash2 {
+    margin: 0.3em 0 0 0.8em;
+}
+
+#purWrapper {
+    display: flex;
+}
+
+#space {
+    margin: 1.2em 0 0 0.7em;
+}
+
+.space {
+    padding: 0.5em 0 0 0;
+    color: rgb(20, 18, 90);
+    font-size: 1.5em;
+}
+
+.color1 {
+    color: rgb(20, 18, 90);
+}
+
+.catWrapper {
+    margin: 2em 0 0 2em;
+    color: rgb(20, 18, 90)
+}
+
+.catWrapper > ul {
+    padding-top: 1em;
+    list-style: circle;
+    font-size: 1.3em;
+}
+
+.catWrapper li {
+    margin-bottom: 1em;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.title {
+    font-size: 5em;
+    font-weight: 600;
+}
+
+.profileWrapper1 {
+    font-weight: 600;
+}
+
+.profileWrapper1 p {
+    margin: 3em 0 0 2em;
+}
+
+.users1 {
+    margin-top: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    width: 80%;
+}
+
+.users1:after {
+    content: "";
+    width: 141.9%;
+    border-bottom: 0.1em solid rgb(175, 175, 175);
+
+  }
+
 #purchase {
     margin-top: 3em;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
+    border-bottom: 0.1em solid rgb(175, 175, 175);
+    width: 80%;
 }
 
 .Checkout {
     margin-top: 1em;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr 1fr;
+}
+
+#deliveryCost {
+    margin: 2.5em 0 0  2em;
+    color: rgb(20, 18, 90);
+    font-weight: 600;
 }
 
 .Checkout::after {
-    content: "";
-    width: 155%;
-    border-bottom: 0.1em solid rgb(175, 175, 175);
-}
-
-#purchase::after {
     content: "";
     width: 155%;
     border-bottom: 0.1em solid rgb(175, 175, 175);
@@ -790,16 +893,6 @@ header {
 
 .pclass > span {
     font-weight: normal;
-}
-
-#purchaseData {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-}
-
-#pad {
-    padding-left: 5em;
 }
 
 #cButtons {
@@ -864,6 +957,23 @@ header {
 
 #userWrapper {
     text-align: center;
+}
+
+#userWrapper2 {
+    text-align: center;
+}
+
+#block {
+    margin-right: 5em;
+}
+
+#finalCost {
+    font-weight: 600;
+    color: rgb(20, 18, 90);
+}
+
+#finalCost > span {
+    font-weight: 300;
 }
 
 footer {

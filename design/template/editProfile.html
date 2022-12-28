@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="../css/style.css">
         <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
         <script src="../javascript/header.js" defer></script>
+        <script src="../javascript/checkbox.js" defer></script>
     </head>
     <body>
         <header>
@@ -64,9 +65,14 @@
                 <input type="username" name="username" class="editor" placeholder="username">
                 <input type="password" name="password" class="editor" placeholder="password">
                 <input type="password" name="repeat" class="editor" placeholder="repeat password">
-                <input type="name" name="name" class="editor" placeholder="name">
                 <input type="address" name="address" class="editor" placeholder="address">
                 <input type="phone" name="phone" class="editor" placeholder="phone number">
+                <div id="userWrapper2">
+                    <label for="owner" class="block">Block</label>
+                    <input type="checkbox" id="block" name="check" class="check" value="block" onclick="onlyOne(this)">
+                    <label for="customer" class="block">Unblock</label>
+                    <input type="checkbox" id="unblock" name="check" class="check" value="unblock" onclick="onlyOne(this)">
+                </div>
                 <button type="submit" id="edit_button" class="edit_button">Confirmar mudanças</button> 
             </form>
             <button type="submit" id="delete_button" class="edit_button">Apagar Conta</button> 

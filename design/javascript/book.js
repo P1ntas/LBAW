@@ -2,20 +2,17 @@ const description = document.querySelector("#description");
 const reviewBook = document.querySelector("#reviewBook");
 const details = document.querySelector("#details");
 const autor = document.querySelector("#autor");
-const commentBook = document.querySelector("#commentBook");
 
-function actButton(a, b) {
+function actButton(a) {
     a.addEventListener("click", () => {
         description.classList.remove("activeLabel");
         reviewBook.classList.remove("activeLabel");
         details.classList.remove("activeLabel");
         autor.classList.remove("activeLabel");
-        commentBook.classList.remove("activeLabel");
         document.getElementById('bookDescription').classList.add('hideBook');
         document.getElementById('bookReview').classList.add('hideBook');
         document.getElementById('detailsBook').classList.add('hideBook');
         document.getElementById('bookAutor').classList.add('hideBook');
-        document.getElementById('bookComments').classList.add('hideBook');
         a.classList.add("activeLabel");
         switch (a) {
             case description:
@@ -30,9 +27,6 @@ function actButton(a, b) {
             case autor:
                 document.getElementById('bookAutor').classList.remove('hideBook');
                 break;
-            case commentBook:
-                document.getElementById('bookComments').classList.remove('hideBook');
-                break;
         }
     })
 }
@@ -41,5 +35,3 @@ actButton(description);
 actButton(reviewBook);
 actButton(details);
 actButton(autor);
-actButton(commentBook);
-

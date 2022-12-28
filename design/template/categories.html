@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="../css/style.css">
         <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
         <script src="../javascript/header.js" defer></script>
+        <script src="../javascript/book.js" defer></script>
+
     </head>
     <body>
         <header>
@@ -32,13 +34,6 @@
                 </div>
                 <div id="hLog">
                     <button id="headerLogin" type="submit">Login</button>
-                    <div id="userPopup">
-                        <ul id ="userActions">
-                            <li><a href="#">Purchases</a></li>
-                            <li><a href="#">Edit Profile</a></li>
-                            <li><a href="#">Sign out</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <nav id="hamburguer">
                     <ul id="hambMenu">
@@ -57,48 +52,16 @@
             </div>
         </header>
         <main>
-            <!-- User starts here -->
-            <div id="userWrapper">
-                <input id="userSearch" type="text" placeholder="search">
-                <div id="pWrapper">
-                    <div class="users1" class="color1">
-                        <div>
-                            <p class="pclass">Afonso Pinto</p>
-                            <a href="#">
-                                <iconify-icon icon="mdi:pencil" class="space"></iconify-icon>
-                            </a>
-                        </div>
-                        <a href="#">
-                            <img src="../pictures/default.jpg" alt="bookPhoto" id="imgPurchase">
-                        </a>
-                    </div>
-                    <div class="users1" class="color1">
-                        <div>
-                            <a href="profile.html">
-                                <p class="pclass">Afonso Pinto</p>
-                            </a>
-                            <a href="editProfile.html">
-                                <iconify-icon icon="mdi:pencil" class="space"></iconify-icon>
-                            </a>
-                        </div>
-                        <a href="#">
-                            <img src="../pictures/default.jpg" alt="bookPhoto" id="imgPurchase">
-                        </a>
-                    </div>
-                    <div class="users1" class="color1">
-                        <div>
-                            <p class="pclass">Afonso Pinto</p>
-                            <a href="#">
-                                <iconify-icon icon="mdi:pencil" class="space"></iconify-icon>
-                            </a>
-                        </div>
-                        <a href="#">
-                            <img src="../pictures/default.jpg" alt="bookPhoto" id="imgPurchase">
-                        </a>
-                    </div>
-                </div>
+            <!-- Categories starts here -->
+            <div class="catWrapper">
+                <span class="title"> Categorias</span>
+                <ul>
+                    <li><a href="#">Drama</a></li>
+                    <li><a href="#">Romance</a></li>
+                    <li><a href="#">Terror</a></li>
+                </ul>
             </div>
-            <!-- Users ends here -->
+            <!-- Categories ends here -->
         </main>
         <footer>
             <ul id="fItems">
