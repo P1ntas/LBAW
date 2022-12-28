@@ -4,3 +4,8 @@ function onlyOne(checkbox) {
         if (item !== checkbox) item.checked = false
     })
 }
+
+document.querySelector('.close-button').addEventListener('click', function() {
+    document.querySelector('.notification').style.display = 'none';
+    document.querySelector('.close-button').style.display = 'none';
+});

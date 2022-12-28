@@ -13,12 +13,15 @@
           <iconify-icon icon="material-symbols:shopping-cart-outline-rounded" id="cart"></iconify-icon>
         </button>
       </div>
-      <div id="hSearch">
-        <button id="magnifierSearch">
-          <iconify-icon icon="simple-line-icons:magnifier"></iconify-icon>
-        </button>
-        <input id="hSearchText" type="text" placeholder="search">
-      </div>
+      <form method="POST" action="/books/search">
+        {{ csrf_field() }}
+        <div id="hSearch">
+          <button id="magnifierSearch">
+            <iconify-icon icon="simple-line-icons:magnifier"></iconify-icon>
+          </button>
+          <input id="hSearchText" type="text" name="search" placeholder="Type a book/author">
+        </div>
+      </form>
       <div id="hLog">
         <button id="headerLogin" type="submit">Login</button>
         <div id="userPopup">
@@ -32,9 +35,9 @@
       <nav id="hamburguer">
         <ul id="hambMenu">
           <li class="item"><a href="/" class="hLink">Home</a></li>
-          <li class="item"><a href="/" class="hLink">Books</a></li>
+          <li class="item"><a href="/books" class="hLink">Books</a></li>
           <li class="item"><a href="/" class="hLink">Collections</a></li>
-          <li class="item"><a href="/"class="hLink">Categories</a></li>
+          <li class="item"><a href="/categories"class="hLink">Categories</a></li>
         </ul>
         <div id="hamb">
           <span class="bar"></span>

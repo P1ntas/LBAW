@@ -19,11 +19,18 @@
     <script type="text/javascript" src="{{ asset('js/header.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/checkbox.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/book.js') }}" defer></script>
   </head>
   <body>
       @include('layouts.header')
       <main>
         <section id="content">
+          @if (Session::has('notification'))
+            <div class="notification {{ Session::get('notification_type') }}">
+              {{ Session::get('notification') }}
+            </div>
+            <button class="close-button" type="button">X</button>
+          @endif
           @yield('content')
         </section>
       </main>

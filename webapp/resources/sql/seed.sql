@@ -172,6 +172,36 @@ INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$1
 INSERT INTO faq VALUES ('This is a question', 'This is an answer');
 INSERT INTO faq VALUES ('What do I do if I cant find a book I want?', 'Try to search better \_/(O-O)\_/');
 
+INSERT INTO category VALUES (DEFAULT, 'Fantasy');
+INSERT INTO category VALUES (DEFAULT, 'History');
+INSERT INTO category VALUES (DEFAULT, 'Comedy');
+INSERT INTO category VALUES (DEFAULT, 'Sports');
+INSERT INTO category VALUES (DEFAULT, 'Adventure');
+
+INSERT INTO publisher VALUES (DEFAULT, 'ASA');
+INSERT INTO publisher VALUES (DEFAULT, 'LEIA');
+INSERT INTO publisher VALUES (DEFAULT, 'PortoEditora');
+
+INSERT INTO book VALUES (DEFAULT, 'Lord Of The Rings', 5351034105, 2000, '9.99', 5, 3, 'An iconic story.', 1, 1);
+INSERT INTO book VALUES (DEFAULT, 'The Human History', 4733319526, 2009, '7.99', 29, 1, 'An educational book about the history of our species', 2, 2);
+INSERT INTO book VALUES (DEFAULT, 'Da Vinci Code', 5351034169, 2009, '10.99', 7, 1, 'An amazing adventure.', 5, 3);
+INSERT INTO book VALUES (DEFAULT, 'Football Rules', 5351034333, 2009, '6.99', 7, 1, 'The rules of the biggest sport in the world.', 4, 3);
+
+INSERT INTO author VALUES (DEFAULT, 'Jose Saramago');
+INSERT INTO author VALUES (DEFAULT, 'J K Rowling');
+INSERT INTO author VALUES (DEFAULT, 'André Telhado');
+INSERT INTO author VALUES (DEFAULT, 'Liam Tyson');
+
+INSERT INTO book_author VALUES (1, 4);
+INSERT INTO book_author VALUES (2, 2);
+INSERT INTO book_author VALUES (2, 3);
+INSERT INTO book_author VALUES (3, 1);
+INSERT INTO book_author VALUES (4, 3);
+
+INSERT INTO review VALUES (DEFAULT, 4, 'What a pleasent experience.', '2022-10-18 03:50:35  +0:00', 1, 1);
+INSERT INTO review VALUES (DEFAULT, 5, 'Very interesting.', '2022-10-18 03:50:35  +0:00', 2, 2);
+INSERT INTO review VALUES (DEFAULT, 3, 'Somewhat funny.', '2022-10-18 03:50:35  +0:00', 3, 3);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------
