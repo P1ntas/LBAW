@@ -13,7 +13,7 @@ use App\Models\Category;
 class BookController extends Controller
 {
     public function list() {
-        $books = Book::paginate(20);
+        $books = Book::simplePaginate(20);
 
         if ($books->isEmpty()) {
             Session::flash('notification', 'Books not found!');
@@ -39,4 +39,29 @@ class BookController extends Controller
         return view('pages.book', ['book' => $book]);
     }
 
+    public function filter(Request $request) {
+        $query = Book::query();
+  
+        if (isset($request->category)) {
+            $category = Category::where('name', $request->category)->first();
+            $query->where('category_id', $category->id);
+        }
+  
+        if (isset($request->price_min)) {
+            $query->where('price', '>=', $request->price_min);
+        }
+  
+        if (isset($request->price_max)) {
+            $query->where('price', '<=', $request->price_max);
+        }
+  
+        $books = $query->simplePaginate(20);
+  
+        return view('pages.books', [
+            'books' => $books,
+            'category' => $request->category,
+            'price_min' => $request->price_min,
+            'price_max' => $request->price_max
+        ]);
+    }      
 }

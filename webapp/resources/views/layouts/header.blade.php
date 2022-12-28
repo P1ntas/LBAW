@@ -34,7 +34,7 @@
           <li class="item"><a href="/" class="hLink">Home</a></li>
           <li class="item"><a href="/books" class="hLink">Books</a></li>
           <li class="item"><a href="/" class="hLink">Collections</a></li>
-          <li class="item"><a href="/"class="hLink">Categories</a></li>
+          <li class="item"><a href="/categories"class="hLink">Categories</a></li>
         </ul>
         <div id="hamb">
           <span class="bar"></span>
