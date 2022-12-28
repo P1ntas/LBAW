@@ -15,3 +15,4 @@ Route::get('/faq', 'StaticController@faq');
 
 // Books
 Route::get('/books', 'BookController@list');
+Route::get('/books/{id}', 'BookController@show')->where(['id' => '[0-9]+']);

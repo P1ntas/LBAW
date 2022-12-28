@@ -24,4 +24,19 @@ class BookController extends Controller
 
         return view('pages.books', ['books' => $books]);
     }
+
+    public function show($id)
+    {
+        $book = Book::find($id);
+
+        if (empty($book)) {
+            Session::flash('notification', 'Book not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect('/books');
+        }
+
+        return view('pages.book', ['book' => $book]);
+    }
+
 }
