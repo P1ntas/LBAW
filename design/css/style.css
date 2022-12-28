@@ -30,6 +30,7 @@ body > * {
 a {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 }
 
 ul {
@@ -850,7 +851,7 @@ header {
     width: 141.9%;
     border-bottom: 0.1em solid rgb(175, 175, 175);
 
-  }
+}
 
 #purchase {
     margin-top: 3em;
@@ -974,6 +975,182 @@ header {
 
 #finalCost > span {
     font-weight: 300;
+}
+
+.booksWrapper {
+    margin: 3em 2em;
+}
+
+.booksForm > label {
+    padding: 0 0 0 2em;
+}
+
+.booksForm {
+    font-size: 1.5em;
+    padding-bottom: 1em;
+    border-bottom: 0.1em solid rgb(175, 175, 175);
+    text-align: center;
+}
+
+.booksForm input[type=number] {
+    font-size: 0.8em;
+    border-radius: 0.5em;
+    border: 1px solid rgb(175, 175, 175);
+    -moz-appearance: textfield;
+}
+
+.bookForms input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.booksForm input[type=number]:focus {
+    border: 1px solid lightblue;
+}
+
+.booksForm select {
+    font-size: 0.8em;
+    border-radius: 0.25em;
+    padding: 0 0.2em 0 0.5em;
+    cursor: pointer;
+    border: 1px solid rgb(175, 175, 175);
+}
+
+.booksForm select:focus {
+    border: 1px solid lightblue;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin: 1em;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.card1 {
+    margin-top: 1.5em !important;
+}
+
+.pos {
+    left: 13em !important;
+}
+
+.card {
+    height: 18em;
+    width: 14em;
+    border-radius: 1em;
+    border: 1px solid rgb(175, 175, 175);
+    margin: 3em 3em 2em 0;
+    box-shadow: 0 15px 25px rgba(0, 0, 50, 0.2);
+
+}
+
+.card img {
+    width: 10em;
+    padding: 1em;
+    border-bottom: 1px solid rgb(175, 175, 175);
+}
+
+.card span {
+    color: rgb(244, 28, 28)
+}
+
+.card p {
+    font-weight: 600;
+    margin-bottom: 1.5em;
+}
+
+.card:hover {
+    transform: translateY(-1.2em) !important;
+      -webkit-filter: brightness(70%);
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      transition: all 1s ease;
+  }
+
+.price {
+    font-weight: 300 !important;
+}
+
+#books {
+    margin: 2em 1em;
+    width: 90%;
+    border-bottom: 1px solid rgb(175, 175, 175);
+    display: flex;
+    position: relative;
+}
+
+#books span {
+    padding-bottom: 0.2em;
+}
+
+#books span:first-of-type {
+    padding-left: 1em;
+    font-weight: 600;
+    font-size: 2em;
+}
+
+#books span:last-child  {
+    position: absolute;
+    left: 8em;
+    bottom: 0.8em;
+    margin: 0 0 0 1em;
+    padding: 0;
+    font-size: 1em;
+    color:  rgb(84, 151, 195);
+    height: 1.2em;
+    font-weight: 300;
+    text-decoration: underline;
+} 
+
+.collection1 {
+    height: 21em !important;
+}
+
+.unbold {
+    font-weight: 300 !important;
+}
+
+.unbold span {
+    color: inherit;
+}
+
+#apply {
+    margin: 0 0 0em 2em;
+    font-size: 0.8em;
+    width: 8em;
+    border-radius: 3em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: rgb(176, 172, 71);
+    border: 0.1em solid rgb(176, 172, 71);
+    text-shadow:
+    -0.1px -0.1px 0 rgb(176, 172, 71),
+    0.1px -0.1px 0 rgb(176, 172, 71),
+    -0.1px 0.1px 0 rgb(176, 172, 71),
+    0.1px 0.1px 0 rgb(176, 172, 71);
+}
+
+#apply:hover {
+    cursor: pointer;
+    background-color: rgb(20, 18, 90);
+    border-color: rgb(20, 18, 90);
+    color: white;
+    text-shadow:
+    -0.1px -0.1px 0 rgb(20, 18, 90),
+    0.1px -0.1px 0 rgb(20, 18, 90),
+    -0.1px 0.1px 0 rgb(20, 18, 90),
+    0.1px 0.1px 0 rgb(20, 18, 90);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 footer {

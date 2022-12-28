@@ -61,38 +61,22 @@
             </div>
         </header>
         <main>
-            <!-- Home starts here -->
-            <div class="homePage">
-                <div id="books">
-                    <span>Books</span>
-                    <a href="book.html"><span>Ver tudo >></span></a>
-                </div>
-                <div class="books">
-                    <div class="card card1">
-                        <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
-                        <a href="#"><p>Lord of the Rings</p></a>
-                        <p class="price">Preço: <span>14.99€</span><p>
-                    </div>
-                    <div class="card card1">
-                        <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
-                        <a href="#"><p>Lord of the Rings</p></a>
-                        <p class="price">Preço: <span>14.99€</span><p>
-                    </div>
-                    <div class="card card1">
-                        <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
-                        <a href="#"><p>Lord of the Rings</p></a>
-                        <p class="price">Preço: <span>14.99€</span><p>
-                    </div>
-                    <div class="card card1">
-                        <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
-                        <a href="#"><p>Lord of the Rings</p></a>
-                        <p class="price">Preço: <span>14.99€</span><p>
-                    </div>
-                </div>
-                <div id="books">
-                    <span>Collections</span>
-                    <a href="collections.html"><span class="pos">Ver tudo >></span></a>
-                </div>
+            <!-- Collections starts here -->
+            <div class="booksWrapper">
+                <form method="POST" class="booksForm" action="/books/filter"> 
+                    <label for="category">Category</label>
+                    <select id="category" name="category">
+                        <option value="" disabled selected>[All]</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Romance" selected>Romance</option>
+                        <option value="Terror">Terror</option>
+                    </select>
+                    <label for="price_min">Price (Min): </label>
+                        <input type="number" id="price-min" name="price_min" value="0.00" min="0.00" max="120.00" step="0.01" placeholder="Min">
+                    <label for="price_max">Price (Max): </label>
+                    <input type="number" id="price-max" name="price_max" value="120.00" min="0.00" max="120.00" step="0.01" placeholder="Max">
+                    <input type="submit"id="apply" value="Apply filters">
+                </form>
                 <div class="books">
                     <div class="card card1 collection1">
                         <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
@@ -100,24 +84,39 @@
                         <p class="unbold">Books: <span>3</span></p>
                         <p class="price">Preço: <span>40.99€</span><p>
                     </div>
-                    <div class="card card1">
+                    <div class="card">
                         <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
                         <a href="#"><p>Lord of the Rings</p></a>
                         <p class="price">Preço: <span>14.99€</span><p>
                     </div>
-                    <div class="card card1">
+                    <div class="card">
                         <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
                         <a href="#"><p>Lord of the Rings</p></a>
                         <p class="price">Preço: <span>14.99€</span><p>
                     </div>
-                    <div class="card card1">
+                    <div class="card">
+                        <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
+                        <a href="#"><p>Lord of the Rings</p></a>
+                        <p class="price">Preço: <span>14.99€</span><p>
+                    </div>
+                    <div class="card">
+                        <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
+                        <a href="#"><p>Lord of the Rings</p></a>
+                        <p class="price">Preço: <span>14.99€</span><p>
+                    </div>
+                    <div class="card">
+                        <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
+                        <a href="#"><p>Lord of the Rings</p></a>
+                        <p class="price">Preço: <span>14.99€</span><p>
+                    </div>
+                    <div class="card">
                         <a href="#"><img src="../pictures/logo.png" alt="logo"></a>
                         <a href="#"><p>Lord of the Rings</p></a>
                         <p class="price">Preço: <span>14.99€</span><p>
                     </div>
                 </div>
             </div>
-            <!-- Home ends here -->
+            <!-- Collections ends here-->
         </main>
         <footer>
             <ul id="fItems">

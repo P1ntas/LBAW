@@ -6,8 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/style.css">
         <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
-        <script src="https://kit.fontawesome.com/82c0a4cf1f.js" crossorigin="anonymous"></script>
         <script src="../javascript/header.js" defer></script>
+        <script src="../javascript/book.js" defer></script>
+
     </head>
     <body>
         <header>
@@ -33,16 +34,6 @@
                 </div>
                 <div id="hLog">
                     <button id="headerLogin" type="submit">Login</button>
-                    <div id="userPopup">
-                        <ul id ="userActions">
-                            <li><a href="#">Purchases</a></li>
-                            <li><a href="#">Edit Profile</a></li>
-                            <li><a href="#">
-                                <i class="fa-regular fa-plus"></i> Book
-                            </a></li>
-                            <li><a href="#">Sign out</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <nav id="hamburguer">
                     <ul id="hambMenu">
@@ -61,7 +52,16 @@
             </div>
         </header>
         <main>
-            
+            <!-- Collection starts here -->
+            <div class="catWrapper">
+                <span class="title">Lord of the Rings Collection</span>
+                <ul>
+                    <li><a href="#">Fellowship of the Ring</a></li>
+                    <li><a href="#">Two Towers</a></li>
+                    <li><a href="#">Return of the King</a></li>
+                </ul>
+            </div>
+            <!-- Collection ends here -->
         </main>
         <footer>
             <ul id="fItems">
