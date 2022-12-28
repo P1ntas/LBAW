@@ -20,7 +20,7 @@ Route::get('/books/{id}', 'BookController@show')->where(['id' => '[0-9]+']);
 Route::get('/books/{id}/edit', 'BookController@edit')->where(['id' => '[0-9]+']);
 
 // Categories
-Route::get('/categories', 'BookController@listcategories');
+Route::get('/categories', 'CategoryController@list');
 
 // Users
 Route::get('/users', 'UserController@list');

@@ -21,12 +21,18 @@ Route::post('/users/{id}/wishlist', 'UserController@manageWishlist')->where(['id
 
 // Books
 Route::post('/books/search', 'BookController@search');
+Route::post('/books/filter', 'BookController@filter');
 Route::post('/books/add', 'BookController@create');
 Route::post('/books/{id}/cart', 'UserController@addToCart')->where(['id' => '[0-9]+']);
 Route::post('/books/{id}/wish', 'UserController@addToWishlist')->where(['id' => '[0-9]+']);
 Route::post('/books/{id}/edit', 'BookController@update')->where(['id' => '[0-9]+']);
 Route::post('/books/{id}/review', 'BookController@review')->where(['id' => '[0-9]+']);
 Route::post('/books/{id}/review/remove', 'BookController@removeReview')->where(['id' => '[0-9]+']);
+
+// Categories
+Route::post('/categories/search', 'CategoryController@search');
+Route::post('/categories/add', 'CategoryController@create');
+Route::get('/categories/{id}/remove', 'CategoryController@delete')->where(['id' => '[0-9]+']);
 
 // Purchases
 Route::post('/users/{id}/cart/checkout', 'PurchaseController@checkout')->where(['id' => '[0-9]+']);
