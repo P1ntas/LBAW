@@ -10,3 +10,4 @@ Route::post('/register', 'Auth\RegisterController@register');
 // Static Pages
 Route::get('/', 'StaticController@home');
 Route::get('/about', 'StaticController@about');
+Route::get('/contacts', 'StaticController@contacts');
