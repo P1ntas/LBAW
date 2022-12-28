@@ -22,7 +22,19 @@ class BookController extends Controller
             return redirect('/');
         }
 
-        return view('pages.books', ['books' => $books]);
+        $categories = Category::all();
+
+        if ($categories->isEmpty()) {
+            Session::flash('notification', 'Categories not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect('/');
+        }
+
+        return view('pages.books', [
+            'books' => $books,
+            'categories' => $categories
+        ]);
     }
 
     public function show($id)
@@ -56,9 +68,19 @@ class BookController extends Controller
         }
   
         $books = $query->simplePaginate(20);
+
+        $categories = Category::all();
+
+        if ($categories->isEmpty()) {
+            Session::flash('notification', 'Categories not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect('/');
+        }
   
         return view('pages.books', [
             'books' => $books,
+            'categories' => $categories,
             'category' => $request->category,
             'price_min' => $request->price_min,
             'price_max' => $request->price_max
