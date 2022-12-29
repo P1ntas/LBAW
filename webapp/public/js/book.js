@@ -3,7 +3,7 @@ const reviewBook = document.querySelector("#reviewBook");
 const details = document.querySelector("#details");
 const autor = document.querySelector("#autor");
 
-function actButton(a, b) {
+function actButton(a) {
     a.addEventListener("click", () => {
         description.classList.remove("activeLabel");
         reviewBook.classList.remove("activeLabel");

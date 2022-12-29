@@ -24,7 +24,7 @@
       </form>
       <div id="hLog">
         @auth
-          <button id="headerLogin" type="submit">{{ Auth::user()->name }}</button>
+          <a id="headerLogin" href="/users/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
           <div id="userPopup">
             <ul id ="userActions">
               <li><a href="/">Purchases</a></li>

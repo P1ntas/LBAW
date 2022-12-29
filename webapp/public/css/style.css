@@ -30,6 +30,7 @@ body > * {
 a {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 }
 
 ul {
@@ -322,6 +323,7 @@ header {
     height: auto;
 }
 
+
 .formul {
     margin-top: 0;
     width: 30em;
@@ -438,6 +440,10 @@ header {
     width: 15em;
 }
 
+#edit_button {
+    margin-top: 1em;
+}
+
 .edit_button {
     width: 15em;
     height: 3em;
@@ -454,7 +460,11 @@ header {
     0.1px -0.1px 0 rgb(176, 172, 71),
     -0.1px 0.1px 0 rgb(176, 172, 71),
     0.1px 0.1px 0 rgb(176, 172, 71);
-    margin: 1.5em auto;
+    margin: 3em auto;
+}
+
+.block {
+    color: black;
 }
 
 .edit_button:hover {
@@ -601,11 +611,16 @@ header {
 .bookLable {
     cursor: pointer;
     flex: 0;
-    max-width: 10em;
+    max-width: 25%;
     height: 2em;
     text-align: center;
     flex: 1;
     line-height: 1.9em;
+}
+
+.trash {
+    font-size: 2em;
+    color: rgb(161, 17, 17);
 }
 
 .activeLabel {
@@ -642,6 +657,7 @@ header {
     float: left;
     flex-flow: row;
     flex-direction: row;
+    margin-left: -6em;
 }
 
 #rating > p {
@@ -661,19 +677,39 @@ header {
 #revHeader {
     float: right;
     width: auto;
-}
-
-#revHeader > a {
-    margin-right: 2em;
+    right: 0;
 }
 
 #revWrapper {
     width: 100%;
-    height: 3.5em;
+    height: 7em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 #revWrapper2 {
     border-bottom: 1px solid rgb(175, 175, 175);
+}
+
+#addReview {
+    margin-top: 3em;
+}
+
+#editUser {
+    font-size: 30px;
+    color: rgb(20, 18, 90);
+    cursor: pointer;
+}
+
+#try2 {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    width: 2em;
+    margin: 0 0 0 0;
+}
+
+#try2:first-child {
+    color: rgb(161, 17, 17);
 }
 
 #comHeader {
@@ -701,7 +737,7 @@ header {
 
 #detailsBook {
     border-collapse: collapse;
-    width: 52.3%;
+    width: 44em;
     height: 22.1em;
 }
 
@@ -750,27 +786,96 @@ header {
     overflow-y: auto;
 }
 
+.trash2 {
+    margin: 0.3em 0 0 0.8em;
+}
+
+#purWrapper {
+    display: flex;
+}
+
+#space {
+    margin: 1.2em 0 0 0.7em;
+}
+
+.space {
+    padding: 0.5em 0 0 0;
+    color: rgb(20, 18, 90);
+    font-size: 1.5em;
+}
+
+.color1 {
+    color: rgb(20, 18, 90);
+}
+
+.catWrapper {
+    margin: 2em 0 0 2em;
+    color: rgb(20, 18, 90)
+}
+
+.catWrapper > ul {
+    padding-top: 1em;
+    list-style: circle;
+    font-size: 1.3em;
+}
+
+.catWrapper li {
+    margin-bottom: 1em;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.title {
+    font-size: 5em;
+    font-weight: 600;
+}
+
+.profileWrapper1 {
+    font-weight: 600;
+}
+
+.profileWrapper1 p {
+    margin: 3em 0 0 2em;
+}
+
+.users1 {
+    margin-top: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    width: 80%;
+}
+
+.users1:after {
+    content: "";
+    width: 141.9%;
+    border-bottom: 0.1em solid rgb(175, 175, 175);
+
+}
+
 #purchase {
     margin-top: 3em;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
+    border-bottom: 0.1em solid rgb(175, 175, 175);
+    width: 80%;
 }
 
 .Checkout {
     margin-top: 1em;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr 1fr;
+}
+
+#deliveryCost {
+    margin: 2.5em 0 0  2em;
+    color: rgb(20, 18, 90);
+    font-weight: 600;
 }
 
 .Checkout::after {
-    content: "";
-    width: 155%;
-    border-bottom: 0.1em solid rgb(175, 175, 175);
-}
-
-#purchase::after {
     content: "";
     width: 155%;
     border-bottom: 0.1em solid rgb(175, 175, 175);
@@ -789,16 +894,6 @@ header {
 
 .pclass > span {
     font-weight: normal;
-}
-
-#purchaseData {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-}
-
-#pad {
-    padding-left: 5em;
 }
 
 #cButtons {
@@ -863,6 +958,202 @@ header {
 
 #userWrapper {
     text-align: center;
+}
+
+#userWrapper2 {
+    text-align: center;
+}
+
+#block {
+    margin-right: 5em;
+}
+
+#finalCost {
+    font-weight: 600;
+    color: rgb(20, 18, 90);
+}
+
+#finalCost > span {
+    font-weight: 300;
+}
+
+.booksWrapper {
+    margin: 3em 2em;
+}
+
+.booksForm > label {
+    padding: 0 0 0 2em;
+}
+
+.booksForm {
+    font-size: 1.5em;
+    padding-bottom: 1em;
+    border-bottom: 0.1em solid rgb(175, 175, 175);
+    text-align: center;
+}
+
+.booksForm input[type=number] {
+    font-size: 0.8em;
+    border-radius: 0.5em;
+    border: 1px solid rgb(175, 175, 175);
+    -moz-appearance: textfield;
+    appearance: textfield;
+    padding-left: 0.4em;
+}
+
+.bookForms input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.booksForm input[type=number]:focus {
+    border: 1px solid lightblue;
+}
+
+.booksForm select {
+    font-size: 0.8em;
+    border-radius: 0.25em;
+    padding: 0 0.2em 0 0.5em;
+    cursor: pointer;
+    border: 1px solid rgb(175, 175, 175);
+}
+
+.booksForm select:focus {
+    border: 1px solid lightblue;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin: 1em;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.card1 {
+    margin-top: 1.5em !important;
+}
+
+.pos {
+    left: 13em !important;
+}
+
+.card {
+    height: 18em;
+    width: 14em;
+    border-radius: 1em;
+    border: 1px solid rgb(175, 175, 175);
+    margin: 3em 3em 2em 0;
+    box-shadow: 0 15px 25px rgba(0, 0, 50, 0.2);
+
+}
+
+.card img {
+    width: 10em;
+    padding: 1em;
+    border-bottom: 1px solid rgb(175, 175, 175);
+}
+
+.card span {
+    color: rgb(244, 28, 28)
+}
+
+.card p {
+    font-weight: 600;
+    margin-bottom: 1.5em;
+}
+
+.card:hover {
+    transform: translateY(-1.2em) !important;
+    filter: brightness(70%);
+      -webkit-filter: brightness(70%);
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      transition: all 1s ease;
+  }
+
+.price {
+    font-weight: 300 !important;
+}
+
+#books {
+    margin: 2em 1em;
+    width: 90%;
+    border-bottom: 1px solid rgb(175, 175, 175);
+    display: flex;
+    position: relative;
+}
+
+#books span {
+    padding-bottom: 0.2em;
+}
+
+#books span:first-of-type {
+    padding-left: 1em;
+    font-weight: 600;
+    font-size: 2em;
+}
+
+#books span:last-child  {
+    position: absolute;
+    left: 8em;
+    bottom: 0.8em;
+    margin: 0 0 0 1em;
+    padding: 0;
+    font-size: 1em;
+    color:  rgb(84, 151, 195);
+    height: 1.2em;
+    font-weight: 300;
+    text-decoration: underline;
+} 
+
+.collection1 {
+    height: 21em !important;
+}
+
+.unbold {
+    font-weight: 300 !important;
+}
+
+.unbold span {
+    color: inherit;
+}
+
+#apply {
+    margin: 0 0 0em 2em;
+    font-size: 0.8em;
+    width: 8em;
+    border-radius: 3em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: rgb(176, 172, 71);
+    border: 0.1em solid rgb(176, 172, 71);
+    text-shadow:
+    -0.1px -0.1px 0 rgb(176, 172, 71),
+    0.1px -0.1px 0 rgb(176, 172, 71),
+    -0.1px 0.1px 0 rgb(176, 172, 71),
+    0.1px 0.1px 0 rgb(176, 172, 71);
+}
+
+#apply:hover {
+    cursor: pointer;
+    background-color: rgb(20, 18, 90);
+    border-color: rgb(20, 18, 90);
+    color: white;
+    text-shadow:
+    -0.1px -0.1px 0 rgb(20, 18, 90),
+    0.1px -0.1px 0 rgb(20, 18, 90),
+    -0.1px 0.1px 0 rgb(20, 18, 90),
+    0.1px 0.1px 0 rgb(20, 18, 90);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 footer {

@@ -11,18 +11,8 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function list(User $user)
+    public function show(User $authUser, User $viewedUser)
     {
-      return Auth::user()->isAdmin();
-    }
-
-    public function update(User $user)
-    {
-      return Auth::user()->id == $user->id || Auth::user()->isAdmin();
-    }
-
-    public function viewCart(User $user)
-    {
-      return Auth::user()->id == $user->id;
+      return $authUser->id == $viewedUser->id;
     }
 }

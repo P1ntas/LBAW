@@ -25,3 +25,6 @@ Route::post('/books/search', 'BookController@search');
 
 // Categories
 Route::get('/categories', 'CategoryController@list');
+
+// Users
+Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+']);

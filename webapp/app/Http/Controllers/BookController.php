@@ -46,7 +46,7 @@ class BookController extends Controller
             Session::flash('notification', 'Book not found!');
             Session::flash('notification_type', 'error');
 
-            return redirect('/books');
+            return redirect()->back();
         }
 
         return view('pages.book', ['book' => $book]);
