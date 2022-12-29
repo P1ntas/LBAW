@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS book_collection CASCADE;
 DROP TABLE IF EXISTS review CASCADE;
 DROP TABLE IF EXISTS purchase_book CASCADE;
 DROP TABLE IF EXISTS delivery CASCADE;
+DROP TABLE IF EXISTS password_resets CASCADE;
 
 DROP TYPE IF EXISTS purchase_state CASCADE;
 
@@ -157,6 +158,12 @@ CREATE TABLE delivery (
     delivery_address TEXT NOT NULL,
     cost NUMERIC(9, 2) NOT NULL CHECK (cost >= 0),
     purchase_id INTEGER NOT NULL UNIQUE REFERENCES purchase(id) ON UPDATE CASCADE ON DELETE CASCADE   
+);
+
+CREATE TABLE password_resets (
+    email VARCHAR(255) PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NULL
 );
 
 /*

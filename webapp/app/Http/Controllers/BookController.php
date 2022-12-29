@@ -57,7 +57,10 @@ class BookController extends Controller
   
         if (isset($request->category)) {
             $category = Category::where('name', $request->category)->first();
-            $query->where('category_id', $category->id);
+
+            if (!empty($category)) {
+                $query->where('category_id', $category->id);
+            }
         }
   
         if (isset($request->price_min)) {

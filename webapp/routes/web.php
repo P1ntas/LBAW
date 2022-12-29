@@ -6,6 +6,10 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('/logout');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('/register');
 Route::post('/register', 'Auth\RegisterController@register');
+Route::get('/forgot-password', 'UserController@forgot')->middleware('guest')->name('password.request');
+Route::post('/forgot-password', 'UserController@forgotPassword')->middleware('guest')->name('password.email');
+Route::get('/reset-password/{token}', 'UserController@reset')->middleware('guest')->name('password.reset');
+Route::post('/reset-password', 'UserController@resetPassword')->middleware('guest')->name('password.update');
 
 // Static Pages
 Route::get('/', 'StaticController@home');

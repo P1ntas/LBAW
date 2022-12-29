@@ -18,6 +18,8 @@
     <label>
         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> remember me
     </label>
+
+    <a href="{{ route('password.request') }}">forgot password</a>
     
     <button type="submit" class="sub">Login</button>
 </form>
