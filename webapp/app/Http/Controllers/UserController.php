@@ -200,6 +200,9 @@ class UserController extends Controller
         $user->password = bcrypt(Str::random(10));
         $user->save();
 
+        Session::flash('notification', 'Your account has been deleted.');
+        Session::flash('notification_type', 'success');
+
         return redirect()->action('Auth\LoginController@logout');
     }
 

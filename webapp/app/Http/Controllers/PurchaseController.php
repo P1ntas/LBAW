@@ -35,4 +35,37 @@ class PurchaseController extends Controller
         return view('pages.purchases', ['purchases' => $purchases]);
     }
 
+    public function cancelOrder($user_id, $purchase_id) {
+        $user = User::find($user_id);
+  
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('cancelOrder', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $purchase = Purchase::find($purchase_id);
+
+        if (empty($purchase)) {
+            Session::flash('notification', 'Purchase not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        $purchase->delete();
+
+        Session::flash('notification', 'Your order has been canceled.');
+        Session::flash('notification_type', 'success');
+  
+        return redirect()->action('PurchaseController@list', ['id' => $user_id]);
+      }
+  
 }

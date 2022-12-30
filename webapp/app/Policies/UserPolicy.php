@@ -42,4 +42,8 @@ class UserPolicy
     public function viewPurchases(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
+
+    public function cancelOrder(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
 }
