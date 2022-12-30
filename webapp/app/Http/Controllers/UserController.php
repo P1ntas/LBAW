@@ -285,6 +285,13 @@ class UserController extends Controller
             return redirect()->back();
         }
   
+        if ($user->cart()->where('book_id', $book_id)->exists()) {
+            Session::flash('notification', 'This book is already in your cart!');
+            Session::flash('notification_type', 'warning');
+
+            return redirect()->back();
+        }
+        
         $user->cart()->attach($book_id);
 
         return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
