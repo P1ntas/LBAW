@@ -81,4 +81,95 @@ class UserController extends Controller
 
         return view('pages.user', ['user' => $user]);
     }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('edit', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        return view('pages.edit_user', ['user' => $user]);
+    }
+
+    public function update(Request $request, $id) {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:6|max:255',
+            'email' => [Rule::unique('users')->ignore($user->id), 'required', 'string', 'email', 'min:6', 'max:255'],
+            'user_address' => 'required|string|min:8|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('notification', 'Invalid inputs!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->action('UserController@edit', ['id' => $id]);
+        }
+
+        if (isset($request->phone)) {
+            $validator = Validator::make($request->all(), [
+                'phone' => 'regex:/^[1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9]$/'
+            ]);
+
+            if ($validator->fails()) {
+                Session::flash('notification', 'Invalid inputs!');
+                Session::flash('notification_type', 'error');
+    
+                return redirect()->action('UserController@edit', ['id' => $id]);
+            }
+        }
+
+        if ($request->password != $request->password_confirmation) {
+            Session::flash('notification', 'Passwords do not match!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->action('UserController@edit', ['id' => $id]);
+        }
+
+        if (isset($request->password)) {
+            $validator = Validator::make($request->all(), [
+                'password' => 'string|min:6'
+            ]);
+    
+            if ($validator->fails()) {
+                Session::flash('notification', 'Invalid password!');
+                Session::flash('notification_type', 'error');
+    
+                return redirect()->action('UserController@edit', ['id' => $id]);
+            }
+
+            if ($request->password == $request->password_confirmation) {
+                $user->password = bcrypt($request->password);
+            }
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->user_address = $request->user_address;
+        if (isset($request->phone)) {
+            $user->phone = $request->phone;
+        }
+        $user->save();
+
+        return redirect()->action('UserController@show', ['id' => $id]);
+    }
 }

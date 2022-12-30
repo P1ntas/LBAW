@@ -23,21 +23,12 @@ class RegisterController extends Controller
         $validator = Validator::make($data, [
             'email' => 'required|string|email|min:6|max:255|unique:users',
             'name' => 'required|string|min:6|max:255',
-            'password' => 'required|string|min:6|confirmed'
+            'password' => 'required|string|min:6|confirmed',
+            'user_address' => 'required|string|min:8|max:255'
         ]);
 
         if ($validator->fails()) {
             return $validator;
-        }
-
-        if (isset($data['user_address'])) {
-            $validator = Validator::make($data, [
-                'user_address' => 'required|string|min:8|max:255'
-            ]);
-
-            if ($validator->fails()) {
-                return $validator;
-            }
         }
 
         if (isset($data['phone'])) {

@@ -28,3 +28,4 @@ Route::get('/categories', 'CategoryController@list');
 
 // Users
 Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+']);
+Route::get('/users/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);

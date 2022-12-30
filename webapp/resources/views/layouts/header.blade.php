@@ -28,7 +28,7 @@
           <div id="userPopup">
             <ul id ="userActions">
               <li><a href="/">Purchases</a></li>
-              <li><a href="/">Edit Profile</a></li>
+              <li><a href="/users/{{ Auth::user()->id }}/edit">Edit Profile</a></li>
               <li><a href="/logout">Sign out</a></li>
             </ul>
           </div>
