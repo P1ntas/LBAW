@@ -371,4 +371,17 @@ class UserController extends Controller
 
         return redirect()->action('UserController@wishlist', ['id' => $user_id]);
     }
+
+    public function getCartBooks($id) {
+        $books = User::find($id)->cart()->get();
+        
+        if (empty($books)) {
+            Session::flash('notification', 'Your order has no items!');
+            Session::flash('notification_type', 'warning');
+
+            return redirect()->back();
+        }
+
+        return $books;
+    }
 }

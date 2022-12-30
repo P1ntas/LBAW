@@ -66,6 +66,50 @@ class PurchaseController extends Controller
         Session::flash('notification_type', 'success');
   
         return redirect()->action('PurchaseController@list', ['id' => $user_id]);
-      }
+    }
+
+    public function create($id) {
+        $purchase = new Purchase();
+
+        $purchase->user_id = $id;
+        $purchase->state_purchase = 'Received';
+        $purchase->save();
+
+        return $purchase;
+    }
+
+
+    private function purchaseBooks($purchase, $books) {
+        foreach ($books as $book) {
+            $purchase->books()->attach($book->id);
+        }
+    }
+    
+    public function checkout($id) {
+        $user = User::find($id);
   
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('checkout', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+    
+        $books = app('App\Http\Controllers\UserController')->getCartBooks($id);
+        $purchase = $this->create($id);
+        $delivery = app('App\Http\Controllers\DeliveryController')->create($purchase->id);
+
+        $this->purchaseBooks($purchase, $books);
+
+        Session::flash('notification', 'Your order has been received.');
+        Session::flash('notification_type', 'success');
+
+        return redirect()->action('UserController@shoppingCart', ['id' => $id]);
+    }
 }

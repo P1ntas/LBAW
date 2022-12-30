@@ -41,6 +41,7 @@ Route::get('/books/{book_id}/cart', 'UserController@addToCart')->where(['book_id
 // Purchases
 Route::get('/users/{id}/purchases', 'PurchaseController@list')->where(['id' => '[0-9]+']);
 Route::delete('/users/{user_id}/purchases/{purchase_id}/cancel', 'PurchaseController@cancelOrder')->where(['user_id' => '[0-9]+', 'purchase_id' => '[0-9]+']);
+Route::get('/users/{id}/cart/checkout', 'PurchaseController@checkout')->where(['id' => '[0-9]+']);
 
 // Wishlist
 Route::get('/users/{id}/wishlist', 'UserController@wishlist')->where(['id' => '[0-9]+']);

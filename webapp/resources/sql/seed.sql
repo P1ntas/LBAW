@@ -356,6 +356,7 @@ LANGUAGE plpgsql;
 
 CREATE TRIGGER cart_purchased 
         AFTER INSERT ON purchase
+        FOR EACH ROW
         EXECUTE PROCEDURE cart_purchased();
 
 -- TRIGGER05
