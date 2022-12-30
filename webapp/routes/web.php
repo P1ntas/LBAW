@@ -45,3 +45,4 @@ Route::delete('/users/{user_id}/purchases/{purchase_id}/cancel', 'PurchaseContro
 // Wishlist
 Route::get('/users/{id}/wishlist', 'UserController@wishlist')->where(['id' => '[0-9]+']);
 Route::delete('/users/{user_id}/wishlist/{book_id}', 'UserController@manageWishlist')->where(['user_id' => '[0-9]+', 'book_id' => '[0-9]+']);
+Route::get('/books/{book_id}/wish', 'UserController@addToWishlist')->where(['book_id' => '[0-9]+']);

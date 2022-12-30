@@ -342,4 +342,33 @@ class UserController extends Controller
 
         return redirect()->action('UserController@wishlist', ['id' => $user_id]);
     }
+
+    public function addToWishlist($book_id) {
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+  
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('addToWishlist', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+  
+        if ($user->wishlist()->where('book_id', $book_id)->exists()) {
+            Session::flash('notification', 'This book is already in your wishlist!');
+            Session::flash('notification_type', 'warning');
+
+            return redirect()->back();
+        }
+        
+        $user->wishlist()->attach($book_id);
+
+        return redirect()->action('UserController@wishlist', ['id' => $user_id]);
+    }
 }

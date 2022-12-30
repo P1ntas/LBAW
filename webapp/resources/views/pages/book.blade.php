@@ -7,6 +7,11 @@
 <div id="bookInfo">
     <!-- book_photo -->
     @auth
+        <form method="GET" action="/books/{{ $book->id }}/wish">
+            <button id="addWish" class="bookButtons" type="submit">
+                <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
+            </button>
+        </form>
         <form method="GET" action="/books/{{ $book->id }}/cart">
             <button id="buy" class="bookButtons" type="submit">Add to cart</button>
         </form>

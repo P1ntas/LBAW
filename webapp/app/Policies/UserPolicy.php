@@ -54,4 +54,8 @@ class UserPolicy
     public function manageWishlist(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
+
+    public function addToWishlist(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
 }
