@@ -46,4 +46,12 @@ class UserPolicy
     public function cancelOrder(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
+
+    public function viewWishlist(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+  
+    public function manageWishlist(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
 }

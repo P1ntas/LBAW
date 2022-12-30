@@ -222,7 +222,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $books = $user->cart()->get();
+        $books = $user->cart()->simplePaginate(10);
 
         return view('pages.cart', ['books' => $books]);
     }
@@ -300,4 +300,46 @@ class UserController extends Controller
         return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
     }
 
+    public function wishlist($id) {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('viewWishlist', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $books = User::find($id)->wishlist()->simplePaginate(10);
+
+        return view('pages.wishlist', ['books' => $books]);
+    }
+
+    public function manageWishlist($user_id, $book_id)
+    {
+        $user = User::find($user_id);
+
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('manageWishlist', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $user->wishlist()->detach($book_id);
+
+        return redirect()->action('UserController@wishlist', ['id' => $user_id]);
+    }
 }

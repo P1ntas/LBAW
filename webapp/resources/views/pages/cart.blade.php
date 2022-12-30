@@ -19,6 +19,7 @@
         onclick="return confirm('Are you sure you want to clear all items?');">Clear cart</button>
     </form>
 </div>
+{{ $books->links() }}
 
 
 @endsection

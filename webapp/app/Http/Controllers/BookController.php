@@ -14,7 +14,7 @@ use App\Models\Author;
 class BookController extends Controller
 {
     public function list() {
-        $books = Book::simplePaginate(20);
+        $books = Book::simplePaginate(10);
 
         if ($books->isEmpty()) {
             Session::flash('notification', 'Books not found!');
@@ -71,7 +71,7 @@ class BookController extends Controller
             $query->where('price', '<=', $request->price_max);
         }
   
-        $books = $query->simplePaginate(20);
+        $books = $query->simplePaginate(10);
 
         $categories = Category::all();
 
@@ -93,7 +93,7 @@ class BookController extends Controller
 
     public function search(Request $request)
     {
-        $results = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(20);
+        $results = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
 
         if ($results->isEmpty()) {
             $authors = Author::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->get();

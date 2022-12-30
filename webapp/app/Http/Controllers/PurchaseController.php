@@ -30,7 +30,7 @@ class PurchaseController extends Controller
             return redirect()->back();
         }
 
-        $purchases = Purchase::where('user_id', $id)->get();
+        $purchases = Purchase::where('user_id', $id)->simplePaginate(10);
 
         return view('pages.purchases', ['purchases' => $purchases]);
     }

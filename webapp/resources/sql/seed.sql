@@ -229,6 +229,12 @@ INSERT INTO delivery VALUES (DEFAULT, '2022-10-18 03:50:35  +0:00', '335-2063 Li
 INSERT INTO delivery VALUES (DEFAULT, '2022-10-09 10:14:51  +4:00', '596-213 In St.', '104.86', 2);
 INSERT INTO delivery VALUES (DEFAULT, '2022-10-28 03:00:56  +9:00', '432-7822 Parturient Av.', '104.80', 3);
 
+INSERT INTO wishlist VALUES (1, 1);
+INSERT INTO wishlist VALUES (1, 4);
+INSERT INTO wishlist VALUES (2, 1);
+INSERT INTO wishlist VALUES (3, 2);
+INSERT INTO wishlist VALUES (3, 3);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------

@@ -7,9 +7,9 @@
     <div id="headerWrapper2">
       @auth
         <div id="headerButtons">
-          <button id="addWish" type="submit">
+          <a id="addWish" href="/users/{{ Auth::user()->id }}/wishlist">
             <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
-          </button>
+          </a>
           <button id="hCart" type="submit">
             <a href="/users/{{ Auth::user()->id }}/cart" >
               <iconify-icon icon="material-symbols:shopping-cart-outline-rounded" id="cart"></iconify-icon>
