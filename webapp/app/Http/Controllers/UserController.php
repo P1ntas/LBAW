@@ -79,6 +79,10 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        if ($user->isAdmin()) {
+            return view('pages.admin', ['admin' => $user]);
+        }
+
         return view('pages.user', ['user' => $user]);
     }
 
@@ -97,6 +101,10 @@ class UserController extends Controller
             $this->authorize('update', $user);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return redirect()->back();
+        }
+
+        if ($user->isAdmin()) {
+            return view('pages.edit_admin', ['admin' => $user]);
         }
 
         return view('pages.edit_user', ['user' => $user]);

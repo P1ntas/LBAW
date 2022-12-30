@@ -5,7 +5,7 @@
       <h1><a href="/" id="name">Off The Shelf</a></h1>
     </div>
     <div id="headerWrapper2">
-      @auth
+      @if (Auth::check() && !Auth::user()->isAdmin())
         <div id="headerButtons">
           <a id="addWish" href="/users/{{ Auth::user()->id }}/wishlist">
             <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
@@ -16,7 +16,7 @@
             </a>
           </button>
         </div>
-      @endauth
+      @endif
       <form method="POST" action="/books/search">
         @csrf
         <div id="hSearch">
@@ -28,17 +28,28 @@
       </form>
       <div id="hLog">
         @auth
-          <a id="headerLogin" href="/users/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
-          <div id="userPopup">
-            <ul id ="userActions">
-              <li><a href="/users/{{ Auth::user()->id }}/purchases">Purchases</a></li>
-              <li><a href="/users/{{ Auth::user()->id }}/edit">Edit Profile</a></li>
-              <li><a href="/logout">Sign out</a></li>
-            </ul>
-          </div>
+          @if (Auth::user()->isAdmin())
+            <a id="headerLogin" href="/admins/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
+            <div id="userPopup">
+              <ul id ="userActions">
+                <li><a href="/users">User Accounts</a></li>
+                <li><a href="/admins/{{ Auth::user()->id }}/edit">Edit Profile</a></li>
+                <li><a href="/logout">Sign Out</a></li>
+              </ul>
+            </div>
+          @else
+            <a id="headerLogin" href="/users/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
+            <div id="userPopup">
+              <ul id ="userActions">
+                <li><a href="/users/{{ Auth::user()->id }}/purchases">Purchases</a></li>
+                <li><a href="/users/{{ Auth::user()->id }}/edit">Edit Profile</a></li>
+                <li><a href="/logout">Sign Out</a></li>
+              </ul>
+            </div>
+          @endif
         @else
-          <a href="/login">Sign in</a>
-          <a href="/register">Sign up</a></li>
+          <a href="/login">Sign In</a>
+          <a href="/register">Sign Up</a></li>
         @endauth
       </div>
       <nav id="hamburguer">
