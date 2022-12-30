@@ -8,8 +8,9 @@
 <div id="editWrapper">
     <!-- user_photo -->
 </div>
-<form id="fedit" method="POST" action="/api/users/{{$user->id}}/edit">
-    {{ csrf_field() }}
+<form id="fedit" method="POST" action="/users/{{$user->id}}/edit">
+    @csrf
+    @method('PUT')
 
     <input class="editor" type="text" name="name" value="{{$user->name}}">
     @if ($errors->has('name'))
@@ -54,6 +55,11 @@
     @endif
 
     <button type="submit" id="edit_button" class="edit_button">Confirm</button>
+</form>
+<form method="POST" action="/users/{{$user->id}}/delete">
+    @csrf
+    @method('DELETE')
+    <button id="delete_button" class="edit_button" type="submit">Delete account</button>
 </form>
 
 @endsection

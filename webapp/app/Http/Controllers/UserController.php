@@ -94,7 +94,7 @@ class UserController extends Controller
         }
 
         try {
-            $this->authorize('edit', $user);
+            $this->authorize('update', $user);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return redirect()->back();
         }
@@ -109,6 +109,12 @@ class UserController extends Controller
             Session::flash('notification', 'User not found!');
             Session::flash('notification_type', 'error');
 
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('update', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return redirect()->back();
         }
 
@@ -171,5 +177,29 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->action('UserController@show', ['id' => $id]);
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('delete', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $user->name = '[DELETED]';
+        $user->password = bcrypt(Str::random(10));
+        $user->save();
+
+        return redirect()->action('Auth\LoginController@logout');
     }
 }
