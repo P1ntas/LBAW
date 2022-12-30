@@ -338,6 +338,7 @@ LANGUAGE plpgsql;
 
 CREATE TRIGGER wishlist_to_cart 
         AFTER INSERT ON cart
+        FOR EACH ROW
         EXECUTE PROCEDURE wishlist_to_cart();
 
 -- TRIGGER04
