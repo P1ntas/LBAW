@@ -21,25 +21,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $validator = Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed'
+            'email' => 'required|string|email|min:6|max:255|unique:users',
+            'name' => 'required|string|min:6|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'user_address' => 'required|string|min:8|max:255'
         ]);
 
         if ($validator->fails()) {
-            // error
             return $validator;
-        }
-
-        if (isset($data['user_address'])) {
-            $validator = Validator::make($data, [
-                'user_address' => 'string|min:8|max:255'
-            ]);
-
-            if ($validator->fails()) {
-                // error
-                return $validator;
-            }
         }
 
         if (isset($data['phone'])) {
@@ -48,7 +37,6 @@ class RegisterController extends Controller
             ]);
 
             if ($validator->fails()) {
-                // error
                 return $validator;
             }
         }

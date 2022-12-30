@@ -12,7 +12,7 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     public function list() {
-        $categories = Category::simplePaginate(20);
+        $categories = Category::simplePaginate(10);
 
         if ($categories->isEmpty()) {
             Session::flash('notification', 'Categories not found!');

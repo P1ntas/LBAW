@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable
 {
@@ -11,7 +12,7 @@ class User extends Authenticatable
 
     public $table = 'users';
     public $timestamps  = false;
-    public $fillable = [
+    protected $fillable = [
         'name',
         'email',
         'password',
@@ -21,7 +22,7 @@ class User extends Authenticatable
         'admin_perms'
     ];
 
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'remember_token'];
 
     public function wishlist()
     {

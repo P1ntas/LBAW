@@ -20,6 +20,7 @@
     <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/checkbox.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/book.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/login.js') }}" defer></script>
   </head>
   <body>
       @include('layouts.header')

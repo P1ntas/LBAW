@@ -11,18 +11,63 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function list(User $user)
-    {
-      return Auth::user()->isAdmin();
+    public function show(User $authUser, User $user) {
+      return $authUser->id == $user->id;
     }
 
-    public function update(User $user)
-    {
-      return Auth::user()->id == $user->id || Auth::user()->isAdmin();
+    public function update(User $authUser, User $user) {
+      return $authUser->id == $user->id;
     }
 
-    public function viewCart(User $user)
-    {
-      return Auth::user()->id == $user->id;
+    public function delete(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function viewCart(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function manageCart(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function clearCart(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function addToCart(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function viewPurchases(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function cancelOrder(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function viewWishlist(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+  
+    public function manageWishlist(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function addToWishlist(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function checkout(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function removeReview(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function editReview(User $authUser, User $user) {
+      return $authUser->id == $user->id;
     }
 }

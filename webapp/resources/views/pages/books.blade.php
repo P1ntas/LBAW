@@ -5,7 +5,7 @@
 @section('content')
 
 <form method="POST" action="/books/filter">
-    {{ csrf_field() }}
+    @csrf
 
     <label for="category">Category</label>
     <select id="category" name="category">

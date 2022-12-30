@@ -3,7 +3,7 @@ const reviewBook = document.querySelector("#reviewBook");
 const details = document.querySelector("#details");
 const autor = document.querySelector("#autor");
 
-function actButton(a, b) {
+function actButton(a) {
     a.addEventListener("click", () => {
         description.classList.remove("activeLabel");
         reviewBook.classList.remove("activeLabel");
@@ -29,6 +29,19 @@ function actButton(a, b) {
                 break;
         }
     })
+}
+
+if (window.location.hash === '#bookReview') {
+    description.classList.remove("activeLabel");
+    reviewBook.classList.remove("activeLabel");
+    details.classList.remove("activeLabel");
+    autor.classList.remove("activeLabel");
+    document.getElementById('bookDescription').classList.add('hideBook');
+    document.getElementById('bookReview').classList.add('hideBook');
+    document.getElementById('detailsBook').classList.add('hideBook');
+    document.getElementById('bookAutor').classList.add('hideBook');
+    reviewBook.classList.add("activeLabel");
+    document.getElementById('bookReview').classList.remove('hideBook');
 }
 
 actButton(description);

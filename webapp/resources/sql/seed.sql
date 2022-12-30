@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS book_collection CASCADE;
 DROP TABLE IF EXISTS review CASCADE;
 DROP TABLE IF EXISTS purchase_book CASCADE;
 DROP TABLE IF EXISTS delivery CASCADE;
+DROP TABLE IF EXISTS password_resets CASCADE;
 
 DROP TYPE IF EXISTS purchase_state CASCADE;
 
@@ -81,7 +82,8 @@ CREATE TABLE users (
     user_address TEXT,
     phone CHAR(9),
     blocked BOOLEAN DEFAULT FALSE NOT NULL,
-    admin_perms BOOLEAN DEFAULT FALSE NOT NULL     
+    admin_perms BOOLEAN DEFAULT FALSE NOT NULL,
+    remember_token VARCHAR    
 );
 
 CREATE TABLE book (
@@ -158,15 +160,21 @@ CREATE TABLE delivery (
     purchase_id INTEGER NOT NULL UNIQUE REFERENCES purchase(id) ON UPDATE CASCADE ON DELETE CASCADE   
 );
 
+CREATE TABLE password_resets (
+    email VARCHAR(255) PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NULL
+);
+
 /*
 Populate Tables
 */
 
 -- password for all users: 123456
-INSERT INTO users VALUES (DEFAULT, 'Afonso Abreu', 'afonsoabreu@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Afonso Pinto', 'afonsopinto@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Ruben Monteiro', 'rubenmonteiro@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
-INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$10$4IQKXw0BxDBXsW44mRkQ6.5PDJ99Mzf2YMWMEa0Nz4flr1K2UrWHq', '696 Magna. Street', '987654321', DEFAULT, TRUE);
+INSERT INTO users VALUES (DEFAULT, 'Afonso Abreu', 'afonsoabreu@gmail.com', '$2y$10$BoAsL2bmrH4A4VScQ14nCOHu1A8DgYgOSMFkCMvQIJlw2cZWUTR0u', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Afonso Pinto', 'afonsopinto@gmail.com', '$2y$10$BoAsL2bmrH4A4VScQ14nCOHu1A8DgYgOSMFkCMvQIJlw2cZWUTR0u', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Ruben Monteiro', 'rubenmonteiro@gmail.com', '$2y$10$BoAsL2bmrH4A4VScQ14nCOHu1A8DgYgOSMFkCMvQIJlw2cZWUTR0u', '696 Magna. Street', '935235731', DEFAULT, DEFAULT);
+INSERT INTO users VALUES (DEFAULT, 'Diogo Silva', 'diogosilva@gmail.com', '$2y$10$BoAsL2bmrH4A4VScQ14nCOHu1A8DgYgOSMFkCMvQIJlw2cZWUTR0u', '696 Magna. Street', '987654321', DEFAULT, TRUE);
 -- last one is admin
 
 INSERT INTO faq VALUES ('This is a question', 'This is an answer');
@@ -201,6 +209,31 @@ INSERT INTO book_author VALUES (4, 3);
 INSERT INTO review VALUES (DEFAULT, 4, 'What a pleasent experience.', '2022-10-18 03:50:35  +0:00', 1, 1);
 INSERT INTO review VALUES (DEFAULT, 5, 'Very interesting.', '2022-10-18 03:50:35  +0:00', 2, 2);
 INSERT INTO review VALUES (DEFAULT, 3, 'Somewhat funny.', '2022-10-18 03:50:35  +0:00', 3, 3);
+
+INSERT INTO cart VALUES (1, 1);
+INSERT INTO cart VALUES (1, 2);
+INSERT INTO cart VALUES (2, 3);
+INSERT INTO cart VALUES (2, 4);
+INSERT INTO cart VALUES (3, 2);
+INSERT INTO cart VALUES (3, 3);
+
+INSERT INTO purchase VALUES (DEFAULT, '2022-07-13 14:03:42 +9:00', 1, 'Received');
+INSERT INTO purchase VALUES (DEFAULT, '2022-01-30 09:05:56 +8:00', 2, 'Dispatched');
+INSERT INTO purchase VALUES (DEFAULT, '2021-12-22 22:21:03 -4:00', 3, 'Delivered');
+
+INSERT INTO purchase_book VALUES (1, 1);
+INSERT INTO purchase_book VALUES (2, 2);
+INSERT INTO purchase_book VALUES (3, 3);
+
+INSERT INTO delivery VALUES (DEFAULT, '2022-10-18 03:50:35  +0:00', '335-2063 Ligula. St.', '131.96', 1);
+INSERT INTO delivery VALUES (DEFAULT, '2022-10-09 10:14:51  +4:00', '596-213 In St.', '104.86', 2);
+INSERT INTO delivery VALUES (DEFAULT, '2022-10-28 03:00:56  +9:00', '432-7822 Parturient Av.', '104.80', 3);
+
+INSERT INTO wishlist VALUES (1, 1);
+INSERT INTO wishlist VALUES (1, 4);
+INSERT INTO wishlist VALUES (2, 1);
+INSERT INTO wishlist VALUES (3, 2);
+INSERT INTO wishlist VALUES (3, 3);
 
 -----------------------------------------
 -- INDEXES
@@ -305,6 +338,7 @@ LANGUAGE plpgsql;
 
 CREATE TRIGGER wishlist_to_cart 
         AFTER INSERT ON cart
+        FOR EACH ROW
         EXECUTE PROCEDURE wishlist_to_cart();
 
 -- TRIGGER04
@@ -322,6 +356,7 @@ LANGUAGE plpgsql;
 
 CREATE TRIGGER cart_purchased 
         AFTER INSERT ON purchase
+        FOR EACH ROW
         EXECUTE PROCEDURE cart_purchased();
 
 -- TRIGGER05
