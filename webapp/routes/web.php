@@ -31,3 +31,8 @@ Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+']);
 Route::get('/users/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
 Route::put('/users/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
 Route::delete('/users/{id}/delete', 'UserController@delete')->where(['id' => '[0-9]+']);
+
+// Cart
+Route::get('/users/{id}/cart', 'UserController@shoppingCart')->where(['id' => '[0-9]+']);
+Route::delete('/users/{user_id}/cart/{book_id}', 'UserController@manageCart')->where(['user_id' => '[0-9]+', 'book_id' => '[0-9]+']);
+Route::delete('/users/{id}/cart/clear', 'UserController@clearCart')->where(['id' => '[0-9]+']);

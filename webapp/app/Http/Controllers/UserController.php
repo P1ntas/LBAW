@@ -179,7 +179,7 @@ class UserController extends Controller
         return redirect()->action('UserController@show', ['id' => $id]);
     }
 
-    public function delete(Request $request, $id)
+    public function delete($id)
     {
         $user = User::find($id);
 
@@ -201,5 +201,49 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->action('Auth\LoginController@logout');
+    }
+
+    public function shoppingCart($id) {
+        $user = User::find($id);
+
+        try {
+            $this->authorize('viewCart', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $books = $user->cart()->get();
+
+        return view('pages.cart', ['books' => $books]);
+    }
+
+    public function manageCart($user_id, $book_id)
+    {
+        $user = User::find($user_id);
+
+        try {
+            $this->authorize('manageCart', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $user->cart()->detach($book_id);
+
+        return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
+    }
+
+    public function clearCart($id)
+    {
+        $user = User::find($id);
+
+        try {
+            $this->authorize('clearCart', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $user->cart()->detach();
+
+        return redirect()->action('UserController@shoppingCart', ['id' => $id]);
     }
 }

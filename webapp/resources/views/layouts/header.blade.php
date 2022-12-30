@@ -5,16 +5,20 @@
       <h1><a href="/" id="name">Off The Shelf</a></h1>
     </div>
     <div id="headerWrapper2">
-      <div id="headerButtons">
-        <button id="addWish" type="submit">
-          <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
-        </button>
-        <button id="hCart" type="submit">
-          <iconify-icon icon="material-symbols:shopping-cart-outline-rounded" id="cart"></iconify-icon>
-        </button>
-      </div>
+      @auth
+        <div id="headerButtons">
+          <button id="addWish" type="submit">
+            <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
+          </button>
+          <button id="hCart" type="submit">
+            <a href="/users/{{ Auth::user()->id }}/cart" >
+              <iconify-icon icon="material-symbols:shopping-cart-outline-rounded" id="cart"></iconify-icon>
+            </a>
+          </button>
+        </div>
+      @endauth
       <form method="POST" action="/books/search">
-        {{ csrf_field() }}
+        @csrf
         <div id="hSearch">
           <button id="magnifierSearch">
             <iconify-icon icon="simple-line-icons:magnifier"></iconify-icon>

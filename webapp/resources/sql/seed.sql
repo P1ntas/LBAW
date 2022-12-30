@@ -210,6 +210,13 @@ INSERT INTO review VALUES (DEFAULT, 4, 'What a pleasent experience.', '2022-10-1
 INSERT INTO review VALUES (DEFAULT, 5, 'Very interesting.', '2022-10-18 03:50:35  +0:00', 2, 2);
 INSERT INTO review VALUES (DEFAULT, 3, 'Somewhat funny.', '2022-10-18 03:50:35  +0:00', 3, 3);
 
+INSERT INTO cart VALUES (1, 1);
+INSERT INTO cart VALUES (1, 2);
+INSERT INTO cart VALUES (2, 3);
+INSERT INTO cart VALUES (2, 4);
+INSERT INTO cart VALUES (3, 2);
+INSERT INTO cart VALUES (3, 3);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------

@@ -5,7 +5,7 @@
 @section('content')
 
 <form method="POST" action="{{ route('password.email') }}">
-    {{ csrf_field() }}
+    @csrf
 
     <input type="email" name="email" placeholder="email" required>
     @if ($errors->has('email'))

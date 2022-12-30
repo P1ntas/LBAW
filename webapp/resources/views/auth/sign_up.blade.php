@@ -1,5 +1,5 @@
 <form id="register" class="inputs" method="POST" action="/register">
-  {{ csrf_field() }}
+  @csrf
   
   <input class="words" type="email" name="email" placeholder="email" required>
   @if ($errors->has('email'))

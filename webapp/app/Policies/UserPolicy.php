@@ -11,17 +11,27 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function show(User $authUser, User $viewedUser)
-    {
-      return $authUser->id == $viewedUser->id;
+    public function show(User $authUser, User $user) {
+      return $authUser->id == $user->id;
     }
 
-    public function update(User $authUser, User $user)
-    {
+    public function update(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
 
     public function delete(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function viewCart(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function manageCart(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
+
+    public function clearCart(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
 }

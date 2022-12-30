@@ -1,5 +1,5 @@
 <form id="loginForm" class="inputs" method="POST" action="/login">
-    {{ csrf_field() }}
+    @csrf
 
     <input id="email" class="words" type="email" name="email" placeholder="email" required>
     @if ($errors->has('email'))

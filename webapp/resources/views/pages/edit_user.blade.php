@@ -59,7 +59,8 @@
 <form method="POST" action="/users/{{$user->id}}/delete">
     @csrf
     @method('DELETE')
-    <button id="delete_button" class="edit_button" type="submit">Delete account</button>
+    <button id="delete_button" class="edit_button" type="submit" 
+    onclick="return confirm('Are you sure you want to delete this account?');">Delete account</button>
 </form>
 
 @endsection

@@ -5,7 +5,7 @@
 @section('content')
 
 <form method="POST" action="{{ route('password.update') }}">
-    {{ csrf_field() }}
+    @csrf
 
     <input type="hidden" name="token" value="{{ $token }}">
 
