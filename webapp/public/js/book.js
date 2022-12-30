@@ -31,6 +31,19 @@ function actButton(a) {
     })
 }
 
+if (window.location.hash === '#bookReview') {
+    description.classList.remove("activeLabel");
+    reviewBook.classList.remove("activeLabel");
+    details.classList.remove("activeLabel");
+    autor.classList.remove("activeLabel");
+    document.getElementById('bookDescription').classList.add('hideBook');
+    document.getElementById('bookReview').classList.add('hideBook');
+    document.getElementById('detailsBook').classList.add('hideBook');
+    document.getElementById('bookAutor').classList.add('hideBook');
+    reviewBook.classList.add("activeLabel");
+    document.getElementById('bookReview').classList.remove('hideBook');
+}
+
 actButton(description);
 actButton(reviewBook);
 actButton(details);

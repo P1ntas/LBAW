@@ -2,8 +2,8 @@
     @php ($final_cost = 1.50)
     @foreach ($purchase->books as $book)
         @php ($final_cost += $book->price)
-        <a href="/books/{{ $book->id }}">
-            <p class="pclass">Item: <span>{{ $book->title }}</span></p>
+        <a href="/books/{{ $book->id }}#bookReview">
+            <p class="pclass">{{ $book->title }} <span>review</span></p>
         </a>
     @endforeach
     <p class="pclass">Arrival date: <span>{{ $purchase->delivery->arrival }}</span></p>
