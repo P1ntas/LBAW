@@ -206,6 +206,13 @@ class UserController extends Controller
     public function shoppingCart($id) {
         $user = User::find($id);
 
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
         try {
             $this->authorize('viewCart', $user);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
@@ -220,6 +227,13 @@ class UserController extends Controller
     public function manageCart($user_id, $book_id)
     {
         $user = User::find($user_id);
+
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
 
         try {
             $this->authorize('manageCart', $user);
@@ -236,6 +250,13 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
         try {
             $this->authorize('clearCart', $user);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
@@ -246,4 +267,27 @@ class UserController extends Controller
 
         return redirect()->action('UserController@shoppingCart', ['id' => $id]);
     }
+
+    public function addToCart($book_id) {
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+  
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('addToCart', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+  
+        $user->cart()->attach($book_id);
+
+        return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
+    }
+
 }

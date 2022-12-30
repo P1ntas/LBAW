@@ -34,4 +34,8 @@ class UserPolicy
     public function clearCart(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
+
+    public function addToCart(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
 }

@@ -6,6 +6,11 @@
 
 <div id="bookInfo">
     <!-- book_photo -->
+    @auth
+        <form method="GET" action="/books/{{ $book->id }}/cart">
+            <button id="buy" class="bookButtons" type="submit">Add to cart</button>
+        </form>
+    @endauth
     <div id="bookDetails">
         <span id="description" class="bookLable activeLabel">Description</span>
         <span id="reviewBook" class="bookLable">Reviews</span>
