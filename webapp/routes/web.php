@@ -50,3 +50,4 @@ Route::get('/books/{book_id}/wish', 'UserController@addToWishlist')->where(['boo
 
 // Reviews
 Route::post('/books/{id}/review', 'BookController@review')->where(['id' => '[0-9]+']);
+Route::delete('/books/{book_id}/review/{review_id}/remove', 'BookController@removeReview')->where(['book_id' => '[0-9]+', 'review_id' => '[0-9]+']);

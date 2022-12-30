@@ -31,6 +31,19 @@
             @foreach ($book->reviews as $review)
                 <div id="revWrapper2">
                     <div id="revWrapper">
+                        @auth
+                            @if (Auth::user()->id == $review->user_id)
+                                <div id="try2">
+                                    <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/remove">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">
+                                            <iconify-icon icon="ion:trash-outline" class="trash"></iconify-icon>
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
+                        @endauth
                         <div id="rating">
                             <p>{{ $review->rating }}</p>
                             <iconify-icon icon="material-symbols:star" id="star" style="color: #ffc700;"></iconify-icon>

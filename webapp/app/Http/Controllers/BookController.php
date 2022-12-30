@@ -173,4 +173,28 @@ class BookController extends Controller
 
         return redirect()->action('BookController@show', ['id' => $id]);
     }
+
+    public function removeReview($book_id, $review_id)
+    {
+        $review = Review::find($review_id);
+
+        if (empty($review)) {
+            Session::flash('notification', 'Review not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        $user = Auth::user();
+
+        try {
+            $this->authorize('removeReview', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $review->delete();
+
+        return redirect()->back();
+    }
 }

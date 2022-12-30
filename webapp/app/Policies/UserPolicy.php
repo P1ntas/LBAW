@@ -66,4 +66,8 @@ class UserPolicy
     public function review(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
+
+    public function removeReview(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
 }
