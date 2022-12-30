@@ -395,4 +395,8 @@ class UserController extends Controller
 
         return $books;
     }
+
+    public function getUser($id) {
+        return User::find($id);
+    }
 }

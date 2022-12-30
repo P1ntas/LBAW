@@ -63,11 +63,11 @@ class UserPolicy
       return $authUser->id == $user->id;
     }
 
-    public function review(User $authUser, User $user) {
+    public function removeReview(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
 
-    public function removeReview(User $authUser, User $user) {
+    public function editReview(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
 }

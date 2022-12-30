@@ -128,14 +128,6 @@ class BookController extends Controller
             return redirect()->back();
         }
 
-        $user = Auth::user();
-
-        try {
-            $this->authorize('review', $user);
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
-            return redirect()->back();
-        }
-
         $validator = Validator::make($request->all(), [
                 'rating' => 'required|numeric|min:0|max:5'
             ], 
@@ -168,7 +160,7 @@ class BookController extends Controller
             $review->comment = $request->comment;
         }
         $review->book_id = $id;
-        $review->user_id = $user->id;
+        $review->user_id = Auth::user()->id;
         $review->save();
 
         return redirect()->action('BookController@show', ['id' => $id]);
@@ -185,7 +177,7 @@ class BookController extends Controller
             return redirect()->back();
         }
 
-        $user = Auth::user();
+        $user = app('App\Http\Controllers\UserController')->getUser($review->user_id);
 
         try {
             $this->authorize('removeReview', $user);
@@ -194,6 +186,60 @@ class BookController extends Controller
         }
 
         $review->delete();
+
+        return redirect()->back();
+    }
+
+    public function editReview(Request $request, $book_id, $review_id) {
+        $review = Review::find($review_id);
+
+        if (empty($review)) {
+            Session::flash('notification', 'Review not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+        
+        $user = app('App\Http\Controllers\UserController')->getUser($review->user_id);
+
+        try {
+            $this->authorize('editReview', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $validator = Validator::make($request->all(), [
+                'rating' => 'required|numeric|min:0|max:5'
+            ], 
+            [
+                'rating.required' => 'Please enter a rating',
+                'rating.numeric' => 'The rating must be a number',
+                'rating.min' => 'The rating must be at least 0',
+                'rating.max' => 'The rating must be no more than 5'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back();
+        }
+
+        if (isset($request->comment)) {
+            $validator = Validator::make($request->all(), [
+                'comment' => 'string'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+        }
+
+        $review->rating = $request->rating;
+        if (isset($request->comment)) {
+            $review->comment = $request->comment;
+        }
+        $review->book_id = $book_id;
+        $review->user_id = Auth::user()->id;
+        $review->save();
 
         return redirect()->back();
     }

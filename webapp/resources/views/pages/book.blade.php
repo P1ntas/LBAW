@@ -29,32 +29,61 @@
                 @include('partials.add_review')
             @endauth
             @foreach ($book->reviews as $review)
-                <div id="revWrapper2">
-                    <div id="revWrapper">
-                        @auth
-                            @if (Auth::user()->id == $review->user_id)
-                                <div id="try2">
-                                    <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/remove">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">
-                                            <iconify-icon icon="ion:trash-outline" class="trash"></iconify-icon>
-                                        </button>
-                                    </form>
-                                </div>
+                @if (Auth::check() && (Auth::user()->id == $review->user_id))
+                    <div id="revWrapper2">
+                        <div id="revWrapper">
+                            <div id="try2">
+                                <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/remove">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <iconify-icon icon="ion:trash-outline" class="trash"></iconify-icon>
+                                    </button>
+                                </form>
+                            </div>
+                            <div id="revHeader">
+                                <p class="username">{{ $review->user->name }}</p>
+                                <!-- user_photo -->
+                            </div>
+                        </div>
+                        <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/edit">
+                            @csrf
+                            @method('PUT')
+
+                            <input type="number" name="rating" min="0" max="5" step="1" value="{{ $review->rating }}">
+                            @if ($errors->has('rating'))
+                                <span class="error">
+                                    {{ $errors->first('rating') }}
+                                </span>
                             @endif
-                        @endauth
-                        <div id="rating">
-                            <p>{{ $review->rating }}</p>
-                            <iconify-icon icon="material-symbols:star" id="star" style="color: #ffc700;"></iconify-icon>
-                        </div>
-                        <div id="revHeader">
-                            <a href="/" class="username">{{ $review->user->name }}</a>
-                            <!-- user_photo -->
-                        </div>
+
+                            <input type="text" name="comment" value="{{ $review->comment }}">
+                            @if ($errors->has('comment'))
+                                <span class="error">
+                                    {{ $errors->first('comment') }}
+                                </span>
+                            @endif
+
+                            <button type="submit" id="addReview" class="edit_button">
+                                <iconify-icon icon="mdi:pencil" id="editUser"></iconify-icon>
+                            </button>
+                        </form>
                     </div>
-                    <p>{{ $review->comment }}</p>
-                </div>
+                @else
+                    <div id="revWrapper2">
+                        <div id="revWrapper">
+                            <div id="rating">
+                                <p>{{ $review->rating }}</p>
+                                <iconify-icon icon="material-symbols:star" id="star" style="color: #ffc700;"></iconify-icon>
+                            </div>
+                            <div id="revHeader">
+                                <p class="username">{{ $review->user->name }}</p>
+                                <!-- user_photo -->
+                            </div>
+                        </div>
+                        <p>{{ $review->comment }}</p>
+                    </div>
+                @endif
             @endforeach
         </div>
         <table id="detailsBook" class="bookContents hideBook">

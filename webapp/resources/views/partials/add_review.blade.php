@@ -14,5 +14,6 @@
             {{ $errors->first('comment') }}
         </span>
     @endif
-    <button type="submit" id="addReview" class="edit_button">Submit Review</button>
+    
+    <button type="submit" id="addReview" class="edit_button">Add Review</button>
 </form>
