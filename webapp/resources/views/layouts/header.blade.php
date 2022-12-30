@@ -31,7 +31,7 @@
           <a id="headerLogin" href="/users/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
           <div id="userPopup">
             <ul id ="userActions">
-              <li><a href="/">Purchases</a></li>
+              <li><a href="/users/{{ Auth::user()->id }}/purchases">Purchases</a></li>
               <li><a href="/users/{{ Auth::user()->id }}/edit">Edit Profile</a></li>
               <li><a href="/logout">Sign out</a></li>
             </ul>

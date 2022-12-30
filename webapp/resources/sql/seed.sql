@@ -217,6 +217,18 @@ INSERT INTO cart VALUES (2, 4);
 INSERT INTO cart VALUES (3, 2);
 INSERT INTO cart VALUES (3, 3);
 
+INSERT INTO purchase VALUES (DEFAULT, '2022-07-13 14:03:42 +9:00', 1, 'Received');
+INSERT INTO purchase VALUES (DEFAULT, '2022-01-30 09:05:56 +8:00', 2, 'Dispatched');
+INSERT INTO purchase VALUES (DEFAULT, '2021-12-22 22:21:03 -4:00', 3, 'Delivered');
+
+INSERT INTO purchase_book VALUES (1, 1);
+INSERT INTO purchase_book VALUES (2, 2);
+INSERT INTO purchase_book VALUES (3, 3);
+
+INSERT INTO delivery VALUES (DEFAULT, '2022-10-18 03:50:35  +0:00', '335-2063 Ligula. St.', '131.96', 1);
+INSERT INTO delivery VALUES (DEFAULT, '2022-10-09 10:14:51  +4:00', '596-213 In St.', '104.86', 2);
+INSERT INTO delivery VALUES (DEFAULT, '2022-10-28 03:00:56  +9:00', '432-7822 Parturient Av.', '104.80', 3);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------

@@ -38,4 +38,8 @@ class UserPolicy
     public function addToCart(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
+
+    public function viewPurchases(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
 }
