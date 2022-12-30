@@ -25,6 +25,9 @@
     <div id="bookDetailed">
         <article id="bookDescription" class="bookContents">{{ $book->book_description }}</article>
         <div id="bookReview" class="bookContents hideBook">
+            @auth 
+                @include('partials.add_review')
+            @endauth
             @foreach ($book->reviews as $review)
                 <div id="revWrapper2">
                     <div id="revWrapper">

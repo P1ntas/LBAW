@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Author;
+use App\Models\Review;
 
 class BookController extends Controller
 {
@@ -38,8 +41,7 @@ class BookController extends Controller
         ]);
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         $book = Book::find($id);
 
         if (empty($book)) {
@@ -91,8 +93,7 @@ class BookController extends Controller
         ]);
     } 
 
-    public function search(Request $request)
-    {
+    public function search(Request $request) {
         $results = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
 
         if ($results->isEmpty()) {
@@ -115,5 +116,61 @@ class BookController extends Controller
             'books' => $results,
             'categories' => $categories
         ]);
+    }
+
+    public function review(Request $request, $id) {
+        $book = Book::find($id);
+
+        if (empty($book)) {
+            Session::flash('notification', 'Book not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        $user = Auth::user();
+
+        try {
+            $this->authorize('review', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $validator = Validator::make($request->all(), [
+                'rating' => 'required|numeric|min:0|max:5'
+            ], 
+            [
+                'rating.required' => 'Please enter a rating',
+                'rating.numeric' => 'The rating must be a number',
+                'rating.min' => 'The rating must be at least 0',
+                'rating.max' => 'The rating must be no more than 5'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back();
+        }
+
+        if (isset($request->comment)) {
+            $validator = Validator::make($request->all(), [
+                'comment' => 'string'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+        }
+
+        $review = new Review();
+
+        $review->rating = $request->rating;
+        if (isset($request->comment)) {
+            $review->comment = $request->comment;
+        }
+        $review->book_id = $id;
+        $review->user_id = $user->id;
+        $review->save();
+
+        return redirect()->action('BookController@show', ['id' => $id]);
     }
 }

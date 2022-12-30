@@ -62,4 +62,8 @@ class UserPolicy
     public function checkout(User $authUser, User $user) {
       return $authUser->id == $user->id;
     }
+
+    public function review(User $authUser, User $user) {
+      return $authUser->id == $user->id;
+    }
 }

@@ -119,48 +119,59 @@ class UserController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|min:6|max:255',
-            'email' => [Rule::unique('users')->ignore($user->id), 'required', 'string', 'email', 'min:6', 'max:255'],
-            'user_address' => 'required|string|min:8|max:255'
-        ]);
+                'name' => 'required|string|min:6|max:255',
+                'email' => [Rule::unique('users')->ignore($user->id), 'required', 'string', 'email', 'min:6', 'max:255'],
+                'user_address' => 'required|string|min:8|max:255'
+            ], 
+            [
+                'name.required' => 'Please enter a name',
+                'name.string' => 'The name must be a string',
+                'name.min' => 'The name must be at least 6 characters',
+                'name.max' => 'The name must be no more than 255 characters',
+                'email.unique' => 'This email is already in use',
+                'email.required' => 'Please enter an email',
+                'email.string' => 'The email must be a string',
+                'email.email' => 'The email must be a valid email address',
+                'email.min' => 'The email must be at least 6 characters',
+                'email.max' => 'The email must be no more than 255 characters',
+                'user_address.required' => 'Please enter an address',
+                'user_address.string' => 'The address must be a string',
+                'user_address.min' => 'The address must be at least 8 characters',
+                'user_address.max' => 'The address must be no more than 255 characters'
+            ]
+        );
 
         if ($validator->fails()) {
-            Session::flash('notification', 'Invalid inputs!');
-            Session::flash('notification_type', 'error');
-
-            return redirect()->action('UserController@edit', ['id' => $id]);
+            return redirect()->back();
         }
 
         if (isset($request->phone)) {
             $validator = Validator::make($request->all(), [
-                'phone' => 'regex:/^[1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9]$/'
-            ]);
+                    'phone' => 'regex:/^[1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9][1-9]$/'
+                ], 
+                [
+                    'phone.regex' => 'The phone number must be a 9-digit number with no spaces or special characters'
+                ]
+            );
 
             if ($validator->fails()) {
-                Session::flash('notification', 'Invalid inputs!');
-                Session::flash('notification_type', 'error');
-    
-                return redirect()->action('UserController@edit', ['id' => $id]);
+                return redirect()->back();
             }
-        }
-
-        if ($request->password != $request->password_confirmation) {
-            Session::flash('notification', 'Passwords do not match!');
-            Session::flash('notification_type', 'error');
-
-            return redirect()->action('UserController@edit', ['id' => $id]);
         }
 
         if (isset($request->password)) {
             $validator = Validator::make($request->all(), [
-                'password' => 'string|min:6'
-            ]);
+                    'password' => 'string|min:6|same:password_confirmation',
+                    'password_confirmation' => 'string|min:6'
+                ], 
+                [
+                    'password.min' => 'The password must be at least 6 characters',
+                    'password.same' => 'The passwords must match'
+                ]
+            );
     
             if ($validator->fails()) {
-                Session::flash('notification', 'Invalid password!');
-                Session::flash('notification_type', 'error');
-    
-                return redirect()->action('UserController@edit', ['id' => $id]);
+                return redirect()->back();
             }
 
             if ($request->password == $request->password_confirmation) {

@@ -14,7 +14,7 @@ class DeliveryController extends Controller
   public function create($id) {
     $delivery = new Delivery();
 
-    $delivery->arrival = Carbon::now(); // change to a week after
+    $delivery->arrival = Carbon::now()->addWeek();
     $delivery->delivery_address = Auth::user()->user_address;
     $delivery->cost = 1.50;
     $delivery->purchase_id = $id;
