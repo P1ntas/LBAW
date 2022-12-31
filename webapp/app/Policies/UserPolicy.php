@@ -98,4 +98,8 @@ class UserPolicy
     public function status(User $authUser, User $user) {
       return $authUser->isAdmin() && !$user->isAdmin() && $authUser->id != $user->id;
     }
+
+    public function addBook(User $authUser) {
+      return $authUser->isAdmin();
+    }
 }

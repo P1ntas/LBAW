@@ -27,9 +27,9 @@
 
     <label for="price_min">Price (Min):</label>
     @empty($price_min)
-        <input type="number" id="price-min" name="price_min" value="0.00" min="0.00" max="120.00" step="0.01" placeholder="Min">
+        <input type="number" id="price-min" name="price_min" value="0.00" min="0.01" max="999.99" step="0.01" placeholder="Min">
     @else
-        <input type="number" id="price-min" name="price_min" value="{{ $price_min }}" min="0.00" max="120.00" step="0.01" placeholder="Min">
+        <input type="number" id="price-min" name="price_min" value="{{ $price_min }}" min="0.01" max="999.99" step="0.01" placeholder="Min">
     @endempty
 
     <label for="price_max">Price (Max):</label>
