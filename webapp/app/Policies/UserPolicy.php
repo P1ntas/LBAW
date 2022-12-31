@@ -36,7 +36,7 @@ class UserPolicy
     }
 
     public function viewCart(User $authUser, User $user) {
-      return $authUser->id == $user->id;
+      return !$authUser->isAdmin() && $authUser->id == $user->id;
     }
 
     public function manageCart(User $authUser, User $user) {
@@ -64,7 +64,7 @@ class UserPolicy
     }
 
     public function viewWishlist(User $authUser, User $user) {
-      return $authUser->id == $user->id;
+      return !$authUser->isAdmin() && $authUser->id == $user->id;
     }
   
     public function manageWishlist(User $authUser, User $user) {
@@ -85,5 +85,9 @@ class UserPolicy
 
     public function editReview(User $authUser, User $user) {
       return $authUser->id == $user->id;
+    }
+
+    public function list(User $authUser) {
+      return $authUser->isAdmin();
     }
 }

@@ -59,3 +59,4 @@ Route::get('/admins/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']
 Route::put('/admins/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
 Route::delete('/admins/{id}/delete', 'UserController@delete')->where(['id' => '[0-9]+']);
 Route::get('/users', 'UserController@list')->where(['id' => '[0-9]+']);
+Route::post('/users/search', 'UserController@search');

@@ -223,7 +223,7 @@ class UserController extends Controller
         $user->password = bcrypt(Str::random(20));
         $user->save();
 
-        Session::flash('notification', 'Your account has been deleted.');
+        Session::flash('notification', 'This account has been deleted.');
         Session::flash('notification_type', 'success');
 
         if (Auth::user()->isAdmin() && !$user->isAdmin()) {
@@ -414,5 +414,37 @@ class UserController extends Controller
 
     public function getUser($id) {
         return User::find($id);
+    }
+
+    public function list()
+    {
+        $users = User::where('admin_perms', FALSE)->simplePaginate(10);
+
+        if ($users->isEmpty()) {
+            Session::flash('notification', 'Users not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect('/');
+        }
+
+        try {
+            $this->authorize('list', User::class);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        return view('pages.users', ['users' => $users]);
+    }
+
+    public function search(Request $request) {
+        $results = User::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
+
+        try {
+            $this->authorize('list', User::class);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+        
+        return view('pages.users', ['users' => $results]);
     }
 }
