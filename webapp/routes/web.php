@@ -27,7 +27,7 @@ Route::post('/books/search', 'BookController@search');
 Route::get('/categories', 'CategoryController@list');
 
 // Users
-Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+']);
+Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+'])->name('pages.user');;
 Route::get('/users/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
 Route::put('/users/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
 Route::delete('/users/{id}/delete', 'UserController@delete')->where(['id' => '[0-9]+']);

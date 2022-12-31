@@ -195,6 +195,10 @@ class UserController extends Controller
         }
         $user->save();
 
+        if (Auth::user()->isAdmin() && !$user->isAdmin()) {
+            return redirect()->route('pages.user', ['id' => $id]);
+        }
+
         return redirect()->action('UserController@show', ['id' => $id]);
     }
 
@@ -216,11 +220,15 @@ class UserController extends Controller
         }
 
         $user->name = '[DELETED]';
-        $user->password = bcrypt(Str::random(10));
+        $user->password = bcrypt(Str::random(20));
         $user->save();
 
         Session::flash('notification', 'Your account has been deleted.');
         Session::flash('notification_type', 'success');
+
+        if (Auth::user()->isAdmin() && !$user->isAdmin()) {
+            return redirect()->action('UserController@list');
+        }
 
         return redirect()->action('Auth\LoginController@logout');
     }

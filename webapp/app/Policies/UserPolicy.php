@@ -12,15 +12,27 @@ class UserPolicy
     use HandlesAuthorization;
 
     public function show(User $authUser, User $user) {
-      return $authUser->id == $user->id;
+      if ($authUser->id == $user->id) {
+        return true;
+      }
+
+      return $authUser->isAdmin() && !$user->isAdmin();
     }
 
     public function update(User $authUser, User $user) {
-      return $authUser->id == $user->id;
+      if ($authUser->id == $user->id) {
+        return true;
+      }
+
+      return $authUser->isAdmin() && !$user->isAdmin();
     }
 
     public function delete(User $authUser, User $user) {
-      return $authUser->id == $user->id;
+      if ($authUser->id == $user->id) {
+        return true;
+      }
+
+      return $authUser->isAdmin() && !$user->isAdmin();
     }
 
     public function viewCart(User $authUser, User $user) {
@@ -40,7 +52,11 @@ class UserPolicy
     }
 
     public function viewPurchases(User $authUser, User $user) {
-      return $authUser->id == $user->id;
+      if ($authUser->id == $user->id) {
+        return true;
+      }
+
+      return $authUser->isAdmin() && !$user->isAdmin();
     }
 
     public function cancelOrder(User $authUser, User $user) {
