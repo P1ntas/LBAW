@@ -1,4 +1,7 @@
 <article class="book" data-id="{{ $book->id }}">
+    @foreach ($book->photos as $photo)
+        <img src="/storage/app/public/upload_media/images/{{ $photo->photo_image }}" alt="{{ $photo->photo_image }}"><br>
+    @endforeach
     <a href="/books/{{ $book->id }}">{{ $book->title }}</a>
     <p>ISBN: {{ $book->isbn }}</p>
     <p>Year: {{ $book->year }}</p>

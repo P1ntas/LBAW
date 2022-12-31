@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Publisher;
 use App\Models\Author;
 use App\Models\Review;
+use App\Models\Photo;
 
 class BookController extends Controller
 {
@@ -66,6 +67,14 @@ class BookController extends Controller
         $author->save();
       }
       $book->authors()->attach($author);
+
+      $photo = Photo::where('name', $request->photo_image)->first();
+      if (empty($photo)) {
+        $photo = new Photo();
+        $photo->photo_image = $request->photo_image;
+        $photo->save();
+      }
+      $book->photos()->attach($photo);
 
       return $book;
 

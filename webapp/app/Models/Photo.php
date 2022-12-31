@@ -31,7 +31,7 @@ class Photo extends Model
     {
         return $this->hasOne(\App\Models\Admin::class);
     }
-/*
+
     public function upload(Request $request)
     {
     $request->validate([
@@ -42,5 +42,5 @@ class Photo extends Model
     $path = $image->store('images');
 
     // Save the path to the image in the database...
-    }*/
+    }
 }

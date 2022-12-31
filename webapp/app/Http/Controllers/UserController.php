@@ -146,7 +146,7 @@ class UserController extends Controller
         }
 
         $user->save();
-/*
+
         if (isset($request->image)) {
             $validator = Validator::make($request->all(), [
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -164,7 +164,7 @@ class UserController extends Controller
                 $image->save();
             }
             $user->image()->attach($image);
-        }*/
+        }
 
         return redirect()->back();
     }

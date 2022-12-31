@@ -220,6 +220,9 @@ INSERT INTO faq VALUES ('What do i do if i cant find a book i want','try to sear
 INSERT INTO wishlist VALUES (3, 2);
 INSERT INTO wishlist VALUES (3, 3);
 
+INSERT INTO photo VALUES (1, 'poordeg.jpg', 1, 4);
+INSERT INTO photo VALUES (2, 'notpoordeg.jpg', 1, 3);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------
