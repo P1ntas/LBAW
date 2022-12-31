@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Purchase;
 use App\Models\Delivery;
@@ -78,7 +79,6 @@ class PurchaseController extends Controller
         return $purchase;
     }
 
-
     private function purchaseBooks($purchase, $books) {
         foreach ($books as $book) {
             $purchase->books()->attach($book->id);
@@ -125,4 +125,48 @@ class PurchaseController extends Controller
             }
         }
     }
+
+    public function updateStatus(Request $request, $user_id, $purchase_id) {
+        $user = User::find($user_id);
+  
+        if (empty($user)) {
+            Session::flash('notification', 'User not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('status', $user);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $purchase = Purchase::find($purchase_id);
+        
+        if (empty($purchase)) {
+            Session::flash('notification', 'Purchase not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        $validator = Validator::make($request->all(), [
+                'status' => 'in:Received,Dispatched,Delivered',
+            ], 
+            [
+                'status.in' => 'The selected status is not valid.'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back();
+        }
+
+        $purchase->state_purchase = $request->status;
+        $purchase->save();
+  
+        return redirect()->back();
+    }
+  
 }

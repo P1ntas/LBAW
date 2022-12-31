@@ -94,4 +94,8 @@ class UserPolicy
     public function block(User $authUser, User $user) {
       return $authUser->isAdmin() && !$user->isAdmin() && $authUser->id != $user->id;
     }
+
+    public function status(User $authUser, User $user) {
+      return $authUser->isAdmin() && !$user->isAdmin() && $authUser->id != $user->id;
+    }
 }

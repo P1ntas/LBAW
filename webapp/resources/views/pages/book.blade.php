@@ -6,7 +6,7 @@
 
 <div id="bookInfo">
     <!-- book_photo -->
-    @auth
+    @if (Auth::check() && !Auth::user()->isAdmin())
         <form method="GET" action="/books/{{ $book->id }}/wish">
             <button id="addWish" class="bookButtons" type="submit">
                 <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
@@ -15,7 +15,7 @@
         <form method="GET" action="/books/{{ $book->id }}/cart">
             <button id="buy" class="bookButtons" type="submit">Add to cart</button>
         </form>
-    @endauth
+    @endif
     <div id="bookDetails">
         <span id="description" class="bookLable activeLabel">Description</span>
         <span id="reviewBook" class="bookLable">Reviews</span>
@@ -25,11 +25,11 @@
     <div id="bookDetailed">
         <article id="bookDescription" class="bookContents">{{ $book->book_description }}</article>
         <div id="bookReview" class="bookContents hideBook">
-            @auth 
+            @if (Auth::check() && !Auth::user()->isAdmin())
                 @include('partials.add_review')
-            @endauth
+            @endif
             @foreach ($book->reviews as $review)
-                @if (Auth::check() && (Auth::user()->id == $review->user_id))
+                @if (Auth::check() && !Auth::user()->isAdmin() && (Auth::user()->id == $review->user_id))
                     <div id="revWrapper2">
                         <div id="revWrapper">
                             <div id="try2">
