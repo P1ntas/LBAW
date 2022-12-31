@@ -57,6 +57,7 @@
             {{ $errors->first('book_description') }}
         </span>
         @endif
+        
         <label for="category">Category</label>
         <input id="category" type="text" name="category" value="{{$book->category->name}}">
         @if ($errors->has('category'))
@@ -70,6 +71,15 @@
         @if ($errors->has('publisher'))
         <span class="error">
             {{ $errors->first('publisher') }}
+        </span>
+        @endif
+        
+        <label for="authors">Author(s)</label>
+        @php $authors_string = implode(',', $book->authors); @endphp
+        <input id="authors" type="text" name="authors" value="{{$authors_string}}">
+        @if ($errors->has('authors'))
+        <span class="error">
+            {{ $errors->first('authors') }}
         </span>
         @endif
 

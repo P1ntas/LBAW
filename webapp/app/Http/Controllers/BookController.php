@@ -115,6 +115,15 @@ class BookController extends Controller
 
       $book->save();
 
+      $author = Author::where('name', $request->author_name)->first();
+      if (empty($author)) {
+        $author = new Author();
+        $author->name = $request->author_name;
+        $author->save();
+      }
+      $book->authors()->attach($author);
+      
+
       return Redirect::to('/books/$book->id');
 
   }

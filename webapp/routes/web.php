@@ -44,3 +44,9 @@ Route::get('faq', 'StaticController@faq');
 
 // Contacts
 Route::get('contacts', 'StaticController@contacts');
+
+// 404
+Route::any('{any}', function () {
+    abort(404, 'errors.404');
+});
+
