@@ -119,51 +119,64 @@ class BookController extends Controller
     }
 
     public function review(Request $request, $id) {
-        $book = Book::find($id);
+        try {
+            $book = Book::find($id);
 
-        if (empty($book)) {
-            Session::flash('notification', 'Book not found!');
-            Session::flash('notification_type', 'error');
+            if (empty($book)) {
+                Session::flash('notification', 'Book not found!');
+                Session::flash('notification_type', 'error');
 
-            return redirect()->back();
-        }
+                return redirect()->back();
+            }
 
-        $validator = Validator::make($request->all(), [
-                'rating' => 'required|numeric|min:0|max:5'
-            ], 
-            [
-                'rating.required' => 'Please enter a rating',
-                'rating.numeric' => 'The rating must be a number',
-                'rating.min' => 'The rating must be at least 0',
-                'rating.max' => 'The rating must be no more than 5'
-            ]
-        );
-
-        if ($validator->fails()) {
-            return redirect()->back();
-        }
-
-        if (isset($request->comment)) {
             $validator = Validator::make($request->all(), [
-                'comment' => 'string'
-            ]);
+                    'rating' => 'required|numeric|min:0|max:5'
+                ], 
+                [
+                    'rating.required' => 'Please enter a rating',
+                    'rating.numeric' => 'The rating must be a number',
+                    'rating.min' => 'The rating must be at least 0',
+                    'rating.max' => 'The rating must be no more than 5'
+                ]
+            );
 
             if ($validator->fails()) {
                 return redirect()->back();
             }
+
+            if (isset($request->comment)) {
+                $validator = Validator::make($request->all(), [
+                    'comment' => 'string'
+                ]);
+
+                if ($validator->fails()) {
+                    return redirect()->back();
+                }
+            }
+
+            $review = new Review();
+
+            $review->rating = $request->rating;
+            if (isset($request->comment)) {
+                $review->comment = $request->comment;
+            }
+            $review->book_id = $id;
+            $review->user_id = Auth::user()->id;
+            $review->save();
+
+            return redirect()->action('BookController@show', ['id' => $id]);
         }
-
-        $review = new Review();
-
-        $review->rating = $request->rating;
-        if (isset($request->comment)) {
-            $review->comment = $request->comment;
+        catch (\Exception $e) {
+            if ($e->getMessage() == 'Blocked users cannot submit reviews.') {
+                Session::flash('notification', 'You cannot submit reviews because you are blocked.');
+                Session::flash('notification_type', 'error');
+    
+                return redirect()->back();
+            } 
+            else {
+                return redirect()->back();
+            }
         }
-        $review->book_id = $id;
-        $review->user_id = Auth::user()->id;
-        $review->save();
-
-        return redirect()->action('BookController@show', ['id' => $id]);
     }
 
     public function removeReview($book_id, $review_id)

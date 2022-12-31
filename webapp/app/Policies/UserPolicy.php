@@ -90,4 +90,8 @@ class UserPolicy
     public function list(User $authUser) {
       return $authUser->isAdmin();
     }
+
+    public function block(User $authUser, User $user) {
+      return $authUser->isAdmin() && !$user->isAdmin() && $authUser->id != $user->id;
+    }
 }

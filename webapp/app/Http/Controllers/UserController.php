@@ -167,6 +167,22 @@ class UserController extends Controller
             }
         }
 
+        if (isset($request->blocked)) {
+            $validator = Validator::make($request->all(), [
+                'blocked' => 'in:TRUE,FALSE'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+
+            try {
+                $this->authorize('block', $user);
+            } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+                return redirect()->back();
+            }
+        }
+
         if (isset($request->password)) {
             $validator = Validator::make($request->all(), [
                     'password' => 'string|min:6|same:password_confirmation',
@@ -192,6 +208,9 @@ class UserController extends Controller
         $user->user_address = $request->user_address;
         if (isset($request->phone)) {
             $user->phone = $request->phone;
+        }
+        if (isset($request->blocked)) {
+            $user->blocked = $request->blocked;
         }
         $user->save();
 

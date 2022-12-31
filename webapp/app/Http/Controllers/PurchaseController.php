@@ -86,30 +86,43 @@ class PurchaseController extends Controller
     }
     
     public function checkout($id) {
-        $user = User::find($id);
-  
-        if (empty($user)) {
-            Session::flash('notification', 'User not found!');
-            Session::flash('notification_type', 'error');
-
-            return redirect()->back();
-        }
-
         try {
-            $this->authorize('checkout', $user);
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
-            return redirect()->back();
-        }
+            $user = User::find($id);
     
-        $books = app('App\Http\Controllers\UserController')->getCartBooks($id);
-        $purchase = $this->create($id);
-        $delivery = app('App\Http\Controllers\DeliveryController')->create($purchase->id);
+            if (empty($user)) {
+                Session::flash('notification', 'User not found!');
+                Session::flash('notification_type', 'error');
 
-        $this->purchaseBooks($purchase, $books);
+                return redirect()->back();
+            }
 
-        Session::flash('notification', 'Your order has been received.');
-        Session::flash('notification_type', 'success');
+            try {
+                $this->authorize('checkout', $user);
+            } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+                return redirect()->back();
+            }
+        
+            $books = app('App\Http\Controllers\UserController')->getCartBooks($id);
+            $purchase = $this->create($id);
+            $delivery = app('App\Http\Controllers\DeliveryController')->create($purchase->id);
 
-        return redirect()->action('UserController@shoppingCart', ['id' => $id]);
+            $this->purchaseBooks($purchase, $books);
+
+            Session::flash('notification', 'Your order has been received.');
+            Session::flash('notification_type', 'success');
+
+            return redirect()->action('UserController@shoppingCart', ['id' => $id]);
+        }
+        catch (\Exception $e) {
+            if ($e->getMessage() == 'Blocked users cannot purchase books.') {
+                Session::flash('notification', 'You cannot purchase books because you are blocked.');
+                Session::flash('notification_type', 'error');
+    
+                return redirect()->back();
+            } 
+            else {
+                return redirect()->back();
+            }
+        }
     }
 }

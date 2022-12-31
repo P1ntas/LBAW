@@ -12,6 +12,10 @@
     @csrf
     @method('PUT')
 
+    @if ($user->isBlocked())
+        <p>[This account is blocked]</p>
+    @endif
+    
     <input class="editor" type="text" name="name" value="{{$user->name}}">
     @if ($errors->has('name'))
     <span class="error">
@@ -52,6 +56,17 @@
     <span class="error">
         {{ $errors->first('phone') }}
     </span>
+    @endif
+
+    @if (Auth::user()->isAdmin())
+        <label for="blocked">Blocked</label>
+        @if ($user->isBlocked())
+            <input type="radio" name="blocked" value="TRUE" checked="checked">Yes
+            <input type="radio" name="blocked" value="FALSE">No
+        @else
+            <input type="radio" name="blocked" value="TRUE">Yes
+            <input type="radio" name="blocked" value="FALSE" checked="checked">No
+        @endif
     @endif
 
     <button type="submit" id="edit_button" class="edit_button">Confirm</button>

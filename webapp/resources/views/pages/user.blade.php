@@ -9,6 +9,9 @@
     <!-- user_photo -->
 </div>
 <div class="profileWrapper1">
+    @if ($user->isBlocked())
+        <p>[This account is blocked]</p>
+    @endif
     <p>Email: <span>{{ $user->email }}</span></p> 
     <p>Address: <span>{{ $user->user_address }}</span></p>
     @if (!empty($user->phone))
