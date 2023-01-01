@@ -1,9 +1,5 @@
-<article>
-    <a href="/books/{{ $book->id }}">{{ $book->title }}</a>
-    <p>Price: {{ $book->price }} €</p>
-    <p>Category: {{ $book->category->name }}
-    <p>Author(s):</p>
-    @foreach ($book->authors as $author)
-        <p>{{ $author->name }}</p>
-    @endforeach
-</article>
+<div class="card">
+    <!-- book_photo -->
+    <a href="/books/{{ $book->id }}"><p>{{ $book->title }}</p></a>
+    <p class="price">Price: <span>{{ $book->price }} €</span><p>
+</div>

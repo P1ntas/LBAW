@@ -17,7 +17,7 @@
     <div id="userWrapper">
         @php ($final_cost = 1.50)
         @foreach ($books as $book)
-        @php ($final_cost += $book->price)
+            @php ($final_cost += $book->price)
         @endforeach
         <p id="finalCost">Final cost: <span>{{ $final_cost }} €</span></p>
     </div>

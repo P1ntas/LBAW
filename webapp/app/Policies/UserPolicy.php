@@ -80,7 +80,11 @@ class UserPolicy
     }
 
     public function removeReview(User $authUser, User $user) {
-      return $authUser->id == $user->id;
+      if ($authUser->id == $user->id) {
+        return true;
+      }
+
+      return $authUser->isAdmin() && !$user->isAdmin();
     }
 
     public function editReview(User $authUser, User $user) {
@@ -100,6 +104,14 @@ class UserPolicy
     }
 
     public function addBook(User $authUser) {
+      return $authUser->isAdmin();
+    }
+
+    public function editBook(User $authUser) {
+      return $authUser->isAdmin();
+    }
+
+    public function deleteBook(User $authUser) {
       return $authUser->isAdmin();
     }
 }

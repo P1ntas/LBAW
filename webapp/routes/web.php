@@ -63,3 +63,6 @@ Route::post('/users/search', 'UserController@search');
 Route::put('/users/{user_id}/purchases/{purchase_id}/status', 'PurchaseController@updateStatus')->where(['user_id' => '[0-9]+', 'purchase_id' => '[0-9]+']);
 Route::get('/books/add', 'BookController@add');
 Route::post('/books/add', 'BookController@create');
+Route::get('/books/{id}/edit', 'BookController@edit')->where(['id' => '[0-9]+']);
+Route::put('/books/{id}/edit', 'BookController@update')->where(['id' => '[0-9]+']);
+Route::delete('/books/{id}/remove', 'BookController@delete')->where(['id' => '[0-9]+']);

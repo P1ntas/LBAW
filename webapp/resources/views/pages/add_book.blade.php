@@ -4,67 +4,59 @@
 
 @section('content')
   
-<form method="POST" action="/books/add">
+<form id="fedit" method="POST" action="/books/add">
     @csrf
 
-    <label for="title">Title *</label>
-    <input id="title" type="text" name="title" required>
+    <input class="editor" type="text" name="title" placeholder="title" required>
     @if ($errors->has('title'))
       <span class="error">
           {{ $errors->first('title') }}
       </span>
     @endif
 
-    <label for="isbn">ISBN *</label>
-    <input id="isbn" type="number" name="isbn" required>
+    <input class="editor" type="number" name="isbn" placeholder="isbn" required>
     @if ($errors->has('isbn'))
       <span class="error">
           {{ $errors->first('isbn') }}
       </span>
     @endif
 
-    <label for="year">Year</label>
-    <input id="year" type="year" name="year">
+    <input class="editor" type="year" name="year" placeholder="year">
     @if ($errors->has('year'))
       <span class="error">
           {{ $errors->first('year') }}
       </span>
     @endif
 
-    <label for="price">Price *</label>
-    <input id="price" type="number" name="price" min="0.01" max="999.99" step="0.01">
+    <input class="editor" type="number" name="price" min="0.01" max="999.99" step="0.01" placeholder="price">
     @if ($errors->has('price'))
       <span class="error">
           {{ $errors->first('price') }}
       </span>
     @endif
 
-    <label for="stock">Stock *</label>
-    <input id="stock" type="number" name="stock" min="0" required>
+    <input class="editor" type="number" name="stock" min="0" placeholder="stock" required>
     @if ($errors->has('stock'))
       <span class="error">
           {{ $errors->first('stock') }}
       </span>
     @endif
 
-    <label for="book_edition">Edition</label>
-    <input id="book_edition" type="number" name="book_edition">
+    <input class="editor" type="number" name="book_edition" placeholder="edition">
     @if ($errors->has('book_edition'))
       <span class="error">
           {{ $errors->first('book_edition') }}
       </span>
     @endif
 
-    <label for="book_description">Description</label>
-    <input id="book_description" type="text" name="book_description">
+    <input class="editor" type="text" name="book_description" placeholder="description">
     @if ($errors->has('book_description'))
       <span class="error">
           {{ $errors->first('book_description') }}
       </span>
     @endif
 
-    <label for="category_name">Category *</label>
-    <select id="category_name" name="category_name" required>
+    <select class="editor" name="category_name" placeholder="category" required>
       @foreach ($categories as $category)
         <option value="{{ $category->name }}">{{ $category->name }}</option>
       @endforeach
@@ -75,8 +67,7 @@
       </span>
     @endif
 
-    <label for="publisher_name">Publisher</label>
-    <select id="publisher_name" name="publisher_name">
+    <select class="editor" name="publisher_name" placeholder="publisher">
       @foreach ($publishers as $publisher)
         <option value="{{ $publisher->name }}">{{ $publisher->name }}</option>
       @endforeach
@@ -87,18 +78,14 @@
       </span>
     @endif
 
-    <label for="authors">Author(s) *</label>
-    <input id="authors" type="text" name="authors" placeholder="separate multiple authors with /" required>
+    <input class="editor" type="text" name="authors" placeholder="author(s) - separate multiple with /" required>
     @if ($errors->has('authors'))
       <span class="error">
           {{ $errors->first('authors') }}
       </span>
     @endif
 
-    <p>Fields marked with * must be filled.</p>
-
-    <button type="submit">Add book</button>
-    <a class="button button-outline" href="/books">Cancel</a>
+    <button id="edit_button" class="edit_button" type="submit">Add book</button>
 </form>
 
 @endsection

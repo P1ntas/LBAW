@@ -431,4 +431,222 @@ class BookController extends Controller
         return redirect()->action('BookController@list');
     }
 
+    public function edit($id) {
+        $book = Book::find($id);
+
+        if (empty($book)) {
+            Session::flash('notification', 'Book not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        $categories = Category::all();
+
+        if ($categories->isEmpty()) {
+            Session::flash('notification', 'Categories not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect('/');
+        }
+
+        $publishers = Publisher::all();
+  
+        if ($publishers->isEmpty()) {
+            Session::flash('notification', 'Publishers not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect('/');
+        }
+
+        try {
+            $this->authorize('editBook', User::class);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $authors = implode('/', $book->authors->map(function($author) {
+            return $author->name;
+        })->toArray());
+  
+        return view('pages.edit_book', [
+            'book' => $book,
+            'categories' => $categories, 
+            'publishers' => $publishers,
+            'authors' => $authors
+        ]);
+    }
+
+    public function update(Request $request, $id) {
+        $book = Book::find($id);
+
+        if (empty($book)) {
+            Session::flash('notification', 'Book not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        try {
+            $this->authorize('editBook', User::class);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $validator = Validator::make($request->all(), [
+                'title' => 'required|string|min:1|max:100',
+                'isbn' => 'required|numeric|max:9999999999999',
+                'price' => 'required|numeric|between:0.01,999.99',
+                'stock' => 'required|integer|min:0',
+                'category_name' => 'required|string|min:2|max:100',
+                'authors' => 'regex:/^([A-Za-z.\s]+)(\/[A-Za-z.\s]+)*$/'
+            ], 
+            [
+                'title.required' => ':attribute is required',
+                'title.string' => ':attribute must be a string',
+                'title.min' => ':attribute must be at least :min characters long',
+                'title.max' => ':attribute cannot be more than :max characters long',
+                'isbn.required' => ':attribute is required',
+                'isbn.numeric' => ':attribute must be a numeric value',
+                'isbn.max' => ':attribute cannot be more than :max',
+                'price.required' => ':attribute is required',
+                'price.numeric' => ':attribute must be a numeric value',
+                'price.between' => ':attribute must be between :min and :max',
+                'stock.required' => ':attribute is required',
+                'stock.integer' => ':attribute must be an integer',
+                'stock.min' => ':attribute must be at least :min',
+                'category_name.string' => ':attribute must be a string',
+                'category_name.min' => ':attribute must be at least :min characters long',
+                'category_name.max' => ':attribute cannot be more than :max characters long',
+                'authors.regex' => ':attribute must be in the format "Author Name/Author Name/Author Name"'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back();
+        }
+
+        if (isset($request->year)) {
+            $validator = Validator::make($request->all(), [
+                    'year' => 'date_format:Y'
+                ], 
+                [
+                    'year.date_format' => ':attribute must be a valid year in the format YYYY'
+                ]
+            );
+
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+        }
+
+        if (isset($request->book_edition)) {
+            $validator = Validator::make($request->all(), [
+                    'book_edition' => 'integer|min:1|max:100'
+                ], 
+                [
+                    'edition.integer' => ':attribute must be an integer',
+                    'edition.min' => ':attribute must be at least :min',
+                    'edition.max' => ':attribute cannot be more than :max',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+        }
+
+        if (isset($request->book_description)) {
+            $validator = Validator::make($request->all(), [
+                    'book_description' => 'string|min:5|max:1000',
+                ], 
+                [
+                    'book_description.string' => ':attribute must be a string',
+                    'book_description.min' => ':attribute must be at least :min characters long',
+                    'book_description.max' => ':attribute cannot be more than :max characters long',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+        }
+
+        if (isset($request->publisher_name)) {
+            $validator = Validator::make($request->all(), [
+                    'publisher_name' => 'string|min:2|max:100'
+                ], 
+                [
+                    'publisher_name.string' => ':attribute must be a string',
+                    'publisher_name.min' => ':attribute must be at least :min characters long',
+                    'publisher_name.max' => ':attribute cannot be more than :max characters long',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+        }
+
+        $book->title = $request->title;
+        $book->isbn = $request->isbn;
+        if (isset($request->year)) {
+            $book->year = $request->year;
+        }
+        $book->price = $request->price;
+        $book->stock = $request->stock;
+        if (isset($request->book_edition)) {
+            $book->book_edition = $request->book_edition;
+        }
+        if (isset($request->book_description)) {
+            $book->book_description = $request->book_description;
+        }
+        $category = Category::where('name', $request->category_name)->first();
+        $book->category_id = $category->id;
+        if (isset($request->publisher_name)) {
+            $publisher = Publisher::where('name', $request->publisher_name)->first();
+            $book->publisher_id = $publisher->id;
+        }
+
+        $book->save();
+
+        $book->authors()->detach();
+        $author_set = explode('/', $request->authors);
+        $author_set = array_map('trim', $author_set);
+        foreach ($author_set as $author_name) {
+            $author = Author::where('name', $author_name)->first();
+            if (empty($author)) {
+                $author = new Author();
+                $author->name = $author_name;
+                $author->save();
+            }
+            $book->authors()->attach($author);
+        }
+
+        return redirect()->action('BookController@show', ['id' => $id]);
+    }
+
+    public function delete($id) {
+        try {
+            $this->authorize('deleteBook', User::class);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        $book = Book::find($id);
+
+        if (empty($book)) {
+            Session::flash('notification', 'Book not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect()->back();
+        }
+
+        $book->delete();
+
+        Session::flash('notification', 'This book has been deleted.');
+        Session::flash('notification_type', 'success');
+  
+        return redirect()->action('BookController@list');
+    }
 }
