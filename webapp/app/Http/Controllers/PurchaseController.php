@@ -108,7 +108,7 @@ class PurchaseController extends Controller
 
             $this->purchaseBooks($purchase, $books);
 
-            Session::flash('notification', 'Your order has been received.');
+            Session::flash('notification', 'Payment approved.');
             Session::flash('notification_type', 'success');
 
             return redirect()->action('UserController@shoppingCart', ['id' => $id]);
@@ -168,5 +168,4 @@ class PurchaseController extends Controller
   
         return redirect()->back();
     }
-  
 }
