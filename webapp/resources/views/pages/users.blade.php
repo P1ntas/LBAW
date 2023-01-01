@@ -10,8 +10,14 @@
 @endsection
 
 @section('content')
-<div id="pWrapper">
-    @each('partials.purchase', $purchases, 'purchase')
+<div id="userWrapper">
+    <form method="POST" action="/users/search">
+        @csrf
+        <input id="userSearch" type="text" name="search" placeholder="Search for an user">
+    </form>
+    <div id="pWrapper">
+        @each('partials.user', $users, 'user')
+    </div>
 </div>
-{{ $purchases->links() }}
+{{ $users->links() }}
 @endsection

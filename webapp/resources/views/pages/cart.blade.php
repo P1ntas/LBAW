@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Shopping Cart')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
 <div class="forIcons">
     <p class="lTitle">Shopping Cart</p>
     <iconify-icon icon="material-symbols:shopping-cart-outline-rounded" class="try1"></iconify-icon>
@@ -17,7 +23,7 @@
     <div id="userWrapper">
         @php ($final_cost = 1.50)
         @foreach ($books as $book)
-        @php ($final_cost += $book->price)
+            @php ($final_cost += $book->price)
         @endforeach
         <p id="finalCost">Final cost: <span>{{ $final_cost }} €</span></p>
     </div>
@@ -35,5 +41,4 @@
         </form>
     </div>
 @endif
-
 @endsection

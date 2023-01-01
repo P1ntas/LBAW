@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Purchase;
 use App\Models\Delivery;
@@ -78,7 +79,6 @@ class PurchaseController extends Controller
         return $purchase;
     }
 
-
     private function purchaseBooks($purchase, $books) {
         foreach ($books as $book) {
             $purchase->books()->attach($book->id);
@@ -86,7 +86,48 @@ class PurchaseController extends Controller
     }
     
     public function checkout($id) {
-        $user = User::find($id);
+        try {
+            $user = User::find($id);
+    
+            if (empty($user)) {
+                Session::flash('notification', 'User not found!');
+                Session::flash('notification_type', 'error');
+
+                return redirect()->back();
+            }
+
+            try {
+                $this->authorize('checkout', $user);
+            } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+                return redirect()->back();
+            }
+        
+            $books = app('App\Http\Controllers\UserController')->getCartBooks($id);
+            $purchase = $this->create($id);
+            $delivery = app('App\Http\Controllers\DeliveryController')->create($purchase->id);
+
+            $this->purchaseBooks($purchase, $books);
+
+            Session::flash('notification', 'Your order has been received.');
+            Session::flash('notification_type', 'success');
+
+            return redirect()->action('UserController@shoppingCart', ['id' => $id]);
+        }
+        catch (\Exception $e) {
+            if ($e->getMessage() == 'Blocked users cannot purchase books.') {
+                Session::flash('notification', 'You cannot purchase books because you are blocked.');
+                Session::flash('notification_type', 'error');
+    
+                return redirect()->back();
+            } 
+            else {
+                return redirect()->back();
+            }
+        }
+    }
+
+    public function updateStatus(Request $request, $user_id, $purchase_id) {
+        $user = User::find($user_id);
   
         if (empty($user)) {
             Session::flash('notification', 'User not found!');
@@ -96,20 +137,36 @@ class PurchaseController extends Controller
         }
 
         try {
-            $this->authorize('checkout', $user);
+            $this->authorize('status', $user);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return redirect()->back();
         }
-    
-        $books = app('App\Http\Controllers\UserController')->getCartBooks($id);
-        $purchase = $this->create($id);
-        $delivery = app('App\Http\Controllers\DeliveryController')->create($purchase->id);
 
-        $this->purchaseBooks($purchase, $books);
+        $purchase = Purchase::find($purchase_id);
+        
+        if (empty($purchase)) {
+            Session::flash('notification', 'Purchase not found!');
+            Session::flash('notification_type', 'error');
 
-        Session::flash('notification', 'Your order has been received.');
-        Session::flash('notification_type', 'success');
+            return redirect()->back();
+        }
 
-        return redirect()->action('UserController@shoppingCart', ['id' => $id]);
+        $validator = Validator::make($request->all(), [
+                'status' => 'in:Received,Dispatched,Delivered',
+            ], 
+            [
+                'status.in' => 'The selected status is not valid.'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back();
+        }
+
+        $purchase->state_purchase = $request->status;
+        $purchase->save();
+  
+        return redirect()->back();
     }
+  
 }

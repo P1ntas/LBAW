@@ -300,7 +300,7 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER book_available
-        BEFORE INSERT ON purchase_book
+        BEFORE INSERT ON cart
         FOR EACH ROW
         EXECUTE PROCEDURE book_available();
 
@@ -320,6 +320,7 @@ LANGUAGE plpgsql;
 
 CREATE TRIGGER book_purchased
         AFTER INSERT ON purchase_book
+        FOR EACH ROW
         EXECUTE PROCEDURE book_purchased();
 
 -- TRIGGER03
@@ -365,7 +366,7 @@ CREATE TRIGGER cart_purchased
 CREATE OR REPLACE FUNCTION blocked_review() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT * FROM users WHERE id = NEW.id AND blocked = TRUE) THEN
+        IF EXISTS (SELECT * FROM users WHERE id = NEW.user_id AND blocked = TRUE) THEN
            RAISE EXCEPTION 'Blocked users cannot submit reviews.';
         END IF;
         RETURN NEW;
@@ -384,7 +385,7 @@ CREATE TRIGGER blocked_review
 CREATE OR REPLACE FUNCTION blocked_purchase() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT * FROM users WHERE id = NEW.id AND blocked = TRUE) THEN
+        IF EXISTS (SELECT * FROM users WHERE id = NEW.user_id AND blocked = TRUE) THEN
            RAISE EXCEPTION 'Blocked users cannot purchase books.';
         END IF;
         RETURN NEW;

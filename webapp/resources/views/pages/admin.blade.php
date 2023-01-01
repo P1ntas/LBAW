@@ -10,18 +10,15 @@
 @endsection
 
 @section('content')
-<h1>{{ $user->name }}</h1>
+<h1>{{ $admin->name }}</h1>
 <div id="editWrapper">
     <!-- user_photo -->
 </div>
 <div class="profileWrapper1">
-    @if ($user->isBlocked())
-        <p>[This account is blocked]</p>
-    @endif
-    <p>Email: <span>{{ $user->email }}</span></p> 
-    <p>Address: <span>{{ $user->user_address }}</span></p>
-    @if (!empty($user->phone))
-        <p>Phone Number: <span>{{ $user->phone }}</span></p>
+    <p>Email: <span>{{ $admin->email }}</span></p> 
+    <p>Address: <span>{{ $admin->user_address }}</span></p>
+    @if (!empty($admin->phone))
+        <p>Phone Number: <span>{{ $admin->phone }}</span></p>
     @endif
 </div>
 @endsection

@@ -9,12 +9,27 @@
     <p class="pclass">Arrival date: <span>{{ $purchase->delivery->arrival }}</span></p>
     <div id="purWrapper">
         <p class="pclass">Status: <span>{{ $purchase->state_purchase }}</span></p>
+        @if (Auth::user()->isAdmin())
+            <form method="POST" action="/users/{{ $purchase->user_id }}/purchases/{{ $purchase->id }}/status">
+                @csrf
+                @method('PUT')
+                <label for="status">Order status</label><br>
+                <select id="status" name="status">
+                  <option value="Received">Received</option>
+                  <option value="Dispatched">Dispatched</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+                <button type="submit">
+                    <iconify-icon icon="mdi:pencil" id="space"></iconify-icon>
+                </button>
+            </form>
+        @endif
     </div>
     <div id="purWrapper">
         <p class="pclass">Final cost: <span>{{ $final_cost }} €</span></p>
         @php ($final_state = 'Delivered')
-        @if ($purchase->state_purchase != $final_state)
-            <form method="POST" action="/users/{{ Auth::user()->id }}/purchases/{{ $purchase->id }}/cancel">
+        @if (!Auth::user()->isAdmin() && $purchase->state_purchase != $final_state)
+            <form method="POST" action="/users/{{ $purchase->user_id }}/purchases/{{ $purchase->id }}/cancel">
                 @csrf
                 @method('DELETE')
                 <button type="submit" 

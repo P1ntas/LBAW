@@ -1,20 +1,34 @@
 @extends('layouts.app')
 
-@section('title', '$book->title')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
 <div id="bookInfo">
     <!-- book_photo -->
-    @auth
-        <form method="GET" action="/books/{{ $book->id }}/wish">
-            <button id="addWish" class="bookButtons" type="submit">
-                <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
-            </button>
-        </form>
-        <form method="GET" action="/books/{{ $book->id }}/cart">
-            <button id="buy" class="bookButtons" type="submit">Add to cart</button>
-        </form>
+    @auth 
+        @if (Auth::user()->isAdmin())
+            <form method="GET" action="/books/{{ $book->id }}/edit">
+                <button id="editButton">
+                    <figcaption>Edit Book <iconify-icon icon="mdi:pencil"></iconify-icon></figcaption>
+                </button>
+            </form>
+        @else 
+            <form method="GET" action="/books/{{ $book->id }}/wish">
+                <button id="addWish" class="bookButtons" type="submit">
+                    <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
+                </button>
+            </form>
+            <form method="GET" action="/books/{{ $book->id }}/cart">
+                <button id="buy" class="bookButtons" type="submit">Add to cart</button>
+            </form>
+        @endif
     @endauth
     <div id="bookDetails">
         <span id="description" class="bookLable activeLabel">Description</span>
@@ -25,50 +39,75 @@
     <div id="bookDetailed">
         <article id="bookDescription" class="bookContents">{{ $book->book_description }}</article>
         <div id="bookReview" class="bookContents hideBook">
-            @auth 
+            @if (Auth::check() && !Auth::user()->isAdmin())
                 @include('partials.add_review')
-            @endauth
+            @endif
             @foreach ($book->reviews as $review)
-                @if (Auth::check() && (Auth::user()->id == $review->user_id))
-                    <div id="revWrapper2">
-                        <div id="revWrapper">
-                            <div id="try2">
-                                <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/remove">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">
-                                        <iconify-icon icon="ion:trash-outline" class="trash"></iconify-icon>
-                                    </button>
-                                </form>
+                @auth
+                    @if (Auth::user()->id == $review->user_id)
+                        <div id="revWrapper2">
+                            <div id="revWrapper">
+                                <div id="try2">
+                                    <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/remove">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">
+                                            <iconify-icon icon="ion:trash-outline" class="trash"></iconify-icon>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div id="revHeader">
+                                    <p class="username">{{ $review->user->name }}</p>
+                                    <!-- user_photo -->
+                                </div>
                             </div>
-                            <div id="revHeader">
-                                <p class="username">{{ $review->user->name }}</p>
-                                <!-- user_photo -->
-                            </div>
+                            <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/edit">
+                                @csrf
+                                @method('PUT')
+
+                                <input type="number" name="rating" min="0" max="5" step="1" value="{{ $review->rating }}">
+                                @if ($errors->has('rating'))
+                                    <span class="error">
+                                        {{ $errors->first('rating') }}
+                                    </span>
+                                @endif
+
+                                <input type="text" name="comment" value="{{ $review->comment }}">
+                                @if ($errors->has('comment'))
+                                    <span class="error">
+                                        {{ $errors->first('comment') }}
+                                    </span>
+                                @endif
+
+                                <button type="submit" id="addReview" class="edit_button">
+                                    <iconify-icon icon="mdi:pencil" id="editUser"></iconify-icon>
+                                </button>
+                            </form>
                         </div>
-                        <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/edit">
-                            @csrf
-                            @method('PUT')
-
-                            <input type="number" name="rating" min="0" max="5" step="1" value="{{ $review->rating }}">
-                            @if ($errors->has('rating'))
-                                <span class="error">
-                                    {{ $errors->first('rating') }}
-                                </span>
-                            @endif
-
-                            <input type="text" name="comment" value="{{ $review->comment }}">
-                            @if ($errors->has('comment'))
-                                <span class="error">
-                                    {{ $errors->first('comment') }}
-                                </span>
-                            @endif
-
-                            <button type="submit" id="addReview" class="edit_button">
-                                <iconify-icon icon="mdi:pencil" id="editUser"></iconify-icon>
-                            </button>
-                        </form>
-                    </div>
+                    @elseif (Auth::user()->isAdmin())
+                        <div id="revWrapper2">
+                            <div id="revWrapper">
+                                <div id="try2">
+                                    <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/remove">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">
+                                            <iconify-icon icon="ion:trash-outline" class="trash"></iconify-icon>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div id="rating">
+                                    <p>{{ $review->rating }}</p>
+                                    <iconify-icon icon="material-symbols:star" id="star" style="color: #ffc700;"></iconify-icon>
+                                </div>  
+                                <div id="revHeader">
+                                    <p class="username">{{ $review->user->name }}</p>
+                                    <!-- user_photo -->
+                                </div>
+                            </div>
+                            <p>{{ $review->comment }}</p>
+                        </div>
+                    @endif
                 @else
                     <div id="revWrapper2">
                         <div id="revWrapper">
@@ -83,7 +122,7 @@
                         </div>
                         <p>{{ $review->comment }}</p>
                     </div>
-                @endif
+                @endauth
             @endforeach
         </div>
         <table id="detailsBook" class="bookContents hideBook">
@@ -127,5 +166,4 @@
         </div>
     </div>
 </div>
-
 @endsection

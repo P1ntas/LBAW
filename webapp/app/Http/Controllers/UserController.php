@@ -79,6 +79,10 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        if ($user->isAdmin()) {
+            return view('pages.admin', ['admin' => $user]);
+        }
+
         return view('pages.user', ['user' => $user]);
     }
 
@@ -97,6 +101,10 @@ class UserController extends Controller
             $this->authorize('update', $user);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return redirect()->back();
+        }
+
+        if ($user->isAdmin()) {
+            return view('pages.edit_admin', ['admin' => $user]);
         }
 
         return view('pages.edit_user', ['user' => $user]);
@@ -159,6 +167,22 @@ class UserController extends Controller
             }
         }
 
+        if (isset($request->blocked)) {
+            $validator = Validator::make($request->all(), [
+                'blocked' => 'in:TRUE,FALSE'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+
+            try {
+                $this->authorize('block', $user);
+            } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+                return redirect()->back();
+            }
+        }
+
         if (isset($request->password)) {
             $validator = Validator::make($request->all(), [
                     'password' => 'string|min:6|same:password_confirmation',
@@ -185,7 +209,14 @@ class UserController extends Controller
         if (isset($request->phone)) {
             $user->phone = $request->phone;
         }
+        if (isset($request->blocked)) {
+            $user->blocked = $request->blocked;
+        }
         $user->save();
+
+        if (Auth::user()->isAdmin() && !$user->isAdmin()) {
+            return redirect()->route('pages.user', ['id' => $id]);
+        }
 
         return redirect()->action('UserController@show', ['id' => $id]);
     }
@@ -208,11 +239,15 @@ class UserController extends Controller
         }
 
         $user->name = '[DELETED]';
-        $user->password = bcrypt(Str::random(10));
+        $user->password = bcrypt(Str::random(20));
         $user->save();
 
-        Session::flash('notification', 'Your account has been deleted.');
+        Session::flash('notification', 'This account has been deleted.');
         Session::flash('notification_type', 'success');
+
+        if (Auth::user()->isAdmin() && !$user->isAdmin()) {
+            return redirect()->action('UserController@list');
+        }
 
         return redirect()->action('Auth\LoginController@logout');
     }
@@ -283,32 +318,45 @@ class UserController extends Controller
     }
 
     public function addToCart($book_id) {
-        $user_id = Auth::user()->id;
-        $user = User::find($user_id);
-  
-        if (empty($user)) {
-            Session::flash('notification', 'User not found!');
-            Session::flash('notification_type', 'error');
-
-            return redirect()->back();
-        }
-
         try {
-            $this->authorize('addToCart', $user);
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
-            return redirect()->back();
-        }
-  
-        if ($user->cart()->where('book_id', $book_id)->exists()) {
-            Session::flash('notification', 'This book is already in your cart!');
-            Session::flash('notification_type', 'warning');
+            $user_id = Auth::user()->id;
+            $user = User::find($user_id);
+    
+            if (empty($user)) {
+                Session::flash('notification', 'User not found!');
+                Session::flash('notification_type', 'error');
 
-            return redirect()->back();
-        }
-        
-        $user->cart()->attach($book_id);
+                return redirect()->back();
+            }
 
-        return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
+            try {
+                $this->authorize('addToCart', $user);
+            } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+                return redirect()->back();
+            }
+    
+            if ($user->cart()->where('book_id', $book_id)->exists()) {
+                Session::flash('notification', 'This book is already in your cart!');
+                Session::flash('notification_type', 'warning');
+
+                return redirect()->back();
+            }
+            
+            $user->cart()->attach($book_id);
+
+            return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
+        }
+        catch (\Exception $e) {
+            if ($e->getMessage() == 'This book is out of stock.') {
+                Session::flash('notification', 'You cannot add this book to the cart (out of stock).');
+                Session::flash('notification_type', 'error');
+    
+                return redirect()->back();
+            } 
+            else {
+                return redirect()->back();
+            }
+        }
     }
 
     public function wishlist($id) {
@@ -398,5 +446,37 @@ class UserController extends Controller
 
     public function getUser($id) {
         return User::find($id);
+    }
+
+    public function list()
+    {
+        $users = User::where('admin_perms', FALSE)->simplePaginate(10);
+
+        if ($users->isEmpty()) {
+            Session::flash('notification', 'Users not found!');
+            Session::flash('notification_type', 'error');
+
+            return redirect('/');
+        }
+
+        try {
+            $this->authorize('list', User::class);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+
+        return view('pages.users', ['users' => $users]);
+    }
+
+    public function search(Request $request) {
+        $results = User::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
+
+        try {
+            $this->authorize('list', User::class);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->back();
+        }
+        
+        return view('pages.users', ['users' => $results]);
     }
 }

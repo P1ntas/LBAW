@@ -27,7 +27,7 @@ Route::post('/books/search', 'BookController@search');
 Route::get('/categories', 'CategoryController@list');
 
 // Users
-Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+']);
+Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+'])->name('pages.user');;
 Route::get('/users/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
 Route::put('/users/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
 Route::delete('/users/{id}/delete', 'UserController@delete')->where(['id' => '[0-9]+']);
@@ -52,3 +52,20 @@ Route::get('/books/{book_id}/wish', 'UserController@addToWishlist')->where(['boo
 Route::post('/books/{id}/review', 'BookController@review')->where(['id' => '[0-9]+']);
 Route::delete('/books/{book_id}/review/{review_id}/remove', 'BookController@removeReview')->where(['book_id' => '[0-9]+', 'review_id' => '[0-9]+']);
 Route::put('/books/{book_id}/review/{review_id}/edit', 'BookController@editReview')->where(['book_id' => '[0-9]+', 'review_id' => '[0-9]+']);
+
+// Admins
+Route::get('/admins/{id}', 'UserController@show')->where(['id' => '[0-9]+']);
+Route::get('/admins/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
+Route::put('/admins/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
+Route::delete('/admins/{id}/delete', 'UserController@delete')->where(['id' => '[0-9]+']);
+Route::get('/users', 'UserController@list')->where(['id' => '[0-9]+']);
+Route::post('/users/search', 'UserController@search');
+Route::put('/users/{user_id}/purchases/{purchase_id}/status', 'PurchaseController@updateStatus')->where(['user_id' => '[0-9]+', 'purchase_id' => '[0-9]+']);
+Route::get('/books/add', 'BookController@add');
+Route::post('/books/add', 'BookController@create');
+Route::get('/books/{id}/edit', 'BookController@edit')->where(['id' => '[0-9]+']);
+Route::put('/books/{id}/edit', 'BookController@update')->where(['id' => '[0-9]+']);
+Route::delete('/books/{id}/remove', 'BookController@delete')->where(['id' => '[0-9]+']);
+Route::post('/categories/add', 'CategoryController@create');
+Route::put('/categories/{id}/edit', 'CategoryController@update');
+Route::delete('/categories/{id}/remove', 'CategoryController@delete')->where(['id' => '[0-9]+']);
