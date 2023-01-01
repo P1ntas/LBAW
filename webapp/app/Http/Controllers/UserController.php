@@ -318,32 +318,45 @@ class UserController extends Controller
     }
 
     public function addToCart($book_id) {
-        $user_id = Auth::user()->id;
-        $user = User::find($user_id);
-  
-        if (empty($user)) {
-            Session::flash('notification', 'User not found!');
-            Session::flash('notification_type', 'error');
-
-            return redirect()->back();
-        }
-
         try {
-            $this->authorize('addToCart', $user);
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
-            return redirect()->back();
-        }
-  
-        if ($user->cart()->where('book_id', $book_id)->exists()) {
-            Session::flash('notification', 'This book is already in your cart!');
-            Session::flash('notification_type', 'warning');
+            $user_id = Auth::user()->id;
+            $user = User::find($user_id);
+    
+            if (empty($user)) {
+                Session::flash('notification', 'User not found!');
+                Session::flash('notification_type', 'error');
 
-            return redirect()->back();
-        }
-        
-        $user->cart()->attach($book_id);
+                return redirect()->back();
+            }
 
-        return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
+            try {
+                $this->authorize('addToCart', $user);
+            } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+                return redirect()->back();
+            }
+    
+            if ($user->cart()->where('book_id', $book_id)->exists()) {
+                Session::flash('notification', 'This book is already in your cart!');
+                Session::flash('notification_type', 'warning');
+
+                return redirect()->back();
+            }
+            
+            $user->cart()->attach($book_id);
+
+            return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
+        }
+        catch (\Exception $e) {
+            if ($e->getMessage() == 'This book is out of stock.') {
+                Session::flash('notification', 'You cannot add this book to the cart (out of stock).');
+                Session::flash('notification_type', 'error');
+    
+                return redirect()->back();
+            } 
+            else {
+                return redirect()->back();
+            }
+        }
     }
 
     public function wishlist($id) {

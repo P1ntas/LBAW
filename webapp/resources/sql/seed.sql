@@ -300,7 +300,7 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER book_available
-        BEFORE INSERT ON purchase_book
+        BEFORE INSERT ON cart
         FOR EACH ROW
         EXECUTE PROCEDURE book_available();
 
