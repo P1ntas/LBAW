@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
-@section('title', $user->name)
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
 <h1>{{ $user->name }}</h1>
 <div id="editWrapper">
     <!-- user_photo -->
@@ -18,5 +24,4 @@
         <p>Phone Number: <span>{{ $user->phone }}</span></p>
     @endif
 </div>
-
 @endsection

@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Add Book')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-  
 <form id="fedit" method="POST" action="/books/add">
     @csrf
 
@@ -87,5 +93,4 @@
 
     <button id="edit_button" class="edit_button" type="submit">Add book</button>
 </form>
-
 @endsection

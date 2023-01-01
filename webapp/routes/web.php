@@ -66,3 +66,6 @@ Route::post('/books/add', 'BookController@create');
 Route::get('/books/{id}/edit', 'BookController@edit')->where(['id' => '[0-9]+']);
 Route::put('/books/{id}/edit', 'BookController@update')->where(['id' => '[0-9]+']);
 Route::delete('/books/{id}/remove', 'BookController@delete')->where(['id' => '[0-9]+']);
+Route::post('/categories/add', 'CategoryController@create');
+Route::put('/categories/{id}/edit', 'CategoryController@update');
+Route::delete('/categories/{id}/remove', 'CategoryController@delete')->where(['id' => '[0-9]+']);

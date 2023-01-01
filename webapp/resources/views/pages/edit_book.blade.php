@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
-@section('title', '$book->title')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
 <h1>Edit Book</h1>
 <div id="editWrapper">
     <!-- book_photo -->
@@ -108,6 +114,4 @@
 
     <button type="submit" id="edit_button" class="edit_button">Confirm changes</button> 
 </form> 
-
-
 @endsection

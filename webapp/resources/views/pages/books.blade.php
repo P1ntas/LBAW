@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Books')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
 <div class="booksWrapper">
     <form class="booksForm" method="POST" action="/books/filter">
         @csrf
@@ -47,5 +53,4 @@
     </div>
 </div>
 {{ $books->links() }}
-
 @endsection

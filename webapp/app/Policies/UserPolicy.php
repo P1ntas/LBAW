@@ -114,4 +114,16 @@ class UserPolicy
     public function deleteBook(User $authUser) {
       return $authUser->isAdmin();
     }
+
+    public function deleteCategory(User $authUser) {
+      return $authUser->isAdmin();
+    }
+
+    public function addCategory(User $authUser) {
+      return $authUser->isAdmin();
+    }
+
+    public function editCategory(User $authUser) {
+      return $authUser->isAdmin();
+    }
 }

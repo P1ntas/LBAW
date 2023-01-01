@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
 <div class="homePage">
     <div id="books">
         <span>Books</span>
@@ -25,6 +31,4 @@
         <!-- collections -->
     </div>
 </div>
-
-
 @endsection

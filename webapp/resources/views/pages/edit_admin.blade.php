@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
-@section('title', $admin->name)
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
 <h1>Edit Profile</h1>
 <div id="editWrapper">
     <!-- user_photo -->
@@ -62,5 +68,4 @@
     <button id="delete_button" class="edit_button" type="submit" 
     onclick="return confirm('Are you sure you want to delete this account?');">Delete account</button>
 </form>
-
 @endsection
