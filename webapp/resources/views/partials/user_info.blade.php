@@ -2,7 +2,8 @@
     @if ($user->isBlocked())
         <p>This account is blocked!</p>
     @endif
-    <img src="{{ URL::asset('images/poordeg.jpg') }}" alt="poordeg.jpg"><br>
+    @php ($picture = $user->photo) @endphp
+    <img src="{{ URL::asset('images/' . $picture->photo_image) }}" alt="profile image"><br>
     <p>Name: {{ $user->name }}</p>
     <p>Email: {{ $user->email }}</p>
     <p>Address: {{ $user->user_address }}</p>
