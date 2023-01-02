@@ -32,15 +32,4 @@ class Photo extends Model
         return $this->hasOne(\App\Models\Admin::class);
     }
 
-    public function upload(Request $request)
-    {
-    $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
-
-    $image = $request->file('image');
-    $path = $image->store('images');
-
-    // Save the path to the image in the database...
-    }
 }

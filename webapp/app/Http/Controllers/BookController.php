@@ -68,13 +68,6 @@ class BookController extends Controller
       }
       $book->authors()->attach($author);
 
-      $photo = Photo::where('name', $request->photo_image)->first();
-      if (empty($photo)) {
-        $photo = new Photo();
-        $photo->photo_image = $request->photo_image;
-        $photo->save();
-      }
-      $book->photos()->attach($photo);
 
       return $book;
 

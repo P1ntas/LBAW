@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 use App\Models\User;
+use App\Models\Photo;
 
 class UserController extends Controller
 {
@@ -145,26 +145,7 @@ class UserController extends Controller
             $user->blocked = $user->blocked;
         }
 
-        $user->save();
-
-        if (isset($request->image)) {
-            $validator = Validator::make($request->all(), [
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-    
-            if ($validator->fails()) {
-                // error
-                return redirect('/');
-            }
-
-            $image = Photo::where('image', $request->image)->first();
-            if(empty($image)){
-                $image = new Photo();
-                $image->photo_image = $request->image;
-                $image->save();
-            }
-            $user->image()->attach($image);
-        }
+            $user->save();
 
         return redirect()->back();
     }
