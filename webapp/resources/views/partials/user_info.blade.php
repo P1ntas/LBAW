@@ -2,7 +2,7 @@
     @if ($user->isBlocked())
         <p>This account is blocked!</p>
     @endif
-    <img src="{{ asset('/storage/app/public/images/poordeg.jpg') }}" alt="poordeg.jpg"><br>
+    <img src="{{ URL::asset('images/poordeg.jpg') }}" alt="poordeg.jpg"><br>
     <p>Name: {{ $user->name }}</p>
     <p>Email: {{ $user->email }}</p>
     <p>Address: {{ $user->user_address }}</p>
