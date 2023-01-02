@@ -57,6 +57,10 @@ class BookController extends Controller
     }
 
     public function filter(Request $request) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
         $query = Book::query();
   
         if (isset($request->category)) {
@@ -96,6 +100,24 @@ class BookController extends Controller
     } 
 
     public function search(Request $request) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
+        $validator = Validator::make($request->all(), [
+                'search' => 'escape_html|string|max:100'
+            ], 
+            [
+                'search.escape_html' => 'The search field may not contain any special characters.',
+                'search.string' => 'The search field must be a string.',
+                'search.max' => 'The search field may not be more than 100 characters.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect('/');
+        }
+
         $results = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
 
         if ($results->isEmpty()) {
@@ -121,6 +143,10 @@ class BookController extends Controller
     }
 
     public function review(Request $request, $id) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
         try {
             $book = Book::find($id);
 
@@ -132,10 +158,11 @@ class BookController extends Controller
             }
 
             $validator = Validator::make($request->all(), [
-                    'rating' => 'required|numeric|min:0|max:5'
+                    'rating' => 'required|escape_html|numeric|min:0|max:5'
                 ], 
                 [
                     'rating.required' => 'Please enter a rating',
+                    'rating.escape_html' => 'The rating field may not contain any special characters.',
                     'rating.numeric' => 'The rating must be a number',
                     'rating.min' => 'The rating must be at least 0',
                     'rating.max' => 'The rating must be no more than 5'
@@ -148,7 +175,7 @@ class BookController extends Controller
 
             if (isset($request->comment)) {
                 $validator = Validator::make($request->all(), [
-                    'comment' => 'string'
+                    'comment' => 'escape_html|string'
                 ]);
 
                 if ($validator->fails()) {
@@ -181,8 +208,7 @@ class BookController extends Controller
         }
     }
 
-    public function removeReview($book_id, $review_id)
-    {
+    public function removeReview($book_id, $review_id) {
         $review = Review::find($review_id);
 
         if (empty($review)) {
@@ -206,6 +232,10 @@ class BookController extends Controller
     }
 
     public function editReview(Request $request, $book_id, $review_id) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
         $review = Review::find($review_id);
 
         if (empty($review)) {
@@ -224,10 +254,11 @@ class BookController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-                'rating' => 'required|numeric|min:0|max:5'
+                'rating' => 'required|escape_html|numeric|min:0|max:5'
             ], 
             [
                 'rating.required' => 'Please enter a rating',
+                'rating.escape_html' => 'The rating field may not contain any special characters.',
                 'rating.numeric' => 'The rating must be a number',
                 'rating.min' => 'The rating must be at least 0',
                 'rating.max' => 'The rating must be no more than 5'
@@ -240,7 +271,7 @@ class BookController extends Controller
 
         if (isset($request->comment)) {
             $validator = Validator::make($request->all(), [
-                'comment' => 'string'
+                'comment' => 'escape_html|string'
             ]);
 
             if ($validator->fails()) {
@@ -291,6 +322,10 @@ class BookController extends Controller
     }
   
     public function create(Request $request) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
         try {
             $this->authorize('addBook', User::class);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
@@ -298,28 +333,33 @@ class BookController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-                'title' => 'required|string|min:1|max:100',
-                'isbn' => 'required|numeric|max:9999999999999',
-                'price' => 'required|numeric|between:0.01,999.99',
-                'stock' => 'required|integer|min:0',
-                'category_name' => 'required|string|min:2|max:100',
+                'title' => 'required|escape_html|string|min:1|max:100',
+                'isbn' => 'required|escape_html|numeric|max:9999999999999',
+                'price' => 'required|escape_html|numeric|between:0.01,999.99',
+                'stock' => 'required|escape_html|integer|min:0',
+                'category_name' => 'required|escape_html|string|min:2|max:100',
                 'authors' => 'regex:/^([A-Za-z.\s]+)(\/[A-Za-z.\s]+)*$/'
             ], 
             [
                 'title.required' => ':attribute is required',
+                'title.escape_html' => 'The title field may not contain any special characters.',
                 'title.string' => ':attribute must be a string',
                 'title.min' => ':attribute must be at least :min characters long',
                 'title.max' => ':attribute cannot be more than :max characters long',
                 'isbn.required' => ':attribute is required',
+                'isbn.escape_html' => 'The isbn field may not contain any special characters.',
                 'isbn.numeric' => ':attribute must be a numeric value',
                 'isbn.max' => ':attribute cannot be more than :max',
                 'price.required' => ':attribute is required',
+                'price.escape_html' => 'The price field may not contain any special characters.',
                 'price.numeric' => ':attribute must be a numeric value',
                 'price.between' => ':attribute must be between :min and :max',
                 'stock.required' => ':attribute is required',
+                'stock.escape_html' => 'The stock field may not contain any special characters.',
                 'stock.integer' => ':attribute must be an integer',
                 'stock.min' => ':attribute must be at least :min',
                 'category_name.string' => ':attribute must be a string',
+                'category_name.escape_html' => 'The category_name field may not contain any special characters.',
                 'category_name.min' => ':attribute must be at least :min characters long',
                 'category_name.max' => ':attribute cannot be more than :max characters long',
                 'authors.regex' => ':attribute must be in the format "Author Name/Author Name/Author Name"'
@@ -332,9 +372,10 @@ class BookController extends Controller
 
         if (isset($request->year)) {
             $validator = Validator::make($request->all(), [
-                    'year' => 'date_format:Y'
+                    'year' => 'escape_html|date_format:Y'
                 ], 
                 [
+                    'year.escape_html' => 'The year field may not contain any special characters.',
                     'year.date_format' => ':attribute must be a valid year in the format YYYY'
                 ]
             );
@@ -346,10 +387,11 @@ class BookController extends Controller
 
         if (isset($request->book_edition)) {
             $validator = Validator::make($request->all(), [
-                    'book_edition' => 'integer|min:1|max:100'
+                    'book_edition' => 'integer|escape_html|min:1|max:100'
                 ], 
                 [
                     'edition.integer' => ':attribute must be an integer',
+                    'edition.escape_html' => 'The edition field may not contain any special characters.',
                     'edition.min' => ':attribute must be at least :min',
                     'edition.max' => ':attribute cannot be more than :max',
                 ]
@@ -362,10 +404,11 @@ class BookController extends Controller
 
         if (isset($request->book_description)) {
             $validator = Validator::make($request->all(), [
-                    'book_description' => 'string|min:5|max:1000',
+                    'book_description' => 'string|escape_html|min:5|max:1000',
                 ], 
                 [
                     'book_description.string' => ':attribute must be a string',
+                    'book_description.escape_html' => 'The book_description field may not contain any special characters.',
                     'book_description.min' => ':attribute must be at least :min characters long',
                     'book_description.max' => ':attribute cannot be more than :max characters long',
                 ]
@@ -378,10 +421,11 @@ class BookController extends Controller
 
         if (isset($request->publisher_name)) {
             $validator = Validator::make($request->all(), [
-                    'publisher_name' => 'string|min:2|max:100'
+                    'publisher_name' => 'string|escape_html|min:2|max:100'
                 ], 
                 [
                     'publisher_name.string' => ':attribute must be a string',
+                    'publisher_name.escape_html' => 'The publisher_name field may not contain any special characters.',
                     'publisher_name.min' => ':attribute must be at least :min characters long',
                     'publisher_name.max' => ':attribute cannot be more than :max characters long',
                 ]
@@ -478,6 +522,10 @@ class BookController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+        
         $book = Book::find($id);
 
         if (empty($book)) {
@@ -494,28 +542,33 @@ class BookController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-                'title' => 'required|string|min:1|max:100',
-                'isbn' => 'required|numeric|max:9999999999999',
-                'price' => 'required|numeric|between:0.01,999.99',
-                'stock' => 'required|integer|min:0',
-                'category_name' => 'required|string|min:2|max:100',
+                'title' => 'required|escape_html|string|min:1|max:100',
+                'isbn' => 'required|escape_html|numeric|max:9999999999999',
+                'price' => 'required|escape_html|numeric|between:0.01,999.99',
+                'stock' => 'required|escape_html|integer|min:0',
+                'category_name' => 'required|escape_html|string|min:2|max:100',
                 'authors' => 'regex:/^([A-Za-z.\s]+)(\/[A-Za-z.\s]+)*$/'
             ], 
             [
                 'title.required' => ':attribute is required',
+                'title.escape_html' => 'The title field may not contain any special characters.',
                 'title.string' => ':attribute must be a string',
                 'title.min' => ':attribute must be at least :min characters long',
                 'title.max' => ':attribute cannot be more than :max characters long',
                 'isbn.required' => ':attribute is required',
+                'isbn.escape_html' => 'The isbn field may not contain any special characters.',
                 'isbn.numeric' => ':attribute must be a numeric value',
                 'isbn.max' => ':attribute cannot be more than :max',
                 'price.required' => ':attribute is required',
+                'price.escape_html' => 'The price field may not contain any special characters.',
                 'price.numeric' => ':attribute must be a numeric value',
                 'price.between' => ':attribute must be between :min and :max',
                 'stock.required' => ':attribute is required',
+                'stock.escape_html' => 'The stock field may not contain any special characters.',
                 'stock.integer' => ':attribute must be an integer',
                 'stock.min' => ':attribute must be at least :min',
                 'category_name.string' => ':attribute must be a string',
+                'category_name.escape_html' => 'The category_name field may not contain any special characters.',
                 'category_name.min' => ':attribute must be at least :min characters long',
                 'category_name.max' => ':attribute cannot be more than :max characters long',
                 'authors.regex' => ':attribute must be in the format "Author Name/Author Name/Author Name"'
@@ -528,9 +581,10 @@ class BookController extends Controller
 
         if (isset($request->year)) {
             $validator = Validator::make($request->all(), [
-                    'year' => 'date_format:Y'
+                    'year' => 'escape_html|date_format:Y'
                 ], 
                 [
+                    'year.escape_html' => 'The year field may not contain any special characters.',
                     'year.date_format' => ':attribute must be a valid year in the format YYYY'
                 ]
             );
@@ -542,10 +596,11 @@ class BookController extends Controller
 
         if (isset($request->book_edition)) {
             $validator = Validator::make($request->all(), [
-                    'book_edition' => 'integer|min:1|max:100'
+                    'book_edition' => 'integer|escape_html|min:1|max:100'
                 ], 
                 [
                     'edition.integer' => ':attribute must be an integer',
+                    'edition.escape_html' => 'The edition field may not contain any special characters.',
                     'edition.min' => ':attribute must be at least :min',
                     'edition.max' => ':attribute cannot be more than :max',
                 ]
@@ -558,10 +613,11 @@ class BookController extends Controller
 
         if (isset($request->book_description)) {
             $validator = Validator::make($request->all(), [
-                    'book_description' => 'string|min:5|max:1000',
+                    'book_description' => 'string|escape_html|min:5|max:1000',
                 ], 
                 [
                     'book_description.string' => ':attribute must be a string',
+                    'book_description.escape_html' => 'The book_description field may not contain any special characters.',
                     'book_description.min' => ':attribute must be at least :min characters long',
                     'book_description.max' => ':attribute cannot be more than :max characters long',
                 ]
@@ -574,10 +630,11 @@ class BookController extends Controller
 
         if (isset($request->publisher_name)) {
             $validator = Validator::make($request->all(), [
-                    'publisher_name' => 'string|min:2|max:100'
+                    'publisher_name' => 'string|escape_html|min:2|max:100'
                 ], 
                 [
                     'publisher_name.string' => ':attribute must be a string',
+                    'publisher_name.escape_html' => 'The publisher_name field may not contain any special characters.',
                     'publisher_name.min' => ':attribute must be at least :min characters long',
                     'publisher_name.max' => ':attribute cannot be more than :max characters long',
                 ]

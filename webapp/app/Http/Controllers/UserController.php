@@ -22,6 +22,10 @@ class UserController extends Controller
     }
 
     public function forgotPassword(Request $request) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
         $request->validate(['email' => 'required|email']);
      
         $status = Password::sendResetLink(
@@ -38,6 +42,10 @@ class UserController extends Controller
     }
 
     public function resetPassword(Request $request) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
@@ -62,8 +70,7 @@ class UserController extends Controller
             : back()->withErrors(['email' => [__($status)]]);
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         $user = User::find($id);
 
         if (empty($user)) {
@@ -86,8 +93,7 @@ class UserController extends Controller
         return view('pages.user', ['user' => $user]);
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
         $user = User::find($id);
 
         if (empty($user)) {
@@ -111,6 +117,10 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
         $user = User::find($id);
 
         if (empty($user)) {
@@ -127,22 +137,25 @@ class UserController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-                'name' => 'required|string|min:6|max:255',
-                'email' => [Rule::unique('users')->ignore($user->id), 'required', 'string', 'email', 'min:6', 'max:255'],
-                'user_address' => 'required|string|min:8|max:255'
+                'name' => 'required|escape_html|string|min:6|max:255',
+                'email' => [Rule::unique('users')->ignore($user->id), 'required', 'escape_html', 'string', 'email', 'min:6', 'max:255'],
+                'user_address' => 'required|escape_html|string|min:8|max:255'
             ], 
             [
                 'name.required' => 'Please enter a name',
+                'name.escape_html' => 'The name field may not contain any special characters.',
                 'name.string' => 'The name must be a string',
                 'name.min' => 'The name must be at least 6 characters',
                 'name.max' => 'The name must be no more than 255 characters',
                 'email.unique' => 'This email is already in use',
                 'email.required' => 'Please enter an email',
+                'email.escape_html' => 'The email field may not contain any special characters.',
                 'email.string' => 'The email must be a string',
                 'email.email' => 'The email must be a valid email address',
                 'email.min' => 'The email must be at least 6 characters',
                 'email.max' => 'The email must be no more than 255 characters',
                 'user_address.required' => 'Please enter an address',
+                'user_address.escape_html' => 'The address field may not contain any special characters.',
                 'user_address.string' => 'The address must be a string',
                 'user_address.min' => 'The address must be at least 8 characters',
                 'user_address.max' => 'The address must be no more than 255 characters'
@@ -185,11 +198,12 @@ class UserController extends Controller
 
         if (isset($request->password)) {
             $validator = Validator::make($request->all(), [
-                    'password' => 'string|min:6|same:password_confirmation',
+                    'password' => 'string|escape_html|min:6|same:password_confirmation',
                     'password_confirmation' => 'string|min:6'
                 ], 
                 [
                     'password.min' => 'The password must be at least 6 characters',
+                    'password.escape_html' => 'The password field may not contain any special characters.',
                     'password.same' => 'The passwords must match'
                 ]
             );
@@ -221,8 +235,7 @@ class UserController extends Controller
         return redirect()->action('UserController@show', ['id' => $id]);
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         $user = User::find($id);
 
         if (empty($user)) {
@@ -273,8 +286,7 @@ class UserController extends Controller
         return view('pages.cart', ['books' => $books]);
     }
 
-    public function manageCart($user_id, $book_id)
-    {
+    public function manageCart($user_id, $book_id) {
         $user = User::find($user_id);
 
         if (empty($user)) {
@@ -295,8 +307,7 @@ class UserController extends Controller
         return redirect()->action('UserController@shoppingCart', ['id' => $user_id]);
     }
 
-    public function clearCart($id)
-    {
+    public function clearCart($id) {
         $user = User::find($id);
 
         if (empty($user)) {
@@ -380,8 +391,7 @@ class UserController extends Controller
         return view('pages.wishlist', ['books' => $books]);
     }
 
-    public function manageWishlist($user_id, $book_id)
-    {
+    public function manageWishlist($user_id, $book_id) {
         $user = User::find($user_id);
 
         if (empty($user)) {
@@ -448,8 +458,7 @@ class UserController extends Controller
         return User::find($id);
     }
 
-    public function list()
-    {
+    public function list() {
         $users = User::where('admin_perms', FALSE)->simplePaginate(10);
 
         if ($users->isEmpty()) {
@@ -469,6 +478,24 @@ class UserController extends Controller
     }
 
     public function search(Request $request) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
+        $validator = Validator::make($request->all(), [
+                'search' => 'escape_html|string|max:100'
+            ], 
+            [
+                'search.escape_html' => 'The search field may not contain any special characters.',
+                'search.string' => 'The search field must be a string.',
+                'search.max' => 'The search field may not be more than 100 characters.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect('/');
+        }
+
         $results = User::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
 
         try {

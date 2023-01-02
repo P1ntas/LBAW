@@ -27,6 +27,10 @@ class CategoryController extends Controller
     }
 
     public function create(Request $request) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+
         try {
             $this->authorize('addCategory', User::class);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
@@ -34,10 +38,11 @@ class CategoryController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-                'name' => 'required|string|min:1|max:100|unique:category'
+                'name' => 'required|escape_html|string|min:1|max:100|unique:category'
             ], 
             [
                 'name.required' => 'The name field is required.',
+                'name.escape_html' => 'The name field may not contain any special characters.',
                 'name.string' => 'The name field must be a string.',
                 'name.min' => 'The name field must have at least :min characters.',
                 'name.max' => 'The name field can have at most :max characters.',
@@ -57,6 +62,10 @@ class CategoryController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+        
         $category = Category::find($id);
 
         if (empty($category)) {
@@ -73,10 +82,11 @@ class CategoryController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-                'name' => 'required|string|min:1|max:100|unique:category'
+                'name' => 'required|escape_html|string|min:1|max:100|unique:category'
             ], 
             [
                 'name.required' => 'The name field is required.',
+                'name.escape_html' => 'The name field may not contain any special characters.',
                 'name.string' => 'The name field must be a string.',
                 'name.min' => 'The name field must have at least :min characters.',
                 'name.max' => 'The name field can have at most :max characters.',

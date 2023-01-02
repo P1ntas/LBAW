@@ -34,7 +34,7 @@
           <button id="magnifierSearch">
             <iconify-icon icon="simple-line-icons:magnifier"></iconify-icon>
           </button>
-          <input id="hSearchText" type="text" name="search" placeholder="Type a book/author">
+          <input id="hSearchText" type="text" name="search" value="{{ old('search') }}" placeholder="Type a book/author">
         </div>
       </form>
       <div id="hLog">

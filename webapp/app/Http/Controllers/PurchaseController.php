@@ -127,6 +127,10 @@ class PurchaseController extends Controller
     }
 
     public function updateStatus(Request $request, $user_id, $purchase_id) {
+        $request->replace(array_map(function($value) {
+            return is_string($value) ? strip_tags($value) : $value;
+        }, $request->all()));
+        
         $user = User::find($user_id);
   
         if (empty($user)) {
