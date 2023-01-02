@@ -69,3 +69,6 @@ Route::delete('/books/{id}/remove', 'BookController@delete')->where(['id' => '[0
 Route::post('/categories/add', 'CategoryController@create');
 Route::put('/categories/{id}/edit', 'CategoryController@update');
 Route::delete('/categories/{id}/remove', 'CategoryController@delete')->where(['id' => '[0-9]+']);
+
+// Notifications
+Route::delete('/notifications/{id}/delete', 'NotificationController@delete')->where(['id' => '[0-9]+']);

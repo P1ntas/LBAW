@@ -7,6 +7,17 @@
     <div id="headerWrapper2">
       @if (Auth::check() && !Auth::user()->isAdmin())
         <div id="headerButtons">
+          @php ($notifications = Auth::user()->notifications)
+          <button onclick="showNotifs()">Notifications ({{ count($notifications) }})</button>
+          <div id="notifs" style="display:none;">
+            @foreach ($notifications as $notification)
+              <p>{{ $notification->content }}</p>
+              <form class="notif" onsubmit="deleteNotif({{ $notification->id }}); return false;">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <button type="submit">X</button>
+              </form>
+            @endforeach
+          </div>
           <a id="addWish" href="/users/{{ Auth::user()->id }}/wishlist">
             <iconify-icon icon="mdi:cards-heart-outline"></iconify-icon>
           </a>
@@ -32,7 +43,7 @@
             <a id="headerLogin" href="/admins/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
             <div id="userPopup">
               <ul id ="userActions">
-                <li><a href="/users">User Accounts</a></li>
+                <li><a href="/users">Users</a></li>
                 <li><a href="/admins/{{ Auth::user()->id }}/edit">Edit Profile</a></li>
                 <li><a href="/logout">Sign Out</a></li>
               </ul>

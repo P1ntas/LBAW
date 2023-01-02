@@ -165,6 +165,11 @@ class PurchaseController extends Controller
 
         $purchase->state_purchase = $request->status;
         $purchase->save();
+
+        $notification = app('App\Http\Controllers\NotificationController')->generate(
+            'Your purchase was now ' . $purchase->state_purchase,
+            $user_id
+        );
   
         return redirect()->back();
     }

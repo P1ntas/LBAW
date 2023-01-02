@@ -588,6 +588,26 @@ class BookController extends Controller
             }
         }
 
+        if ($book->price != $request->price) {
+            $users = $book->carts;
+            foreach ($users as $user) {
+                $notification = app('App\Http\Controllers\NotificationController')->generate(
+                    '' . $book->title . ' price update',
+                    $user->id
+                );
+            }
+        }
+
+        if ($book->stock == 0 && $request->stock > 0) {
+            $users = $book->wishlist;
+            foreach ($users as $user) {
+                $notification = app('App\Http\Controllers\NotificationController')->generate(
+                    '' . $book->title . ' is now available',
+                    $user->id
+                );
+            }
+        }
+
         $book->title = $request->title;
         $book->isbn = $request->isbn;
         if (isset($request->year)) {

@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS book_collection CASCADE;
 DROP TABLE IF EXISTS review CASCADE;
 DROP TABLE IF EXISTS purchase_book CASCADE;
 DROP TABLE IF EXISTS delivery CASCADE;
+DROP TABLE IF EXISTS notifications CASCADE;
 DROP TABLE IF EXISTS password_resets CASCADE;
 
 DROP TYPE IF EXISTS purchase_state CASCADE;
@@ -158,6 +159,12 @@ CREATE TABLE delivery (
     delivery_address TEXT NOT NULL,
     cost NUMERIC(9, 2) NOT NULL CHECK (cost >= 0),
     purchase_id INTEGER NOT NULL UNIQUE REFERENCES purchase(id) ON UPDATE CASCADE ON DELETE CASCADE   
+);
+
+CREATE TABLE notifications (
+    id SERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE   
 );
 
 CREATE TABLE password_resets (

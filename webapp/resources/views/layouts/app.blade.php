@@ -22,6 +22,7 @@
     <script type="text/javascript" src="{{ asset('js/book.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/login.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/category.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/notification.js') }}" defer></script>
   </head>
   <body>
       @include('layouts.header')

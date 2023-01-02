@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasOne(\App\Models\Photo::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(\App\Models\Notification::class);
+    }
+
     public function isBlocked() {
         return $this->blocked;
     }

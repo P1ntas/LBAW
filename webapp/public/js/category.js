@@ -16,4 +16,5 @@ function updateCategory(id) {
         form.style.display = 'none';
     };
     xhr.send('name=' + encodeURIComponent(categoryName));
+    location.reload();
 }
