@@ -26,8 +26,13 @@ Route::post('/books/search', 'BookController@search');
 // Categories
 Route::get('/categories', 'CategoryController@list');
 
+// Collections
+Route::get('/collections', 'CollectionController@list');
+Route::get('/collections/{id}', 'CollectionController@show')->where(['id' => '[0-9]+']);
+Route::post('/collections/search', 'CollectionController@search');
+
 // Users
-Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+'])->name('pages.user');;
+Route::get('/users/{id}', 'UserController@show')->where(['id' => '[0-9]+'])->name('pages.user');
 Route::get('/users/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
 Route::put('/users/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
 Route::delete('/users/{id}/delete', 'UserController@delete')->where(['id' => '[0-9]+']);
@@ -69,6 +74,11 @@ Route::delete('/books/{id}/remove', 'BookController@delete')->where(['id' => '[0
 Route::post('/categories/add', 'CategoryController@create');
 Route::put('/categories/{id}/edit', 'CategoryController@update');
 Route::delete('/categories/{id}/remove', 'CategoryController@delete')->where(['id' => '[0-9]+']);
+Route::get('/collections/add', 'CollectionController@add');
+Route::post('/collections/add', 'CollectionController@create');
+Route::get('/collections/{id}/edit', 'CollectionController@edit')->where(['id' => '[0-9]+']);
+Route::put('/collections/{id}/edit', 'CollectionController@update')->where(['id' => '[0-9]+']);
+Route::delete('/collections/{id}/remove', 'CollectionController@delete')->where(['id' => '[0-9]+']);
 
 // Notifications
 Route::delete('/notifications/{id}/delete', 'NotificationController@delete')->where(['id' => '[0-9]+']);

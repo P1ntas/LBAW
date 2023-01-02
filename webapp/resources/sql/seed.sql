@@ -242,6 +242,11 @@ INSERT INTO wishlist VALUES (2, 1);
 INSERT INTO wishlist VALUES (3, 2);
 INSERT INTO wishlist VALUES (3, 3);
 
+INSERT INTO collections VALUES (DEFAULT, 'Lord of The Rings Collection');
+INSERT INTO book_collection VALUES (1, 1);
+INSERT INTO book_collection VALUES (2, 1);
+INSERT INTO book_collection VALUES (3, 1);
+
 -----------------------------------------
 -- INDEXES
 -----------------------------------------

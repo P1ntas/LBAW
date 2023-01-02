@@ -25,10 +25,10 @@
     </div>
     <div id="books">
         <span>Collections</span>
-        <a href="/"><span class="pos">View all >></span></a>
+        <a href="/collections"><span class="pos">View all >></span></a>
     </div>
     <div class="books">
-        <!-- collections -->
+        @each('partials.collection', $collections, 'collection')
     </div>
 </div>
 @endsection

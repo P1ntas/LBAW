@@ -126,4 +126,16 @@ class UserPolicy
     public function editCategory(User $authUser) {
       return $authUser->isAdmin();
     }
+
+    public function addCollection(User $authUser) {
+      return $authUser->isAdmin();
+    }
+
+    public function editCollection(User $authUser) {
+      return $authUser->isAdmin();
+    }
+
+    public function deleteCollection(User $authUser) {
+      return $authUser->isAdmin();
+    }
 }
