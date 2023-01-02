@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\FAQ;
+use App\Models\Book;
 
 class StaticController extends Controller
 {
   public function home() {
-    return view('pages.home');
+    $books = Book::take(3)->get();
+
+    return view('pages.home', ['books' => $books]);
   }
 
   public function about() {

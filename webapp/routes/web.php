@@ -72,3 +72,6 @@ Route::delete('/categories/{id}/remove', 'CategoryController@delete')->where(['i
 
 // Notifications
 Route::delete('/notifications/{id}/delete', 'NotificationController@delete')->where(['id' => '[0-9]+']);
+
+// 404
+Route::fallback(function() {return view('pages.404');});

@@ -21,7 +21,7 @@
         <a href="/books"><span>View all >></span></a>
     </div>
     <div class="books">
-        <!-- books -->
+        @each('partials.book', $books, 'book')
     </div>
     <div id="books">
         <span>Collections</span>
