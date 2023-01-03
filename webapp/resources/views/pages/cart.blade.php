@@ -19,7 +19,7 @@
 </div>
 {{ $books->links() }}
 @if (count($books) > 0)
-    <p id="deliveryCost">Delivery cost: 1.50 €</p>
+    <p id="deliveryCost">Delivery cost: <span>1.50 €</span></p>
     <div id="userWrapper">
         @php ($final_cost = 1.50)
         @foreach ($books as $book)

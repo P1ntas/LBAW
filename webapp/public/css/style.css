@@ -59,7 +59,6 @@ button {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 1em;
 }
 
 #name {
@@ -778,8 +777,8 @@ header {
 }
 
 #star {
-    margin-top: 0.05em;
-    font-size: 2.8em;
+    margin-top: 2.5em;
+    font-size: 1.5em;
 }
 
 #rating > * {
@@ -813,6 +812,26 @@ header {
     font-size: 30px;
     color: rgb(20, 18, 90);
     cursor: pointer;
+}
+
+.blue {
+    color:rgb(176, 172, 71) !important;
+}
+
+.sizer {
+    margin-top: 0 !important;
+}
+
+.sizer input {
+    font-size: 1em !important;
+}
+
+.sizer input[type="number"] {
+    width: 0.7em;
+}
+
+.sizer input[type="text"] {
+    width: 100%;
 }
 
 #try2 {
@@ -853,11 +872,18 @@ header {
     border-collapse: collapse;
     width: 44em;
     height: 22.1em;
+    display: table;
 }
 
 #detailsBook tr {
     border-bottom: 1px solid rgb(175, 175, 175);
     height: 3em;
+}
+
+.detailsText {
+    float: right;
+    padding-right: 2em;
+    padding-top: 0.8em;
 }
 
 #detailsBook tr:last-child {
@@ -866,7 +892,8 @@ header {
 
 .detailsHeader {
     font-weight: bold;
-    width: 75%;
+    min-width: 80%;
+    padding-left: 1em;
 }
 
 .redWrapper {
@@ -986,6 +1013,12 @@ header {
 
 .profileWrapper1 {
     font-weight: 600;
+    color: rgb(20, 18, 90);
+}
+
+.centered {
+    float: right !important;
+    margin-right: 30%;
 }
 
 .profileWrapper1 p {
@@ -1027,12 +1060,21 @@ header {
     margin: 2.5em 0 0  2em;
     color: rgb(20, 18, 90);
     font-weight: 600;
+    text-align: center;
 }
+
+#deliveryCost > span {
+    font-weight: 300;
+} 
 
 .Checkout::after {
     content: "";
     width: 155%;
     border-bottom: 0.1em solid rgb(175, 175, 175);
+}
+
+#content {
+    margin: 3em;
 }
 
 #imgPurchase {
@@ -1051,8 +1093,22 @@ header {
 }
 
 #cButtons {
-    margin-top: 5em;
+    margin: 5em 0 4em 0;
+    margin-left: 30%;
     display: flex;
+}
+
+#cButtons form {
+    margin-right: 10em;
+}
+
+#notification {
+    display: flex;
+}
+
+#notification button {
+    color: rgb(161, 17, 17);
+    border: none;
 }
 
 #delete_buttonC {
@@ -1131,6 +1187,12 @@ header {
     font-weight: 300;
 }
 
+#books span + span {
+    margin: 0 0 2em 3em;
+    font-weight: 600;
+    color: rgb(157, 23, 23);
+}
+
 .booksWrapper {
     margin: 3em 2em;
 }
@@ -1194,7 +1256,7 @@ header {
 }
 
 .card {
-    height: 20em;
+    height: 24em;
     width: 14em;
     border-radius: 1em;
     border: 1px solid rgb(175, 175, 175);
@@ -1204,7 +1266,7 @@ header {
 }
 
 .card img {
-    width: 10em;
+    height: 13em;
     padding: 1em;
     border-bottom: 1px solid rgb(175, 175, 175);
 }
@@ -1264,6 +1326,11 @@ header {
 
 .collection1 {
     height: 21em !important;
+}
+
+.collection1 img {
+    width: 10em !important;
+    height: auto !important;
 }
 
 .unbold {

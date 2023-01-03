@@ -79,11 +79,13 @@
                                     @endif
                                 </div>
                             </div>
-                            <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/edit">
+                            <form method="POST" class="sizer" action="/books/{{ $book->id }}/review/{{ $review->id }}/edit">
                                 @csrf
                                 @method('PUT')
 
                                 <input type="number" name="rating" min="0" max="5" step="1" value="{{ $review->rating }}">
+                                <iconify-icon icon="material-symbols:star" id="star" style="color: #ffc700;"></iconify-icon>
+
                                 @if ($errors->has('rating'))
                                     <span class="error">
                                         {{ $errors->first('rating') }}
@@ -98,7 +100,7 @@
                                 @endif
 
                                 <button type="submit" id="addReview" class="edit_button">
-                                    <iconify-icon icon="mdi:pencil" id="editUser"></iconify-icon>
+                                    <iconify-icon icon="mdi:pencil" class="blue" id="editUser"></iconify-icon>
                                 </button>
                             </form>
                         </div>

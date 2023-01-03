@@ -11,7 +11,7 @@
 
 @section('content')
 <h1>{{ $user->name }}</h1>
-<div id="editWrapper">
+<div id="editWrapper" class="centered">
 @php ($picture = $user->photo) @endphp
     @if (empty($picture))
         <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPicture" id="userPic">
