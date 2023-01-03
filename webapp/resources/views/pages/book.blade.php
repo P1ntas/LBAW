@@ -11,7 +11,7 @@
 
 @section('content')
 <div id="bookInfo">
-    <!-- book_photo -->
+    <img src="{{ URL::asset('images/book.jpg') }}" alt="bookPhoto" id="bookP">
     @auth 
         @if (Auth::user()->isAdmin())
             <form method="GET" action="/books/{{ $book->id }}/edit">
@@ -58,7 +58,7 @@
                                 </div>
                                 <div id="revHeader">
                                     <p class="username">{{ $review->user->name }}</p>
-                                    <!-- user_photo -->
+                                    <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPhoto" class="bookU">
                                 </div>
                             </div>
                             <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/edit">
@@ -102,7 +102,7 @@
                                 </div>  
                                 <div id="revHeader">
                                     <p class="username">{{ $review->user->name }}</p>
-                                    <!-- user_photo -->
+                                    <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPhoto" class="bookU">
                                 </div>
                             </div>
                             <p>{{ $review->comment }}</p>
@@ -117,7 +117,7 @@
                             </div>
                             <div id="revHeader">
                                 <p class="username">{{ $review->user->name }}</p>
-                                <!-- user_photo -->
+                                <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPhoto" class="bookU">
                             </div>
                         </div>
                         <p>{{ $review->comment }}</p>

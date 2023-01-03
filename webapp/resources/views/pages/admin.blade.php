@@ -12,7 +12,7 @@
 @section('content')
 <h1>{{ $admin->name }}</h1>
 <div id="editWrapper">
-    <!-- user_photo -->
+    <img src="{{ URL::asset('images/avatar.jpg') }}" id="userPic" alt="userPicture">
 </div>
 <div class="profileWrapper1">
     <p>Email: <span>{{ $admin->email }}</span></p> 

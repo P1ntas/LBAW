@@ -1,5 +1,5 @@
 <div class="card card1 collection1">
-    <!-- collection_photo -->
+    <a href="/collections/{{ $collection->id }}"><img src="{{ URL::asset('images/collection.jpg') }}" alt="collection"></a>
     <a href="/collections/{{ $collection->id }}"><p>{{ $collection->name}}</p></a>
     @php ($final_cost = 0)
     @foreach ($collection->books as $book)

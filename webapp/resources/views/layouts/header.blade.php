@@ -1,7 +1,7 @@
 <header>
   <div id="headerWrapper">
     <div id ="imgTitle">
-      <!-- logo.png -->
+      <img src="{{ URL::asset('images/logo.png') }}" alt="logo">
       <h1><a href="/" id="name">Off The Shelf</a></h1>
     </div>
     <div id="headerWrapper2">
@@ -59,8 +59,7 @@
             </div>
           @endif
         @else
-          <a href="/login">Sign In</a>
-          <a href="/register">Sign Up</a></li>
+          <a id="headerLogin" href="/login">Sign In</a>
         @endauth
       </div>
       <nav id="hamburguer">

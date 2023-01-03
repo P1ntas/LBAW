@@ -24,7 +24,7 @@
         </p>
     </div>
     <div id="col2AboutUs">
-        <!-- book_store.jpg -->
+        <img id= "imgAboutUs" src="{{ URL::asset('images/bookStore.jpg') }}" id="bookStore">
     </div>
 </div>
 @endsection

@@ -12,7 +12,7 @@
 @section('content')
 <h1>Edit Book</h1>
 <div id="editWrapper">
-    <!-- book_photo -->
+  <img src="{{ URL::asset('images/book.jpg') }}" id="userPic" alt="userPicture">
     <br/>
     <form method="POST" action="/books/{{ $book->id }}/remove">
         @csrf

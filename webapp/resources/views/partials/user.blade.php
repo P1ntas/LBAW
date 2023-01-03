@@ -9,6 +9,6 @@
         </a>
     </div>
     <a href="/users/{{ $user->id }}">
-        <!-- user_photo -->
+        <img src="{{ URL::asset('images/avatar.jpg') }}" alt="bookPhoto" id="imgPurchase">
     </a>
 </div>

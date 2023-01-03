@@ -12,7 +12,7 @@
 @section('content')
 <h1>{{ $user->name }}</h1>
 <div id="editWrapper">
-    <!-- user_photo -->
+    <img src="{{ URL::asset('images/avatar.jpg') }}" id="userPic" alt="userPicture">
 </div>
 <div class="profileWrapper1">
     @if ($user->isBlocked())

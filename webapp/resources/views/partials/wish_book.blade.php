@@ -5,12 +5,11 @@
             @csrf
             @method('DELETE')
             <button type="submit">
-                <!-- x_photo -->
-                <p>X</p>
+                <img src="{{ URL::asset('images/x.png') }}" alt="xCheckout" id="imgCheckout">
             </button>
         </form>
     </div>
     <a href="/books/{{ $book->id }}">
-        <!-- book_photo -->
+        <img src="{{ URL::asset('images/book.jpg') }}" alt="bookPhoto" id="imgPurchase">
     </a>
 </div>

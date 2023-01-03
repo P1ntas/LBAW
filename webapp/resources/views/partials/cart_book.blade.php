@@ -10,6 +10,6 @@
         </form>
     </div>
     <a href="/books/{{ $book->id }}">
-        <!-- book_photo -->
+        <img src="{{ URL::asset('images/book.jpg') }}" alt="bookPhoto" id="imgPurchase">
     </a>
 </div>
