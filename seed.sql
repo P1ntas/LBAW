@@ -344,7 +344,41 @@ INSERT INTO review VALUES
   (4, 'I really enjoyed the setting and atmosphere of this book. The plot was a bit slow-moving, but overall it was a good read.', '2022-01-10', 10, 2);
 
 
-
+INSERT INTO photo VALUES (DEFAULT, 'The Catcher in the Rye.jpg', 1);
+INSERT INTO photo VALUES (DEFAULT, 'To_Kill_a_Mockingbird.jpg', 2);
+INSERT INTO photo VALUES (DEFAULT, 'pride-prejudice.jpg', 3);
+INSERT INTO photo VALUES (DEFAULT, 'The_Great_Gatsby.jpg', 4);
+INSERT INTO photo VALUES (DEFAULT, 'The Alchemist.jpg', 5);
+INSERT INTO photo VALUES (DEFAULT, 'One Hundred Years of Solitude.jpg', 6);
+INSERT INTO photo VALUES (DEFAULT, 'Moby-Dick.jpg', 7);
+INSERT INTO photo VALUES (DEFAULT, 'The Picture of Dorian Gray.jpg', 8);
+INSERT INTO photo VALUES (DEFAULT, 'The Bell Jar.jpg', 9);
+INSERT INTO photo VALUES (DEFAULT, 'The Grapes of Wrath.jpg', 10);
+INSERT INTO photo VALUES (DEFAULT, 'The Brothers Karamazovd.jpg', 11);
+INSERT INTO photo VALUES (DEFAULT, 'The Old Man and the Sea', 12);
+INSERT INTO photo VALUES (DEFAULT, 'Jane Eyre.jpg', 13);
+INSERT INTO photo VALUES (DEFAULT, 'Brave New World.jpg', 14);
+INSERT INTO photo VALUES (DEFAULT, 'The Color Purple.jpg', 15);
+INSERT INTO photo VALUES (DEFAULT, 'The Death of Ivan Ilyich.jpg', 16);
+INSERT INTO photo VALUES (DEFAULT, 'Wuthering Heights.jpg', 17);
+INSERT INTO photo VALUES (DEFAULT, 'The Hitchhikers Guide to the Galaxy.webp', 18);
+INSERT INTO photo VALUES (DEFAULT, 'The Shining.jpg', 19);
+INSERT INTO photo VALUES (DEFAULT, 'Enders Game.jpg', 20);
+INSERT INTO photo VALUES (DEFAULT, 'The Hunger Games.jpg', 21);
+INSERT INTO photo VALUES (DEFAULT, 'The Handmaids Tale.jpg', 22);
+INSERT INTO photo VALUES (DEFAULT, 'The Time Travelers Wife.jpg', 23);
+INSERT INTO photo VALUES (DEFAULT, 'The Time Travelers Wife.jpg', 24);
+INSERT INTO photo VALUES (DEFAULT, 'The Notebook.jpg', 25);
+INSERT INTO photo VALUES (DEFAULT, 'The Fault in Our Stars.jpg', 26);
+INSERT INTO photo VALUES (DEFAULT, 'Divergent.jpg', 27);
+INSERT INTO photo VALUES (DEFAULT, 'Gone with the Wind.jpg', 28);
+INSERT INTO photo VALUES (DEFAULT, 'The Chronicles of Narnia.jpg', 29);
+INSERT INTO photo VALUES (DEFAULT, 'The Da Vinci Code.jpg', 30);
+INSERT INTO photo VALUES (DEFAULT, 'The Help.jpg', 31);
+INSERT INTO photo VALUES (DEFAULT, 'Rebecca.jpg', 32);
+INSERT INTO photo VALUES (DEFAULT, 'The Lord of the Rings.jpg', 33);
+INSERT INTO photo VALUES (DEFAULT, 'The Lord of the Rings The Two Towers.jpg', 34);
+INSERT INTO photo VALUES (DEFAULT, 'The Lord of the Rings The Return of the King.jpg', 35);
 
 
 -----------------------------------------
