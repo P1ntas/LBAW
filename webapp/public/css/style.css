@@ -21,6 +21,7 @@ body {
   
     --main-color: black;
     min-height: 100vh;
+    position: relative;
 }
   
 body > * {
@@ -83,11 +84,12 @@ header {
 
 #headerWrapper {
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     flex-direction: row;
     flex-flow: row;
     clear: both;
-    justify-content: space-between;
+    position: relative;
 }
 
 #headerWrapper2 {
@@ -97,7 +99,6 @@ header {
     clear: both;
     justify-content: space-between;
     float: right;
-    width: 50%;
 }
 
 #hSearch {
@@ -168,6 +169,7 @@ header {
 
 .searching {
     width: 17em;
+    margin-right: 7em;
 }
 
 .hambMenu li {
@@ -254,8 +256,8 @@ header {
 #userPopup {
     width: 7em;
     height: auto;
-    margin: 1em 0 0 0;
-    right: 4.3em;
+    margin: 2em 0 0 0;
+    right: 7em;
     background-color: white;
     border: 1px solid rgb(20, 18, 90);
     border-radius: 0.3em;
@@ -282,8 +284,53 @@ header {
     transition: all .2s ease-in-out;
 }
 
+.butBell {
+    font-size: 1em;
+    border: none;
+    border-radius: 2em;
+    margin-right: 1em;
+    background-color: transparent;
+}
+
+.bigger {
+    font-size: 1.5em;
+}
+
+#notifs {
+    width: 20em;
+    height: auto;
+    margin: 2em 1em 0 0;
+    right: 35%;
+    border: 2px solid rgb(20, 18, 90);
+    border-radius: 0.3em;
+    position: absolute;
+    transition: all 0s ease 0.1s;
+    z-index: 1;
+    opacity: 1;
+    background-color: rgb(172, 172, 172);
+    
+}
+
+#notifs * {
+    padding-left: 1em;
+}
+
+.flexor1 {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+.flexor1 button {
+    margin-top: 2em;
+    margin-right: 3em;
+    text-align: center;
+    color: rgb(157, 23, 23);
+    padding-right: 20%;
+}
+
 #headerLogin {
-    width: 4em;
+    width: 8em;
     font-size: 1em;
     font-weight: 600;
     padding: 0;
@@ -294,7 +341,8 @@ header {
     -o-appearance: inherit;
     appearance: inherit;
     color: rgb(20, 18, 90);
-    right: 7em;
+    right: 6em;
+    position: absolute;
 }
 
 #headerLogin:hover {
@@ -1361,4 +1409,10 @@ footer > p {
     height: 0;
     overflow: hidden;
     transition: all 1s;
+}
+
+@media only screen and (max-width: 700px) {
+    #imgTitle h1 {
+       display: none; 
+    }
 }
