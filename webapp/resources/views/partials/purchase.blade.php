@@ -1,33 +1,42 @@
-<article class="purchase" data-id="{{ $purchase->id }}">
-    <hr>
-    <p>Checkout date: {{ $purchase->purchase_date }}</p>
-    <p>Book(s):</p>
-    @php ($finalcost = 1.50)
+<div id="purchase">
+    @php ($final_cost = 1.50)
     @foreach ($purchase->books as $book)
-        @php ($finalcost += $book->price)
-        <p>{{ $book->title }}</p>
+        @php ($final_cost += $book->price)
+        <a href="/books/{{ $book->id }}#bookReview">
+            <p class="pclass">{{ $book->title }} <span>review</span></p>
+        </a>
     @endforeach
-    <p>Final cost: {{$finalcost}} €</p>
-    <p>State: {{ $purchase->state_purchase }}</p>
-    @if (Auth::user()->isAdmin())
-        <form method="POST" action="/api/users/{{$purchase->user_id}}/purchases/status">
-          <label for="status">Order status:</label><br>
-          <select id="status" name="status">
-            <option value="Received">Received</option>
-            <option value="Dispatched">Dispatched</option>
-            <option value="Delivered">Delivered</option>
-          </select>
-          <input type="hidden" name="purchase_id" value="{{$purchase->id}}">
-        </form> 
-    @endif
-    <p>Arrival date:  {{ $purchase->delivery->arrival }}</p>
-    <p>Delivery address:  {{ $purchase->delivery->delivery_address }}</p>
-    @php ($final_state = 'Delivered')
-    @if ($purchase->state_purchase != $final_state)
-        <form method="POST" action="/api/users/{{$purchase->user_id}}/purchases/cancel">
-            <input type="hidden" name="purchase_id" value="{{$purchase->id}}">
-            <input type="hidden" name="delivery_id" value="{{$purchase->delivery->id}}">
-            <input type="submit" value="Cancel order">
-        </form>
-    @endif
-</article>
+    <p class="pclass">Arrival date: <span>{{ $purchase->delivery->arrival }}</span></p>
+    <div id="purWrapper">
+        <p class="pclass">Status: <span>{{ $purchase->state_purchase }}</span></p>
+        @if (Auth::user()->isAdmin())
+            <form method="POST" action="/users/{{ $purchase->user_id }}/purchases/{{ $purchase->id }}/status">
+                @csrf
+                @method('PUT')
+                <label for="status">Order status</label><br>
+                <select id="status" name="status">
+                  <option value="Received">Received</option>
+                  <option value="Dispatched">Dispatched</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+                <button type="submit">
+                    <iconify-icon icon="mdi:pencil" id="space"></iconify-icon>
+                </button>
+            </form>
+        @endif
+    </div>
+    <div id="purWrapper">
+        <p class="pclass">Final cost: <span>{{ $final_cost }} €</span></p>
+        @php ($final_state = 'Delivered')
+        @if (!Auth::user()->isAdmin() && $purchase->state_purchase != $final_state)
+            <form method="POST" action="/users/{{ $purchase->user_id }}/purchases/{{ $purchase->id }}/cancel">
+                @csrf
+                @method('DELETE')
+                <button type="submit" 
+                onclick="return confirm('Are you sure you want to cancel this order?');">
+                    <iconify-icon icon="ion:trash-outline" class="trash trash2"></iconify-icon>
+                </button>
+            </form>
+        @endif
+    </div>
+</div>

@@ -1,12 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Purchase History')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
-<section id="purchases">
-  <p>Purchase History</p>
-  @each('partials.purchase', $purchases, 'purchase')
-</section>
-
+<div id="pWrapper">
+    @each('partials.purchase', $purchases, 'purchase')
+</div>
+{{ $purchases->links() }}
 @endsection

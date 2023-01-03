@@ -11,23 +11,30 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/milligram.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script type="text/javascript">
-        // Fix for Firefox autofocus CSS bug
-        // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
-    </script>
-    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/82c0a4cf1f.js" crossorigin="anonymous" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js" defer></script>
+    <script type="text/javascript" src="{{ asset('js/header.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/checkbox.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/book.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/login.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/category.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/notification.js') }}" defer></script>
   </head>
   <body>
-    <hr>
-    @include('layouts.header')
-    <hr>
-    <section id="content">
-      @yield('content')
-    </section>
-    <hr>
-    @include('layouts.footer')
-    <hr>
+      @include('layouts.header')
+      <main>
+        <section id="notification">
+          @yield('notification')
+        </section>
+        <section id="content">
+          @yield('content')
+        </section>
+      </main>
+      @include('layouts.footer')
   </body>
 </html>
+

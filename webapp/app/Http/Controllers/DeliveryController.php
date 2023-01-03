@@ -11,23 +11,15 @@ use App\Models\Delivery;
 
 class DeliveryController extends Controller
 {
-    public function create(Request $request, $id)
-    {
-      $delivery = new Delivery();
+  public function create($id) {
+    $delivery = new Delivery();
 
-      $delivery->arrival = Carbon::now(); // change to a week after
-      $delivery->delivery_address = $request->delivery_address;
-      $delivery->cost = $request->cost;
-      $delivery->purchase_id = $id;
-      $delivery->save();
+    $delivery->arrival = Carbon::now()->addWeek();
+    $delivery->delivery_address = Auth::user()->user_address;
+    $delivery->cost = 1.50;
+    $delivery->purchase_id = $id;
+    $delivery->save();
 
-      return $delivery;
-    }
-
-    public function create(Request $request, $id) {
-      $delivery = Delivery::find($request->delivery_id);
-      $delivery->delete();
-      
-      return $delivery;
-    }
+    return $delivery;
+  }
 }

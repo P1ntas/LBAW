@@ -1,13 +1,15 @@
-<article class="book" data-id="{{ $book->id }}">
-    <a href="/books/{{ $book->id }}">{{ $book->title }}</a>
-    <p>Price: {{ $book->price }} €</p>
-    <p>Category: {{ $book->category->name }}
-    <p>Author(s):</p>
-    @foreach ($book->authors as $author)
-        <p>{{ $author->name }}</p>
-    @endforeach
-    <form method="POST" action="/api/users/{{Auth::user()->id}}/cart">
-        <input type="hidden" name="book_id" value="{{$book->id}}">
-        <input type="submit" value="Remove from cart">
-    </form>
-</article>
+<div class="Checkout">
+    <div>
+        <p class="pclass">Price: <span>{{ $book->price }} €</span></p>
+        <form method="POST" action="/users/{{ Auth::user()->id }}/cart/{{ $book->id }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">
+                <iconify-icon icon="ion:trash-outline" class="trash"></iconify-icon>
+            </button>
+        </form>
+    </div>
+    <a href="/books/{{ $book->id }}">
+        <img src="{{ URL::asset('images/book.jpg') }}" alt="bookPhoto" id="imgPurchase">
+    </a>
+</div>

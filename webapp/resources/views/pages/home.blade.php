@@ -1,18 +1,34 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
-<div class="container">
-    <a href="/books">Books</a>
-    @auth
-        @if (Auth::user()->isAdmin())
-            <a href="/users">Users</a>
-        @else
-            <a href="/users/{{Auth::user()->id}}/purchases">Purchases</a>
+<div class="homePage">
+    <div id="books">
+        <span>Books</span>
+        @if (Auth::check() && Auth::user()->isAdmin())
+            <span>
+                <a href="/books/add"><i class="fa-regular fa-plus"></i> Book</a>
+            </span>
         @endif
-    @endauth
+        <a href="/books"><span>View all >></span></a>
+    </div>
+    <div class="books">
+        @each('partials.book', $books, 'book')
+    </div>
+    <div id="books">
+        <span>Collections</span>
+        <a href="/collections"><span class="pos">View all >></span></a>
+    </div>
+    <div class="books">
+        @each('partials.collection', $collections, 'collection')
+    </div>
 </div>
-
 @endsection

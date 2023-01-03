@@ -1,14 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'Wishlist')
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
-<section id="wishlist">
-  <form method="GET" action="/api/users/{{Auth::user()->id}}/wishlist/clear">
-    <input type="submit" value="Clear wishlist">
-  </form>
-  @each('partials.wishlist_book', $books, 'book')
-</section>
-
+<div class="forIcons">
+    <p class="lTitle">Wishlist</p>
+    <iconify-icon icon="mdi:cards-heart-outline" class="try1"></iconify-icon>
+    </div>
+<div id="pWrapper">
+    @each('partials.wish_book', $books, 'book')
+</div>
+{{ $books->links() }}
 @endsection

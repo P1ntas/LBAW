@@ -1,4 +1,8 @@
-<article class="faq">
-    <p>Question: {{$faq->question}}</p>
-    <p>Answer: {{$faq->answer}}</p>
-</article>
+<div id="question">
+    <button class="FAQtoggle">{{ $faq->question }}
+        <i class="fas fa-plus icon"></i>
+    </button>
+    <div class="answer">
+        <p>{{ $faq->answer }}</p>
+    </div>
+</div>

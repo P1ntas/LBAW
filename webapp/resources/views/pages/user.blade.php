@@ -1,24 +1,27 @@
 @extends('layouts.app')
 
-@section('title', $user->name)
+@section('notification')
+@if (Session::has('notification'))
+    <div class="notification {{ Session::get('notification_type') }}">
+      {{ Session::get('notification') }}
+    </div>
+    <button class="close-button" type="button">X</button>
+@endif
+@endsection
 
 @section('content')
-
-<article class="user" data-id="{{ $user->id }}">
+<h1>{{ $user->name }}</h1>
+<div id="editWrapper">
+    <img src="{{ URL::asset('images/avatar.jpg') }}" id="userPic" alt="userPicture">
+</div>
+<div class="profileWrapper1">
     @if ($user->isBlocked())
-        <p>This account is blocked!</p>
+        <p>[This account is blocked]</p>
     @endif
-    <p>Name: {{ $user->name }}</p>
-    <p>Email: {{ $user->email }}</p>
-    <p>Address: {{ $user->user_address }}</p>
-    <p>Phone: {{ $user->phone }}</p>
-    <a href="/users/{{ $user->id }}/edit">Edit Profile</a>
-    @if (Auth::user()->isAdmin())
-        <a href="/users/{{ $user->id }}/purchases">View purchases</a>
+    <p>Email: <span>{{ $user->email }}</span></p> 
+    <p>Address: <span>{{ $user->user_address }}</span></p>
+    @if (!empty($user->phone))
+        <p>Phone Number: <span>{{ $user->phone }}</span></p>
     @endif
-    <form method="GET" action="/api/users/{{$user->id}}/delete">
-        <input type="submit" value="Delete account">
-    </form>
-</article>
-
+</div>
 @endsection
