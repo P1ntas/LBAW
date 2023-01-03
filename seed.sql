@@ -184,7 +184,7 @@ INSERT INTO publisher VALUES (DEFAULT, 'ASA');
 INSERT INTO publisher VALUES (DEFAULT, 'LEIA');
 INSERT INTO publisher VALUES (DEFAULT, 'PortoEditora');
 
-INSERT INTO book (title, isbn, year, price, stock, book_edition, book_description) VALUES 
+INSERT INTO book VALUES 
   (DEFAULT, 'The Catcher in the Rye', '0316769487', 1951, 10.99, 100, 1, 'The story of Holden Caulfield, a young man struggling with depression and alienation.', 6, 1),
   (DEFAULT, 'To Kill a Mockingbird', '0061120081', 1960, 11.99, 50, 2, 'The story of a young girl, Scout, growing up in the Deep South during the 1930s and the racial injustice she witnesses.', 6, 2), 
   (DEFAULT, 'Pride and Prejudice', '0141439580', 1813, 8.99, 75, 3, 'The story of the Bennett family and their search for love and marriage in early 19th century England.', 7, 3),
@@ -331,7 +331,7 @@ INSERT INTO wishlist VALUES (3, 3);
 INSERT INTO wishlist VALUES (4, 13);
 INSERT INTO wishlist VALUES (4, 20);
 
-INSERT INTO review (rating, comment, review_date, book_id, user_id) VALUES 
+INSERT INTO review VALUES 
   (4, 'I really enjoyed this book! The characters were well-developed and the plot kept me engaged throughout.', '2022-01-01', 1, 1),
   (5, 'This book was amazing! I couldnt put it down. The writing was beautiful and the story was so moving.', '2022-01-02', 2, 2),
   (3, 'It was a good book, but I felt like the ending was a bit rushed. Overall, I would recommend it.', '2022-01-03', 3, 3),
