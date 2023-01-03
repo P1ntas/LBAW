@@ -8,14 +8,19 @@
       @if (Auth::check() && !Auth::user()->isAdmin())
         <div id="headerButtons">
           @php ($notifications = Auth::user()->notifications)
-          <button onclick="showNotifs()">Notifications ({{ count($notifications) }})</button>
+          <button class="butBell" onclick="showNotifs()">
+            <iconify-icon class="bigger" icon="mdi:bell-circle" style="color: #141228;"></iconify-icon>
+            ({{ count($notifications) }})
+          </button>
           <div id="notifs" style="display:none;">
             @foreach ($notifications as $notification)
+              <div class="flexor1">
               <p>{{ $notification->content }}</p>
               <form class="notif" onsubmit="deleteNotif({{ $notification->id }}); return false;">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <button type="submit">X</button>
               </form>
+              </div>
             @endforeach
           </div>
           <a id="addWish" href="/users/{{ Auth::user()->id }}/wishlist">
