@@ -49,7 +49,7 @@ The implementations of policies that authorize all kinds of actions is also rele
 
 > Provide the results of accessibility and usability tests using the following checklists. Include the results as PDF files in the group's repository. Add individual links to those files here.
 >
-- Accessibility: 14/18 (docs/Checklist de Acessibilidade.pdf)  
+- Accessibility: 14/18 (https://git.fe.up.pt/lbaw/lbaw2223/lbaw2232/-/blob/main/docs/Checklist_de_Acessibilidade.pdf)  
 - Usability: x/28 (https://ux.sapo.pt/checklists/usabilidade/)  
 
 ### 6. HTML & CSS Validation
