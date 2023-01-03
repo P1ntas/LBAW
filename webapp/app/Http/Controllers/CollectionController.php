@@ -15,7 +15,7 @@ use App\Models\Book;
 class CollectionController extends Controller
 {
     public function list() {
-        $collections = Collection::simplePaginate(10);
+        $collections = Collection::simplePaginate(8);
 
         if ($collections->isEmpty()) {
             Session::flash('notification', 'Collections not found!');
@@ -46,7 +46,7 @@ class CollectionController extends Controller
             return redirect('/');
         }
 
-        $results = Collection::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
+        $results = Collection::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(8);
         
         return view('pages.collections', ['collections' => $results]);
     }
@@ -107,7 +107,7 @@ class CollectionController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         $collection = new Collection();
@@ -181,7 +181,7 @@ class CollectionController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         $collection->name = $request->name;

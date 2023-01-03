@@ -19,7 +19,7 @@
             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> remember me
         </label>
 
-        <a href="{{ route('password.request') }}">forgot password</a>
+        <a href="/login">forgot password</a>
     </div>
     
     <button type="submit" class="sub">Login</button>

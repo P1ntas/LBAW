@@ -14,7 +14,7 @@ use App\Models\User;
 class CategoryController extends Controller
 {
     public function list() {
-        $categories = Category::simplePaginate(10);
+        $categories = Category::simplePaginate(8);
 
         if ($categories->isEmpty()) {
             Session::flash('notification', 'Categories not found!');
@@ -51,7 +51,7 @@ class CategoryController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         $category = new Category();
@@ -95,7 +95,7 @@ class CategoryController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         $category->name = $request->name;

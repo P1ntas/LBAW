@@ -163,7 +163,7 @@ class UserController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         if (isset($request->phone)) {
@@ -281,7 +281,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $books = $user->cart()->simplePaginate(10);
+        $books = $user->cart()->simplePaginate(8);
 
         return view('pages.cart', ['books' => $books]);
     }
@@ -386,7 +386,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $books = User::find($id)->wishlist()->simplePaginate(10);
+        $books = User::find($id)->wishlist()->simplePaginate(8);
 
         return view('pages.wishlist', ['books' => $books]);
     }
@@ -459,7 +459,7 @@ class UserController extends Controller
     }
 
     public function list() {
-        $users = User::where('admin_perms', FALSE)->simplePaginate(10);
+        $users = User::where('admin_perms', FALSE)->simplePaginate(8);
 
         if ($users->isEmpty()) {
             Session::flash('notification', 'Users not found!');
@@ -496,7 +496,7 @@ class UserController extends Controller
             return redirect('/');
         }
 
-        $results = User::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
+        $results = User::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(8);
 
         try {
             $this->authorize('list', User::class);

@@ -31,7 +31,7 @@ class PurchaseController extends Controller
             return redirect()->back();
         }
 
-        $purchases = Purchase::where('user_id', $id)->simplePaginate(10);
+        $purchases = Purchase::where('user_id', $id)->simplePaginate(8);
 
         return view('pages.purchases', ['purchases' => $purchases]);
     }
@@ -164,7 +164,7 @@ class PurchaseController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         $purchase->state_purchase = $request->status;

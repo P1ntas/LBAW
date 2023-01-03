@@ -10,7 +10,7 @@ class StaticController extends Controller
 {
   public function home() {
     $books = Book::take(3)->get();
-    $collections = Collection::take(1)->get();
+    $collections = Collection::take(3)->get();
 
     return view('pages.home', [
       'books' => $books,

@@ -7,7 +7,7 @@
     <div id="headerWrapper2">
       @if (Auth::check() && !Auth::user()->isAdmin())
         <div id="headerButtons">
-          @php ($notifications = Auth::user()->notifications)
+        @php ($notifications = Auth::user()->notifications)
           <button class="butBell" onclick="showNotifs()">
             <iconify-icon class="bigger" icon="mdi:bell-circle" style="color: #141228;"></iconify-icon>
             ({{ count($notifications) }})

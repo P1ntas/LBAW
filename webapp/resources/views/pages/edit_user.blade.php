@@ -12,7 +12,12 @@
 @section('content')
 <h1>Edit Profile</h1>
 <div id="editWrapper">
-    <img src="{{ URL::asset('images/avatar.jpg') }}" id="userPic" alt="userPicture">
+    @php ($picture = $user->photo) @endphp
+    @if (empty($picture))
+        <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPicture" id="userPic">
+    @else
+        <img src="{{ URL::asset('images/users/' . $picture->photo_image) }}" alt="userPicture" id="userPic">
+    @endif
 </div>
 <form id="fedit" method="POST" action="/users/{{$user->id}}/edit">
     @csrf

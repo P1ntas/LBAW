@@ -55,9 +55,9 @@ class Book extends Model
         return $this->belongsToMany(\App\Models\User::class, 'cart', 'book_id', 'user_id');
     }
 
-    public function photos()
+    public function photo()
     {
-        return $this->hasMany(\App\Models\Photo::class);
+        return $this->hasOne(\App\Models\Photo::class);
     }
 
     public function reviews()

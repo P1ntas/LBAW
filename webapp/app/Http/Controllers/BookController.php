@@ -19,7 +19,7 @@ use App\Models\User;
 class BookController extends Controller
 {
     public function list() {
-        $books = Book::simplePaginate(10);
+        $books = Book::simplePaginate(8);
 
         if ($books->isEmpty()) {
             Session::flash('notification', 'Books not found!');
@@ -79,7 +79,7 @@ class BookController extends Controller
             $query->where('price', '<=', $request->price_max);
         }
   
-        $books = $query->simplePaginate(10);
+        $books = $query->simplePaginate(8);
 
         $categories = Category::all();
 
@@ -118,7 +118,7 @@ class BookController extends Controller
             return redirect('/');
         }
 
-        $results = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(10);
+        $results = Book::whereRaw("title @@ plainto_tsquery('" . $request->search . "')")->simplePaginate(8);
 
         if ($results->isEmpty()) {
             $authors = Author::whereRaw("name @@ plainto_tsquery('" . $request->search . "')")->get();
@@ -266,7 +266,7 @@ class BookController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         if (isset($request->comment)) {
@@ -367,7 +367,7 @@ class BookController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         if (isset($request->year)) {
@@ -576,7 +576,7 @@ class BookController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->back();
+            return redirect()->back()->withErrors($validator);
         }
 
         if (isset($request->year)) {

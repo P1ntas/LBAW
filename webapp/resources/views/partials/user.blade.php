@@ -9,6 +9,11 @@
         </a>
     </div>
     <a href="/users/{{ $user->id }}">
-        <img src="{{ URL::asset('images/avatar.jpg') }}" alt="bookPhoto" id="imgPurchase">
+        @php ($picture = $user->photo) @endphp
+        @if (empty($picture))
+            <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPicture" id="imgPurchase">
+        @else
+            <img src="{{ URL::asset('images/users/' . $picture->photo_image) }}" alt="userPicture" id="imgPurchase">
+        @endif
     </a>
 </div>
