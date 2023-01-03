@@ -14,13 +14,13 @@
     <div id="col1AboutUs">
         <p id= "titleAboutUs"><b>How we started</b></p>
         <p id= "story">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit erat in purus luctus, 
-            id dictum nisl laoreet. Praesent quis enim dolor. Donec dignissim hendrerit blandit. Sed ut 
-            rutrum ipsum. Nunc auctor nisi sed dui tempor rhoncus. Duis augue lacus, feugiat eget erat vitae, 
-            dapibus mattis lorem. Nunc nec aliquet sapien. Integer tortor ex, facilisis non ultricies vitae, 
-            posuere a ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br> Nunc sodales urna 
-            lorem, non eleifend elit dictum ac. Quisque vulputate eleifend diam ut tincidunt. Nunc tempor, 
-            erat sed pellentesque dignissim, leo ante rutrum nulla, eget maximus nisi velit ac lectus. 
+            Off The Shelf started simply as a dream for us. We started this project we were still in 
+            highscool and decided to finally commence a small business that sold books in its majority.
+            The garage was our first selling spot for books and although the beggining was very hard, we 
+            didn't give up. </br> Few years later we got our first considerable profit and and some months 
+            after that, we opened up our first store. At the moment, we already have a website solely made for 
+            books and we couldn't be more proud for what we have done along this path. To be in the scale we are now 
+            we can only thank our customers who made this possible and helped us improve this business every day.
         </p>
     </div>
     <div id="col2AboutUs">
