@@ -11,13 +11,24 @@
 
 @section('content')
 <div id="bookInfo">
-    <img src="{{ URL::asset('images/book.jpg') }}" alt="bookPhoto" id="bookP">
+    @php ($picture = $book->photo) @endphp
+    @if (empty($picture))
+        <img src="{{ URL::asset('images/book.jpg') }}" alt="bookPhoto" id="bookP">
+    @else
+        <img src="{{ URL::asset('images/books/' . $picture->photo_image) }}" alt="bookPhoto" id="bookP">
+    @endif
     @auth 
         @if (Auth::user()->isAdmin())
             <form method="GET" action="/books/{{ $book->id }}/edit">
                 <button id="editButton">
                     <figcaption>Edit Book <iconify-icon icon="mdi:pencil"></iconify-icon></figcaption>
                 </button>
+            </form>
+            <form method="POST" action="/books/{{ $book->id }}/remove">
+                @csrf
+                @method('DELETE')
+                <button id="delete_button" class="edit_button" type="submit" 
+                onclick="return confirm('Are you sure you want to delete this book?');">Delete Book</button>
             </form>
         @else 
             <div class="tired">
@@ -60,7 +71,12 @@
                                 </div>
                                 <div id="revHeader">
                                     <p class="username">{{ $review->user->name }}</p>
-                                    <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPhoto" class="bookU">
+                                    @php ($picture = $review->user->photo) @endphp
+                                    @if (empty($picture))
+                                        <img src="{{ URL::asset('images/avatar.jpg') }}" alt="bookPhoto" class="bookU">
+                                    @else
+                                        <img src="{{ URL::asset('images/users/' . $picture->photo_image) }}" alt="bookPhoto" class="bookU">
+                                    @endif
                                 </div>
                             </div>
                             <form method="POST" action="/books/{{ $book->id }}/review/{{ $review->id }}/edit">
@@ -104,7 +120,12 @@
                                 </div>  
                                 <div id="revHeader">
                                     <p class="username">{{ $review->user->name }}</p>
-                                    <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPhoto" class="bookU">
+                                    @php ($picture = $review->user->photo) @endphp
+                                    @if (empty($picture))
+                                        <img src="{{ URL::asset('images/avatar.jpg') }}" alt="bookPhoto" class="bookU">
+                                    @else
+                                        <img src="{{ URL::asset('images/users/' . $picture->photo_image) }}" alt="bookPhoto" class="bookU">
+                                    @endif
                                 </div>
                             </div>
                             <p>{{ $review->comment }}</p>
@@ -119,7 +140,12 @@
                             </div>
                             <div id="revHeader">
                                 <p class="username">{{ $review->user->name }}</p>
-                                <img src="{{ URL::asset('images/avatar.jpg') }}" alt="userPhoto" class="bookU">
+                                @php ($picture = $review->user->photo) @endphp
+                                @if (empty($picture))
+                                    <img src="{{ URL::asset('images/avatar.jpg') }}" alt="bookPhoto" class="bookU">
+                                @else
+                                    <img src="{{ URL::asset('images/users/' . $picture->photo_image) }}" alt="bookPhoto" class="bookU">
+                                @endif
                             </div>
                         </div>
                         <p>{{ $review->comment }}</p>
