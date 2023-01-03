@@ -97,6 +97,7 @@ header {
     clear: both;
     justify-content: space-between;
     float: right;
+    width: 50%;
 }
 
 #hSearch {
@@ -105,7 +106,7 @@ header {
     clear: both;
     color: rgb(20, 18, 90);
     display: flex;
-    margin-right: 1.5em;
+    margin: 0.1em 1.5em 0 0;
 }
 
 #magnifierSearch {
@@ -113,7 +114,7 @@ header {
     border: 0;
     color: inherit;
     font-size: 1.7em;
-    margin: 0.2em 0 0 1em;
+    margin: 1em 0.3em 0 1em;
 }
 
 #hSearchText {
@@ -139,6 +140,7 @@ header {
     appearance: inherit;
     font-size: 2em;
     color: inherit;
+    margin-top: 0.1em;
 }
 
 #hCart {
@@ -161,7 +163,11 @@ header {
 }
 
 #hLog {
-    margin: 2.2em 1.5em 0 0;
+    margin: 2.4em 0 0 0;
+}
+
+.searching {
+    width: 17em;
 }
 
 .hambMenu li {
@@ -288,6 +294,7 @@ header {
     -o-appearance: inherit;
     appearance: inherit;
     color: rgb(20, 18, 90);
+    right: 7em;
 }
 
 #headerLogin:hover {
@@ -409,7 +416,7 @@ header {
     border: 0;
     outline: none;
     border-radius: 1.5625em;
-    color: rgb(20, 18, 90);
+    color: rgb(20, 18, 90) !important;
     margin-top: 1em;
 }
 
@@ -419,15 +426,35 @@ header {
     border-radius: 2.1875em;
     box-shadow: 0 0 0.9375em 0.2em rgb(20, 18, 90);
     transition: 0.5s;
-    color: white;
+    color: white !important;
 }
 
 #loginForm {
     left: 6.25em; 
+    color: white;
+}
+
+#loginForm * {
+    color: inherit;
+}
+
+#password {
+    margin-bottom: 1.5em;
 }
 
 #loginForm button{
-    margin-top: 1em;
+    margin-top: 1.5em;
+}
+
+.gridder {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 1em;
+    text-align: center;
+}
+
+.gridder a {
+    font-size: 12px;
 }
 
 #editWrapper{
@@ -522,6 +549,44 @@ header {
 #register {
     left: 37.5em;
     top: 7.5em;
+    color: white;
+}
+
+#register * {
+    color: inherit;
+}
+
+#register button{
+    margin-top: 2em;
+}
+
+#bookInfo {
+    margin-top: 2em;
+}
+
+.tired {
+    margin-top: 5%;
+    display: flex;
+    float: right;
+    vertical-align: middle;
+    width: 11em;
+    justify-content: space-between;
+}
+
+.alter {
+    color: rgb(176, 172, 71);
+    align-self: center;
+    margin: 0em 0.5em 0 0;
+    vertical-align: middle;
+}
+
+.alter2 {
+    display: inline-block;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
 }
 
 #returnBook {
@@ -657,7 +722,6 @@ header {
     float: left;
     flex-flow: row;
     flex-direction: row;
-    margin-left: -6em;
 }
 
 #rating > p {
@@ -675,16 +739,18 @@ header {
 }
 
 #revHeader {
+    position: relative;
     float: right;
-    width: auto;
-    right: 0;
+    width: 15em;
+    margin-right: 3em;
 }
 
 #revWrapper {
     width: 100%;
-    height: 7em;
+    height: 5em;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    margin: 0.4em 0.5em 0 1em;
 }
 
 #revWrapper2 {
@@ -794,6 +860,16 @@ header {
     display: flex;
 }
 
+#purWrapper form {
+    margin-left: 0.7em;
+}
+
+#purWrapper form button {
+    text-align: center;
+   padding-right: 6em;
+   width: 5em;
+}
+
 #space {
     margin: 1.2em 0 0 0.7em;
 }
@@ -811,6 +887,36 @@ header {
 .catWrapper {
     margin: 2em 0 0 2em;
     color: rgb(20, 18, 90)
+}
+
+.changer {
+    cursor: pointer;
+    border-radius: 3em;
+    text-align: center;
+    justify-content: center;
+    background-color: white;
+    color: rgb(176, 172, 71);
+    border: 2px solid rgb(176, 172, 71);
+    text-shadow:
+    -0.1px -0.1px 0 rgb(176, 172, 71),
+    0.1px -0.1px 0 rgb(176, 172, 71),
+    -0.1px 0.1px 0 rgb(176, 172, 71),
+    0.1px 0.1px 0 rgb(176, 172, 71);
+}
+
+.changer:hover {
+    background-color: rgb(20, 18, 90);
+    border-color: rgb(20, 18, 90);
+    color: white;
+    text-shadow:
+    -0.1px -0.1px 0 rgb(20, 18, 90),
+    0.1px -0.1px 0 rgb(20, 18, 90),
+    -0.1px 0.1px 0 rgb(20, 18, 90),
+    0.1px 0.1px 0 rgb(20, 18, 90);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 .catWrapper > ul {
@@ -1040,7 +1146,7 @@ header {
 }
 
 .card {
-    height: 18em;
+    height: 20em;
     width: 14em;
     border-radius: 1em;
     border: 1px solid rgb(175, 175, 175);
@@ -1066,14 +1172,12 @@ header {
 
 .card:hover {
     transform: translateY(-1.2em) !important;
-    filter: brightness(70%);
-      -webkit-filter: brightness(70%);
       -webkit-transition: all 1s ease;
       -moz-transition: all 1s ease;
       -o-transition: all 1s ease;
       -ms-transition: all 1s ease;
       transition: all 1s ease;
-  }
+}
 
 .price {
     font-weight: 300 !important;

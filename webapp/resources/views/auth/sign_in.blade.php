@@ -14,12 +14,13 @@
             {{ $errors->first('password') }}
         </span>
     @endif
-    
-    <label>
-        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> remember me
-    </label>
+    <div class="gridder">
+        <label>
+            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> remember me
+        </label>
 
-    <a href="{{ route('password.request') }}">forgot password</a>
+        <a href="{{ route('password.request') }}">forgot password</a>
+    </div>
     
     <button type="submit" class="sub">Login</button>
 </form>

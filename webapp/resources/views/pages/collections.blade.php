@@ -11,8 +11,9 @@
 
 @section('content')
 <div class="booksWrapper">
-    <form method="POST" action="/collections/search">
+    <form method="POST" class="alter2" action="/collections/search">
         @csrf
+        <iconify-icon class="alter" icon="simple-line-icons:magnifier"></iconify-icon> 
         <input id="userSearch" type="text" name="search" value="{{ old('search') }}" placeholder="Search for a collection">
     </form>
     <div class="books">

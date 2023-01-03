@@ -1,7 +1,7 @@
 <li>
     <form method="POST" action="/books/filter">
         @csrf
-        <input type="submit" name="category" value="{{ $category->name }}">
+        <input class="changer" type="submit" name="category" value="{{ $category->name }}">
     </form>
     @if (Auth::check() && Auth::user()->isAdmin())
         <button onclick="showInput({{ $category->id }})">

@@ -28,7 +28,7 @@
           </button>
         </div>
       @endif
-      <form method="POST" action="/books/search">
+      <form class="searching" method="POST" action="/books/search">
         @csrf
         <div id="hSearch">
           <button id="magnifierSearch">
