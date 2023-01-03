@@ -314,14 +314,13 @@ INSERT INTO cart VALUES (2, 4);
 INSERT INTO cart VALUES (3, 2);
 INSERT INTO cart VALUES (3, 3);
 
-INSERT INTO photo VALUES (3, 3);
-
-INSERT INTO faq (question, answer) VALUES 
-  ('What is the return policy?', 'We offer a 30-day return policy for most products. If you are not satisfied with your purchase, you can return it for a full refund as long as it is in its original condition and packaging.'),
-  ('How do I track my order?', 'You can track your order by logging into your account and viewing your order history. If you do not have an account, you can track your order using the tracking number provided in your shipping confirmation email.'),
+INSERT INTO faq VALUES 
+  ('How do I track my order?', 'You can track your order by logging into your account and viewing your order history, specifically in the status field.'),
+  ('I am thinking about buying a book but it ran out of stock. How should I act?', 'By adding the desired book to your wishlist (heart button), you will be notified as soon as that book is available again.'),
+  ('Are other users able to see my profile information?', 'No, only the owner of the customer account has permission to view its profile (and more sensible data such as address, phone number, etc).'),
+  ('My account is blocked. Now what?', 'With your account blocked, you are not authorized to make a purchase of any kind. Also, you are no longer able to leave reviews on our products.'),
   ('Do you offer international shipping?', 'Yes, we offer international shipping to most countries. The cost and delivery time will vary depending on your location.'),
-  ('Do you offer gift wrapping?', 'Yes, we offer gift wrapping for an additional fee. You can select this option during the checkout process.'),
-  ('Do you have a physical store?', 'We do not have a physical store, but our products are available for purchase online or through our authorized retailers.');
+  ('Do you offer gift wrapping?', 'Yes, we offer gift wrapping as a way to guarantee professionalism in our deliveries.'),
 
 INSERT INTO wishlist VALUES (1, 1);
 INSERT INTO wishlist VALUES (1, 4);
