@@ -12,7 +12,9 @@ The users will be able to create an account for themselves and login/logout as n
 Link to the release (final version of source code): (link)
 Docker command to start the image:
 ```
-commands
+docker-compose up
+
+docker run -it -p 8000:80 --name=lbaw2232 -e DB_DATABASE="lbaw2232" -e DB_SCHEMA="offtheshelf" -e DB_USERNAME="lbaw2232" -e DB_PASSWORD="dPSEDTRW" git.fe.up.pt:5050/lbaw/lbaw2223/lbaw2232
 ```
 
 ### 2. Usage
