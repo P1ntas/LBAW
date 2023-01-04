@@ -9,8 +9,8 @@ The users will be able to create an account for themselves and login/logout as n
 
 ### 1. Installation
 
-Link to the release (final version of source code): (link)
-Docker command to start the image:
+- Link to the release (final version of source code): (https://git.fe.up.pt/lbaw/lbaw2223/lbaw2232/-/releases/pa)
+- Docker command to start the image:
 ```
 docker-compose up
 
