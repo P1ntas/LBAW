@@ -138,7 +138,7 @@ The users will be able to create an account for themselves and login/logout as n
 
 ### 2. Video presentation
 
-![img](https://git.fe.up.pt/lbaw/lbaw2223/lbaw2232/-/blob/main/docs/images/video_screenshot.png)
+![img](https://git.fe.up.pt/lbaw/lbaw2223/lbaw2232/-/raw/main/docs/images/video_screenshot.png)
 
 - Link to the video on the Google Drive folder: (https://drive.google.com/file/d/15EfSKoFvKKP3OS1lHuAlj8nrN9aVInRp/view?usp=share_link)
 
