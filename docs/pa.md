@@ -138,11 +138,9 @@ The users will be able to create an account for themselves and login/logout as n
 
 ### 2. Video presentation
 
-> Screenshot of the video plus the link to the lbaw2232.mp4 file  
+![img](https://git.fe.up.pt/lbaw/lbaw2223/lbaw2232/-/blob/main/docs/images/video_screenshot.png)
 
-> - Upload the lbaw21gg.mp4 file to the video uploads' [Google folder](https://drive.google.com/drive/folders/1-fPoSR3lXyPI38UgpWf6iQBe2Lk_ckoT?usp=sharing "Videos folder"). You need to use a Google U.Porto account to upload the video.   
-> - The video must not exceed 2 minutes.
-> - Include a link to the video on the Google Drive folder.
+- Link to the video on the Google Drive folder: (https://drive.google.com/file/d/15EfSKoFvKKP3OS1lHuAlj8nrN9aVInRp/view?usp=share_link)
 
 ---
 
